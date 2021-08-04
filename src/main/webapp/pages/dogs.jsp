@@ -11,9 +11,8 @@
     <title>Dogs</title>
 </head>
 <body>
+
+
 <hr/>
-${number}
-${language}
-${encoding}
 </body>
 </html>

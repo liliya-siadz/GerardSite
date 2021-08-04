@@ -18,7 +18,9 @@ public class HelloServlet extends HttpServlet {
        request.setAttribute("number", 100);
        request.setAttribute("language", request.getHeader("Accept-Language"));
        request.setAttribute("encoding", request.getHeader("Accept-Charset"));
-       request.getRequestDispatcher("pages/dogs.jsp").forward(request,response);
+        request.getSession().setAttribute("LANGUA", "EN");
+       request.getRequestDispatcher("pages/home.jsp").forward(request,response);
+
 
 
 
