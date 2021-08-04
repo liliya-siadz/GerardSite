@@ -1,0 +1,7 @@
+.idea/**
+target/**
+PLAN.txt
+requirements.pdf
+TODO.txt
+VOCABULARY.txt
+*.iml
