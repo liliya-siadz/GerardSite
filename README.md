@@ -1,6 +1,6 @@
 # GerardSite
 <h3><b>Web-site for monobreed kennel <i>"Gerard"</i>.</b></h3>
-Class project after course "Промышленное программирование на Java" with love.
+Class project after course "Промышленное программирование на Java".
 
 ![leon_baby2](https://user-images.githubusercontent.com/39922259/126233688-83c843be-0cfb-40ab-a33c-65d8086ad839.jpg)
 
