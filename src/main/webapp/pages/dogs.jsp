@@ -5,10 +5,10 @@
   Time: 7:40 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ include file="/pages/include.jsp" %>
+<%@ include file="/pages/common/include.jsp" %>
 <html>
 <head>
-    <title><title><fmt:message key="page.dogs.title"/></title></title>
+    <title><fmt:message key="page.dogs.title"/></title>
 </head>
 <body>
  Dogs page

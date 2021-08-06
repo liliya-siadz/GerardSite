@@ -31,4 +31,12 @@
         <servlet-name>dogs</servlet-name>
         <url-pattern>/dogs</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>include</servlet-name>
+        <jsp-file>/pages/include.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>include</servlet-name>
+        <url-pattern>/include</url-pattern>
+    </servlet-mapping>
 </web-app>

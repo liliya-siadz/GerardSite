@@ -6,32 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ include file="/pages/include.jsp" %>
+<%@ include file="/pages/common/include.jsp" %>
 <html>
     <head>
     <title><fmt:message key="page.home.title"/></title>
     </head>
     <body>
     Home page.
-    <form method="post"
-          action="${applicationPath}${servletUrl}">
-        <button type="submit"
-                name="command"
-                value="SWITCH_LOCALE_TO_EN">
-            EN
-        </button>
-        <button type="submit"
-                name="command"
-                value="SWITCH_LOCALE_TO_BE">
-            BE
-        </button>
-        <button type="submit"
-                name="command"
-                value="SWITCH_LOCALE_TO_RU">
-            RU
-        </button>
-        <a href="home">home</a>
-        <a href="dogs">dogs</a>
+
     </form>
     </body>
 </html>
