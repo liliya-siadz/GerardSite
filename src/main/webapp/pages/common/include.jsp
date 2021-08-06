@@ -15,8 +15,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <c:set var="applicationPath" value="${pageContext.request.contextPath}" scope="application"/>
 <c:set var="servletUrl" value="${initParam.servlet_url}" scope="application"/>
-
-<html>
+<html dir="ltr">
     <head>
         <link rel="icon" type="image/x-icon" href="${applicationPath}/favicon.ico">
         <link rel="stylesheet" href="${applicationPath}/css/bootstrap.min.css">
@@ -53,7 +52,6 @@
     </form>
         <a href="home">home</a>
         <a href="dogs">dogs</a>
-
         <script src="${applicationPath}/js/jquery-3.1.0.min.js"></script>
         <script src="${applicationPath}/js/bootstrap.min.js"></script>
     </body>
