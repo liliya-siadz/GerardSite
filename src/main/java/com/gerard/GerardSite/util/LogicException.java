@@ -1,25 +1,25 @@
-package com.gerard.GerardSite.connection;
+package com.gerard.GerardSite.util;
 
-public class ConnectionException extends Exception{
-    public ConnectionException() {
+public class LogicException extends Exception {
+
+    public LogicException() {
         super();
     }
-
-    public ConnectionException(String message) {
+    public LogicException(String message) {
         super(message);
     }
 
-    public ConnectionException(String message, Throwable cause) {
+    public LogicException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ConnectionException(Throwable cause) {
+    public LogicException(Throwable cause) {
         super(cause);
     }
 
     @Override
     public String toString() {
-        return "ConnectionException{"
+        return "UtilException{"
                 + "message: " + super.getMessage() + ", cause: " + super.getCause()
                 + "}:";
     }
@@ -33,4 +33,5 @@ public class ConnectionException extends Exception{
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
 }

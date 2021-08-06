@@ -25,8 +25,8 @@ public class ConnectionPoolTest {
     //todo doc: 'threadPoolSize' must be bigger than 'poolSize'
 
     //doc: timeOut : one test separately; invocationTimeOut : all invocations
-    @Test(invocationTimeOut = 5000, threadPoolSize = 4*5,
-            invocationCount = 4*5, timeOut = 5000, successPercentage = 80
+    @Test(invocationTimeOut = 5000, threadPoolSize = 4 * 5,
+            invocationCount = 4 * 5, timeOut = 5000, successPercentage = 80
             , description = "Check that pool creates fixed quantity of connection in in a competitive environment"
 //    , expectedExceptions = {NullPointerException.class}
     )
@@ -38,7 +38,7 @@ public class ConnectionPoolTest {
     //todo : realize
     @AfterClass
     public void destroyConnectionPool() throws ConnectionException {
-            connectionPool.destroy();
+        connectionPool.destroy();
     }
 //    //todo: count timeout for test
 //    @BeforeMethod(dependsOnMethods = "get back connection from pool", timeOut = 5000)
