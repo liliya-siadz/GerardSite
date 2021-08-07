@@ -3,24 +3,151 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+<!--    application start-->
     <context-param>
         <param-name>controller_url</param-name>
         <param-value>/controller</param-value>
     </context-param>
+<!--    application end-->
+
+<!--    common pages start-->
     <servlet>
         <servlet-name>home</servlet-name>
-        <jsp-file>/pages/guest/home.jsp</jsp-file>
-    </servlet>
-    <servlet>
-        <servlet-name>dogs</servlet-name>
-        <jsp-file>/pages/guest/dogs.jsp</jsp-file>
+        <jsp-file>/pages/common/home.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>error</servlet-name>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>error</servlet-name>
+        <jsp-file>/pages/common/error.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>error-404</servlet-name>
+        <url-pattern>/error-404</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>error-404</servlet-name>
+        <jsp-file>/pages/common/error-404.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sign</servlet-name>
+        <url-pattern>/sign</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>sign</servlet-name>
+        <jsp-file>/pages/common/sign.jsp</jsp-file>
+    </servlet>
+<!--    common pages end-->
+
+<!--guest pages start-->
+    <servlet>
+        <servlet-name>dogs</servlet-name>
+        <jsp-file>/pages/guest/dogs.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>dogs</servlet-name>
         <url-pattern>/dogs</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>photos</servlet-name>
+        <jsp-file>/pages/guest/photos.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>photos</servlet-name>
+        <url-pattern>/photos</url-pattern>
+    </servlet-mapping>
+<!--    guest pages end-->
+
+ <!--client pages start-->
+    <servlet>
+        <servlet-name>client_dogs</servlet-name>
+        <jsp-file>/pages/client/client_dogs.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>client_dogs</servlet-name>
+        <url-pattern>/client_dogs</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>client_photos</servlet-name>
+        <jsp-file>/pages/client/client_photos.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>client_photos</servlet-name>
+        <url-pattern>/client_photos</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>client_profile</servlet-name>
+        <jsp-file>/pages/client/client_profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>client_profile</servlet-name>
+        <url-pattern>/client_profile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>client_requests</servlet-name>
+        <jsp-file>/pages/client/client_requests.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>client_requests</servlet-name>
+        <url-pattern>/client_requests</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>make_request</servlet-name>
+        <jsp-file>/pages/client/make_request.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>make_request</servlet-name>
+        <url-pattern>/make_request</url-pattern>
+    </servlet-mapping>
+<!--client pages end-->
+
+<!--    admin pages start-->
+    <servlet>
+        <servlet-name>admin_dogs</servlet-name>
+        <jsp-file>/pages/admin/admin_dogs.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin_dogs</servlet-name>
+        <url-pattern>/admin_dogs</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>admin_photos</servlet-name>
+        <jsp-file>/pages/admin/admin_photos.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin_photos</servlet-name>
+        <url-pattern>/admin_photos</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>admin_profile</servlet-name>
+        <jsp-file>/pages/admin/admin_profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin_profile</servlet-name>
+        <url-pattern>/admin_profile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>requests</servlet-name>
+        <jsp-file>/pages/admin/requests.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>requests</servlet-name>
+        <url-pattern>/requests</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>users</servlet-name>
+        <jsp-file>/pages/admin/users.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>users</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+<!--    admin pages end-->
+
 </web-app>

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/include.jsp" %>
-<%@ include file="guest_header.jsp" %>
+<%@ include file="header.jsp" %>
 <html>
 <head>
     <title><fmt:message key="page.photos.title"/></title>

@@ -29,8 +29,8 @@ public class RoleServlet extends HttpServlet {
             response.addCookie(new Cookie("bundle", "locale"));
             response.addCookie(new Cookie("locale", "en"));
         }
-        //request.getRequestDispatcher("pages/home.jsp").forward(request,response);
-        response.sendRedirect("http://localhost:8080/GerardSite/home");
+        //request.getRequestDispatcher("pages/admin_home.jsp").forward(request,response);
+        response.sendRedirect("http://localhost:8080/GerardSite/dogs");
     }
 
     @Override
@@ -39,7 +39,8 @@ public class RoleServlet extends HttpServlet {
        request.setAttribute("localePseudoScope", request.getServletPath());
        Cookie cookie = new Cookie("sfdf", "sfsef");
        request.setAttribute("Accept-Language", request.getHeader("Accept-Language"));
-      request.getRequestDispatcher("pages/home.jsp").forward(request,response);
+      request.getRequestDispatcher("pages/admin_" +
+              "home.jsp").forward(request,response);
     }
 
     @Override
