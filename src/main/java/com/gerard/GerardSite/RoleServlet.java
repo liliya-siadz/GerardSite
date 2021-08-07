@@ -6,7 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("/kennel")
+@WebServlet("/controller")
 public class RoleServlet extends HttpServlet {
 
     @Override
@@ -17,15 +17,20 @@ public class RoleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String locale = request.getParameter("command");
-        response.addCookie(new Cookie("locale", locale));
         if(locale.equalsIgnoreCase("SWITCH_LOCALE_TO_BE")){
             response.addCookie(new Cookie("bundle", "locale_be"));
+            response.addCookie(new Cookie("locale", "be"));
         }
         else if(locale.equalsIgnoreCase("SWITCH_LOCALE_TO_RU")){
             response.addCookie(new Cookie("bundle", "locale_ru"));
+            response.addCookie(new Cookie("locale", "ru"));
+        }
+        else if(locale.equalsIgnoreCase("SWITCH_LOCALE_TO_EN")){
+            response.addCookie(new Cookie("bundle", "locale"));
+            response.addCookie(new Cookie("locale", "en"));
         }
         //request.getRequestDispatcher("pages/home.jsp").forward(request,response);
-        response.sendRedirect("http://localhost:8080/GerardSite/kennel");
+        response.sendRedirect("http://localhost:8080/GerardSite/home");
     }
 
     @Override

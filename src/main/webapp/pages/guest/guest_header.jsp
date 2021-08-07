@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Client header</title>
+    <title>Header</title>
 </head>
 <body>
 <%--locale switch panel--%>
@@ -23,6 +23,5 @@
     </button>
 </form>
 <%--locale switch panel----%>
-<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

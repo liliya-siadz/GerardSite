@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
-    <meta charset="utf-8"/>
-    <meta name="description" content="Kennel presentation for clients"/>
-    <meta name="keywords" content="dog, leonberger, Gerard, gerard, kennel"/>
-    <meta name="author" content="Liliya Siadzelnikava"/>
-    <title>Home</title>
+    <title>Admin header</title>
   </head>
   <body>
-
+  <%--locale switch panel--%>
+  <form method="post"
+        action="${applicationPath}${controllerUrl}">
+    <button type="submit"
+            name="command"
+            value="SWITCH_LOCALE_TO_EN">
+      EN
+    </button>
+    <button type="submit"
+            name="command"
+            value="SWITCH_LOCALE_TO_BE">
+      BE
+    </button>
+    <button type="submit"
+            name="command"
+            value="SWITCH_LOCALE_TO_RU">
+      RU
+    </button>
+  </form>
+  <%--locale switch panel----%>
+  <%@ include file="../common/footer.jsp" %>
   </body>
 </html>
