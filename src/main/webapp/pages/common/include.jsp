@@ -26,6 +26,7 @@
     <link rel="icon" type="image/x-icon" href="${applicationPath}/favicon.ico">
     <link rel="stylesheet" href="${applicationPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${applicationPath}/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="${applicationPath}/css/custom.css">
     <meta name="description" content="Kennel presentation for clients"/>
     <meta name="keywords"
           content="dog, leonberger, Gerard, leon, kennel, собака, питомник, Жерард, леонбергер,сабака, пітомнік, Жерард, леонбергер"/>

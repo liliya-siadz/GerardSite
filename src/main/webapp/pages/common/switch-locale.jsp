@@ -11,7 +11,7 @@
 </head>
 <body>
 <%--switch locale panel--%>
-<div class="btn-group btn-group-xs nav navbar-left" role="locale-panel">
+<div class="btn-group btn-group-xs" role="locale-panel">
 <form method="post"
       action="${applicationPath}${controllerUrl}">
     <button type="submit"

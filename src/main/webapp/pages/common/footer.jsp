@@ -12,26 +12,38 @@
 <%--footer start--%>
 <div class="container-fluid panel-footer" style="{ font-size: 5px; }">
     <div class="row">
-        <div class="col-md-2"><a href="home"><fmt:message key="footer.link.home.name"/></a></div>
-        <div class="col-md-1"><c:out value="${currentDate}"/></div>
-        <small><div class="col-md-2">
+        <small><div class="col-md-1"><a href="home"><fmt:message key="footer.link.home.name"/></a></div></small>
+        <small>
+            <div class="col-md-3">
                 <fmt:message key="footer.link.coordinates.name"/>
-                <osd:output-site-description
-                        applicationUrl="${initParam.application_url}"
-                        elementTagName="cordinates" />
-        </div></small>
-        <small><div class="col-md-3">
+                : &#9737;
+                <b><osd:output-site-description applicationUrl="${initParam.application_url}"
+                        elementTagName="cordinates" /></b>
+                &#9200;
+                <c:out value="${currentDate}"/>
+            </div>
+        </small>
+        <small>
+            <div class="col-md-3">
             <fmt:message key="footer.link.address.name"/>
-            <fmt:message key="kennel.address"/>
-        </div></small>
-        <small><div class="col-md-2">
+                : &#9749;
+            <b><fmt:message key="kennel.address"/></b>
+            </div>
+        </small>
+        <small>
+            <div class="col-md-2">
             <fmt:message key="footer.link.phone.name"/>
-            <osd:output-site-description applicationUrl="${initParam.application_url}" elementTagName="phone" />
-        </div></small>
-        <small><div class="col-md-2">
+                : &#9742;
+            <b><osd:output-site-description applicationUrl="${initParam.application_url}" elementTagName="phone" /></b>
+            </div>
+        </small>
+        <small>
+            <div class="col-md-3">
             <fmt:message key="footer.link.email.name"/>
-            <osd:output-site-description applicationUrl="${initParam.application_url}" elementTagName="email" />
-        </div></small>
+                : &#9755;
+            <b><osd:output-site-description applicationUrl="${initParam.application_url}" elementTagName="email" /></b>
+            </div>
+        </small>
     </div>
 </div>
     <%-- current place description start--%>

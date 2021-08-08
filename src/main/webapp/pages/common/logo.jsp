@@ -12,10 +12,13 @@
 <body>
 <%--logo start--%>
 <li>
-    <a class="nav navbar-brand" href="home">
+    <a class="nav navbar-left"
+       href="home"
+       style="margin:0;padding:0">
         <img src="${applicationPath}/logo.png"
              alt="GERARD"
-             width="50">
+             width="50"
+             style="margin-top:5px;margin-right:60px">
     </a>
 </li>
 <%--logo end  --%>
