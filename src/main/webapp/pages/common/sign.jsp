@@ -8,8 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    TO-DO: switch headers
-    <title></title>
+    <title><fmt:message key="page.sign.title"/></title>
 </head>
 <body>
 </body>

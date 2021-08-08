@@ -1,7 +1,7 @@
 package com.gerard.GerardSite.connection;
 
 
-import com.gerard.GerardSite.util.CustomPropertiesUtil;
+import com.gerard.GerardSite.util.CustomDocumentUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +29,7 @@ public class ConnectionFactory {
 
     private ConnectionFactory(){
         try {
-            dbConnectionProperties = CustomPropertiesUtil.loadPropertiesByObject(this, DB_CONNECTION_RESOURCE_PATH);
+            dbConnectionProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, DB_CONNECTION_RESOURCE_PATH);
         } catch (IOException | URISyntaxException e) {
             LOGGER.fatal("Database connection properties file: " + DB_CONNECTION_RESOURCE_PATH
             + "is invalid");

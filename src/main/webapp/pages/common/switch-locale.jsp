@@ -11,14 +11,6 @@
 </head>
 <body>
 <%--switch locale panel--%>
-<li>
-    <a class="nav navbar-brand" href="home">
-        <img src="${applicationPath}/logo.png"
-             alt="GERARD"
-             width="50"
-             style="margin-bottom: 45px;">
-    </a>
-</li>
 <div class="btn-group btn-group-xs nav navbar-left" role="locale-panel">
 <form method="post"
       action="${applicationPath}${controllerUrl}">

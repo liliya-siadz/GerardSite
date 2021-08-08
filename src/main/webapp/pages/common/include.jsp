@@ -11,8 +11,9 @@
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ilab" uri="init-locale-and-bundle" %>
+<%@ taglib prefix="osd" uri="output-site-description" %>
 <c:set var="applicationPath" value="${pageContext.request.contextPath}" scope="application"/>
-<c:set var="controllerUrl" value="${initParam.controller_url}" scope="application"/>
+<c:set var="controllerUrl" value="${initParam.controller_url_pattern}" scope="application"/>
 <c:set var="currentPageUrl" value="${pageContext.request.servletPath}" scope="application"/>
 <c:set var="currentFullUrl" value="${pageContext.request.requestURL}"/>
 <ilab:init-locale-and-bundle/>

@@ -28,11 +28,10 @@ public class InitLocaleAndBundleCookies extends TagSupport {
     private static final int LOCALE_CODE_LETTERS_QUANTITY = 2;
     private static final SupportedLocale defaultLocale = SupportedLocale.EN;
 
-
     //if cookie has no elements than assign from header
     @Override
     public int doStartTag() {
-         HttpServletRequest request = (HttpServletRequest) super.pageContext.getRequest();
+        HttpServletRequest request = (HttpServletRequest) super.pageContext.getRequest();
         Cookie locale = CustomHttpServletRequestUtil.getCookieFromRequestByName(
                 request, LOCALE_COOKIE_NAME);
         Cookie bundle = CustomHttpServletRequestUtil.getCookieFromRequestByName(

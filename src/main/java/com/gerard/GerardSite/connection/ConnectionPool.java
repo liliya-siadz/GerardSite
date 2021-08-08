@@ -1,6 +1,6 @@
 package com.gerard.GerardSite.connection;
 
-import com.gerard.GerardSite.util.CustomPropertiesUtil;
+import com.gerard.GerardSite.util.CustomDocumentUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,7 +44,7 @@ public class ConnectionPool {
 
     private ConnectionPool() {
         try {
-            dbConnectionPoolProperties = CustomPropertiesUtil.loadPropertiesByObject(this, DB_CONNECTION_POOL_RESOURCE_PATH);
+            dbConnectionPoolProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, DB_CONNECTION_POOL_RESOURCE_PATH);
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
         } catch (SQLException | IOException | URISyntaxException exception) {
             LOGGER.fatal("Database connection pool properties resource file: "

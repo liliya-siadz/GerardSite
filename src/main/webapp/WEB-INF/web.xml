@@ -5,11 +5,14 @@
          version="5.0">
 <!--    application start-->
     <context-param>
-        <param-name>controller_url</param-name>
+        <param-name>controller_url_pattern</param-name>
         <param-value>/controller</param-value>
     </context-param>
+    <context-param>
+        <param-name>application_url</param-name>
+        <param-value>http://localhost:8080/GerardSite</param-value>
+    </context-param>
 <!--    application end-->
-
 <!--    common pages start-->
     <servlet>
         <servlet-name>home</servlet-name>

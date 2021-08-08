@@ -7,13 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/include.jsp" %>
-<%@ include file="header.jsp" %>
 <html>
 <head>
     <title><fmt:message key="page.dogs.title"/></title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
  Dogs page
-</body>
 <%@ include file="../common/footer.jsp" %>
+</body>
 </html>
