@@ -5,15 +5,15 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <%@ include file="../common/logo.jsp" %>
-            <li><a href="home"><fmt:message key="header.link.home.name"/></a></li>
-            <li><a href="dogs"><fmt:message key="header.link.dogs.name"/></a></li>
-            <li><a href="dogs"><fmt:message key="header.link.puppies.name"/></a></li>
-            <li><a href="photos"><fmt:message key="header.link.photos.name"/></a></li>
-            <li><a href="sign"><fmt:message key="header.link.make_request.name"/></a></li>
+            <%@ include file="../common/fragment/logo.jsp" %>
+            <li><a href="/guest/home"><fmt:message key="header.link.home.name"/></a></li>
+            <li><a href="/guest/dogs"><fmt:message key="header.link.dogs.name"/></a></li>
+            <li><a href="/guest/puppies"><fmt:message key="header.link.puppies.name"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/guest/photos"><fmt:message key="header.link.photos.name"/></a></li>
+            <li><a href="/guest/sign"><fmt:message key="header.link.make_request.name"/></a></li>
         </ul>
-        <%@ include file="../common/sign-panel.jsp" %>
-        <%@ include file="../common/switch-locale.jsp" %>
+        <%@ include file="../common/fragment/sign-fragment.jsp" %>
+        <%@ include file="../common/fragment/switch-locale-fragment.jsp" %>
     </div>
 </nav>
 </body>

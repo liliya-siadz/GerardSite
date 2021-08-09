@@ -5,5 +5,5 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @FunctionalInterface
 public interface Action {
-   String execute(HttpServletRequest request, HttpServletResponse response);
+    String execute(HttpServletRequest request, HttpServletResponse response);
 }

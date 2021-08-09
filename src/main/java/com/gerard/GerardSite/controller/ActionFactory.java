@@ -1,16 +1,15 @@
-package com.gerard.GerardSite.controller.action;
+package com.gerard.GerardSite.controller;
 
 
-import com.gerard.GerardSite.controller.action.impl.LoginAction;
-import com.gerard.GerardSite.controller.action.impl.LogoutAction;
-import com.gerard.GerardSite.controller.action.impl.TransferToError404PageAction;
+import com.gerard.GerardSite.controller.action.Action;
+import com.gerard.GerardSite.controller.action.impl.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gerard.GerardSite.controller.action.Command.*;
+import static com.gerard.GerardSite.controller.Command.*;
 
 public enum ActionFactory {
     INSTANCE;
@@ -19,9 +18,13 @@ public enum ActionFactory {
     private final Map<Command, Action> actions = new HashMap<>();
     private final Command defaultCommand = SHOW_ERROR_404;
     private final Action defaultAction = TransferToError404PageAction.INSTANCE;
+
     ActionFactory(){
         actions.put(LOGIN, LoginAction.INSTANCE);
         actions.put(LOGOUT, LogoutAction.INSTANCE);
+        actions.put(SWITCH_LOCALE_TO_EN, SwitchLocaleToEnAction.INSTANCE);
+        actions.put(SWITCH_LOCALE_TO_BE, SwitchLocaleToBeAction.INSTANCE);
+        actions.put(SWITCH_LOCALE_TO_RU, SwitchLocaleToRuAction.INSTANCE);
         actions.put(SHOW_ERROR_404, TransferToError404PageAction.INSTANCE);
     }
 

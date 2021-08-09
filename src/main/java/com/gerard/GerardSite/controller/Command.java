@@ -1,6 +1,6 @@
-package com.gerard.GerardSite.controller.action;
+package com.gerard.GerardSite.controller;
 
-public enum Command {
+enum Command {
     LOGIN,
     LOGOUT,
     SHOW_ERROR_404,

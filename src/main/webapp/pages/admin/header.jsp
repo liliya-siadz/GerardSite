@@ -23,6 +23,6 @@
     </button>
   </form>
   <%--locale switch panel----%>
-  <%@ include file="../common/footer.jsp" %>
+  <%@ include file="../common/fragment/footer.jsp" %>
   </body>
 </html>

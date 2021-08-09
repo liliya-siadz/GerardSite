@@ -11,6 +11,7 @@ public enum SwitchLocaleToBeAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         response.addCookie(new Cookie("bundle", "locale_be"));
         response.addCookie(new Cookie("locale", "be"));
-        return null;
+        //return "/GerardSite/guest/dogs";
+        return request.getHeader("Referer");
     }
 }

@@ -12,7 +12,7 @@
 <body>
 <%--switch locale panel--%>
 <div class="btn-group btn-group-xs" role="locale-panel">
-<form method="post"
+<form method="POST"
       action="${applicationPath}${controllerUrl}">
     <button type="submit"
             name="command"

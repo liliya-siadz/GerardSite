@@ -1,5 +1,6 @@
 package com.gerard.GerardSite.controller.action;
 
+import com.gerard.GerardSite.controller.ActionFactory;
 import com.gerard.GerardSite.controller.action.impl.LoginAction;
 import com.gerard.GerardSite.controller.action.impl.LogoutAction;
 import com.gerard.GerardSite.controller.action.impl.TransferToError404PageAction;

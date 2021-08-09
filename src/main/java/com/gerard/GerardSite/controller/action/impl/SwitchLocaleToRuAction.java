@@ -11,6 +11,6 @@ public enum SwitchLocaleToRuAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         response.addCookie(new Cookie("bundle", "locale_ru"));
         response.addCookie(new Cookie("locale", "ru"));
-        return null;
+        return request.getHeader("Referer");
     }
 }
