@@ -1,4 +1,4 @@
-package com.gerard.GerardSite.custom_tag;
+package com.gerard.GerardSite.tag;
 
 import com.gerard.GerardSite.util.CustomHttpServletRequestUtil;
 import jakarta.servlet.http.Cookie;

@@ -1,7 +1,9 @@
-package com.gerard.GerardSite;
+package com.gerard.GerardSite.controller;
 
 import java.io.*;
 
+import com.gerard.GerardSite.controller.action.Action;
+import com.gerard.GerardSite.controller.action.ActionFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -9,41 +11,28 @@ import jakarta.servlet.annotation.*;
 @WebServlet
 public class Controller extends HttpServlet {
 
-    @Override
-    public void init() {
-    }
-
+    private static final String ACTION_IDENTIFIER_REQUEST_PARAMETER_NAME = "command";
+    private static final String VIEW_DIRECTORY_NAME = "/pages";
+    private static final String VIEW_EXTENSION = ".jsp";
+    private static String view;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String locale = request.getParameter("command");
-        if(locale.equalsIgnoreCase("SWITCH_LOCALE_TO_BE")){
-            response.addCookie(new Cookie("bundle", "locale_be"));
-            response.addCookie(new Cookie("locale", "be"));
-        }
-        else if(locale.equalsIgnoreCase("SWITCH_LOCALE_TO_RU")){
-            response.addCookie(new Cookie("bundle", "locale_ru"));
-            response.addCookie(new Cookie("locale", "ru"));
-        }
-        else if(locale.equalsIgnoreCase("SWITCH_LOCALE_TO_EN")){
-            response.addCookie(new Cookie("bundle", "locale"));
-            response.addCookie(new Cookie("locale", "en"));
-        }
-        //request.getRequestDispatcher("pages/admin_home.jsp").forward(request,response);
-        response.sendRedirect("http://localhost:8080/GerardSite/dogs");
+        //response.sendRedirect("http://localhost:8080/GerardSite/dogs");
+        response.sendRedirect(view); //uses relative url
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-       //select
-       request.setAttribute("localePseudoScope", request.getServletPath());
-       Cookie cookie = new Cookie("sfdf", "sfsef");
-       request.setAttribute("Accept-Language", request.getHeader("Accept-Language"));
-      request.getRequestDispatcher("pages/admin_" +
-              "home.jsp").forward(request,response);
+        request.getRequestDispatcher("/pages" + view + "jsp").forward(request,response);
     }
 
     @Override
-    public void destroy() {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String command = request.getParameter(ACTION_IDENTIFIER_REQUEST_PARAMETER_NAME);
+        Action action = ActionFactory.INSTANCE.getAction(command);
+        view = action.execute(request, response);
+        super.service(request, response);
     }
+
 }

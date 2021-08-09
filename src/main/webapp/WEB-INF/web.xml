@@ -6,7 +6,7 @@
 <!--    application start-->
     <servlet>
         <servlet-name>controller</servlet-name>
-        <servlet-class>com.gerard.GerardSite.Controller</servlet-class>
+        <servlet-class>com.gerard.GerardSite.controller.Controller</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>controller</servlet-name>
@@ -22,17 +22,9 @@
     </context-param>
 <!--    application end-->
 <!--    common pages start-->
-    <servlet>
-        <servlet-name>home</servlet-name>
-        <jsp-file>/pages/common/home.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>home</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>error</servlet-name>
-        <url-pattern>/error</url-pattern>
+        <url-pattern>/common/error</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>error</servlet-name>
@@ -40,30 +32,30 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>error-404</servlet-name>
-        <url-pattern>/error-404</url-pattern>
+        <url-pattern>/common/error-404</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>error-404</servlet-name>
         <jsp-file>/pages/common/error-404.jsp</jsp-file>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>sign</servlet-name>
-        <url-pattern>/sign</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>sign</servlet-name>
-        <jsp-file>/pages/common/sign.jsp</jsp-file>
-    </servlet>
 <!--    common pages end-->
 
 <!--guest pages start-->
+    <servlet>
+        <servlet-name>home</servlet-name>
+        <jsp-file>/pages/guest/home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>home</servlet-name>
+        <url-pattern>/guest/home</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>dogs</servlet-name>
         <jsp-file>/pages/guest/dogs.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>dogs</servlet-name>
-        <url-pattern>/dogs</url-pattern>
+        <url-pattern>/guest/dogs</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>photos</servlet-name>
@@ -71,26 +63,34 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>photos</servlet-name>
-        <url-pattern>/photos</url-pattern>
+        <url-pattern>/guest/photos</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sign</servlet-name>
+        <url-pattern>/guest/sign</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>sign</servlet-name>
+        <jsp-file>/pages/guest/sign.jsp</jsp-file>
+    </servlet>
 <!--    guest pages end-->
 
  <!--client pages start-->
     <servlet>
-        <servlet-name>client_dogs</servlet-name>
-        <jsp-file>/pages/client/client_dogs.jsp</jsp-file>
+        <servlet-name>dogs_client</servlet-name>
+        <jsp-file>/pages/client/dogs_client.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>client_dogs</servlet-name>
-        <url-pattern>/client_dogs</url-pattern>
+        <servlet-name>dogs_client</servlet-name>
+        <url-pattern>/client/dogs_client</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>client_photos</servlet-name>
-        <jsp-file>/pages/client/client_photos.jsp</jsp-file>
+        <servlet-name>photos_client</servlet-name>
+        <jsp-file>/pages/client/photos_client.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>client_photos</servlet-name>
-        <url-pattern>/client_photos</url-pattern>
+        <servlet-name>photos_client</servlet-name>
+        <url-pattern>/client/photos_client</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>client_profile</servlet-name>
@@ -98,7 +98,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>client_profile</servlet-name>
-        <url-pattern>/client_profile</url-pattern>
+        <url-pattern>/client/client_profile</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>client_requests</servlet-name>
@@ -106,7 +106,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>client_requests</servlet-name>
-        <url-pattern>/client_requests</url-pattern>
+        <url-pattern>/client/client_requests</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>make_request</servlet-name>
@@ -114,26 +114,26 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>make_request</servlet-name>
-        <url-pattern>/make_request</url-pattern>
+        <url-pattern>/client/make_request</url-pattern>
     </servlet-mapping>
 <!--client pages end-->
 
 <!--    admin pages start-->
     <servlet>
-        <servlet-name>admin_dogs</servlet-name>
-        <jsp-file>/pages/admin/admin_dogs.jsp</jsp-file>
+        <servlet-name>dogs_admin</servlet-name>
+        <jsp-file>/pages/admin/dogs_admin.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>admin_dogs</servlet-name>
-        <url-pattern>/admin_dogs</url-pattern>
+        <servlet-name>dogs_admin</servlet-name>
+        <url-pattern>/admin/dogs_admin</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>admin_photos</servlet-name>
-        <jsp-file>/pages/admin/admin_photos.jsp</jsp-file>
+        <servlet-name>photos_admin</servlet-name>
+        <jsp-file>/pages/admin/photos_admin.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>admin_photos</servlet-name>
-        <url-pattern>/admin_photos</url-pattern>
+        <servlet-name>photos_admin</servlet-name>
+        <url-pattern>/admin/photos_admin</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>admin_profile</servlet-name>
@@ -141,7 +141,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>admin_profile</servlet-name>
-        <url-pattern>/admin_profile</url-pattern>
+        <url-pattern>/admin/admin_profile</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>requests</servlet-name>
@@ -149,7 +149,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>requests</servlet-name>
-        <url-pattern>/requests</url-pattern>
+        <url-pattern>/admin/requests</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>users</servlet-name>
@@ -157,7 +157,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>users</servlet-name>
-        <url-pattern>/users</url-pattern>
+        <url-pattern>/admin/users</url-pattern>
     </servlet-mapping>
 <!--    admin pages end-->
 

@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="include.jsp" %>
+<%@ include file="../common/include.jsp" %>
 <%--TO-DO: switch headers? where store role--%>
-<%@ include file="../guest/header.jsp" %>
+<%@ include file="header.jsp" %>
 <html>
     <head>
     <title><fmt:message key="page.home.title"/></title>
@@ -20,5 +20,5 @@
         <a href="dogs">dogs</a>
     </div>
     </body>
-<%@ include file="footer.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 </html>

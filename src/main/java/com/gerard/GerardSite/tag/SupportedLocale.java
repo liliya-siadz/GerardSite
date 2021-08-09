@@ -1,4 +1,4 @@
-package com.gerard.GerardSite.custom_tag;
+package com.gerard.GerardSite.tag;
 
 public enum SupportedLocale {
     EN("locale"),

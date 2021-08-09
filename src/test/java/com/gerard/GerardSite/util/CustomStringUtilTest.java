@@ -1,6 +1,6 @@
 package com.gerard.GerardSite.util;
 
-import com.gerard.GerardSite.custom_tag.SupportedLocale;
+import com.gerard.GerardSite.tag.SupportedLocale;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
