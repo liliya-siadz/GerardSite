@@ -10,6 +10,6 @@ public enum LoginAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String lila= "LILA";
         request.setAttribute("lila",lila);
-        return "/guest/sign";
+        return "/sign";
     }
 }

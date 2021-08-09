@@ -21,57 +21,63 @@
         <param-value>http://localhost:8080/GerardSite</param-value>
     </context-param>
 <!--    application end-->
-<!--    common pages start-->
-    <servlet-mapping>
-        <servlet-name>error</servlet-name>
-        <url-pattern>/common/error</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>error</servlet-name>
-        <jsp-file>/pages/common/error.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>error-404</servlet-name>
-        <url-pattern>/common/error-404</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>error-404</servlet-name>
-        <jsp-file>/pages/common/error-404.jsp</jsp-file>
-    </servlet>
-<!--    common pages end-->
 
 <!--guest pages start-->
+    <servlet-mapping>
+        <servlet-name>error</servlet-name>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>error</servlet-name>
+        <jsp-file>/pages/error.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>error-404</servlet-name>
+        <url-pattern>/error-404</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>error-404</servlet-name>
+        <jsp-file>/pages/error-404.jsp</jsp-file>
+    </servlet>
     <servlet>
         <servlet-name>home</servlet-name>
-        <jsp-file>/pages/guest/home.jsp</jsp-file>
+        <jsp-file>/pages/home.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
-        <url-pattern>/guest/home</url-pattern>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>dogs</servlet-name>
-        <jsp-file>/pages/guest/dogs.jsp</jsp-file>
+        <jsp-file>/pages/dogs.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>dogs</servlet-name>
-        <url-pattern>/guest/dogs</url-pattern>
+        <url-pattern>/dogs</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>puppies</servlet-name>
+        <jsp-file>/pages/puppies.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>puppies</servlet-name>
+        <url-pattern>/puppies</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>photos</servlet-name>
-        <jsp-file>/pages/guest/photos.jsp</jsp-file>
+        <jsp-file>/pages/photos.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>photos</servlet-name>
-        <url-pattern>/guest/photos</url-pattern>
+        <url-pattern>/photos</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>sign</servlet-name>
-        <url-pattern>/guest/sign</url-pattern>
+        <url-pattern>/sign</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>sign</servlet-name>
-        <jsp-file>/pages/guest/sign.jsp</jsp-file>
+        <jsp-file>/pages/sign.jsp</jsp-file>
     </servlet>
 <!--    guest pages end-->
 

@@ -1,8 +1,8 @@
 <html>
   <head>
-    <title>Admin header</title>
   </head>
   <body>
+  ADMIN HEEEAAAAADRRRR
   <%--locale switch panel--%>
   <form method="post"
         action="${applicationPath}${controllerUrl}">
@@ -23,6 +23,5 @@
     </button>
   </form>
   <%--locale switch panel----%>
-  <%@ include file="../common/fragment/footer.jsp" %>
   </body>
 </html>
