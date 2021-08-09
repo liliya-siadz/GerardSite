@@ -6,8 +6,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("/controller")
-public class RoleServlet extends HttpServlet {
+@WebServlet
+public class Controller extends HttpServlet {
 
     @Override
     public void init() {

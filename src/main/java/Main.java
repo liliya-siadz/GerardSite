@@ -1,20 +1,17 @@
+import com.gerard.GerardSite.connection.ConnectionPool;
 import com.gerard.GerardSite.custom_tag.InitLocaleAndBundleCookies;
 import com.gerard.GerardSite.util.CustomDocumentUtil;
 import com.gerard.GerardSite.util.OneOffSingleXmlDocDomParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
+
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger(InitLocaleAndBundleCookies.class);
     public static void main(String[] args) {
-        //ConnectionPool connectionPool  = ConnectionPool.getInstance();
-     //  Connection connection  =  connectionPool.giveOutConnection()
-        String url = "http://localhost:8080/GerardSite/description.xml";
+        ConnectionPool connectionPool  = ConnectionPool.getInstance();
+        Connection connection  =  connectionPool.giveOutConnection();
 
-        OneOffSingleXmlDocDomParser oneOffSingleXmlDocDomParser =
-                new OneOffSingleXmlDocDomParser(url);
-        System.out.println(oneOffSingleXmlDocDomParser
-                .getChildElementContent("phone"));
-    //    System.out.println(CustomDocumentUtil.isUrlValid(url));
     }
 }
