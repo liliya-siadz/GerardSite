@@ -12,8 +12,8 @@
             <li><a href="${pageContext.request.contextPath}/photos"><fmt:message key="header.link.photos.name"/></a></li>
             <li><a href="${pageContext.request.contextPath}/sign"><fmt:message key="header.link.make_request.name"/></a></li>
         </ul>
-        <%@ include file="../sign-fragment.jsp" %>
-        <%@ include file="../switch-locale-fragment.jsp" %>
+        <%@ include file="../sign-panel.jsp" %>
+        <%@ include file="../switch-locale-panel.jsp" %>
     </div>
 </nav>
 </body>

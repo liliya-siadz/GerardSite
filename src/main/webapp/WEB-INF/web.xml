@@ -39,14 +39,14 @@
         <servlet-name>error-404</servlet-name>
         <jsp-file>/pages/error-404.jsp</jsp-file>
     </servlet>
-    <servlet>
-        <servlet-name>home</servlet-name>
-        <jsp-file>/pages/home.jsp</jsp-file>
-    </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>home</servlet-name>
+        <jsp-file>/pages/home.jsp</jsp-file>
+    </servlet>
     <servlet>
         <servlet-name>dogs</servlet-name>
         <jsp-file>/pages/dogs.jsp</jsp-file>
@@ -83,40 +83,16 @@
 
  <!--client pages start-->
     <servlet>
-        <servlet-name>dogs_client</servlet-name>
-        <jsp-file>/pages/client/dogs_client.jsp</jsp-file>
+        <servlet-name>my_requests</servlet-name>
+        <jsp-file>/pages/authaccessed/client/my_requests.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>dogs_client</servlet-name>
-        <url-pattern>/client/dogs_client</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>photos_client</servlet-name>
-        <jsp-file>/pages/client/photos_client.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>photos_client</servlet-name>
-        <url-pattern>/client/photos_client</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>client_profile</servlet-name>
-        <jsp-file>/pages/client/client_profile.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>client_profile</servlet-name>
-        <url-pattern>/client/client_profile</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>client_requests</servlet-name>
-        <jsp-file>/pages/client/client_requests.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>client_requests</servlet-name>
-        <url-pattern>/client/client_requests</url-pattern>
+        <servlet-name>my_requests</servlet-name>
+        <url-pattern>/client/my_requests</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>make_request</servlet-name>
-        <jsp-file>/pages/client/make_request.jsp</jsp-file>
+        <jsp-file>/pages/authaccessed/client/make_request.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>make_request</servlet-name>
@@ -124,34 +100,37 @@
     </servlet-mapping>
 <!--client pages end-->
 
+<!-- auth accessed pages start-->
+    <servlet>
+        <servlet-name>my_profile</servlet-name>
+        <jsp-file>/pages/authaccessed/my_profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>my_profile</servlet-name>
+        <url-pattern>/authaccessed/my_profile</url-pattern>
+    </servlet-mapping>
+<!--    auth accessed pages end-->
+
 <!--    admin pages start-->
     <servlet>
-        <servlet-name>dogs_admin</servlet-name>
-        <jsp-file>/pages/admin/dogs_admin.jsp</jsp-file>
+        <servlet-name>admin_dogs</servlet-name>
+        <jsp-file>/pages/authaccessed/admin/admin_dogs.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>dogs_admin</servlet-name>
-        <url-pattern>/admin/dogs_admin</url-pattern>
+        <servlet-name>admin_dogs</servlet-name>
+        <url-pattern>/admin/admin_dogs</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>photos_admin</servlet-name>
-        <jsp-file>/pages/admin/photos_admin.jsp</jsp-file>
+        <servlet-name>admin_photos</servlet-name>
+        <jsp-file>/pages/authaccessed/admin/admin_photos.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>photos_admin</servlet-name>
-        <url-pattern>/admin/photos_admin</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>admin_profile</servlet-name>
-        <jsp-file>/pages/admin/admin_profile.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>admin_profile</servlet-name>
-        <url-pattern>/admin/admin_profile</url-pattern>
+        <servlet-name>admin_photos</servlet-name>
+        <url-pattern>/admin/admin_photos</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>requests</servlet-name>
-        <jsp-file>/pages/admin/requests.jsp</jsp-file>
+        <jsp-file>/pages/authaccessed/admin/requests.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>requests</servlet-name>
@@ -159,7 +138,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>users</servlet-name>
-        <jsp-file>/pages/admin/users.jsp</jsp-file>
+        <jsp-file>/pages/authaccessed/admin/users.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>users</servlet-name>

@@ -20,7 +20,7 @@
 <ilab:init-locale-and-bundle/>
 <fmt:setBundle basename="${sessionScope.bundle}"/>
 <fmt:setLocale value="${sessionScope.locale}"/>
-
+<c:set var="role" value="${sessionScope.role}"/>
 <jsp:useBean id="date" class="java.util.Date"/>
 <fmt:formatDate type="date" pattern="yyyy" value="${date}" var="currentDate"/>
 <html dir="ltr">

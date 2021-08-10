@@ -5,20 +5,13 @@
   Time: 7:40 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="fragment/include.jsp" %>
-<%--TO-DO: switch headers? where store role--%>
-<%@ include file="fragment/headers/header.jsp" %>
 <html>
     <head>
     <title><fmt:message key="page.home.title"/></title>
     </head>
     <body>
-    Home page.
-    <div class="container">
-        <a href="home">home</a>
-        <a href="dogs">dogs</a>
-    </div>
+    <%@include file="fragment/dynamic-headering.jsp"%>
+    <%@ include file="fragment/footer.jsp" %>
     </body>
-<%@ include file="fragment/footer.jsp" %>
 </html>
