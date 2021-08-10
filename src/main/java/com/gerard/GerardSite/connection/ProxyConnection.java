@@ -73,7 +73,13 @@ public class ProxyConnection implements Connection{
 
     @Override
     public void close() {
-        ConnectionPool.getInstance().getBackConnection(this);
+        try {
+            ConnectionPool.getInstance().getBackConnection(this);
+        } catch (ConnectionException connectionException) {
+            LOGGER.fatal("Unable to close real connection in proxy connection!");
+            throw new RuntimeException("Unable to close real connection in proxy connection!"
+                    + connectionException.getMessage(), connectionException);
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@
     <title><fmt:message key="page.sign.title"/></title>
 </head>
 <body>
-<%@include file="fragment/dynamic-headering.jsp"%>
+<%@include file="fragment/headers/header.jsp"%>
 <%@ include file="fragment/footer.jsp" %>
 </body>
 </html>

@@ -25,35 +25,41 @@ public class ConnectionPool {
     private static final AtomicBoolean isInstanceInitialized = new AtomicBoolean(false);
     private static final AtomicBoolean isDestroyCalled = new AtomicBoolean(false);
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-    private final Properties dbConnectionPoolProperties;
+    private static final String DB_CONNECTION_POOL_RESOURCE_PATH = "/db_connection_pool.properties";
+    private static final String POOL_SIZE_PROPERTY_KEY = "size";
+    private static final String ANTI_LEAKING_CONNECTIONS_START_MIN_PROPERTY_KEY = "antiLeakingConnectionsStart.min";
+    private static final String ANTI_LEAKING_CONNECTIONS_PERIOD_MIN_PROPERTY_KEY = "antiLeakingConnectionsPeriod.min";
+    private static final String QUANTITY_OF_TRIES_TO_OFFER_FREE_CONNECTIONS = "triesToOfferFreeConnections.quantity";
+
     private final BlockingQueue<ProxyConnection> freeConnections;
     private final BlockingQueue<ProxyConnection> givenConnections = new LinkedBlockingQueue<>();
     private final int poolSize;
+    private long antiLeakingConnectionsStartMin;
+    private long antiLeakingConnectionsPeriodMin;
     private int quantityOfTriesToOfferFreeConnections;
-    private Timer offerLeakedConnections;
-    private final String DB_CONNECTION_POOL_RESOURCE_PATH = "/db_connection_pool.properties";
-    private final String POOL_SIZE_PROPERTY_KEY = "size";
-    private final String ANTI_LEAKING_CONNECTIONS_START_MIN_PROPERTY_KEY = "antiLeakingConnectionsStart.min";
-    private final String ANTI_LEAKING_CONNECTIONS_PERIOD_MIN_PROPERTY_KEY = "antiLeakingConnectionsPeriod.min";
-    private final String QUANTITY_OF_TRIES_TO_OFFER_FREE_CONNECTIONS = "triesToOfferFreeConnections.quantity";
+    private Timer offerLeakedConnections = new Timer();
 
 
     //todo commit: after testing
-    //todo change: exception ideology
     //todo test: test pool throw Mockito and TestNG
-
     private ConnectionPool() {
         try {
-            dbConnectionPoolProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, DB_CONNECTION_POOL_RESOURCE_PATH);
+            Properties dbConnectionPoolProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, DB_CONNECTION_POOL_RESOURCE_PATH);
+            poolSize = Integer.parseInt(dbConnectionPoolProperties.getProperty(POOL_SIZE_PROPERTY_KEY));
+            quantityOfTriesToOfferFreeConnections = Integer.parseInt(dbConnectionPoolProperties.getProperty(QUANTITY_OF_TRIES_TO_OFFER_FREE_CONNECTIONS));
+            freeConnections = new LinkedBlockingQueue<>(poolSize);
+            antiLeakingConnectionsStartMin = Long.parseLong(
+                    dbConnectionPoolProperties.getProperty(ANTI_LEAKING_CONNECTIONS_START_MIN_PROPERTY_KEY));
+            antiLeakingConnectionsPeriodMin = Long.parseLong(
+                    dbConnectionPoolProperties.getProperty(ANTI_LEAKING_CONNECTIONS_PERIOD_MIN_PROPERTY_KEY));
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        } catch (SQLException | IOException | URISyntaxException exception) {
+        } catch (NullPointerException | SQLException | IOException | URISyntaxException exception) {
             LOGGER.fatal("Database connection pool properties resource file: "
                     + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid");
             throw new RuntimeException("Database connection pool properties resource file: "
                     + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid");
         }
-        poolSize = Integer.parseInt(dbConnectionPoolProperties.getProperty(POOL_SIZE_PROPERTY_KEY));
-        freeConnections = new LinkedBlockingQueue<>(poolSize);
+
         offerFreeConnections();
         scheduleTimerForLeakedConnectionsOffering();
     }
@@ -71,59 +77,60 @@ public class ConnectionPool {
         return instance;
     }
 
-    public Connection giveOutConnection() {
+    public Connection giveOutConnection() throws ConnectionException {
         if (isDestroyCalled.get()) {
-            LOGGER.warn("Trying to get connection while pool destroying");
+            LOGGER.warn("Try to get connection while pool destroying.");
             LOGGER.debug("Thread that tried to get connection will be interrupted");
             Thread.currentThread().interrupt();
-            throw new RuntimeException("Trying to get connection while pool destroying");
+            throw new ConnectionException("Try to get connection while pool destroying!");
         } else {
             ProxyConnection connection = null;
             try {
                 connection = freeConnections.take();
-                LOGGER.info("Connection:" + connection + " was taken from free connections queue");
+                LOGGER.info("Connection:" + connection + " was taken from free connections queue.");
             } catch (InterruptedException exception) {
-                LOGGER.warn("Unable to take connection from free connections queue");
+                LOGGER.warn("Unable to take connection from free connections queue!");
+                throw new ConnectionException("Unable to take connection from free connections queue!");
             }
-            if (connection != null) {
-                try {
+            try {
                     givenConnections.put(connection);
-                    LOGGER.info("Connection" + connection + "was put into given connections queue");
+                    LOGGER.info("Connection" + connection + "was put into given connections queue.");
                 } catch (InterruptedException exception) {
-                    LOGGER.warn("Unable to put given connection: " + connection + "into given connections queue");
+                    LOGGER.warn("Unable to put given connection: " + connection + "into given connections queue!");
                 }
-            }
             LOGGER.info(connection + " given out from pool");
             return connection;
         }
     }
 
-    //todo better: return boolean result
-    public void getBackConnection(Connection connection) {
+    public boolean getBackConnection(Connection connection) throws ConnectionException {
         if (connection instanceof ProxyConnection proxyConnection) {
             if (!givenConnections.remove(proxyConnection)) {
-                LOGGER.error("Unable to remove connection:" + proxyConnection + " from given connections queue");
-                LOGGER.debug("Connection will be replaced to extra one");
+                LOGGER.warn("Unable to remove connection:" + proxyConnection + " from given connections queue!");
+                LOGGER.debug("Connection will be replaced to extra one.");
                 proxyConnection = replaceInvalidConnection(proxyConnection);
             }
             try {
                 freeConnections.put(proxyConnection);
-                LOGGER.info("Connection:" + proxyConnection + " was put into free connections queue");
+                LOGGER.info("Connection:" + proxyConnection + " was put into free connections queue.");
+                return true;
             } catch (InterruptedException exception) {
-                LOGGER.warn("Connection: " + proxyConnection + " wasn't put into free connections queue: " + exception.getMessage(), exception);
-                LOGGER.debug("Connection will be replaced to extra one");
+                LOGGER.warn("Connection: " + proxyConnection + " wasn't put into free connections queue! " + exception.getMessage(), exception);
+                LOGGER.debug("Connection will be replaced to extra one.");
                 proxyConnection = replaceInvalidConnection(proxyConnection);
-                LOGGER.debug("Trying to put extra connection into free connections queue");
+                LOGGER.debug("Try to put extra connection into free connections queue.");
                 try {
                     freeConnections.put(proxyConnection);
-                    LOGGER.info("Connection:" + proxyConnection + " was put into free connections queue");
-                } catch (InterruptedException poolException) {
-                    LOGGER.error("Unable to return connection into pool: " + poolException.getMessage(), poolException);
-                    throw new RuntimeException("Unable to return connection into pool: " + poolException.getMessage(), poolException);
+                    LOGGER.info("Connection:" + proxyConnection + " was put into free connections queue.");
+                    return true;
+                } catch (InterruptedException connectionException) {
+                    LOGGER.error("Unable to return connection into pool! " + connectionException.getMessage(), connectionException);
+                    throw new ConnectionException("Unable to return connection into pool! " + connectionException.getMessage(), connectionException);
                 }
             }
         } else {
             LOGGER.error("Connection wasn't returned cause is not instance of 'ProxyConnection' (or null)");
+            return false;
         }
     }
 
@@ -134,13 +141,14 @@ public class ConnectionPool {
             try {
                 freeConnections.put(extraConnection);
             } catch (InterruptedException e) {
-                LOGGER.debug("No space for extra connection");
+                LOGGER.debug("No space for another extra connection.");
                 break;
             }
         }
     }
 
-    public void destroy() throws ConnectionException { //todo call: in servlet destroy()
+    //todo call: in servlet destroy() or in Listener
+    public void destroy() throws ConnectionException {
         isDestroyCalled.set(true);
         offerLeakedConnections.cancel();
         try {
@@ -148,7 +156,7 @@ public class ConnectionPool {
                 freeConnections.remove().strictClose();
             }
         } catch (NoSuchElementException exception) {
-            LOGGER.info("Pool destroyed");
+            LOGGER.info("Connection pool was destroying");
         } finally {
             deregisterDrivers();
         }
@@ -162,22 +170,16 @@ public class ConnectionPool {
                 LOGGER.error(exception.getMessage(), exception);
             }
         });
+        LOGGER.info("Drivers was deregistered");
     }
 
     private void scheduleTimerForLeakedConnectionsOffering() {
-        long antiLeakingConnectionsStartMin = Long.parseLong(
-                dbConnectionPoolProperties.getProperty(ANTI_LEAKING_CONNECTIONS_START_MIN_PROPERTY_KEY));
-        long antiLeakingConnectionsPeriodMin = Long.parseLong(
-                dbConnectionPoolProperties.getProperty(ANTI_LEAKING_CONNECTIONS_PERIOD_MIN_PROPERTY_KEY));
-        offerLeakedConnections = new Timer();
         offerLeakedConnections.schedule(new AntiLeakingConnectionTimerTask()
                 , TimeUnit.MINUTES.toMinutes(antiLeakingConnectionsStartMin)
                 , TimeUnit.MINUTES.toMinutes(antiLeakingConnectionsPeriodMin));
     }
 
-    //todo better: count time for 'for' loop
     private void offerFreeConnections() {
-        quantityOfTriesToOfferFreeConnections = Integer.parseInt(dbConnectionPoolProperties.getProperty(QUANTITY_OF_TRIES_TO_OFFER_FREE_CONNECTIONS));
         int quantityOfPastTriesToOfferFreeConnections = 0;
         int quantityOfSuccessfullyOfferedConnections = 0;
         while (quantityOfSuccessfullyOfferedConnections != poolSize && quantityOfPastTriesToOfferFreeConnections < quantityOfTriesToOfferFreeConnections) {
@@ -190,5 +192,4 @@ public class ConnectionPool {
             quantityOfPastTriesToOfferFreeConnections++;
         }
     }
-
 }

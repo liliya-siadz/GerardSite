@@ -1,11 +1,11 @@
-package com.gerard.GerardSite.tag;
+package com.gerard.GerardSite.service.tag;
 
 public enum SupportedLocale {
     EN("locale"),
     RU("locale_ru"),
     BE("locale_be");
 
-    private String bundleName;
+    private final String bundleName;
     SupportedLocale(String bundleName) {
         this.bundleName = bundleName;
 

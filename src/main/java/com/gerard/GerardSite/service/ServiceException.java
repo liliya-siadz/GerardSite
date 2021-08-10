@@ -1,25 +1,25 @@
-package com.gerard.GerardSite.util;
+package com.gerard.GerardSite.service;
 
-public class LogicException extends Exception {
+public class ServiceException extends Exception {
 
-    public LogicException() {
+    public ServiceException() {
         super();
     }
-    public LogicException(String message) {
+    public ServiceException(String message) {
         super(message);
     }
 
-    public LogicException(String message, Throwable cause) {
+    public ServiceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public LogicException(Throwable cause) {
+    public ServiceException(Throwable cause) {
         super(cause);
     }
 
     @Override
     public String toString() {
-        return "UtilException{"
+        return "ServiceException{"
                 + "message: " + super.getMessage() + ", cause: " + super.getCause()
                 + "}:";
     }

@@ -1,5 +1,6 @@
 package com.gerard.GerardSite.util;
 
+import com.gerard.GerardSite.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
@@ -17,13 +18,13 @@ import java.util.Objects;
 /*
  * Tool for simple xml document, with child unique elements (quantity fixed=1)
  */
-public class OneOffSingleXmlDocDomParser {
+public class SingleDocDomParser {
 
-    private static final Logger LOGGER = LogManager.getLogger(OneOffSingleXmlDocDomParser.class);
+    private static final Logger LOGGER = LogManager.getLogger(SingleDocDomParser.class);
     private DocumentBuilder documentBuilder;
     private String documentUrl;
 
-    public OneOffSingleXmlDocDomParser(String documentUrl) {
+    public SingleDocDomParser(String documentUrl) {
         DocumentBuilderFactory documentBuilderFactory =
                 DocumentBuilderFactory.newInstance();
         try {
@@ -34,7 +35,7 @@ public class OneOffSingleXmlDocDomParser {
         }
         try {
             setDocumentUrl(documentUrl);
-        } catch (LogicException exception) {
+        } catch (ServiceException exception) {
             LOGGER.error("Unable to set document url or root element tag name" +
                     ". Unable to create parser", exception);
         }
@@ -72,8 +73,8 @@ public class OneOffSingleXmlDocDomParser {
         if (this == object) {
             return true;
         }
-        if (object instanceof OneOffSingleXmlDocDomParser oneOffSingleXmlDocDomParser) {
-            return (this.documentUrl.equals(oneOffSingleXmlDocDomParser.documentUrl));
+        if (object instanceof SingleDocDomParser singleDocDomParser) {
+            return (this.documentUrl.equals(singleDocDomParser.documentUrl));
         } else {
             return false;
         }
@@ -86,16 +87,16 @@ public class OneOffSingleXmlDocDomParser {
 
     @Override
     public String toString() {
-        return "OneOffDomParser{" +
+        return "SingleDocDomParser{" +
                 "documentUrl=" + documentUrl + '\''
                 + '}';
     }
 
-    private void setDocumentUrl(String documentUrl) throws LogicException {
+    private void setDocumentUrl(String documentUrl) throws ServiceException {
         if (CustomDocumentUtil.isUrlValid(documentUrl)) {
             this.documentUrl = documentUrl;
         } else {
-            throw new LogicException("Document is not readable. " +
+            throw new ServiceException("Document is not readable. " +
                     "Document url string representation: " + documentUrl);
         }
     }

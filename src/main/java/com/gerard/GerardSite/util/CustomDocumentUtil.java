@@ -43,6 +43,7 @@ public class CustomDocumentUtil {
         LOGGER.trace("URL: " + url + " is " + (isUrlValid? "valid":"not valid"));
         return isUrlValid;
     }
+
     public static boolean isResourceValidByUrl(URL resourceUrl){
         if(resourceUrl == null){
             LOGGER.info("Resource url is null");

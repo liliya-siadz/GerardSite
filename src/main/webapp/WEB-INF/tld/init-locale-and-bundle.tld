@@ -7,7 +7,7 @@
     <uri>init-locale-and-bundle</uri>
     <tag>
         <name>init-locale-and-bundle</name>
-        <tag-class>com.gerard.GerardSite.tag.InitLocaleAndBundleCookies</tag-class>
+        <tag-class>com.gerard.GerardSite.service.tag.InitLocaleAndBundleCookies</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

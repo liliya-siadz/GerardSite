@@ -1,6 +1,6 @@
-package com.gerard.GerardSite.tag;
+package com.gerard.GerardSite.service.tag;
 
-import com.gerard.GerardSite.util.OneOffSingleXmlDocDomParser;
+import com.gerard.GerardSite.util.SingleDocDomParser;
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.TagSupport;
 
@@ -21,11 +21,10 @@ public class OutputSiteDescription extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        OneOffSingleXmlDocDomParser oneOffSingleXmlDocDomParser =
-                new OneOffSingleXmlDocDomParser(applicationUrl + DESCRIPTION_XML_FILE_URI);
-        String value = oneOffSingleXmlDocDomParser.getChildElementContent(elementTagName);
+        SingleDocDomParser singleDocDomParser =
+                new SingleDocDomParser(applicationUrl + DESCRIPTION_XML_FILE_URI);
+        String value = singleDocDomParser.getChildElementContent(elementTagName);
         try {
-          //  pageContext.getOut().write("<p>" + value + "</p>");
             pageContext.getOut().write(value);
         } catch (IOException exception) {
             throw new JspException(exception.getMessage());
