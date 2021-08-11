@@ -16,7 +16,7 @@ public class ConnectionPoolTest2 {
     }
 
     @Test(groups = "Opened connections",
-            description = "Check that pool creates fixed connections quantity",
+            description = "Check that pool creates quantity of connections not less than pool size number set",
             invocationTimeOut = 5000, threadPoolSize = 4,
             invocationCount = 4, timeOut = 5000, successPercentage = 100)
     public void testGiveOutConnectionConnectionsNotNull() throws ConnectionException {

@@ -16,13 +16,14 @@ public class ConnectionPoolTest1 {
     //doc: 'threadPoolSize' must be bigger than 'poolSize'
     @Test(testName ="testGiveOutConnectionFixedConnectionsQuantity" ,
             groups = "Opened connections",
-            description = "Check that pool creates fixed quantity of connections in a competitive environment",
+            description = "Check that pool doesn't create extra connections" +
+                    " in a competitive environment",
             invocationTimeOut = 5000, threadPoolSize = 4 * 5,
-            invocationCount = 4*5, timeOut = 5000, successPercentage = 80,
+            invocationCount = 4*5, timeOut = 100000, successPercentage = 20,
             expectedExceptions = ConnectionException.class)
     public void testGiveOutConnectionFixedConnectionsQuantity()
             throws ConnectionException {
-        assertNull(connectionPool.giveOutConnection());
+        assertNotNull(connectionPool.giveOutConnection());
     }
 
     @AfterClass

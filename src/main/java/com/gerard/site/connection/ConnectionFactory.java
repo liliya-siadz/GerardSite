@@ -1,45 +1,21 @@
 package com.gerard.site.connection;
 
-
-import com.gerard.site.util.CustomDocumentUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
-
-import java.net.URISyntaxException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import java.util.Properties;
+import static com.gerard.site.connection.ConnectionProperties.*;
 
 public class ConnectionFactory {
     private static ConnectionFactory instance;
     private static final Logger LOGGER = LogManager.getLogger(ConnectionFactory.class);
-    private final String DB_CONNECTION_RESOURCE_PATH = "/db_connection.properties";
-    private final String URL_PROPERTY_KEY = "url";
-    private final String QUANTITY_OF_TRIES_TO_CREATE_CONNECTION_PROPERTY_KEY = "connectionCreationTries.quantity";
-    private final String QUANTITY_OF_TRIES_TO_CREATE_VALID_CONNECTION_PROPERTY_KEY = "connectionCreationValidTries.quantity";
-    private String url;
-    private Properties dbConnectionProperties;
-    private int quantityOfTriesToCreateConnection;
-    private int quantityOfTriesToCreateValidConnection;
 
     private ConnectionFactory(){
-        try {
-            dbConnectionProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, DB_CONNECTION_RESOURCE_PATH);
-            quantityOfTriesToCreateValidConnection = Integer.parseInt(dbConnectionProperties.getProperty(QUANTITY_OF_TRIES_TO_CREATE_VALID_CONNECTION_PROPERTY_KEY));
-            url = dbConnectionProperties.getProperty(URL_PROPERTY_KEY);
-            quantityOfTriesToCreateConnection = Integer.parseInt(dbConnectionProperties.getProperty(QUANTITY_OF_TRIES_TO_CREATE_CONNECTION_PROPERTY_KEY));
-        } catch (NullPointerException | IOException | URISyntaxException e) {
-            LOGGER.fatal("Database connection properties file: " + DB_CONNECTION_RESOURCE_PATH
-            + "is invalid!");
-            throw new RuntimeException("Database connection properties file: "
-                    + DB_CONNECTION_RESOURCE_PATH + "is invalid!");
-        }
     }
+
     static ConnectionFactory getInstance(){
         if(instance == null){
             instance = new ConnectionFactory();
@@ -75,7 +51,6 @@ public class ConnectionFactory {
         return extraConnection;
     }
 
-    //todo better: guarantee creation connection boarded times
     private ProxyConnection createConnection(){
         for(int i = 0; i < quantityOfTriesToCreateConnection;){
             try {

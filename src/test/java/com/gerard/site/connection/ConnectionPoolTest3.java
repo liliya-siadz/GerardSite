@@ -29,10 +29,8 @@ public class ConnectionPoolTest3 {
         };
     }
 
-    //reperc
-    //experimental
     @Test(dataProvider = "dataProviderGivenConnectionsToGetBack",
-            description = "Check that pool connection gets back taken connections",
+            description = "Check that pool connection can get back taken connections",
             threadPoolSize = 3, invocationCount = 2)
     public void testGetBackConnection(Connection connection, boolean expected)
             throws ConnectionException {
