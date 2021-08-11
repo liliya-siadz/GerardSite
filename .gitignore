@@ -6,3 +6,4 @@ requirements.pdf
 TODO.txt
 VOCABULARY.txt
 *.iml
+src/main/java/Main.java

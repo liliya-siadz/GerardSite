@@ -39,12 +39,15 @@ public class ConnectionPool {
     private int quantityOfTriesToOfferFreeConnections;
     private Timer offerLeakedConnections = new Timer();
 
-
-    //todo commit: after testing
-    //todo test: test pool throw Mockito and TestNG
     private ConnectionPool() {
         try {
             Properties dbConnectionPoolProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, DB_CONNECTION_POOL_RESOURCE_PATH);
+            if(dbConnectionPoolProperties == null) {
+                LOGGER.fatal("Database connection pool properties resource FILE: "
+                        + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid!");
+                throw new RuntimeException("Database connection pool properties resource FILE: "
+                        + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid!");
+            }
             poolSize = Integer.parseInt(dbConnectionPoolProperties.getProperty(POOL_SIZE_PROPERTY_KEY));
             quantityOfTriesToOfferFreeConnections = Integer.parseInt(dbConnectionPoolProperties.getProperty(QUANTITY_OF_TRIES_TO_OFFER_FREE_CONNECTIONS));
             freeConnections = new LinkedBlockingQueue<>(poolSize);
@@ -53,19 +56,14 @@ public class ConnectionPool {
             antiLeakingConnectionsPeriodMin = Long.parseLong(
                     dbConnectionPoolProperties.getProperty(ANTI_LEAKING_CONNECTIONS_PERIOD_MIN_PROPERTY_KEY));
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        } catch (NullPointerException | SQLException | IOException | URISyntaxException exception) {
-            LOGGER.fatal("Database connection pool properties resource file: "
-                    + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid");
-            throw new RuntimeException("Database connection pool properties resource file: "
-                    + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid");
+        } catch (SQLException | IOException | URISyntaxException exception) {
+            LOGGER.fatal("Database connection pool properties resource file CONTENT: "
+                    + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid!");
+            throw new RuntimeException("Database connection pool properties resource file CONTENT: "
+                    + DB_CONNECTION_POOL_RESOURCE_PATH + "is invalid!");
         }
-
         offerFreeConnections();
         scheduleTimerForLeakedConnectionsOffering();
-    }
-
-    public int getPoolSize() {
-        return poolSize;
     }
 
     public static ConnectionPool getInstance() {
