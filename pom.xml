@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gerard</groupId>
-    <artifactId>GerardSite</artifactId>
+    <artifactId>site</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>GerardSite</name>
+    <name>gerard</name>
     <packaging>war</packaging>
-    <description>Class project after course "Промышленное программирование на Java" with love.</description>
-    <url>http://localhost:8080/GerardSite/</url>
+    <description>Class project after course "Java programming by EPAM".</description>
+    <url>http://localhost:8080/gerard</url>
     <developers>
         <developer>
             <name>Lilu</name>

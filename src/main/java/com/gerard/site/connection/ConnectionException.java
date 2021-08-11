@@ -1,0 +1,36 @@
+package com.gerard.site.connection;
+
+public class ConnectionException extends Exception{
+    public ConnectionException() {
+        super();
+    }
+
+    public ConnectionException(String message) {
+        super(message);
+    }
+
+    public ConnectionException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ConnectionException(Throwable cause) {
+        super(cause);
+    }
+
+    @Override
+    public String toString() {
+        return "ConnectionException{"
+                + "message: " + super.getMessage() + ", cause: " + super.getCause()
+                + "}:";
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+}

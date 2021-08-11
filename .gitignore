@@ -1,8 +1,5 @@
 .idea/**
 .settings/**
-.classpath
-.factorypath
-.project
 target/**
 PLAN.txt
 requirements.pdf

@@ -5,7 +5,7 @@ Class project after course "Промышленное программирова�
 ![leon_baby2](https://user-images.githubusercontent.com/39922259/126233688-83c843be-0cfb-40ab-a33c-65d8086ad839.jpg)
 
 <h4>Main purposes of web-site:</h4>
-<h5>1 Processing requests for puppies from potential pet's ownners
+<h5>1 Processing requests for puppies from potential pet's owners
 <hr/>
 2 Showing actual information regarding puppies in the kennel</h5>
 <hr/>

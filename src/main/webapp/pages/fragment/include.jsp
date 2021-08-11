@@ -11,15 +11,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ilab" uri="init-locale-and-bundle" %>
 <%@ taglib prefix="osd" uri="output-site-description" %>
+<%@ taglib prefix="dla" uri="define-language-attributes" %>
 <c:set var="applicationPath" value="${pageContext.request.contextPath}" scope="application"/>
 <c:set var="controllerUrl" value="${initParam.controller_url_pattern}" scope="application"/>
 <c:set var="currentPageUrl" value="${pageContext.request.servletPath}" scope="application"/>
 <c:set var="currentFullUrl" value="${pageContext.request.requestURL}"/>
-<ilab:init-locale-and-bundle/>
-<fmt:setBundle basename="${sessionScope.bundle}"/>
+<dla:define-language-attributes/>
 <fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="${sessionScope.bundle}"/>
 <c:set var="role" value="${sessionScope.role}"/>
 <jsp:useBean id="date" class="java.util.Date"/>
 <fmt:formatDate type="date" pattern="yyyy" value="${date}" var="currentDate"/>
