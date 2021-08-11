@@ -1,19 +1,19 @@
 package com.gerard.site.connection;
 
-public class ConnectionException extends Exception{
-    public ConnectionException() {
+public class ConnectionException extends Exception {
+    ConnectionException() {
         super();
     }
 
-    public ConnectionException(String message) {
+    ConnectionException(String message) {
         super(message);
     }
 
-    public ConnectionException(String message, Throwable cause) {
+    ConnectionException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ConnectionException(Throwable cause) {
+    ConnectionException(Throwable cause) {
         super(cause);
     }
 

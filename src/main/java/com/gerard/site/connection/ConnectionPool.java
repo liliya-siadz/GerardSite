@@ -52,6 +52,7 @@ public class ConnectionPool {
         return instance;
     }
 
+    //? merge throwing of connection exception
     public Connection giveOutConnection() throws ConnectionException {
         if (isDestroyCalled.get()) {
             LOGGER.warn("Try to get connection while pool destroying.");
@@ -59,7 +60,7 @@ public class ConnectionPool {
             Thread.currentThread().interrupt();
             throw new ConnectionException("Try to get connection while pool destroying!");
         } else {
-            ProxyConnection connection = null;
+            ProxyConnection connection;
             try {
                 connection = freeConnections.take();
                 LOGGER.info("Connection:" + connection + " was taken from free connections queue.");
@@ -109,19 +110,6 @@ public class ConnectionPool {
         }
     }
 
-    void offerLeakedConnections() {
-        int leakedConnectionsQuantity = poolSize - (givenConnections.size() + freeConnections.size());
-        for (int i = 0; i < leakedConnectionsQuantity; i++) {
-            ProxyConnection extraConnection = ConnectionFactory.getInstance().createValidConnection();
-            try {
-                freeConnections.put(extraConnection);
-            } catch (InterruptedException e) {
-                LOGGER.debug("No space for another extra connection.");
-                break;
-            }
-        }
-    }
-
     //todo call: in servlet destroy() or in Listener
     public void destroy() throws ConnectionException {
         isDestroyCalled.set(true);
@@ -134,6 +122,19 @@ public class ConnectionPool {
             LOGGER.info("Connection pool was destroyed");
         } finally {
             deregisterDrivers();
+        }
+    }
+
+    void offerLeakedConnections() {
+        int leakedConnectionsQuantity = poolSize - (givenConnections.size() + freeConnections.size());
+        for (int i = 0; i < leakedConnectionsQuantity; i++) {
+            ProxyConnection extraConnection = ConnectionFactory.getInstance().createValidConnection();
+            try {
+                freeConnections.put(extraConnection);
+            } catch (InterruptedException e) {
+                LOGGER.debug("No space for another extra connection.");
+                break;
+            }
         }
     }
 

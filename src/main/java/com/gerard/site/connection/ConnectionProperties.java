@@ -57,6 +57,8 @@ class ConnectionProperties {
     }
 
     static void init(){
-        instance = new ConnectionProperties();
+        if(instance==null){
+            instance = new ConnectionProperties();
+        }
     }
 }
