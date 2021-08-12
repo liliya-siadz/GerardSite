@@ -22,13 +22,17 @@
            type="text"
            name="login"
            required
-           pattern="login"
+           pattern="${loginPattern}"
            title="${loginValidationMessage}"
+           maxlength="${loginMaxLength}"
+           minlength="${loginMinLength}"
            oninvalid="setCustomValidity('X')"/>
 <%--    login end--%>
 <%--    password start--%>
     <label for="passwordId"><fmt:message key="page.sign.field.password.label"/></label>
-    <input id="passwordId" type="password" name="password" />
+    <input id="passwordId"
+           type="password"
+           name="password" />
 <%--    password end  --%>
 <%--    login command--%>
     <input type="hidden" name="command" value="LOGIN"/>
@@ -39,10 +43,5 @@
 <%--    login command end--%>
 </form>
 <%@ include file="fragment/footer.jsp" %>
-<script type="text/javascript">
-    function validLogin(){
-        window.alert("hello");
-    }
-</script>
 </body>
 </html>
