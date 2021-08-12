@@ -18,8 +18,8 @@
 <c:set var="currentPageUrl" value="${pageContext.request.servletPath}" scope="application"/>
 <c:set var="currentFullUrl" value="${pageContext.request.requestURL}"/>
 <dla:define-language-attributes/>
-<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
-<fmt:setBundle basename="${sessionScope.bundle}" scope="session"/>
+<fmt:setLocale value="${sessionScope.locale}" scope="application"/>
+<fmt:setBundle basename="${sessionScope.bundle}" scope="application"/>
 <c:set var="role" value="${sessionScope.role}" scope="session"/>
 <jsp:useBean id="date" class="java.util.Date"/>
 <fmt:formatDate type="date" pattern="yyyy" value="${date}" var="currentDate"/>
