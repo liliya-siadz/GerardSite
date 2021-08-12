@@ -19,8 +19,8 @@ public class Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        String applicationContext = getServletContext().getInitParameter(APPLICATION_CONTEXT_INIT_PARAMETER_NAME);
-        response.sendRedirect(applicationContext + prepareViewUrl(request, response));
+       // String applicationContext = getServletContext().getInitParameter(APPLICATION_CONTEXT_INIT_PARAMETER_NAME);
+        response.sendRedirect(prepareViewUrl(request, response));
     }
 
     @Override

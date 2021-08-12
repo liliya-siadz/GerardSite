@@ -26,14 +26,14 @@
                         applicationUrl="${initParam.application_url}"
                         elementTagName="cordinates" />
                 </b>
-                &#9200;
+                &#10711;
                 <c:out value="${currentDate}"/>
             </div>
         </small>
         <small>
             <div class="col-md-3">
             <fmt:message key="footer.link.address.name"/>
-                : &#9749;
+                : &#8962;
             <b>
                 <fmt:message key="kennel.address"/>
             </b>
@@ -52,7 +52,7 @@
         <small>
             <div class="col-md-3">
             <fmt:message key="footer.link.email.name"/>
-                : &#9755;
+                : &#9993;
             <b><osd:output-site-description
                     applicationUrl="${initParam.application_url}"
                     elementTagName="email" />

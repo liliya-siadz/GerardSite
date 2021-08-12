@@ -10,6 +10,8 @@ public enum LoginAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String lila= "LILA";
         request.setAttribute("lila",lila);
-        return "/admin/users";
+        //session saves role
+        String requestRefererUrl = request.getHeader("Referer");
+        return "http://localhost:8080/gerard/client/my_requests";
     }
 }

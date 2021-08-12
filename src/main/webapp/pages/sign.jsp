@@ -12,17 +12,30 @@
 </head>
 <body>
 <%@include file="fragment/headers/header.jsp"%>
-
 <form method="POST"
       action="${applicationPath}${controllerUrl}">
+<%--    login start --%>
+    <label for="loginId"><fmt:message key="page.sign.field.login.label"/></label>
+    <input id="loginId" type="text" name="login"/>
+<%--    login end--%>
+<%--    password start--%>
+    <label for="passwordId"><fmt:message key="page.sign.field.password.label"/></label>
+    <input id="passwordId" type="password" name="password"/>
+<%--    password end  --%>
+<%--    login command--%>
+    <input type="hidden" name="command" value="LOGIN"/>
     <button type="submit"
-            name="command"
-            value="LOGIN"
             class="btn btn-xs navbar-btn">
         <fmt:message key="header.link.sign_in.name"/>
     </button>
+<%--    login command end--%>
 </form>
-
 <%@ include file="fragment/footer.jsp" %>
+<%--<fmt:message key="page.sign.field.login.validation.message" var="loginValidationMessage"/>--%>
+<%--<script type="text/javascript">--%>
+<%--    function validLogin(){--%>
+<%--        window.alert("hello");--%>
+<%--    }--%>
+<%--</script>--%>
 </body>
 </html>
