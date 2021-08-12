@@ -12,6 +12,11 @@ public enum LoginAction implements Action {
         request.setAttribute("lila",lila);
         //session saves role
         String requestRefererUrl = request.getHeader("Referer");
-        return "http://localhost:8080/gerard/client/my_requests";
+        //1 read login and password from request parameters
+        //2 validate it
+        //3 if ok: send redirect to home page
+        //4 if not ok: redirect to same pages
+        // of this fields in session attributes with map of fields errors
+        return "/gerard/client/my_requests";
     }
 }
