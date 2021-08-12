@@ -9,14 +9,12 @@
 <head>
 </head>
 <body>
-<%--sign panel start--%>
+<%--sign out panel start--%>
 <div class="d-block nav navbar-right" style="margin-right:45px;">
-<a href="sign" class="btn btn-danger navbar-btn btn-xs" style="margin-bottom:30px">
-    <fmt:message key="header.link.sign_in.name"/>
-    |
-    <fmt:message key="header.link.sign_up.name"/>
+<a href="#" class="btn btn-danger navbar-btn btn-xs" style="margin-bottom:30px">
+    <fmt:message key="header.link.sign_out.name"/>
 </a>
 </div>
-<%--sign panel end  --%>
+<%--sign out panel end  --%>
 </body>
 </html>

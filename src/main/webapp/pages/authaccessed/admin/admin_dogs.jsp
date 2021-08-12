@@ -8,7 +8,7 @@
 <%@ include file="../../fragment/include.jsp" %>
 <html>
 <head>
-    <title><fmt:message key="page.dogs.title"/></title>
+    <title><fmt:message key="page.admin_dogs.title"/></title>
 </head>
 <body>
 <%@ include file="../../fragment/headers/admin_header.jsp" %>

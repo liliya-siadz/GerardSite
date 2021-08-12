@@ -17,6 +17,10 @@
         <param-value>/controller</param-value>
     </context-param>
     <context-param>
+        <param-name>application_context</param-name>
+        <param-value>/gerard</param-value>
+    </context-param>
+    <context-param>
         <param-name>application_url</param-name>
         <param-value>http://localhost:8080/gerard</param-value>
     </context-param>

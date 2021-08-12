@@ -12,6 +12,17 @@
 </head>
 <body>
 <%@include file="fragment/headers/header.jsp"%>
+
+<form method="POST"
+      action="${applicationPath}${controllerUrl}">
+    <button type="submit"
+            name="command"
+            value="LOGIN"
+            class="btn btn-xs navbar-btn">
+        <fmt:message key="header.link.sign_in.name"/>
+    </button>
+</form>
+
 <%@ include file="fragment/footer.jsp" %>
 </body>
 </html>

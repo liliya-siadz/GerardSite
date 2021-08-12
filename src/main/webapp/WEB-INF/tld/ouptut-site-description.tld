@@ -7,7 +7,7 @@
     <uri>output-site-description</uri>
     <tag>
         <name>output-site-description</name>
-        <tag-class>com.gerard.site.service.tag.OutputSiteDescription</tag-class>
+        <tag-class>com.gerard.site.service.tag.OutputSiteDescriptionTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>applicationUrl</name>

@@ -13,8 +13,8 @@ public class HttpServletRequestUtil {
     private static final Logger LOGGER =
             LogManager.getLogger(CustomDocumentUtil.class);
 
-    //docs: https://datatracker.ietf.org/doc/html/rfc2616#page-29
-    //where any two-letter primary-tag is an ISO-639 language abbreviation
+    //doc from: https://datatracker.ietf.org/doc/html/rfc2616#page-29
+    //doc : where any two-letter primary-tag is an ISO-639 language abbreviation
     public static String[] getAcceptedLanguagesCodesFromHeader(HttpServletRequest request) {
         String requestHeaderName = "Accept-Language";
         String localeCodeSeparator = ",";
@@ -30,7 +30,7 @@ public class HttpServletRequestUtil {
         return acceptedLanguagesCodes;
     }
 
-    //null return
+    //doc null return
     public static Cookie getCookieByName(HttpServletRequest request, String cookieName) {
          Cookie[] cookies = request.getCookies();
         for (int i = 0; i < cookies.length; i++) {

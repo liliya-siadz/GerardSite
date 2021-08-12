@@ -6,7 +6,7 @@ import jakarta.servlet.jsp.tagext.TagSupport;
 
 import java.io.IOException;
 
-public class OutputSiteDescription extends TagSupport {
+public class OutputSiteDescriptionTag extends TagSupport {
     private static final String DESCRIPTION_XML_FILE_URI = "/description.xml";
     private String elementTagName;
     private String applicationUrl;
