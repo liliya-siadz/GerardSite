@@ -12,7 +12,7 @@
 <fmt:message key="page.sign.field.login.validation.message"
              var="loginValidationMessage"
              scope="application"/>
-<c:set var="loginPattern" value="lol"/>
+<c:set var="loginPattern" value="login"/>
 <c:set var="loginMaxLength" value="5"/>
 <c:set var="loginMinLength" value="3"/>
 </body>

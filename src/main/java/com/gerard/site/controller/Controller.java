@@ -14,12 +14,10 @@ public class Controller extends HttpServlet {
     private static final String ACTION_IDENTIFIER_REQUEST_PARAMETER_NAME = "command";
     private static final String VIEW_DIRECTORY_NAME = "/pages";
     private static final String VIEW_EXTENSION = ".jsp";
-    private static final String APPLICATION_CONTEXT_INIT_PARAMETER_NAME = "application_context";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-       // String applicationContext = getServletContext().getInitParameter(APPLICATION_CONTEXT_INIT_PARAMETER_NAME);
         response.sendRedirect(prepareViewUrl(request, response));
     }
 

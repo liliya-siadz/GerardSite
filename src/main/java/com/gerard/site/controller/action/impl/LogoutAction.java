@@ -7,7 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public enum LogoutAction implements Action {
     INSTANCE;
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request,
+                          HttpServletResponse response) {
         return "logout";
     }
 }

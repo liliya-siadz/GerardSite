@@ -21,12 +21,13 @@
     <input id="loginId"
            type="text"
            name="login"
-           required
-           pattern="${loginPattern}"
-           title="${loginValidationMessage}"
-           maxlength="${loginMaxLength}"
-           minlength="${loginMinLength}"
-           oninvalid="setCustomValidity('X')"/>
+<%--           required--%>
+<%--           pattern="${loginPattern}"--%>
+<%--           title="${loginValidationMessage}"--%>
+<%--           maxlength="${loginMaxLength}"--%>
+<%--           minlength="${loginMinLength}"--%>
+<%--           oninvalid="setCustomValidity('X')"/>--%>
+        />
 <%--    login end--%>
 <%--    password start--%>
     <label for="passwordId"><fmt:message key="page.sign.field.password.label"/></label>
@@ -42,6 +43,11 @@
     </button>
 <%--    login command end--%>
 </form>
+<c:if test="${not empty sessionScope.loginCommandErrors}">
+    <c:if test="${not sessionScope.loginCommandErrors.LOGIN}">
+        <fmt:message key="page.sign.field.login.validation.message"/>
+    </c:if>
+</c:if>
 <%@ include file="fragment/footer.jsp" %>
 </body>
 </html>
