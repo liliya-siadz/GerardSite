@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class Field {
 
+    //PHASE: design
     private static Field instance;
     public static Map<String, FieldValidator> validators = new HashMap<>();
 
