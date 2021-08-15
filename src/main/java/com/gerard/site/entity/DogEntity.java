@@ -1,2 +1,4 @@
-package com.gerard.site.entity;public class Dog {
+package com.gerard.site.entity;
+
+public class DogEntity {
 }

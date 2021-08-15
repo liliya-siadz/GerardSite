@@ -1,12 +1,12 @@
 package com.gerard.site.controller.action.impl;
 
 import com.gerard.site.controller.action.Action;
-import com.gerard.site.service.Language;
+import com.gerard.site.localization.Language;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import static com.gerard.site.service.Language.BE;
+import static com.gerard.site.localization.Language.BE;
 
 public enum SwitchLocaleToBeAction implements Action {
 

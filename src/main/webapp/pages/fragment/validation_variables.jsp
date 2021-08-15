@@ -9,11 +9,14 @@
 <head>
 </head>
 <body>
-<fmt:message key="page.sign.field.login.validation.message"
+
+
+<fmt:message key="page.sign.field.email.validation.message"
              var="loginValidationMessage"
              scope="application"/>
-<c:set var="loginPattern" value="login"/>
-<c:set var="loginMaxLength" value="5"/>
-<c:set var="loginMinLength" value="3"/>
+<c:set var="emailPattern" value="my.email@gmail.com"/>
+<c:set var="emailMaxLength" value="5"/>
+<c:set var="emailMinLength" value="3"/>
+<c:set var="emailPlaceholder" value="billy.joel@gmail.com"/>
 </body>
 </html>

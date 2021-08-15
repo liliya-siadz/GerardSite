@@ -1,6 +1,6 @@
 package com.gerard.site.service.tag.localization;
 
-import com.gerard.site.service.Language;
+import com.gerard.site.localization.Language;
 import com.gerard.site.util.HttpServletRequestUtil;
 import com.gerard.site.util.CustomStringUtil;
 import jakarta.servlet.http.Cookie;
@@ -14,7 +14,7 @@ import jakarta.servlet.jsp.tagext.TagSupport;
 
 import java.util.List;
 
-import static com.gerard.site.service.Language.*;
+import static com.gerard.site.localization.Language.*;
 
 public class DefineLanguageAttributesTag extends TagSupport {
 

@@ -1,2 +1,13 @@
-package com.gerard.site.controller.action.impl;public class GetAllDogsAction {
+package com.gerard.site.controller.action.impl;
+
+import com.gerard.site.controller.action.Action;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public enum GetAllDogsAction implements Action {
+    INSTANCE;
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
+        return null;
+    }
 }

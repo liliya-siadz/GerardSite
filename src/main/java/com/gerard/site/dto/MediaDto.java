@@ -1,2 +1,4 @@
-package com.gerard.site.dto.impl;public interface MediaDto {
+package com.gerard.site.dto;
+
+public interface MediaDto extends Dto {
 }

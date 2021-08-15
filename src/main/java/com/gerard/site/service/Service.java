@@ -1,2 +1,4 @@
-package com.gerard.site.service;public interface Service {
+package com.gerard.site.service;
+
+public interface Service {
 }

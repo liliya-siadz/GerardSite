@@ -16,36 +16,39 @@
 <%@include file="fragment/validation_variables.jsp"%>
 <form method="POST"
       action="${applicationPath}${controllerUrl}">
-<%--    login start --%>
-    <label for="loginId"><fmt:message key="page.sign.field.login.label"/></label>
-    <input id="loginId"
+
+<%--    email start --%>
+    <label for="emailId"><fmt:message key="page.sign.field.email.label"/></label>
+    <input id="emailId"
            type="text"
-           name="login"
+           name="email"
 <%--           required--%>
-<%--           pattern="${loginPattern}"--%>
-<%--           title="${loginValidationMessage}"--%>
-<%--           maxlength="${loginMaxLength}"--%>
-<%--           minlength="${loginMinLength}"--%>
+<%--           pattern="${emailPattern}"--%>
+<%--           title="${emailValidationMessage}"--%>
+<%--           maxlength="${emailMaxLength}"--%>
+<%--           minlength="${emailMinLength}"--%>
 <%--           oninvalid="setCustomValidity('X')"/>--%>
         />
-<%--    login end--%>
+<%--    email end--%>
+
 <%--    password start--%>
     <label for="passwordId"><fmt:message key="page.sign.field.password.label"/></label>
     <input id="passwordId"
            type="password"
-           name="password" />
+           name="password"/>
 <%--    password end  --%>
-<%--    login command--%>
+
+<%--    LOGIN command--%>
     <input type="hidden" name="command" value="LOGIN"/>
     <button type="submit"
             class="btn btn-xs navbar-btn">
         <fmt:message key="header.link.sign_in.name"/>
     </button>
-<%--    login command end--%>
+<%--    LOGIN command end--%>
 </form>
-<c:if test="${not empty sessionScope.loginCommandErrors}">
-    <c:if test="${not sessionScope.loginCommandErrors.LOGIN}">
-        <fmt:message key="page.sign.field.login.validation.message"/>
+<c:if test="${not empty sessionScope.loginValidationErrors}">
+    <c:if test="${not sessionScope.loginValidationErrors.email}">
+        <fmt:message key="page.sign.field.email.validation.message"/>
     </c:if>
 </c:if>
 <%@ include file="fragment/footer.jsp" %>

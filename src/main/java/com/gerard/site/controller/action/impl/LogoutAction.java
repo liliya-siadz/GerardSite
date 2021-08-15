@@ -9,6 +9,6 @@ public enum LogoutAction implements Action {
     @Override
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) {
-        return "logout";
+        throw new UnsupportedOperationException();
     }
 }

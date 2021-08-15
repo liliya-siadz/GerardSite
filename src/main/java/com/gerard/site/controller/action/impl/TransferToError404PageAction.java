@@ -8,6 +8,6 @@ public enum TransferToError404PageAction implements Action {
     INSTANCE;
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }

@@ -1,8 +1,8 @@
-package com.gerard.site.validation.impl;
+package com.gerard.site.validation.field.impl;
 
-import com.gerard.site.validation.FieldValidator;
+import com.gerard.site.validation.field.FieldValidator;
 
-public class LoginValidator implements FieldValidator {
+public class EmailFieldValidator implements FieldValidator {
 
     //todo: think about null | empty | blank inside validate
     //PHASE: design

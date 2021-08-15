@@ -1,4 +1,4 @@
-package com.gerard.site.service;
+package com.gerard.site.localization;
 
 import java.util.Optional;
 

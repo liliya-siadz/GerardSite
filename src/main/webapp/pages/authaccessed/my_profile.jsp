@@ -15,6 +15,9 @@
     <c:when test="${role eq 'client'}"><%@include file="../fragment/headers/client_header.jsp" %></c:when>
     <c:when test="${role eq 'admin'}"><%@include file="../fragment/headers/admin_header.jsp" %></c:when>
 </c:choose>
+
+hello, ${sessionScope.email}
+
 <%@ include file="../fragment/footer.jsp" %>
 </body>
 </html>

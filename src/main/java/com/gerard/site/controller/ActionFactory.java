@@ -3,6 +3,7 @@ package com.gerard.site.controller;
 
 import com.gerard.site.controller.action.Action;
 import com.gerard.site.controller.action.impl.*;
+import com.gerard.site.validation.field.FieldsValidators;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,6 +27,7 @@ public enum ActionFactory {
         actions.put(SWITCH_LOCALE_TO_BE, SwitchLocaleToBeAction.INSTANCE);
         actions.put(SWITCH_LOCALE_TO_RU, SwitchLocaleToRuAction.INSTANCE);
         actions.put(SHOW_ERROR_404, TransferToError404PageAction.INSTANCE);
+        actions.put(GET_ALL_DOGS, GetAllDogsAction.INSTANCE);
     }
 
     public Action getAction(String command){

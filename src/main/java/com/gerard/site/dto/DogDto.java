@@ -1,2 +1,4 @@
-package com.gerard.site.dto.impl;public interface DogDto {
+package com.gerard.site.dto;
+
+public interface DogDto extends Dto {
 }
