@@ -1,6 +1,6 @@
-# GerardSite
+# gerard
 <h3><b>Web-site for monobreed kennel <i>"Gerard"</i>.</b></h3>
-Class project after course "Промышленное программирование на Java".
+Class project after online-training "Java Web development" by EPAM
 
 ![leon_baby2](https://user-images.githubusercontent.com/39922259/126233688-83c843be-0cfb-40ab-a33c-65d8086ad839.jpg)
 
