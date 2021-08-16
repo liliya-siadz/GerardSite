@@ -8,4 +8,4 @@
   <li>Showing actual information regarding puppies in the kennel </li>
 </ol>
 <h3>Database scheme</h3>
-![database_scheme](https://user-images.githubusercontent.com/39922259/129642216-3c67be9a-1cdb-4cc9-92d4-e7638514c569.jpg)
+![database_scheme](https://user-images.githubusercontent.com/39922259/129642252-56cbc570-e3d4-46f5-9a66-83332aab319d.jpg)
