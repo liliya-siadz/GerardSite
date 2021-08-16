@@ -3,7 +3,6 @@ package com.gerard.site.dao;
 import com.gerard.site.connection.ConnectionException;
 import com.gerard.site.connection.ConnectionPool;
 import com.gerard.site.dto.UserWithRequests;
-import com.gerard.site.entity.UserEntity;
 
 import java.sql.Connection;
 import java.util.Optional;
