@@ -42,8 +42,13 @@ public class AppUserDao extends AbstractDao<UserEntity> {
         return instance;
     }
 
+    // todo select top 1 record by criteries from entity
+    // add analog method that returnes list ?
     @Override
-    public UserEntity select(UserEntity entity) throws DaoException {
+    public UserEntity findRecord(UserEntity entity) throws DaoException {
+        if(entity == null) {
+            throw new DaoException("Parameter 'entity' is null");
+        }
         final String selectUserByEmailAndPassword
                 = "SELECT * FROM " + TABLE_NAME + " where email =? and password =?";
         String email = entity.getEmail();
@@ -77,7 +82,7 @@ public class AppUserDao extends AbstractDao<UserEntity> {
     }
 
     @Override
-    public List<UserEntity> selectAll() throws DaoException {
+    public List<UserEntity> selectAllRecords() throws DaoException {
         final String selectAllUsers = "SELECT * FROM " + TABLE_NAME;
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection()){
             try (Statement statement = connection.createStatement()) {
@@ -101,12 +106,21 @@ public class AppUserDao extends AbstractDao<UserEntity> {
     }
 
     @Override
-    public boolean update(UserEntity entity, UserEntity newEntityVersion) {
+    public boolean update(UserEntity entity, UserEntity newEntityVersion) throws DaoException {
+        if(entity == null) {
+            throw new DaoException("Parameter 'entity' is null");
+        }
+        if(newEntityVersion == null) {
+            throw new DaoException("Parameter 'newEntityVersion' is null");
+        }
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean create(UserEntity entity) {
+    public boolean create(UserEntity entity) throws DaoException {
+        if(entity == null) {
+            throw new DaoException("Parameter 'entity' is null");
+        }
         throw new UnsupportedOperationException();
     }
 

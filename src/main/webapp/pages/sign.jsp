@@ -14,6 +14,12 @@
 <body>
 <%@include file="fragment/headers/header.jsp"%>
 <%@include file="fragment/validation_variables.jsp"%>
+
+<c:if test="${not empty sessionScope.isUserFound}">
+    <c:if test="${not sessionScope.isUserFound}">
+        <p style="color: red"><fmt:message key="page.sign.authorization.result"/></p>
+    </c:if>
+</c:if>
 <form method="POST"
       action="${applicationPath}${controllerUrl}">
 

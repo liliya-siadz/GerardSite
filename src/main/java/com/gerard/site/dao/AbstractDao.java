@@ -13,10 +13,10 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
     protected AbstractDao() {
     }
 
-    public abstract E select(E entity) throws DaoException;
-    public abstract List<E> selectAll() throws DaoException;
-    public abstract boolean update(E entity, E newEntityVersion);
-    public abstract boolean create(E entity);
+    public abstract E findRecord(E entity) throws DaoException;
+    public abstract List<E> selectAllRecords() throws DaoException;
+    public abstract boolean update(E entity, E newEntityVersion) throws DaoException;
+    public abstract boolean create(E entity) throws DaoException;
     public abstract E parseResultSet(ResultSet resultSet) throws SQLException;
 
     @Override

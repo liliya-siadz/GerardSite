@@ -1,6 +1,6 @@
 package com.gerard.site.util;
 
-import com.gerard.site.service.ServiceException;
+import com.gerard.site.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;

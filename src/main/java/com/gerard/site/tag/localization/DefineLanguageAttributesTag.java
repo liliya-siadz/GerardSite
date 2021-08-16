@@ -1,4 +1,4 @@
-package com.gerard.site.service.tag.localization;
+package com.gerard.site.tag.localization;
 
 import com.gerard.site.localization.Language;
 import com.gerard.site.util.HttpServletRequestUtil;

@@ -1,4 +1,4 @@
-package com.gerard.site.service.tag;
+package com.gerard.site.tag;
 
 import com.gerard.site.util.SingleDocDomParser;
 import jakarta.servlet.jsp.JspException;
