@@ -3,20 +3,16 @@ package com.gerard.site.entity;
 import java.util.Objects;
 
 public class AbstractEntity<K>{
-    private K id;
+    protected K id;
 
     public AbstractEntity(){
-
-    }
-    public AbstractEntity(K id){
-        this.id = id;
     }
 
     public final K getId(){
         return id;
     }
 
-    public final void setId(K id){
+    public void setId(K id){
         this.id = id;
     }
 
