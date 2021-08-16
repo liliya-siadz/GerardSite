@@ -7,6 +7,10 @@ import java.util.List;
 
 public class DogService implements Service {
      List<DogDto> findAllDogs(){
+         int age = 2;
+         String name = "Gerard" ;
          return null;
      }
+
+
 }

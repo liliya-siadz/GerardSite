@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class FieldsValidators {
 
+    //todo store them as already inited once
     private static final Map<String, FieldValidator> validators = new HashMap<>();
     private static FieldsValidators instance;
 

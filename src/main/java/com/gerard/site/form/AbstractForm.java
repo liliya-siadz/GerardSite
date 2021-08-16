@@ -6,20 +6,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractForm {
+public abstract class AbstractForm<T extends FormValidator> {
+    protected final HttpServletRequest request;
+    protected final FormValidator validator;
     private final List<String> inputsName;
-    protected FormValidator validator;
 
-
-    public AbstractForm(List<String> inputsName){
+    AbstractForm(HttpServletRequest request, List<String> inputsName, T validator){
+        this.request = request;
         this.inputsName = inputsName;
+        this.validator = validator;
+        readInputs(request);
     }
 
-    protected final void setValidator(FormValidator formValidator){
-        this.validator = formValidator;
+    public Map<String, Boolean> getValidationMap(){
+        return validator.validateForm(this);
     }
-
-    public abstract Map<String, Boolean> getValidationMap();
 
     protected abstract void readInputs(HttpServletRequest request);
 
