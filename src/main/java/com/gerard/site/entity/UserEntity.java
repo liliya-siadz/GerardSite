@@ -7,7 +7,6 @@ public class UserEntity extends AbstractEntity<Integer> {
     private AppUserRole appUserRole;
     private AppUserSex appUserSex;
     private String email;
-    private String password;
     private String name;
     private String surname;
     private String patronymic;
@@ -33,10 +32,6 @@ public class UserEntity extends AbstractEntity<Integer> {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public String getName() {
         return name;
     }
@@ -56,8 +51,7 @@ public class UserEntity extends AbstractEntity<Integer> {
     @Override
     public int hashCode() {
         return Objects.hash(appUserStatus, appUserRole,
-                appUserSex, email, password,
-                name, surname, patronymic);
+                appUserSex, email, name, surname, patronymic);
     }
 
     @Override
@@ -67,7 +61,6 @@ public class UserEntity extends AbstractEntity<Integer> {
                 ", appUserRole=" + appUserRole +
                 ", appUserSex=" + appUserSex +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", patronymic='" + patronymic + '\'' +
@@ -117,11 +110,6 @@ public class UserEntity extends AbstractEntity<Integer> {
 
         public Builder email(String email) {
             userEntity.email = email;
-            return this;
-        }
-
-        public Builder password(String password) {
-            userEntity.password = password;
             return this;
         }
 

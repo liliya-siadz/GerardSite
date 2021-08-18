@@ -38,7 +38,7 @@ public enum LoginAction implements Action {
         } else {
             try {
                 Optional<UserEntity> possibleAuthenticatedUser
-                        = AppUserService.authenticate(loginForm);
+                        = AppUserService.getInstance().authenticate(loginForm);
                 if (possibleAuthenticatedUser.isEmpty()) {
                     //todo: make attr for "no user found" message
                     session.setAttribute("isUserFound", false);

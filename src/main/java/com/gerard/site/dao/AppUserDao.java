@@ -16,7 +16,6 @@ import static com.gerard.site.entity.UserEntity.AppUserSex;
 
 public class AppUserDao extends AbstractDao<UserEntity> {
     //todo check methods for null args
-
     private static AppUserDao instance;
     private static final String TABLE_NAME = "gerard.app_user";
     private static final String COLUMN_LABEL_1 = "app_user_id";
@@ -42,22 +41,19 @@ public class AppUserDao extends AbstractDao<UserEntity> {
         return instance;
     }
 
-    // todo select top 1 record by criteries from entity
-    // add analog method that returnes list ?
     @Override
-    public UserEntity findRecord(UserEntity entity) throws DaoException {
-        if(entity == null) {
-            throw new DaoException("Parameter 'entity' is null");
+    public UserEntity findRecord(UserEntity user) throws DaoException {
+        if (user == null) {
+            throw new DaoException("Parameter 'user' is null");
         }
-        final String selectUserByEmailAndPassword
-                = "SELECT * FROM " + TABLE_NAME + " where email =? and password =?";
-        String email = entity.getEmail();
-        String password = entity.getPassword();
-        try (Connection connection = ConnectionPool.getInstance().giveOutConnection()){
+        final String selectUserByEmail
+                = "SELECT * FROM " + TABLE_NAME + " where email =?";
+        String email = user.getEmail();
+        try (Connection connection
+                     = ConnectionPool.getInstance().giveOutConnection()) {
             try (PreparedStatement preparedStatement
-                         = connection.prepareStatement(selectUserByEmailAndPassword)) {
+                         = connection.prepareStatement(selectUserByEmail)) {
                 preparedStatement.setString(1, email);
-                preparedStatement.setString(2, password);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.isBeforeFirst()) {
                     UserEntity selectedUser = null;
@@ -66,25 +62,26 @@ public class AppUserDao extends AbstractDao<UserEntity> {
                     }
                     return selectedUser;
                 } else {
-                    LOGGER.info("No records were found in table: " + TABLE_NAME + ". "
+                    LOGGER.info("No records were found in table: "
+                            + TABLE_NAME + ". "
                             + "Used next columns values: "
                             + TABLE_NAME + "." + COLUMN_LABEL_4 + " : " + email
-                            + " , "
-                            + TABLE_NAME + "." + COLUMN_LABEL_5 + " : " + password + " .");
+                            + " . ");
                     LOGGER.warn("Null will be returned");
                     return null;
                 }
             }
         } catch (ConnectionException | SQLException exception) {
-            throw new DaoException("Unable to get data from table: " + TABLE_NAME + " ! "
-                    + "Reason: " + exception.getMessage(), exception);
+            throw new DaoException("Unable to get data from table: "
+                    + TABLE_NAME + " ! "
+                    + exception.getMessage(), exception);
         }
     }
 
     @Override
     public List<UserEntity> selectAllRecords() throws DaoException {
         final String selectAllUsers = "SELECT * FROM " + TABLE_NAME;
-        try (Connection connection = ConnectionPool.getInstance().giveOutConnection()){
+        try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(selectAllUsers);
                 if (resultSet.isBeforeFirst()) {
@@ -94,34 +91,80 @@ public class AppUserDao extends AbstractDao<UserEntity> {
                     }
                     return selectedUsers;
                 } else {
-                    LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
+                    LOGGER.info("No records were found in table: "
+                            + TABLE_NAME + ". ");
                     LOGGER.warn("Null will be returned");
                     return null;
                 }
             }
         } catch (ConnectionException | SQLException exception) {
-            throw new DaoException("Unable to get data from table: " + TABLE_NAME + " ! "
+            throw new DaoException("Unable to get data from table: "
+                    + TABLE_NAME + " ! "
                     + "Reason: " + exception.getMessage(), exception);
         }
     }
 
     @Override
-    public boolean update(UserEntity entity, UserEntity newEntityVersion) throws DaoException {
-        if(entity == null) {
-            throw new DaoException("Parameter 'entity' is null");
+    public boolean update(UserEntity user, UserEntity newUserVersion) throws DaoException {
+        if (user == null) {
+            throw new DaoException("Parameter 'user' is null");
         }
-        if(newEntityVersion == null) {
-            throw new DaoException("Parameter 'newEntityVersion' is null");
+        if (newUserVersion == null) {
+            throw new DaoException("Parameter 'newUserVersion' is null");
         }
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean create(UserEntity entity) throws DaoException {
-        if(entity == null) {
-            throw new DaoException("Parameter 'entity' is null");
+    public boolean create(UserEntity user) throws DaoException {
+        if (user == null) {
+            throw new DaoException("Parameter 'user' is null");
         }
         throw new UnsupportedOperationException();
+    }
+
+    public String selectUserPasswordByEmail(String token, String email)
+            throws DaoException {
+        String passwordToken = "electronDance18";
+        if (passwordToken.equals(token)) {
+            if (email == null) {
+                throw new DaoException("Parameter 'email' is null");
+            }
+            final String selectUserPasswordByEmail
+                    = "SELECT " + COLUMN_LABEL_5
+                    + " FROM " + TABLE_NAME + " where email =?";
+            try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
+                try (PreparedStatement preparedStatement
+                        = connection.prepareStatement(selectUserPasswordByEmail)) {
+                    preparedStatement.setString(1, email);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if (resultSet.isBeforeFirst()) {
+                        String password = null;
+                        while (resultSet.next()) {
+                            password = resultSet.getString(COLUMN_LABEL_5);
+                        }
+                        return password;
+                    } else {
+                        LOGGER.info("No records were found in table: "
+                                + TABLE_NAME + ". "
+                                + "Used next columns values: "
+                                + TABLE_NAME + "." + COLUMN_LABEL_4 + " : " + email
+                                + " . ");
+
+                        LOGGER.warn("Null will be returned");
+                        return null;
+                    }
+                }
+            } catch (SQLException | ConnectionException throwables) {
+                throw new DaoException("Unable to get data from table: "
+                        + TABLE_NAME + " ! "
+                        + throwables.getMessage(), throwables);
+            }
+        } else {
+            LOGGER.warn("Unknown access for service! "
+                    + ". Used token : " + token);
+            throw new DaoException("Unknown access for service! . Access denied!");
+        }
     }
 
     @Override
@@ -132,7 +175,6 @@ public class AppUserDao extends AbstractDao<UserEntity> {
         AppUserRole appUserRole = AppUserRole.valueOf(
                 resultSet.getString(COLUMN_LABEL_3).toUpperCase());
         String email = resultSet.getString(COLUMN_LABEL_4);
-        String password = resultSet.getString(COLUMN_LABEL_5);
         String name = resultSet.getString(COLUMN_LABEL_6);
         String surname = resultSet.getString(COLUMN_LABEL_7);
         String patronymic = resultSet.getString(COLUMN_LABEL_8);
@@ -146,7 +188,6 @@ public class AppUserDao extends AbstractDao<UserEntity> {
                 .email(email)
                 .name(name)
                 .surname(surname)
-                .password(password)
                 .patronymic(patronymic)
                 .phone(phone)
                 .appUserSex(appUserSex)

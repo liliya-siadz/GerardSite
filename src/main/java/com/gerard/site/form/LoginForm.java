@@ -18,6 +18,7 @@ public class LoginForm extends AbstractForm<LoginFormValidator> {
         FieldsValidators.init();
     }
 
+
     public String getEmail() {
         return email;
     }

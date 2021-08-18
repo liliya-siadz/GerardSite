@@ -1,4 +1,3 @@
-src/main/java/Main.java
 .idea/**
 .settings/**
 target/**
@@ -7,3 +6,4 @@ requirements.pdf
 TODO.txt
 VOCABULARY.txt
 *.iml
+src/main/java/com/gerard/site/Main.java

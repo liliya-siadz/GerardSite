@@ -7,37 +7,43 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.gerard.site.connection.ConnectionProperties.*;
+import static com.gerard.site.connection.ConnectionProperties.dbConnectionProperties;
+import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToCreateConnection;
+import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToCreateValidConnection;
+import static com.gerard.site.connection.ConnectionProperties.url;
 
-public class ConnectionFactory {
+final class ConnectionFactory {
     private static ConnectionFactory instance;
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionFactory.class);
+    private static final Logger LOGGER =
+            LogManager.getLogger(ConnectionFactory.class);
 
-    private ConnectionFactory(){
+    private ConnectionFactory() {
     }
 
-    static ConnectionFactory getInstance(){
-        if(instance == null){
+    static ConnectionFactory getInstance() {
+        if (instance == null) {
             instance = new ConnectionFactory();
-        }return instance;
+        }
+        return instance;
     }
 
     ProxyConnection createValidConnection() {
         int pastTriesToCreateValidConnection = 0;
-        while (pastTriesToCreateValidConnection < quantityOfTriesToCreateValidConnection){
+        while (pastTriesToCreateValidConnection < quantityOfTriesToCreateValidConnection) {
             ProxyConnection connection = createConnection();
             try {
                 boolean isConnectionValid = connection.isValid(0);
-                if(isConnectionValid){
+                if (isConnectionValid) {
                     return connection;
                 }
             } catch (SQLException exception) {
-                LOGGER.error("Connection: " + connection + " is invalid! " + exception.getMessage(), exception);
+                LOGGER.error("Connection: " + connection + " is invalid! "
+                        + exception.getMessage(), exception);
                 LOGGER.debug("Try to create valid connection again.");
-                pastTriesToCreateValidConnection ++;
+                pastTriesToCreateValidConnection++;
             }
         }
-        LOGGER.info(quantityOfTriesToCreateValidConnection + " tries had past to create valid connection.");
+        LOGGER.trace(quantityOfTriesToCreateValidConnection + " tries had past to create valid connection.");
         LOGGER.fatal("Unable to create valid connection!");
         throw new RuntimeException("Unable to create valid connection!");
     }
@@ -47,25 +53,40 @@ public class ConnectionFactory {
         connection.strictClose();
         LOGGER.trace("Connection: " + connection + "was strictly closed.");
         ProxyConnection extraConnection = getInstance().createValidConnection();
-        LOGGER.trace("Created extra connection: " + extraConnection);
+        LOGGER.info("Created extra connection: " + extraConnection);
         return extraConnection;
     }
 
-    private ProxyConnection createConnection(){
-        for(int i = 0; i < quantityOfTriesToCreateConnection;){
+    private ProxyConnection createConnection() {
+        for (int i = 0; i < quantityOfTriesToCreateConnection;) {
             try {
                 Connection connection = DriverManager.getConnection(url, dbConnectionProperties);
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 return proxyConnection;
             } catch (SQLException exception) {
-                LOGGER.error("Database connection errors while creating connection! " + exception.getMessage(), exception);
+                LOGGER.error("Database connection errors while creating connection! "
+                        + exception.getMessage(), exception);
                 LOGGER.debug(i + " try to create valid connection again");
-                i ++;
+                i++;
             }
         }
-        LOGGER.info(quantityOfTriesToCreateConnection + " tries had past to create database connection.");
+        LOGGER.trace(quantityOfTriesToCreateConnection + " tries had past to create database connection.");
         LOGGER.fatal("Unable to create database connection!");
         throw new RuntimeException("Unable to create database connection!");
     }
 
+    @Override
+    public boolean equals(Object object) {
+        return super.equals(object);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "ConnectionFactory{}";
+    }
 }

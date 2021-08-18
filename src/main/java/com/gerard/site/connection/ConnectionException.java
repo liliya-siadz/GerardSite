@@ -18,10 +18,8 @@ public class ConnectionException extends Exception {
     }
 
     @Override
-    public String toString() {
-        return "ConnectionException{"
-                + "message: " + super.getMessage() + ", cause: " + super.getCause()
-                + "}:";
+    public boolean equals(Object object) {
+        return super.equals(object);
     }
 
     @Override
@@ -30,7 +28,10 @@ public class ConnectionException extends Exception {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public String toString() {
+        return "ConnectionException{"
+                + "message: " + super.getMessage()
+                + ", cause: " + super.getCause()
+                + "}:";
     }
 }
