@@ -34,17 +34,21 @@ import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToO
  *     <li>free connections queue </li>
  *     <li>given connections queue </li>
  * </ol>
- * Giving out connections process takes connections from free connection queue
- * and put it to the given connections queue. Getting back process works
- * otherwise, it takes connections from given connections queue
+ * Giving out connections method {@link ConnectionPool#giveOutConnection()}
+ * takes connections from free connection queue
+ * and put it to the given connections queue.
+ * Getting back method {@link ConnectionPool#getBackConnection(Connection)} ()}
+ * works otherwise, it takes connections from given connections queue
  * and puts it to the free connections queue .
  * </p>
  * <p>Can but no guarantee protection from leaking connections
  *, cause database connections has timeout .
  * </p>
- * <p>Connections may be destroyed by using destroy method .</p>
- * <p>Singleton pattern realized through using AtomicBoolean object {@link AtomicBoolean
- * }</p>
+ * <p>Connections may be destroyed by using method {@code destroy()} {@link ConnectionPool#destroy()} .
+ * </p>
+ * <p>Singleton pattern realized through
+ * using AtomicBoolean object {@link AtomicBoolean}
+ * </p>
  *
  * @author Liliya Siadzelnikava
  * @version 1.0
@@ -130,8 +134,8 @@ public final class ConnectionPool {
      * Gives out database connection from connection pool.
      * Firstly gives connection from free connections queue then
      * put it to given connections queue. If no free connection exists waits
-     * <p> For thread-safeness uses take {@link BlockingQueue#take()}
-     * and put {@link BlockingQueue#put(Object)} methods of BlockingQueue class
+     * <p> For thread-safeness uses {@code take()} {@link BlockingQueue#take()}
+     * and {@code put(Object)} {@link BlockingQueue#put(Object)} methods of BlockingQueue class
      * </p>
      * If called while pool destroy process interrupts that thread and
      * throws ConnectionException {@link ConnectionException} .
@@ -171,7 +175,7 @@ public final class ConnectionPool {
 
     /**
      * Gets back connection to connection pool.
-     * Firstly check if connection instanceof ProxyConnection {@link ProxyConnection}
+     * Firstly check if connection {@code instanceof ProxyConnection} {@link ProxyConnection}
      * if no throws ConnectionException {@link ConnectionException} .
      * Then takes it from given connections queue and put to free connections queue .
      * <p>If removing connection from given connections
@@ -231,12 +235,12 @@ public final class ConnectionPool {
     /**
      * Destroys pool by removing connections from free connections queue
      * and really close connections
-     * by calling close method in Connection class {@link Connection#close()} .
+     * by calling {@code close()} method in Connection class {@link Connection#close()} .
      *
      * Given connections in given connections queue are not closing
      * cause
      * <p>Deregister JDBC drivers in finally block .
-     * Used not-thread safe queue method remove {@link Queue#remove()} </p>
+     * Used not-thread safe queue method remove() {@link Queue#remove()} </p>
      */
     public void destroy() {
         isDestroyCalled.set(true);

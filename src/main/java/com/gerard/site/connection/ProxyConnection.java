@@ -24,11 +24,33 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class ProxyConnection implements Connection {
+//todo is it ok ?: 'delegates'
+/**
+ * Covers real database connection and works as proxy
+ * of interface Connection {@link Connection},
+ * has it's own realization of method {@code close()}
+ * {@link Connection#close()} .
+ * <p>
+ *  Overrides method {@code close()} by giving back connection into connection pool
+ *  instead of usual real closing database connection .
+ * </p>
+ * <p>Has it's own method {@code strictClose()} {@link ProxyConnection#strictClose()}
+ * that delegates method {@code close()} {@link Connection#close()} .
+ * </p>
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
+ */
+public final class ProxyConnection implements Connection {
     private static final Logger LOGGER = LogManager.getLogger(ProxyConnection.class);
+
+    /**
+     * Real database connection .
+     */
     private Connection connection;
 
     ProxyConnection(Connection connection) {
+        super();
         this.connection = connection;
     }
 
@@ -36,6 +58,10 @@ public class ProxyConnection implements Connection {
         return connection;
     }
 
+    /**
+     * Really closes database connection,
+     * delegate method {@code close()} {@link Connection#close()} .
+     */
     public void strictClose() {
         try {
             connection.close();
@@ -85,6 +111,13 @@ public class ProxyConnection implements Connection {
         connection.rollback();
     }
 
+    /**
+     * Pseudo-closes database connection by getting back
+     * connection into connection pool .
+     * Calls method getBackConnection(Connection) {@link ConnectionPool#getBackConnection(Connection)}
+     * <p>Overrides standard method {@code close()} of implemented
+     * interface Connection {@link Connection}</p>
+     */
     @Override
     public void close() {
         try {
