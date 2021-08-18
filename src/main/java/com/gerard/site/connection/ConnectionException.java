@@ -1,5 +1,6 @@
 package com.gerard.site.connection;
 
+
 public class ConnectionException extends Exception {
     ConnectionException() {
         super();
@@ -11,10 +12,6 @@ public class ConnectionException extends Exception {
 
     ConnectionException(String message, Throwable cause) {
         super(message, cause);
-    }
-
-    ConnectionException(Throwable cause) {
-        super(cause);
     }
 
     @Override

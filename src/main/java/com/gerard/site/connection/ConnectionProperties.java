@@ -9,9 +9,6 @@ import java.net.URISyntaxException;
 import java.util.Properties;
 
 final class ConnectionProperties {
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-    private static ConnectionProperties instance;
-
     static Properties dbConnectionProperties;
     static int poolSize;
     static long antiLeakingConnectionsStartMin;
@@ -20,18 +17,12 @@ final class ConnectionProperties {
     static String url;
     static int quantityOfTriesToCreateConnection;
     static int quantityOfTriesToCreateValidConnection;
-
-    final String URL_PROPERTY_KEY = "url";
-    final String QUANTITY_OF_TRIES_TO_CREATE_CONNECTION_PROPERTY_KEY = "connectionCreationTries.quantity";
-    final String QUANTITY_OF_TRIES_TO_CREATE_VALID_CONNECTION_PROPERTY_KEY = "connectionCreationValidTries.quantity";
-    final String POOL_SIZE_PROPERTY_KEY = "size";
-    final String ANTI_LEAKING_CONNECTIONS_START_MIN_PROPERTY_KEY = "antiLeakingConnectionsStart.min";
-    final String ANTI_LEAKING_CONNECTIONS_PERIOD_MIN_PROPERTY_KEY = "antiLeakingConnectionsPeriod.min";
-    final String QUANTITY_OF_TRIES_TO_OFFER_FREE_CONNECTIONS_PROPERTY_KEY = "triesToOfferFreeConnections.quantity";
+    private static ConnectionProperties instance;
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     private ConnectionProperties() {
+        String dbConnectionResourcePath = "/connection.properties";
         try {
-            final String dbConnectionResourcePath = "/connection.properties";
             dbConnectionProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, dbConnectionResourcePath);
             if (dbConnectionProperties == null) {
                 LOGGER.fatal("Database connection properties is null! "
@@ -39,27 +30,36 @@ final class ConnectionProperties {
                 throw new RuntimeException("Database connection properties is null! "
                         + "Resource FILE: " + dbConnectionResourcePath);
             }
-            poolSize = Integer.parseInt(dbConnectionProperties.getProperty(POOL_SIZE_PROPERTY_KEY));
-            quantityOfTriesToOfferFreeConnections = Integer.parseInt(dbConnectionProperties.getProperty(QUANTITY_OF_TRIES_TO_OFFER_FREE_CONNECTIONS_PROPERTY_KEY));
+            String poolSizePropertyKey = "size";
+            String quantityOfTriesToOfferFreeConnectionsPropertyKey = "triesToOfferFreeConnections.quantity";
+            String antiLeakingConnectionsStartMinPropertyKey = "antiLeakingConnectionsStart.min";
+            String antiLeakingConnectionsPeriodMinPropertyKey = "antiLeakingConnectionsPeriod.min";
+            String quantityOfTriesToCreateValidConnectionPropertyKey = "connectionCreationValidTries.quantity";
+            String urlPropertyKey = "url";
+            String quantityOfTriesToCreateConnectionPropertyKey = "connectionCreationTries.quantity";
+            poolSize = Integer.parseInt(
+                    dbConnectionProperties.getProperty(poolSizePropertyKey));
+            quantityOfTriesToOfferFreeConnections = Integer.parseInt(
+                    dbConnectionProperties.getProperty(quantityOfTriesToOfferFreeConnectionsPropertyKey));
             antiLeakingConnectionsStartMin = Long.parseLong(
-                    dbConnectionProperties.getProperty(ANTI_LEAKING_CONNECTIONS_START_MIN_PROPERTY_KEY));
+                    dbConnectionProperties.getProperty(antiLeakingConnectionsStartMinPropertyKey));
             antiLeakingConnectionsPeriodMin = Long.parseLong(
-                    dbConnectionProperties.getProperty(ANTI_LEAKING_CONNECTIONS_PERIOD_MIN_PROPERTY_KEY));
+                    dbConnectionProperties.getProperty(antiLeakingConnectionsPeriodMinPropertyKey));
             quantityOfTriesToCreateValidConnection = Integer.parseInt(
-                    dbConnectionProperties.getProperty(QUANTITY_OF_TRIES_TO_CREATE_VALID_CONNECTION_PROPERTY_KEY));
-            url = dbConnectionProperties.getProperty(URL_PROPERTY_KEY);
-            quantityOfTriesToCreateConnection = Integer.parseInt(dbConnectionProperties.getProperty(QUANTITY_OF_TRIES_TO_CREATE_CONNECTION_PROPERTY_KEY));
-
+                    dbConnectionProperties.getProperty(quantityOfTriesToCreateValidConnectionPropertyKey));
+            url = dbConnectionProperties.getProperty(urlPropertyKey);
+            quantityOfTriesToCreateConnection = Integer.parseInt(
+                    dbConnectionProperties.getProperty(quantityOfTriesToCreateConnectionPropertyKey));
         } catch (IOException | URISyntaxException exception) {
             LOGGER.fatal("Database connection properties resource file CONTENT: "
-                    + DB_CONNECTION_RESOURCE_PATH + "is invalid!");
+                    + dbConnectionResourcePath + "is invalid!");
             throw new RuntimeException("Database connection properties resource file CONTENT: "
-                    + DB_CONNECTION_RESOURCE_PATH + "is invalid!");
+                    + dbConnectionResourcePath + "is invalid! " + exception.getMessage(), exception);
         }
     }
 
-    static void init(){
-        if(instance==null){
+    static void init() {
+        if (instance == null) {
             instance = new ConnectionProperties();
         }
     }

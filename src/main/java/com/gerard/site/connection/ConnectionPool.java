@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
+import java.util.Queue;
 import java.util.Timer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -19,34 +20,101 @@ import static com.gerard.site.connection.ConnectionProperties.antiLeakingConnect
 import static com.gerard.site.connection.ConnectionProperties.poolSize;
 import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToOfferFreeConnections;
 
+/**
+ * Manages (gives out and gets back) fixed quantity of database connections
+ * which are instance of custom class ProxyConnection {@link ProxyConnection} .
+ *
+ * Uses connection properties from class ConnectionProperties {@link ConnectionProperties}
+ * through MySQL JDBC drivers {@link com.mysql.cj.jdbc} .
+ * Realized as thread-safe singleton object .
+ * <p>Database connections are storing in two queues:
+ * <ol>
+ *     <li>free connections queue </li>
+ *     <li>given connections queue </li>
+ * </ol>
+ * Giving out connections process takes connections from free connection queue
+ * and put it to the given connections queue. Getting back process works
+ * otherwise, it takes connections from given connections queue
+ * and puts it to the free connections queue .
+ * </p>
+ * <p>Can but no guarantee protection from leaking connections
+ *, cause database connections has timeout .
+ * </p>
+ * <p>Connections may be destroyed by using destroy method .</p>
+ * <p>Singleton pattern realized through using AtomicBoolean object {@link AtomicBoolean
+ * }</p>
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
+ */
 public final class ConnectionPool {
-    private static ConnectionPool instance;
-    private static final AtomicBoolean isInstanceInitialized =
-            new AtomicBoolean(false);
-    private static final AtomicBoolean isDestroyCalled =
-            new AtomicBoolean(false);
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-    private final BlockingQueue<ProxyConnection> freeConnections;
-    private final BlockingQueue<ProxyConnection> givenConnections;
-    private final Timer offerLeakedConnections;
 
+    /**
+     * Initializes database connections properties
+     * such as connections quantity (pool size) and etc.
+     * in class ConnectionProperties {@link ConnectionProperties}
+     */
     static {
         ConnectionProperties.init();
     }
 
+    /**
+     * Thread-safe marker indicating that connection pool was initialized .
+     */
+    private static final AtomicBoolean isInstanceInitialized = new AtomicBoolean(false);
+
+    /**
+     * Thread-safe marker indicating that connection pool destroying process had started .
+     *
+     * @see #destroy()
+     */
+    private static final AtomicBoolean isDestroyCalled = new AtomicBoolean(false);
+
+    /**
+     * Class singleton instance .
+     */
+    private static ConnectionPool instance;
+
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
+    /**
+     * Queue storage for free connections .
+     */
+    private final BlockingQueue<ProxyConnection> freeConnections;
+
+    /**
+     * Queue storage for given connections .
+     */
+    private final BlockingQueue<ProxyConnection> givenConnections;
+
+    /**
+     * Timer for managing anti-leaking connections protection .
+     *
+     * @see #offerLeakedConnections()
+     */
+    private final Timer leakedConnectionsOfferTimer;
+
+
     private ConnectionPool() {
         givenConnections = new LinkedBlockingQueue<>();
         freeConnections = new LinkedBlockingQueue<>(poolSize);
-        offerLeakedConnections = new Timer();
+        leakedConnectionsOfferTimer = new Timer();
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            LOGGER.fatal("Unable to register JDBC drivers! "
+                    + exception.getMessage());
+            throw new RuntimeException("Unable to register JDBC drivers!"
+                    + exception.getMessage(), exception);
         }
         offerFreeConnections();
         scheduleTimerForLeakedConnectionsOffering();
     }
 
+    /**
+     * Provides and initializes pool instance .
+     * @return initialized pool instance
+     */
     public static ConnectionPool getInstance() {
         while (instance == null) {
             if (isInstanceInitialized.compareAndSet(false, true)) {
@@ -56,6 +124,23 @@ public final class ConnectionPool {
         return instance;
     }
 
+    /**
+     * Gives out database connection from connection pool.
+     * Firstly gives connection from free connections queue then
+     * put it to given connections queue. If no free connection exists waits
+     * <p> For thread-safeness uses take {@link BlockingQueue#take()}
+     * and put {@link BlockingQueue#put(Object)} methods of BlockingQueue class
+     * </p>
+     * If called while pool destroy process interrupts that thread and
+     * throws ConnectionException {@link ConnectionException} .
+     * If this implementation is used it's recommended
+     * to use transactions to protect of data corrupting .
+     *
+     * @return taken connection from free connection queue.
+     *         If no free connection exists wait .
+     * @throws ConnectionException
+     *         if method called while pool destroy executing
+     */
     public Connection giveOutConnection() throws ConnectionException {
         if (isDestroyCalled.get()) {
             LOGGER.warn("Try to get connection while pool destroying.");
@@ -82,6 +167,27 @@ public final class ConnectionPool {
         }
     }
 
+    /**
+     * Gets back connection to connection pool.
+     * Firstly check if connection instanceof ProxyConnection {@link ProxyConnection}
+     * if no throws ConnectionException {@link ConnectionException} .
+     * Then takes it from given connections queue and put to free connections queue .
+     * <p>If removing connection from given connections
+     * or putting it to the free connections queue is impossible
+     * replaces it by the new one .</p>
+     *
+     * @param connection to get back to pool
+     * @return  false if param connection
+     *          is not instanceof ProxyConnection
+     *          {@link ProxyConnection}
+     *          true if connection was successfully put to free connections queue
+     * @throws ConnectionException if catches InterruptedException
+     *          which can be thrown while putting connection
+     *          into free connection queue
+     *          by using method put of BlockingQueue class
+     *          {@link BlockingQueue#put(Object)}
+     * @see ProxyConnection
+     */
     public boolean getBackConnection(Connection connection) throws ConnectionException {
         if (connection instanceof ProxyConnection proxyConnection) {
             if (!givenConnections.remove(proxyConnection)) {
@@ -119,14 +225,26 @@ public final class ConnectionPool {
     }
 
     //todo call: in Listener
+    //todo add docs: why given connections are not close
+    /**
+     * Destroys pool by removing connections from free connections queue
+     * and really close connections
+     * by calling close method in Connection class {@link Connection#close()} .
+     *
+     * Given connections in given connections queue are not closing
+     * cause
+     * <p>Deregister JDBC drivers in finally block .
+     * Used not-thread safe queue method remove {@link Queue#remove()} </p>
+     */
     public void destroy() {
         isDestroyCalled.set(true);
-        offerLeakedConnections.cancel();
+        leakedConnectionsOfferTimer.cancel();
         try {
             for (int i = 0; i < poolSize; i++) {
                 freeConnections.remove().strictClose();
             }
         } catch (NoSuchElementException exception) {
+            LOGGER.trace("No elements in free connections queue");
             LOGGER.info("Connection pool was destroyed");
         } finally {
             deregisterDrivers();
@@ -134,13 +252,14 @@ public final class ConnectionPool {
     }
 
     void offerLeakedConnections() {
-        int leakedConnectionsQuantity = poolSize - (givenConnections.size() + freeConnections.size());
+        int existingConnectionsQuantity = givenConnections.size() + freeConnections.size();
+        int leakedConnectionsQuantity = poolSize - existingConnectionsQuantity;
         for (int i = 0; i < leakedConnectionsQuantity; i++) {
             ProxyConnection extraConnection = ConnectionFactory.getInstance().createValidConnection();
             try {
                 freeConnections.put(extraConnection);
                 LOGGER.trace("Connection: " + extraConnection
-                        + "was put to free connections queue to reduce risk of leaking connection.");
+                        + " was put to free connections queue to reduce risk of leaking connection.");
             } catch (InterruptedException e) {
                 LOGGER.trace("No space for another extra connection.");
                 break;
@@ -152,7 +271,7 @@ public final class ConnectionPool {
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {
             try {
                 DriverManager.deregisterDriver(driver);
-                LOGGER.info("Drivers was deregistered");
+                LOGGER.info("Drivers were deregistered.");
             } catch (SQLException exception) {
                 LOGGER.error("Unable to deregister drivers! " + exception.getMessage(), exception);
             }
@@ -161,7 +280,7 @@ public final class ConnectionPool {
     }
 
     private void scheduleTimerForLeakedConnectionsOffering() {
-        offerLeakedConnections.schedule(
+        leakedConnectionsOfferTimer.schedule(
                 new AntiLeakingConnectionTimerTask(),
                 TimeUnit.MINUTES.toMinutes(antiLeakingConnectionsStartMin),
                 TimeUnit.MINUTES.toMinutes(antiLeakingConnectionsPeriodMin));
@@ -198,7 +317,7 @@ public final class ConnectionPool {
         return "ConnectionPool{"
                 + "freeConnections=" + freeConnections
                 + ", givenConnections=" + givenConnections
-                + ", offerLeakedConnections=" + offerLeakedConnections
+                + ", offerLeakedConnections=" + leakedConnectionsOfferTimer
                 + '}';
     }
 }

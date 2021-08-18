@@ -14,8 +14,7 @@ import static com.gerard.site.connection.ConnectionProperties.url;
 
 final class ConnectionFactory {
     private static ConnectionFactory instance;
-    private static final Logger LOGGER =
-            LogManager.getLogger(ConnectionFactory.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionFactory.class);
 
     private ConnectionFactory() {
     }

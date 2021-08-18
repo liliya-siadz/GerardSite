@@ -3,7 +3,22 @@ package com.gerard.site.connection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Array;
+import java.sql.Blob;
+import java.sql.CallableStatement;
+import java.sql.Clob;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.NClob;
+import java.sql.PreparedStatement;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
+import java.sql.SQLWarning;
+import java.sql.SQLXML;
+import java.sql.Savepoint;
+import java.sql.ShardingKey;
+import java.sql.Statement;
+import java.sql.Struct;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
@@ -13,17 +28,18 @@ public class ProxyConnection implements Connection {
     private static final Logger LOGGER = LogManager.getLogger(ProxyConnection.class);
     private Connection connection;
 
-    ProxyConnection(Connection connection){
+    ProxyConnection(Connection connection) {
         this.connection = connection;
     }
 
-    private Connection getConnection(){
+    private Connection getConnection() {
         return connection;
     }
 
-    public void strictClose(){
+    public void strictClose() {
         try {
             connection.close();
+            LOGGER.trace("Database connection: " + connection + " was closed.");
         } catch (SQLException exception) {
             LOGGER.error(exception.getMessage(), exception);
         }
@@ -73,10 +89,10 @@ public class ProxyConnection implements Connection {
     public void close() {
         try {
             ConnectionPool.getInstance().getBackConnection(this);
-        } catch (ConnectionException connectionException) {
+        } catch (ConnectionException exception) {
             LOGGER.fatal("Unable to close real connection in proxy connection!");
             throw new RuntimeException("Unable to close real connection in proxy connection!"
-                    + connectionException.getMessage(), connectionException);
+                    + exception.getMessage(), exception);
         }
     }
 
@@ -131,17 +147,20 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
+    public Statement createStatement(
+            int resultSetType, int resultSetConcurrency) throws SQLException {
         return connection.createStatement(resultSetType, resultSetConcurrency);
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, int resultSetType,
+                                              int resultSetConcurrency) throws SQLException {
         return connection.prepareStatement(sql, resultSetType, resultSetConcurrency);
     }
 
     @Override
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
+    public CallableStatement prepareCall(String sql, int resultSetType,
+                                         int resultSetConcurrency) throws SQLException {
         return connection.prepareCall(sql, resultSetType, resultSetConcurrency);
     }
 
@@ -186,17 +205,20 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    public Statement createStatement(int resultSetType, int resultSetConcurrency,
+                                     int resultSetHoldability) throws SQLException {
         return connection.createStatement(resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency,
+                                              int resultSetHoldability) throws SQLException {
         return connection.prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     @Override
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency,
+                                         int resultSetHoldability) throws SQLException {
         return connection.prepareCall(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
@@ -306,7 +328,8 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public boolean setShardingKeyIfValid(ShardingKey shardingKey, ShardingKey superShardingKey, int timeout) throws SQLException {
+    public boolean setShardingKeyIfValid(ShardingKey shardingKey,
+                                         ShardingKey superShardingKey, int timeout) throws SQLException {
         return connection.setShardingKeyIfValid(shardingKey, superShardingKey, timeout);
     }
 
@@ -316,7 +339,8 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public void setShardingKey(ShardingKey shardingKey, ShardingKey superShardingKey) throws SQLException {
+    public void setShardingKey(ShardingKey shardingKey,
+                               ShardingKey superShardingKey) throws SQLException {
         connection.setShardingKey(shardingKey, superShardingKey);
     }
 
@@ -336,11 +360,11 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public boolean equals(Object object){
-        if (object == this){
+    public boolean equals(Object object) {
+        if (object == this) {
             return true;
         }
-        if(object instanceof ProxyConnection proxyConnection){
+        if (object instanceof ProxyConnection proxyConnection) {
             Connection proxyConnectionField = proxyConnection.getConnection();
             return Objects.equals(connection, proxyConnectionField);
         }
@@ -348,20 +372,14 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int hash = 7;
-        int hashcode = hash + 31 * (connection==null?0:connection.hashCode());
+        int hashcode = hash + 31 * (connection == null ? 0 : connection.hashCode());
         return hashcode;
     }
 
     @Override
     public String toString() {
-       return new StringBuilder()
-                .append( "ProxyConnection{")
-                .append("\n")
-                .append(connection!=null?connection.toString():"connection: null")
-                .append("\nhashcode: ").append(hashCode())
-                .append("\n}")
-                .toString();
+        return "ProxyConnection { hashcode " + hashCode() + " }";
     }
 }
