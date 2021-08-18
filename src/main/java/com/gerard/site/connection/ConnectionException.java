@@ -1,6 +1,13 @@
 package com.gerard.site.connection;
 
 
+/**
+ * Class is subclass of checked exception {@link Exception}
+ * and indicates that was some connection errors with
+ * database connection in the connection layer.
+ * Mostly this exception should be thrown up .
+ * Can be caught by next layer and covered by the next layer exception .
+ */
 public class ConnectionException extends Exception {
     ConnectionException() {
         super();

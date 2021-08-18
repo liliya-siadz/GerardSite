@@ -21,12 +21,14 @@ import static com.gerard.site.connection.ConnectionProperties.poolSize;
 import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToOfferFreeConnections;
 
 /**
- * Manages (gives out and gets back) fixed quantity of database connections
+ * Final class that manages (gives out and gets back) specified
+ * fixed quantity of database connections
  * which are instance of custom class ProxyConnection {@link ProxyConnection} .
  *
- * Uses connection properties from class ConnectionProperties {@link ConnectionProperties}
+ * <p>Uses connection properties from class ConnectionProperties {@link ConnectionProperties}
  * through MySQL JDBC drivers {@link com.mysql.cj.jdbc} .
  * Realized as thread-safe singleton object .
+ * </p>
  * <p>Database connections are storing in two queues:
  * <ol>
  *     <li>free connections queue </li>
