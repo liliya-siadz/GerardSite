@@ -1,14 +1,12 @@
-# GerardSite
-<h3><b>Web-site for monobreed kennel <i>"Gerard"</i>.</b></h3>
-Class project after course "Промышленное программирование на Java".
+# gerard
+<h2><i>Web-app(web-site) for monobreed kennel "Gerard"</i>.</h2>
+☆ Class project after online-training "Java Web development" by EPAM ☆
 
-![leon_baby2](https://user-images.githubusercontent.com/39922259/126233688-83c843be-0cfb-40ab-a33c-65d8086ad839.jpg)
-
-<h4>Main purposes of web-site:</h4>
-<h5>1 Processing requests for puppies from potential pet's owners
-<hr/>
-2 Showing actual information regarding puppies in the kennel</h5>
-<hr/>
+<h4>The main purposes of the web-app:</h4>
+<ol type="1">
+  <li>Processing requests for puppies from potential pet's owners </li>
+  <li>Showing actual information regarding puppies in the kennel </li>
+</ol>
 <h3>Database scheme</h3>
 
-![Gerard_bd_sheme](https://user-images.githubusercontent.com/39922259/126234046-9284d98b-e85a-45d5-84e5-4fd9533e9728.jpg)
+![database_scheme](https://user-images.githubusercontent.com/39922259/129642252-56cbc570-e3d4-46f5-9a66-83332aab319d.jpg)
