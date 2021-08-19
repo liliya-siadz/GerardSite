@@ -1,21 +1,17 @@
 package com.gerard.site.tag;
 
-import com.gerard.site.exception.ServiceException;
-import com.gerard.site.util.SingleDocDomParser;
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.TagSupport;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Custom JSP-tag to display information from
- * description XML file that located at
- * application root level, works only with
- * 1-level nested xml file with unique elements inside,
- * it means that only root element of the file
- * can have child elements and they must have unique names .
+ * description XML file that must be located at
+ * application root level and must corresponds
+ * requirements of using custom tool for XML parsing
+ * {@code SingleDocDomParser} {@link SingleDocDomParser} .
  *
  * <p>Note, that description XML file must be named
  * as "description.xml" and be located at application
@@ -34,8 +30,6 @@ import java.io.IOException;
  *     that is used for finding content to display</li>
  * </ol>
  * </p>
- * For parsing uses custom single XML document DOM parser
- * {@link SingleDocDomParser}
  *
  * @author Liliya Siadzelnikava
  * @version 1.0
@@ -47,8 +41,12 @@ public class OutputSiteDescriptionTag extends TagSupport {
      * URI for finding description file .
      */
     private static final String DESCRIPTION_XML_FILE_URI = "/description.xml";
-    private static final Logger LOGGER =
-            LogManager.getLogger(OutputSiteDescriptionTag.class);
+
+    /**
+     * Default content, is used if content specified to tag
+     * is corrupted or not found .
+     */
+    private static final String DEFAULT_CONTENT = "NO CONTENT WAS FOUND";
 
     /**
      * Tag name to display content from,
@@ -90,9 +88,13 @@ public class OutputSiteDescriptionTag extends TagSupport {
     public int doStartTag() throws JspException {
         SingleDocDomParser singleDocDomParser =
                 new SingleDocDomParser(applicationUrl + DESCRIPTION_XML_FILE_URI);
-        String value = singleDocDomParser.getChildElementContent(elementTagName);
+        Optional<String> specifiedContent =
+                singleDocDomParser.getChildElementContent(elementTagName);
+        String content = specifiedContent.isEmpty()
+                ? DEFAULT_CONTENT
+                : specifiedContent.get();
         try {
-            pageContext.getOut().write(value);
+            pageContext.getOut().write(content);
         } catch (IOException exception) {
             throw new JspException(exception.getMessage());
         }
