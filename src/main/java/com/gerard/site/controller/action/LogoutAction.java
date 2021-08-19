@@ -1,6 +1,5 @@
-package com.gerard.site.controller.action.impl;
+package com.gerard.site.controller.action;
 
-import com.gerard.site.controller.action.Action;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

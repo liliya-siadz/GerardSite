@@ -1,10 +1,7 @@
-package com.gerard.site.controller.action.impl;
+package com.gerard.site.controller.action;
 
-import com.gerard.site.connection.ConnectionPool;
-import com.gerard.site.controller.action.Action;
 import com.gerard.site.entity.UserEntity;
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.form.AbstractForm;
 import com.gerard.site.form.LoginForm;
 import com.gerard.site.service.AppUserService;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,6 +1,5 @@
 package com.gerard.site.connection;
 
-
 /**
  * Class is subclass of checked exception {@link Exception}
  * and indicates that was some connection errors with

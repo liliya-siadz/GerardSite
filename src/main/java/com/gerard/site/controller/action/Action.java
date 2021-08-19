@@ -13,5 +13,11 @@ public interface Action {
         return requestRefererUrl;
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @return url
+     */
     String execute(HttpServletRequest request, HttpServletResponse response);
 }

@@ -1,26 +1,33 @@
-package com.gerard.site.controller;
+package com.gerard.site.controller.action;
 
 
-import com.gerard.site.controller.action.Action;
-import com.gerard.site.controller.action.impl.*;
-import com.gerard.site.validation.field.FieldsValidators;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gerard.site.controller.Command.*;
+import static com.gerard.site.controller.action.ActionFactory.Command.*;
 
 public enum ActionFactory {
     INSTANCE;
+
+    enum Command {
+        LOGIN,
+        LOGOUT,
+        SHOW_ERROR_404,
+        SWITCH_LOCALE_TO_BE,
+        SWITCH_LOCALE_TO_EN,
+        SWITCH_LOCALE_TO_RU,
+        GET_ALL_DOGS
+    }
 
     private static final Logger LOGGER = LogManager.getLogger(ActionFactory.class);
     private final Map<Command, Action> actions = new HashMap<>();
     private final Command defaultCommand = SHOW_ERROR_404;
     private final Action defaultAction = TransferToError404PageAction.INSTANCE;
 
-    ActionFactory(){
+   ActionFactory(){
         actions.put(LOGIN, LoginAction.INSTANCE);
         actions.put(LOGOUT, LogoutAction.INSTANCE);
         actions.put(SWITCH_LOCALE_TO_EN, SwitchLocaleToEnAction.INSTANCE);

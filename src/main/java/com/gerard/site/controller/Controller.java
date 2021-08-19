@@ -1,39 +1,42 @@
 package com.gerard.site.controller;
 
-import java.io.*;
+import java.io.IOException;
 
-import com.gerard.site.controller.action.Action;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Role controller, extends HttpServlet interface
+ * {@link HttpServlet}, overrides and manages
+ * only 'GET' and 'POST' HTTP requests  .
+ * <p>'POST' requests are redirected . 'GET' requests are forwarded .
+ * Uses Router class com.gerard.site.controller.Router {@link Router}
+ * for preparing url and location for redirecting and forwarding respectively .
+ * </p>
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
+ * @see Router#prepareUrl(HttpServletRequest, HttpServletResponse)
+ * @see Router#preparePath(HttpServletRequest, HttpServletResponse)
+ */
 @WebServlet
 public class Controller extends HttpServlet {
-
-    private static final String ACTION_IDENTIFIER_REQUEST_PARAMETER_NAME = "command";
-    private static final String VIEW_DIRECTORY_NAME = "/pages";
-    private static final String VIEW_EXTENSION = ".jsp";
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        response.sendRedirect(prepareViewUrl(request, response));
+        String url = Router.prepareUrl(request, response);
+        response.sendRedirect(url);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        String path = VIEW_DIRECTORY_NAME + prepareViewUrl(request, response) + VIEW_EXTENSION;
+        String path = Router.preparePath(request, response);
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(path);
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
-
-    private String prepareViewUrl(HttpServletRequest request, HttpServletResponse response){
-        String command = request.getParameter(ACTION_IDENTIFIER_REQUEST_PARAMETER_NAME);
-        Action action = ActionFactory.INSTANCE.getAction(command);
-        String view = action.execute(request, response);
-        return view;
-    }
-
 }

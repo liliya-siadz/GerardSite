@@ -1,9 +1,5 @@
 package com.gerard.site.controller.action;
 
-import com.gerard.site.controller.ActionFactory;
-import com.gerard.site.controller.action.impl.LoginAction;
-import com.gerard.site.controller.action.impl.LogoutAction;
-import com.gerard.site.controller.action.impl.TransferToError404PageAction;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
