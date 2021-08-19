@@ -6,8 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * This util works with HttpServletRequest
- * {@link HttpServletRequest}
+ * This util services HTTP servlet request {@link HttpServletRequest}
  *
  * @author Liliya Siadzelnikava
  * @version 1.0

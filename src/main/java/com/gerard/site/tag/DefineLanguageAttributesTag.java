@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import jakarta.servlet.jsp.tagext.TagSupport;
 
-import java.util.List;
+import java.util.Set;
 
 import static com.gerard.site.localization.Language.BUNDLE_BASE_NAME_COOKIE_NAME;
 import static com.gerard.site.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
@@ -54,10 +54,11 @@ public class DefineLanguageAttributesTag extends TagSupport {
         if (((languageCode == null) || (languageCode.getValue() == null))
                 || (Language.getLanguage(languageCode.getValue().toUpperCase()).isEmpty())) {
             LOGGER.trace("Full language information wasn't found in the cookies .");
-            List<Language> supportedLocales =
+            Set<Language> supportedLocales =
                     findSupportedLanguagesFromRequestHeader(request);
-            Language assignedLanguage =
-                    supportedLocales.size() == 0 ? DEFAULT_LANGUAGE : supportedLocales.get(0);
+            Language assignedLanguage = (supportedLocales.size() == 0)
+                                         ? DEFAULT_LANGUAGE
+                                         : supportedLocales.stream().findFirst().get();
             languageCode = new Cookie(LANGUAGE_CODE_COOKIE_NAME,
                     assignedLanguage.name().toLowerCase());
             Cookie bundle = new Cookie(BUNDLE_BASE_NAME_COOKIE_NAME,
@@ -81,12 +82,12 @@ public class DefineLanguageAttributesTag extends TagSupport {
         return SKIP_BODY;
     }
 
-    private List<Language> findSupportedLanguagesFromRequestHeader(
+    private Set<Language> findSupportedLanguagesFromRequestHeader(
             HttpServletRequest request) {
         String[] acceptedLanguagesCodes = HttpServletRequestUtil.
                 getAcceptedLanguagesCodesFromHeader(request);
-        List<Language> supportedLanguagesFromRequestHeader =
-                CustomStringUtil.filterMatchedRowsByEnumElements(
+        Set<Language> supportedLanguagesFromRequestHeader =
+                CustomStringUtil.getMatchedEnumValuesSet(
                         acceptedLanguagesCodes, Language.values());
         return supportedLanguagesFromRequestHeader;
     }

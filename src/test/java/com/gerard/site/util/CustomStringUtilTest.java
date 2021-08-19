@@ -4,7 +4,7 @@ import com.gerard.site.localization.Language;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.*;
 
@@ -31,9 +31,9 @@ public class CustomStringUtilTest {
 
     @Test
     public void testDistinctRowsEnumMatcher() {
-        List<Language> actual = CustomStringUtil.filterMatchedRowsByEnumElements(
+        Set<Language> actual = CustomStringUtil.getMatchedEnumValuesSet(
                 new String[]{"en", "ru", "ru", ""}, Language.values());
-        List<Language> expected = List.of(Language.EN, Language.RU);
+        Set<Language> expected = Set.of(Language.EN, Language.RU);
         assertEquals(actual, expected);
     }
 
