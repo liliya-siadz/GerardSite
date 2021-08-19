@@ -1,6 +1,6 @@
 package com.gerard.site.connection;
 
-import com.gerard.site.util.CustomDocumentUtil;
+import com.gerard.site.util.IdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,7 +23,7 @@ final class ConnectionProperties {
     private ConnectionProperties() {
         String dbConnectionResourcePath = "/connection.properties";
         try {
-            dbConnectionProperties = CustomDocumentUtil.loadResourcePropertiesByObject(this, dbConnectionResourcePath);
+            dbConnectionProperties = IdentifierUtil.getPropertiesByPath(this, dbConnectionResourcePath);
             if (dbConnectionProperties == null) {
                 LOGGER.fatal("Database connection properties is null! "
                         + "Resource FILE: " + dbConnectionResourcePath);

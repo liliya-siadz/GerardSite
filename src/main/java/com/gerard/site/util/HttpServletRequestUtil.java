@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  * @version 1.0
  */
 public class HttpServletRequestUtil {
-    private static final Logger LOGGER = LogManager.getLogger(CustomDocumentUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(IdentifierUtil.class);
 
     private HttpServletRequestUtil() {
     }
@@ -48,6 +48,7 @@ public class HttpServletRequestUtil {
 
     /**
      * Finds cookie in the request by it's name, may return null .
+     * <b>May return null value .</b>
      *
      * @param request    request to find cookie in
      * @param cookieName cookie name to find in the specified request

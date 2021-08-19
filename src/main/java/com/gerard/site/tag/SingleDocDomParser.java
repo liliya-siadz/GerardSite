@@ -1,7 +1,7 @@
 package com.gerard.site.tag;
 
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.util.CustomDocumentUtil;
+import com.gerard.site.util.IdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
@@ -113,7 +113,7 @@ public class SingleDocDomParser {
     }
 
     private void setDocumentUrl(String documentUrl) throws ServiceException {
-        if (CustomDocumentUtil.isUrlValid(documentUrl)) {
+        if (IdentifierUtil.isUrlValid(documentUrl)) {
             this.documentUrl = documentUrl;
         } else {
             throw new ServiceException("Document is not readable. !"

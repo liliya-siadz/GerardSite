@@ -6,7 +6,7 @@ import com.gerard.site.entity.UserEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.form.LoginForm;
 import com.gerard.site.util.BCrypt;
-import com.gerard.site.util.CustomDocumentUtil;
+import com.gerard.site.util.IdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -62,7 +62,7 @@ public class AppUserService {
     private String getToken() throws IOException, URISyntaxException {
         String securityFileResourcePath = "/security.properties";
         Properties securityProperties
-                = CustomDocumentUtil.loadResourcePropertiesByObject(
+                = IdentifierUtil.getPropertiesByPath(
                 instance, securityFileResourcePath);
         if ((securityProperties == null)) {
             LOGGER.fatal("Security properties is null! "
