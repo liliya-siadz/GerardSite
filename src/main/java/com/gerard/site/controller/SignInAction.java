@@ -1,4 +1,4 @@
-package com.gerard.site.controller.action;
+package com.gerard.site.controller;
 
 import com.gerard.site.entity.UserEntity;
 import com.gerard.site.exception.ServiceException;
@@ -13,11 +13,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.Map;
 import java.util.Optional;
 
-public enum LoginAction implements Action {
+enum SignInAction implements Action {
 
     INSTANCE;
 
-    private static final Logger LOGGER = LogManager.getLogger(LoginAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(SignInAction.class);
 
 
     //todo : url white list of roles

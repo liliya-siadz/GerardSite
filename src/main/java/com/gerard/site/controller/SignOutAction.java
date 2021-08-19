@@ -1,9 +1,9 @@
-package com.gerard.site.controller.action;
+package com.gerard.site.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public enum LogoutAction implements Action {
+enum SignOutAction implements Action {
     INSTANCE;
     @Override
     public String execute(HttpServletRequest request,

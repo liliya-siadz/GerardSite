@@ -10,10 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Role controller, extends HttpServlet interface
+ * Controller, extends HttpServlet interface
  * {@link HttpServlet}, overrides and manages
- * only 'GET' and 'POST' HTTP requests  .
- * <p>'POST' requests are redirected . 'GET' requests are forwarded .
+ * only 'GET' and 'POST' HTTP requests, works as role controller .
+ * <p>Redirects 'POST' requests . Forwards 'GET' requests .
  * Uses Router class com.gerard.site.controller.Router {@link Router}
  * for preparing url and location for redirecting and forwarding respectively .
  * </p>

@@ -1,4 +1,4 @@
-package com.gerard.site.controller.action;
+package com.gerard.site.controller;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,11 +10,11 @@ public class ActionFactoryTest {
     @DataProvider(name = "testGetActionDataProvider")
     public Object[][] testGetActionDataProvider() {
         return new Object[][]{
-                {"LOGIN", LoginAction.INSTANCE},
-                {"LOGOUT", LogoutAction.INSTANCE},
-                {"unknown command", TransferToError404PageAction.INSTANCE},
-                {"im a danger hacker :)", TransferToError404PageAction.INSTANCE},
-                {null, TransferToError404PageAction.INSTANCE}
+                {"LOGIN", SignInAction.INSTANCE},
+                {"LOGOUT", SignOutAction.INSTANCE},
+                {"unknown command", Error404PageAction.INSTANCE},
+                {"im a danger hacker :)", Error404PageAction.INSTANCE},
+                {null, Error404PageAction.INSTANCE}
             };
         }
 

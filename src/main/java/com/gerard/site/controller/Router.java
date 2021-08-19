@@ -1,18 +1,16 @@
 package com.gerard.site.controller;
 
-import com.gerard.site.controller.action.Action;
-import com.gerard.site.controller.action.ActionFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Class created to route HTTP requests that coming to role controller
+ * Class created to route HTTP requests that coming to controller
  * (Controller class {@link Controller} .
  * <p>
  *    To find needing route extracts special parameter from
  *    request. Then uses this parameter value to find
  *    and execute specified action by calling method
- *    getAction() in class com.gerard.site.controller.action.ActionFactory
+ *    getAction() in class com.gerard.site.controller.ActionFactory
  *    {@link ActionFactory#getAction(String)}.
  * </p>
  *
