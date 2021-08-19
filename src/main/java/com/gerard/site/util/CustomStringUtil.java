@@ -1,12 +1,14 @@
 package com.gerard.site.util;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class CustomStringUtil {
     static final String WHITE_SPACE_SYMBOLS_REGEX = "\\s";
     static final String EMPTY_STRING = "";
+
+    private CustomStringUtil(){
+    }
 
     public static String[] splitByRegex(String row,
                                         String regex, boolean cleanWhiteSpaces) {

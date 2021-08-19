@@ -15,7 +15,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class CustomDocumentUtil {
-    private static final Logger LOGGER = LogManager.getLogger(CustomDocumentUtil.class);
+    private static final Logger LOGGER =
+            LogManager.getLogger(CustomDocumentUtil.class);
+
+    private CustomDocumentUtil(){
+    }
 
     //to-do rewrite to norm checker
     public static Properties loadResourcePropertiesByObject(

@@ -13,6 +13,9 @@ import static com.gerard.site.controller.ActionFactory.Command.*;
  * {@link Action} .
  * Works as command-key action-value map, singleton object, realizes
  * pattern factory .
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
  */
 enum ActionFactory {
     INSTANCE;

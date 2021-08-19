@@ -1,45 +1,69 @@
 package com.gerard.site.util;
 
-
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
-import java.util.Optional;
-
+/**
+ * This util works with HttpServletRequest
+ * {@link HttpServletRequest}
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
+ */
 public class HttpServletRequestUtil {
-    private static final Logger LOGGER =
-            LogManager.getLogger(CustomDocumentUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(CustomDocumentUtil.class);
 
-    //doc from: https://datatracker.ietf.org/doc/html/rfc2616#page-29
-    //doc : where any two-letter primary-tag is an ISO-639 language abbreviation
-    public static String[] getAcceptedLanguagesCodesFromHeader(HttpServletRequest request) {
+    private HttpServletRequestUtil() {
+    }
+
+    /**
+     * Extracts accepted languages codes from request header 'Accept-Language',
+     * {@link <a href = "https://datatracker.ietf.org/doc/html/rfc2616#page-29"></a>}
+     * <quote>where any two-letter primary-tag is an ISO-639 language abbreviation</quote> .
+     * <p>
+     * Takes request header 'Accept-Language' value and
+     * splits, cleans all non locale codes information .
+     * Then put all found locale codes into string array .
+     * </p>
+     *
+     * @param request request to get accepted languages from
+     * @return returns array of accepted languages from request header
+     */
+    public static String[] getAcceptedLanguagesCodesFromHeader(
+            HttpServletRequest request) {
         String requestHeaderName = "Accept-Language";
         String localeCodeSeparator = ",";
-        int localeCodeLettersQuantity = 2;
         String acceptedLanguagesRow = request.getHeader(requestHeaderName);
-        String[] acceptedLanguages = CustomStringUtil.splitByRegex(acceptedLanguagesRow,
-                localeCodeSeparator, true);
+        String[] acceptedLanguages = CustomStringUtil.splitByRegex(
+                acceptedLanguagesRow, localeCodeSeparator, true);
         String[] acceptedLanguagesCodes = new String[acceptedLanguages.length];
+        int localeCodeLettersQuantity = 2;
         for (int i = 0; i < acceptedLanguages.length; i++) {
-            acceptedLanguagesCodes[i] = acceptedLanguages[i].substring(0,
-                    localeCodeLettersQuantity);
+            acceptedLanguagesCodes[i] =
+                    acceptedLanguages[i].substring(0, localeCodeLettersQuantity);
         }
         return acceptedLanguagesCodes;
     }
 
-    //doc null return
+    /**
+     * Finds cookie in the request by it's name, may return null .
+     *
+     * @param request    request to find cookie in
+     * @param cookieName cookie name to find in the specified request
+     * @return returns target cookie by specified name,
+     * otherwise returns {@code null}
+     */
     public static Cookie getCookieByName(HttpServletRequest request, String cookieName) {
-         Cookie[] cookies = request.getCookies();
+        Cookie[] cookies = request.getCookies();
         for (int i = 0; i < cookies.length; i++) {
-            if(cookies[i].getName().equals(cookieName)){
-                LOGGER.info("Cookie: " + cookieName + " was found.");
+            if (cookies[i].getName().equals(cookieName)) {
+                LOGGER.info("Cookie with name: '" + cookieName + "' was found.");
                 return cookies[i];
             }
         }
-        LOGGER.warn("Null will be returned!");
+        LOGGER.warn("Null will be returned . ");
         return null;
     }
 }
