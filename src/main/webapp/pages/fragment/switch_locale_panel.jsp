@@ -16,19 +16,19 @@
     <button type="submit"
             name="command"
             class="btn btn-xs navbar-btn"
-            value="SWITCH_LOCALE_TO_EN">
+            value="SET_LOCALE_TO_EN">
         EN
     </button>
     <button type="submit"
             name="command"
             class="btn btn-xs navbar-btn"
-            value="SWITCH_LOCALE_TO_BE">
+            value="SET_LOCALE_TO_BE">
         BE
     </button>
     <button type="submit"
             name="command"
             class="btn btn-xs navbar-btn"
-            value="SWITCH_LOCALE_TO_RU">
+            value="SET_LOCALE_TO_RU">
         RU
     </button>
 </form>

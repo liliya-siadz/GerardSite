@@ -5,8 +5,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import static com.gerard.site.localization.Language.BUNDLE_COOKIE_NAME;
-import static com.gerard.site.localization.Language.LOCALE_CODE_COOKIE_NAME;
+import static com.gerard.site.localization.Language.BUNDLE_BASE_NAME_COOKIE_NAME;
+import static com.gerard.site.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
 
 /**
  * This functional interface services commands
@@ -68,13 +68,13 @@ interface Action {
      * @param language language from enum {@code Language} {@link Language}
      *                 to set
      * @return come request's url (could be uses to route to the same page)
-     * @see Language#LOCALE_CODE_COOKIE_NAME
-     * @see Language#BUNDLE_COOKIE_NAME
+     * @see Language#LANGUAGE_CODE_COOKIE_NAME
+     * @see Language#BUNDLE_BASE_NAME_COOKIE_NAME
      */
     static String changeLocale(HttpServletRequest request,
                                HttpServletResponse response, Language language) {
-        Cookie locale = new Cookie(LOCALE_CODE_COOKIE_NAME, language.name().toLowerCase());
-        Cookie bundle = new Cookie(BUNDLE_COOKIE_NAME, language.getBundleBaseName());
+        Cookie locale = new Cookie(LANGUAGE_CODE_COOKIE_NAME, language.name().toLowerCase());
+        Cookie bundle = new Cookie(BUNDLE_BASE_NAME_COOKIE_NAME, language.getBundleBaseName());
         response.addCookie(locale);
         response.addCookie(bundle);
         return getRefererUrl(request);

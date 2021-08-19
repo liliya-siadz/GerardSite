@@ -150,8 +150,8 @@ public final class ConnectionPool {
     public Connection giveOutConnection() throws ConnectionException {
         if (isDestroyCalled.get()) {
             LOGGER.warn("Try to get connection while pool destroying.");
-            LOGGER.debug("The thread that tried to get connection will be interrupted.");
             Thread.currentThread().interrupt();
+            LOGGER.debug("Attempt to interrupt this thread have been made.");
             throw new ConnectionException("Try to get connection while pool destroying!");
         } else {
             ProxyConnection connection;
@@ -231,7 +231,7 @@ public final class ConnectionPool {
     }
 
     //todo call: in Listener
-    //todo add docs: why given connections are not close
+    //todo ? add to docs: why given connections are not close
     /**
      * Destroys pool by removing connections from free connections queue
      * and really close connections

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
+//todo ?: generics is ok
 public abstract class AbstractForm<T extends FormValidator> {
     protected final HttpServletRequest request;
     protected final FormValidator validator;

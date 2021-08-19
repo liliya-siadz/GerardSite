@@ -26,9 +26,9 @@ enum ActionFactory {
         LOGOUT,
         ERROR,
         ERROR_404,
-        CHANGE_LOCALE_TO_BE,
-        CHANGE_LOCALE_TO_EN,
-        CHANGE_LOCALE_TO_RU,
+        SET_LOCALE_TO_BE,
+        SET_LOCALE_TO_EN,
+        SET_LOCALE_TO_RU,
     }
 
     private static final Logger LOGGER = LogManager.getLogger(ActionFactory.class);
@@ -52,9 +52,9 @@ enum ActionFactory {
     ActionFactory() {
         actions.put(LOGIN, SignInAction.INSTANCE);
         actions.put(LOGOUT, SignOutAction.INSTANCE);
-        actions.put(CHANGE_LOCALE_TO_EN, SetLocaleToEnAction.INSTANCE);
-        actions.put(CHANGE_LOCALE_TO_BE, SetLocaleToBeAction.INSTANCE);
-        actions.put(CHANGE_LOCALE_TO_RU, SetLocaleToRuAction.INSTANCE);
+        actions.put(SET_LOCALE_TO_EN, SetLocaleToEnAction.INSTANCE);
+        actions.put(SET_LOCALE_TO_BE, SetLocaleToBeAction.INSTANCE);
+        actions.put(SET_LOCALE_TO_RU, SetLocaleToRuAction.INSTANCE);
         actions.put(ERROR, ErrorPageAction.INSTANCE);
         actions.put(ERROR_404, Error404PageAction.INSTANCE);
     }
