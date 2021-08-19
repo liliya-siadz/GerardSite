@@ -47,8 +47,7 @@ public class SingleDocDomParser {
 
     public String getChildElementContent(String childElementTagName) {
         if (childElementTagName == null
-                || childElementTagName.isBlank()
-                || childElementTagName.isEmpty()) {
+                || childElementTagName.isBlank()) {
             LOGGER.warn("Element tag name: " + childElementTagName
                     + "is null or blank or empty");
             LOGGER.debug("Null will be returned");

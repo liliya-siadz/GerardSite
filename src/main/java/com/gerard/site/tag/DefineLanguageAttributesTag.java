@@ -1,4 +1,4 @@
-package com.gerard.site.tag.localization;
+package com.gerard.site.tag;
 
 import com.gerard.site.localization.Language;
 import com.gerard.site.util.HttpServletRequestUtil;
@@ -20,11 +20,12 @@ import static com.gerard.site.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
 /**
  * Custom JSP-tag, defines and sets in the app
  * locale and bundle due to this locale .
- * <p>
- * Firstly checks cookies, if no app supported language {@link Language}
+ *
+ *<p> Firstly checks cookies, if no app supported language {@link Language}
  * was found (or null) tries to get language from request header,
  * if no app supported language was found (or null) in the request header
  * uses default language .
+ *</p>
  *
  * @author Liliya Siadzelnikava
  * @version 1.0
@@ -37,8 +38,8 @@ public class DefineLanguageAttributesTag extends TagSupport {
      */
     private static final Language DEFAULT_LANGUAGE = Language.EN;
 
-    private static final Logger LOGGER = LogManager.getLogger(
-            DefineLanguageAttributesTag.class);
+    private static final Logger LOGGER =
+            LogManager.getLogger(DefineLanguageAttributesTag.class);
 
     public DefineLanguageAttributesTag() {
         super();

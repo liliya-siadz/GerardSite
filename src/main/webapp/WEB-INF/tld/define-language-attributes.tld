@@ -7,7 +7,7 @@
     <uri>define-language-attributes</uri>
     <tag>
         <name>define-language-attributes</name>
-        <tag-class>com.gerard.site.tag.localization.DefineLanguageAttributesTag</tag-class>
+        <tag-class>com.gerard.site.tag.DefineLanguageAttributesTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>
