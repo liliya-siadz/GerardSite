@@ -7,7 +7,9 @@
     <li>Showing actual information regarding dogs/puppies in the kennel</li> 
     
     <li>Processing requests for puppies from potential pet's owners</li>
+    
     ![dog_2](https://user-images.githubusercontent.com/39922259/130232381-db469dc3-b3f5-49ec-a9c7-f8744e272e2e.png)
+    
 </ol>
 <h3>Database scheme</h3>
 
