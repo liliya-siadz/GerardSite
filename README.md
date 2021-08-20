@@ -2,7 +2,7 @@
 <small>Web-app(web-site)</small>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 
-![dog_3](https://user-images.githubusercontent.com/39922259/130232929-f4452859-f61f-45bd-9725-8a7ff3a777dc.jpg)
+![dog_3](https://user-images.githubusercontent.com/39922259/130233054-9dd386d9-1db8-4e79-925b-8e732f16b33d.jpg)
 
 ![dog_1](https://user-images.githubusercontent.com/39922259/130232710-1783c12f-387e-4ea5-b074-106dce9d4098.png)
 
