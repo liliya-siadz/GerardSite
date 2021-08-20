@@ -1,4 +1,4 @@
-<h2><i>Private monobreed kennel "Gerard"</i>.</h2>
+<h2><i>Private monobreed dog kennel "Gerard"</i>.</h2>
 <small>Web-app(web-site)</small>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 
