@@ -2,9 +2,16 @@
 <small>Web-app(web-site)</small>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 
+![dog_1](https://user-images.githubusercontent.com/39922259/130232710-1783c12f-387e-4ea5-b074-106dce9d4098.png)
+
 ![dog_3](https://user-images.githubusercontent.com/39922259/130233054-9dd386d9-1db8-4e79-925b-8e732f16b33d.jpg)
 
-![dog_1](https://user-images.githubusercontent.com/39922259/130232710-1783c12f-387e-4ea5-b074-106dce9d4098.png)
+![dog_4](https://user-images.githubusercontent.com/39922259/130233844-9a0e6f82-e362-4164-adca-30499ff42d2f.jpg)
+
+![dog_2](https://user-images.githubusercontent.com/39922259/130232617-1b0751a0-f217-448b-a325-12e6fe353fa6.jpg)
+
+![dog_6](https://user-images.githubusercontent.com/39922259/130233867-68c087e0-8577-41c8-b15d-b5ff13cef352.jpg)
+
 
 <h4>The main purposes of the web-app:</h4>
 <ol type="1">
@@ -12,7 +19,6 @@
     <li>Processing requests for puppies from potential pet's owners</li>   
 </ol>
 
-![dog_2](https://user-images.githubusercontent.com/39922259/130232617-1b0751a0-f217-448b-a325-12e6fe353fa6.jpg)
 
 <h3>Database scheme</h3>
 
