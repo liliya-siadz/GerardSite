@@ -1,5 +1,5 @@
-<h2><i>Private monobreed dog kennel "</i>.</h2>
-<h2>Web-app(web-site) "Gerard</h2>
+<h2><i>Private monobreed dog kennel </i>.</h2>
+<h2>Web-app(web-site) "Gerard" </h2>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 <h4>The main purposes of the web-app:</h4>
 <ol type="1">
