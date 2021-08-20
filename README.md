@@ -10,7 +10,7 @@
 
 ![dog_2](https://user-images.githubusercontent.com/39922259/130232617-1b0751a0-f217-448b-a325-12e6fe353fa6.jpg)
 
-![dog_6](https://user-images.githubusercontent.com/39922259/130233867-68c087e0-8577-41c8-b15d-b5ff13cef352.jpg)
+![dog_6a](https://user-images.githubusercontent.com/39922259/130234243-ccd2e3c8-68f2-4887-a653-c377f57b3fab.jpg)
 
 
 <h4>The main purposes of the web-app:</h4>
