@@ -47,7 +47,8 @@
 <%@include file="fragment/dynamic-headering.jsp" %>
 <h1 style="text-align: center">
     <b><fmt:message key="error.word"/>${pageContext.errorData.statusCode} !
-    <b><fmt:message key="page.error-404.message.alternative_action"/></b>
+    <fmt:message key="page.error.message.alternative_action"/></b>
+    &#9758;
     <button class="btn btn-md" onclick="history.back()">
         <fmt:message key="getback.word"/>
     </button>
@@ -57,14 +58,14 @@
     <div style="display: inline-block">
         <div>
             <h3><fmt:message key="page.error-404.message.signal"/>
-                <span style="background: red">
+                <span style="background: yellowgreen">
                      ${header.host}${pageContext.errorData.requestURI}
                 </span>
             </h3>
         </div>
-        <div><h3><fmt:message key="page.error-404.message.fun"/></h3></div>
+        <div><h3><fmt:message key="page.error.message.fun"/></h3></div>
         <div>
-            <h3><b><fmt:message key="page.error-404.message.action"/></b>
+            <h3><b><fmt:message key="page.error.message.action"/></b>
                 <a href="${pageContext.request.contextPath}/home">
                     &#8962;
                     <fmt:message key="header.link.home.name"/>
