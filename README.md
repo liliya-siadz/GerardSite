@@ -1,5 +1,6 @@
 # gerard
-<h2><i>Web-app(web-site) for provate monobreed kennel "Gerard"</i>.</h2>
+<h2><i>Private monobreed kennel "Gerard"</i>.</h2>
+<small>Web-app(web-site)</small>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 
 <h4>The main purposes of the web-app:</h4>
