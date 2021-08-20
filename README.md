@@ -4,7 +4,7 @@
 
 <h4>The main purposes of the web-app:</h4>
 <ol type="1">
-    <li>Showing actual information regarding puppies in the kennel</li>
+    <li>Showing actual information regarding dogs/puppies in the kennel</li>
     <li>Processing requests for puppies from potential pet's owners</li>
 </ol>
 <h3>Database scheme</h3>
