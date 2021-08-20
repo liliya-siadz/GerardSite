@@ -9,7 +9,7 @@
 
 ![presentation](https://user-images.githubusercontent.com/39922259/130238710-f060da61-7411-4564-aa34-682f435a9864.jpg)
 
-<h3>Scheme of database</h3>
+<h2>Scheme of database</h2>
 
 ![database_scheme](https://user-images.githubusercontent.com/39922259/130284207-2ed0baf5-d892-4d03-a1fd-dc0fb6935553.jpg)
 
