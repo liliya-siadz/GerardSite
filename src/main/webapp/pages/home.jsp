@@ -13,6 +13,6 @@
     <body>
     <%@include file="fragment/dynamic-headering.jsp"%>
     Hello, ${sessionScope.email} !
-    <%@ include file="fragment/footer.jsp" %>
+    <%@ include file="fragment/footers/footer.jsp" %>
     </body>
 </html>

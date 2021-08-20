@@ -153,10 +153,53 @@
 <!--    admin pages end-->
     <!--    error pages config start-->
     <error-page>
+        <!-- Missing login -->
+        <error-code>401</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Forbidden directory listing -->
+        <error-code>402</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Forbidden directory listing -->
+        <error-code>403</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!--    Not found-->
         <error-code>404</error-code>
         <location>/pages/error-404.jsp</location>
     </error-page>
     <error-page>
+        <!-- Uncaught exception -->
+        <error-code>500</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Not Implemented -->
+        <error-code>501</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Bad Gateway -->
+        <error-code>502</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Unsupported servlet method -->
+        <error-code>503</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Unsupported servlet method -->
+        <error-code>504</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Unsupported servlet method -->
+        <error-code>505</error-code>
         <location>/pages/error.jsp</location>
     </error-page>
     <!--    error pages config end-->

@@ -73,6 +73,6 @@
          alt="GERARD"
          width="512"/>
 </div>
-<%@ include file="fragment/footer.jsp" %>
+<%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

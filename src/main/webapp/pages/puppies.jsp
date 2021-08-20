@@ -12,6 +12,6 @@
 </head>
 <body>
 <%@include file="fragment/dynamic-headering.jsp"%>
-<%@ include file="fragment/footer.jsp" %>
+<%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

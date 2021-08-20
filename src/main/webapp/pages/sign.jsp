@@ -57,6 +57,6 @@
         <fmt:message key="page.sign.field.email.validation.message"/>
     </c:if>
 </c:if>
-<%@ include file="fragment/footer.jsp" %>
+<%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

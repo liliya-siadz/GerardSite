@@ -12,6 +12,6 @@
 </head>
 <body>
 <%@ include file="../../fragment/headers/client_header.jsp" %>
-<%@ include file="../../fragment/footer.jsp" %>
+<%@ include file="../../fragment/footer/footer.jsp" %>
 </body>
 </html>
