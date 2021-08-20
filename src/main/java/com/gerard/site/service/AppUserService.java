@@ -15,6 +15,10 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.Properties;
 
+
+//params form/entity/any other object
+//returns entity/dto
+
 public class AppUserService {
 
     private static AppUserService instance;
