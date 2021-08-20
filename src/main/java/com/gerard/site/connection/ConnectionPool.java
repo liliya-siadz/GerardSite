@@ -34,9 +34,11 @@ import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToO
  *     <li>free connections queue </li>
  *     <li>given connections queue </li>
  * </ol>
- * Giving out connections method {@link ConnectionPool#giveOutConnection()}
+ * <p>Giving out connections method {@link ConnectionPool#giveOutConnection()}
  * takes connections from free connection queue
  * and put it to the given connections queue.
+ * </p>
+ * <p>
  * Getting back method {@link ConnectionPool#getBackConnection(Connection)} ()}
  * works otherwise, it takes connections from given connections queue
  * and puts it to the free connections queue .
@@ -44,7 +46,8 @@ import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToO
  * <p>Can but no guarantee protection from leaking connections
  *, cause database connections has timeout .
  * </p>
- * <p>Connections may be destroyed by using method {@code destroy()} {@link ConnectionPool#destroy()} .
+ * <p>Connections may be destroyed by using method {@code destroy()}
+ * {@link ConnectionPool#destroy()} .
  * </p>
  * <p>Singleton pattern realized through
  * using AtomicBoolean object {@link AtomicBoolean}
@@ -54,7 +57,6 @@ import static com.gerard.site.connection.ConnectionProperties.quantityOfTriesToO
  * @version 1.0
  */
 public final class ConnectionPool {
-
     /**
      * Initializes database connections properties
      * such as connections quantity (pool size) and etc.
@@ -277,12 +279,11 @@ public final class ConnectionPool {
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {
             try {
                 DriverManager.deregisterDriver(driver);
-                LOGGER.info("Drivers were deregistered.");
             } catch (SQLException exception) {
                 LOGGER.error("Unable to deregister drivers! " + exception.getMessage(), exception);
             }
         });
-
+        LOGGER.info("Drivers were deregistered.");
     }
 
     private void scheduleTimerForLeakedConnectionsOffering() {
@@ -306,16 +307,6 @@ public final class ConnectionPool {
             }
             quantityOfPastTriesToOfferFreeConnections++;
         }
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return super.equals(object);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 
     @Override

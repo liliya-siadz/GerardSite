@@ -22,14 +22,13 @@ import java.util.Optional;
  * <b>description file location should be: </b>
  * <i>http://localhost:8080/gerard/description.xml </i>
  * </p>
- * <p>Tag has 2 attributes:
+ * Tag has 2 attributes:
  * <ol>
  *     <li>applicationUrl (url of application,
  *     that stores description file</li>
  *     <li>tag name in description file,
  *     that is used for finding content to display</li>
  * </ol>
- * </p>
  *
  * @author Liliya Siadzelnikava
  * @version 1.0

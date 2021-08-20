@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpServletResponse;
  * @version 1.0
  */
 class Router {
-
     /**
      * Request parameter name to be extracted from the request .
      * Is using as action identifier

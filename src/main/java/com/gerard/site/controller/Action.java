@@ -28,10 +28,8 @@ import static com.gerard.site.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
  * @see HttpServletRequest#getCookies()
  * @see HttpServletResponse#addCookie(Cookie)
  */
-
 @FunctionalInterface
 interface Action {
-
     String REQUEST_HEADER_REFERER_HEADER_NAME = "Referer";
     String APPLICATION_CONTEXT = "/gerard";
 

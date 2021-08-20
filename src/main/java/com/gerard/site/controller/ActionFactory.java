@@ -79,7 +79,7 @@ enum ActionFactory {
         try {
             targetCommand = Command.valueOf(command);
         } catch (NullPointerException | IllegalArgumentException exception) {
-            LOGGER.warn(command + " command not found");
+            LOGGER.warn("'" + command + "' command not found");
             targetCommand = defaultCommand;
         }
         Action targetAction = actions.get(targetCommand);

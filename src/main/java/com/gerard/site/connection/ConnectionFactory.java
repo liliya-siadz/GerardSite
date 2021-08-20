@@ -74,18 +74,4 @@ final class ConnectionFactory {
         throw new RuntimeException("Unable to create database connection!");
     }
 
-    @Override
-    public boolean equals(Object object) {
-        return super.equals(object);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "ConnectionFactory{}";
-    }
 }

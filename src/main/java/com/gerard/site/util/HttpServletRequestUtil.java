@@ -19,8 +19,8 @@ public class HttpServletRequestUtil {
 
     /**
      * Extracts accepted languages codes from request header 'Accept-Language',
-     * {@link <a href = "https://datatracker.ietf.org/doc/html/rfc2616#page-29"></a>}
-     * <quote>where any two-letter primary-tag is an ISO-639 language abbreviation</quote> .
+     * <a href = "https://datatracker.ietf.org/doc/html/rfc2616#page-29"></a>
+     * <i>where any two-letter primary-tag is an ISO-639 language abbreviation</i> .
      * <p>
      * Takes request header 'Accept-Language' value and
      * splits, cleans all non locale codes information .

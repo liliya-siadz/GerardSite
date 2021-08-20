@@ -1,5 +1,5 @@
 package com.gerard.site.connection;
-
+//todo doc package
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -14,6 +14,7 @@ public class ConnectionPoolTest {
         connectionPool = ConnectionPool.getInstance();
     }
 
+    //todo add description
     @Test(expectedExceptions = ConnectionException.class)
     public void testDestroy() throws ConnectionException {
         connectionPool.destroy();
