@@ -31,6 +31,7 @@ public class BreedingEntity extends AbstractEntity<Integer> {
 
     /**
      * Represents column 'date_fact' in the table <i>gerard.breeding</i> .
+     * Can be null value in the table
      */
     private Date dateFact;
 

@@ -1,5 +1,7 @@
 package com.gerard.site.entity;
 
+import java.sql.Date;
+
 /**
  * Class represents single record from table <i>gerard.photo</i> ,
  * note that primary key of record is represented
@@ -12,59 +14,39 @@ package com.gerard.site.entity;
  * @version 1.0
  */
 public class PhotoEntity extends AbstractEntity<Integer> {
-    /**
-     * Possible values for instance field {@code photoType}
-     * {@link PhotoEntity#photoType} .
-     */
-    public enum PhotoType {
-        PHOTO, AVATAR, PEDIGREE
-    }
 
     /**
      * Represents column 'path' in the table <i>gerard.photo</i> .
      */
-    private String path;
-
-    /**
-     * Represents column 'photo_type' in the table <i>gerard.photo</i> .
-     */
-    private PhotoType photoType;
+    private String photoPath;
 
     /**
      * Represents column 'name' in the table <i>gerard.photo</i> .
-     * May store null value in database .
      */
     private String name;
 
     /**
      * Represents column 'dog_id' in the table <i>gerard.photo</i> .
-     * May store null value in database .
+     * Can be null value in the table
      */
     private int dogId;
 
+
     /**
-     * Represents column 'request_id' in the table <i>gerard.photo</i> .
-     * May store null value in database .
+     * Represents column 'photo_date' in the table <i>gerard.photo</i> .
+     * Can be null value in the table
      */
-    private int requestId;
+    private Date photoDate;
 
     public PhotoEntity() {
     }
 
-    public String getPath() {
-        return path;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public PhotoType getPhotoType() {
-        return photoType;
-    }
-
-    public void setPhotoType(PhotoType photoType) {
-        this.photoType = photoType;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
     public String getName() {
@@ -83,12 +65,12 @@ public class PhotoEntity extends AbstractEntity<Integer> {
         this.dogId = dogId;
     }
 
-    public int getRequestId() {
-        return requestId;
+    public Date getPhotoDate() {
+        return photoDate;
     }
 
-    public void setRequestId(int requestId) {
-        this.requestId = requestId;
+    public void setPhotoDate(Date photoDate) {
+        this.photoDate = photoDate;
     }
 
     @Override
@@ -108,11 +90,10 @@ public class PhotoEntity extends AbstractEntity<Integer> {
     public int hashCode() {
         int hash = 7;
         int hashcode = super.hashCode();
-        hashcode = hash * hashcode + (path == null ? 0 : path.hashCode());
-        hashcode = hash * hashcode + (photoType == null ? 0 : photoType.hashCode());
+        hashcode = hash * hashcode + (photoPath == null ? 0 : photoPath.hashCode());
         hashcode = hash * hashcode + (name == null ? 0 : name.hashCode());
+        hashcode = hash * hashcode + (photoDate == null ? 0 : photoDate.hashCode());
         hashcode = hash * hashcode + dogId;
-        hashcode = hash * hashcode + requestId;
         return hashcode;
     }
 
@@ -120,11 +101,9 @@ public class PhotoEntity extends AbstractEntity<Integer> {
     public String toString() {
         return "PhotoEntity{"
                 + "id=" + id
-                + ", path='" + path + '\''
-                + ", photoType=" + photoType
+                + ", path='" + photoPath + '\''
                 + ", name='" + name + '\''
                 + ", dogId=" + dogId
-                + ", requestId=" + requestId
                 + '}';
     }
 }

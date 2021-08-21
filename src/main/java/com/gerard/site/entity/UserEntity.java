@@ -33,7 +33,8 @@ public class UserEntity extends AbstractEntity<Integer> {
 
     /**
      * Represents column 'app_user_sex' in the table <i>gerard.app_user</i> .
-     * Stores enum value in table, may store null value in database .
+     * Stores enum value in table .
+     * Can be null value in the table
      */
     private AppUserSex appUserSex;
 
@@ -49,13 +50,13 @@ public class UserEntity extends AbstractEntity<Integer> {
 
     /**
      * Represents column 'surname' in the table <i>gerard.app_user</i> .
-     * May store null value in database .
+     * Can be null value in the table
      */
     private String surname;
 
     /**
      * Represents column 'patronymic' in the table <i>gerard.app_user</i> .
-     * May store null value in database .
+     * Can be null value in the table
      */
     private String patronymic;
 

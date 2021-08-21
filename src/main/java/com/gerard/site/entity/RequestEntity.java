@@ -89,7 +89,7 @@ public class RequestEntity extends AbstractEntity<Integer> {
 
     /**
      * Represents column 'reply' in the table <i>gerard.request</i> .
-     * May store null value in database .
+     * Can be null value in the table
      */
     private String reply;
 

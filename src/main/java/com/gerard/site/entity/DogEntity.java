@@ -77,28 +77,26 @@ public class DogEntity extends AbstractEntity<Integer> {
 
     /**
      * Represents column 'mother_dog_id' in the table <i>gerard.dog</i> .
+     * Can be null value in the table
      */
     private int motherId;
 
     /**
      * Represents column 'father_dog_id' in the table <i>gerard.dog</i> .
+     * Can be null value in the table
      */
     private int fatherId;
 
     /**
-     * Represents column 'avatar_media_id' in the table <i>gerard.dog</i> .
+     * Represents column 'avatar_photo_path' in the table <i>gerard.dog</i> .
      */
-    private int avatarMediaId;
+    private String avatarPhotoPath;
 
     /**
-     * Represents column 'pedigree_media_id' in the table <i>gerard.dog</i> .
+     * Represents column 'pedigree_photo_path' in the table <i>gerard.dog</i> .
      */
-    private int pedigreeMediaId;
+    private String pedigreePhotoPath;
 
-    /**
-     * Represents column 'home_kennel' in the table <i>gerard.dog</i> .
-     */
-    private boolean homeKennel;
 
     /**
      * Represents column 'description' in the table <i>gerard.dog</i> .
@@ -165,28 +163,20 @@ public class DogEntity extends AbstractEntity<Integer> {
         this.fatherId = fatherId;
     }
 
-    public int getAvatarMediaId() {
-        return avatarMediaId;
+    public String getAvatarPhotoPath() {
+        return avatarPhotoPath;
     }
 
-    public void setAvatarMediaId(int avatarMediaId) {
-        this.avatarMediaId = avatarMediaId;
+    public void setAvatarPhotoPath(String avatarPhotoPath) {
+        this.avatarPhotoPath = avatarPhotoPath;
     }
 
-    public int getPedigreeMediaId() {
-        return pedigreeMediaId;
+    public String getPedigreePhotoPath() {
+        return pedigreePhotoPath;
     }
 
-    public void setPedigreeMediaId(int pedigreeMediaId) {
-        this.pedigreeMediaId = pedigreeMediaId;
-    }
-
-    public boolean isHomeKennel() {
-        return homeKennel;
-    }
-
-    public void setHomeKennel(boolean homeKennel) {
-        this.homeKennel = homeKennel;
+    public void setPedigreePhotoPath(String pedigreePhotoPath) {
+        this.pedigreePhotoPath = pedigreePhotoPath;
     }
 
     public String getDescription() {
@@ -221,9 +211,8 @@ public class DogEntity extends AbstractEntity<Integer> {
         hashcode = hash * hashcode + (birthday == null ? 0 : birthday.hashCode());
         hashcode = hash * hashcode + motherId;
         hashcode = hash * hashcode + fatherId;
-        hashcode = hash * hashcode + avatarMediaId;
-        hashcode = hash * hashcode + pedigreeMediaId;
-        hashcode = hash * hashcode + (homeKennel ? 1 : 0);
+        hashcode = hash * hashcode + (avatarPhotoPath == null ? 0 : avatarPhotoPath.hashCode());
+        hashcode = hash * hashcode + (pedigreePhotoPath == null ? 0 : avatarPhotoPath.hashCode());
         hashcode = hash * hashcode + (description == null ? 0 : description.hashCode());
         return hashcode;
     }
@@ -239,9 +228,8 @@ public class DogEntity extends AbstractEntity<Integer> {
                 + ", birthday=" + birthday
                 + ", motherId=" + motherId
                 + ", fatherId=" + fatherId
-                + ", avatarMediaId=" + avatarMediaId
-                + ", pedigreeMediaId=" + pedigreeMediaId
-                + ", homeKennel=" + homeKennel
+                + ", avatarMediaId=" + avatarPhotoPath
+                + ", pedigreeMediaId=" + pedigreePhotoPath
                 + ", description='" + description + '\''
                 + '}';
     }
@@ -298,18 +286,13 @@ public class DogEntity extends AbstractEntity<Integer> {
             return this;
         }
 
-        public Builder avatarMediaId(int avatarMediaId) {
-            dogEntity.avatarMediaId = avatarMediaId;
+        public Builder avatarMediaId(String avatarMediaId) {
+            dogEntity.avatarPhotoPath = avatarMediaId;
             return this;
         }
 
-        public Builder pedigreeMediaId(int pedigreeMediaId) {
-            dogEntity.pedigreeMediaId = pedigreeMediaId;
-            return this;
-        }
-
-        public Builder homeKennel(boolean homeKennel) {
-            dogEntity.homeKennel = homeKennel;
+        public Builder pedigreeMediaId(String pedigreeMediaId) {
+            dogEntity.pedigreePhotoPath = pedigreeMediaId;
             return this;
         }
 
