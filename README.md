@@ -3,13 +3,14 @@
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 <h4>The main purposes of the web-app:</h4>
 <ol type="1">
+
     <li>Showing actual information regarding dogs/puppies in the kennel</li> 
     <li>Processing requests for puppies from potential pet's owners</li>   
 </ol>
 
 <h2>Scheme of database</h2>
 
-![database_scheme](https://user-images.githubusercontent.com/39922259/130284207-2ed0baf5-d892-4d03-a1fd-dc0fb6935553.jpg)
+![database_scheme](https://user-images.githubusercontent.com/39922259/130320965-01f36157-5485-437f-b508-1074d94cc738.png)
 
 <h2>Business idea:</h2>
 
