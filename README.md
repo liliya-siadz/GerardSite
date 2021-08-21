@@ -1,7 +1,7 @@
 <h2><i>Private monobreed dog kennel </i>.</h2>
 <h2>Web-app(web-site) "Gerard" </h2>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
-<h3>The main purposes of the web-app:</h4>
+<h3>The main purposes of the web-app:
 <ol type="1">
     <li> <b> Providing actual information regarding dogs/puppies in the kennel </b>
         <ul>
@@ -10,7 +10,9 @@
         </ul>
      </li> 
     <li><b>Processing requests for puppies from potential pet's owners</b></li>
+    <li><b>Provide contact information of the kennel</b></li>
 </ol>
+</h3>
 
 <h2>DATABASE SCHEME</h2>
 
