@@ -1,10 +1,6 @@
-.idea/**
-.settings/**
-target/**
-TODO.txt
-*.iml
-src/main/resources/connection.properties
-src/main/resources/mail.properties
-src/main/resources/security.properties
-/.idea/
+.idea
 site.iml
+target
+src/main/resources/mail.properties
+src/main/resources/connection.properties
+src/main/resources/security.properties
