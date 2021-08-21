@@ -33,7 +33,7 @@ public class UserEntity extends AbstractEntity<Integer> {
 
     /**
      * Represents column 'app_user_sex' in the table <i>gerard.app_user</i> .
-     * Stores enum value in table .
+     * Stores enum value in table, may store null value in database .
      */
     private AppUserSex appUserSex;
 
@@ -49,6 +49,7 @@ public class UserEntity extends AbstractEntity<Integer> {
 
     /**
      * Represents column 'surname' in the table <i>gerard.app_user</i> .
+     * May store null value in database .
      */
     private String surname;
 
@@ -187,8 +188,7 @@ public class UserEntity extends AbstractEntity<Integer> {
 
         /**
          * Represents next user's status:
-         * user had sent it's credentials,
-         * but have not confirmed his email yet .
+         * user had does not confirmed his credentials
          */
         NON_CONFIRMED,
 
@@ -211,8 +211,7 @@ public class UserEntity extends AbstractEntity<Integer> {
      * {@link UserEntity#appUserRole} .
      */
     public enum AppUserRole {
-        ADMIN,
-        CLIENT
+        ADMIN, CLIENT, GUEST
     }
 
     /**
@@ -220,9 +219,7 @@ public class UserEntity extends AbstractEntity<Integer> {
      * {@link UserEntity#appUserSex} .
      */
     public enum AppUserSex {
-        MALE,
-        FEMALE,
-        BINARY
+        MALE, FEMALE, BINARY
     }
 
     /**

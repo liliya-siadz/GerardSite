@@ -16,10 +16,7 @@ import java.util.Optional;
 enum SignInAction implements Action {
 
     INSTANCE;
-
     private static final Logger LOGGER = LogManager.getLogger(SignInAction.class);
-
-
     //todo : url white list of roles
     //todo: filter ?
 

@@ -68,9 +68,9 @@ public class RequestEntity extends AbstractEntity<Integer> {
     private RequestType requestType;
 
     /**
-     * Represents column 'app_user_id' in the table <i>gerard.request</i> .
+     * Represents column 'app_email' in the table <i>gerard.request</i> .
      */
-    private int appUserId;
+    private String email;
 
     /**
      * Represents column 'dog_id' in the table <i>gerard.request</i> .
@@ -113,12 +113,12 @@ public class RequestEntity extends AbstractEntity<Integer> {
         this.requestType = requestType;
     }
 
-    public int getAppUserId() {
-        return appUserId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAppUserId(int appUserId) {
-        this.appUserId = appUserId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getDogId() {
@@ -172,7 +172,7 @@ public class RequestEntity extends AbstractEntity<Integer> {
         int hashcode = super.hashCode();
         hashcode = hash * hashcode + (requestStatus == null ? 0 : requestStatus.hashCode());
         hashcode = hash * hashcode + (requestType == null ? 0 : requestType.hashCode());
-        hashcode = hash * hashcode + appUserId;
+        hashcode = hash * hashcode + (email == null ? 0 : email.hashCode());
         hashcode = hash * hashcode + dogId;
         hashcode = hash * hashcode + (content == null ? 0 : content.hashCode());
         hashcode = hash * hashcode + (dateFact == null ? 0 : dateFact.hashCode());
@@ -186,7 +186,7 @@ public class RequestEntity extends AbstractEntity<Integer> {
                 + "id=" + id
                 + ", requestStatus=" + requestStatus
                 + ", requestType=" + requestType
-                + ", appUserId=" + appUserId
+                + ", email=" + email
                 + ", dogId=" + dogId
                 + ", content='" + content + '\''
                 + ", dateFact=" + dateFact
