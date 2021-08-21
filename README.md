@@ -4,16 +4,12 @@
 <h3>The main purposes of the web-app:</h4>
 <ol type="1">
     <li> <b> Providing actual information regarding dogs/puppies in the kennel </b>
-     <ul>
+        <ul>
             <li>displaying photos of dogs </li>
             <li>presenting description of dogs </li>
-     </ul>
-     </li> 
-    <li <b>Processing requests for potential pet's owners </b>
-        <ul>
-            <li>request for puppy </li>
         </ul>
-    </li>
+     </li> 
+    <li <b>Processing requests for puppies from potential pet's owners </b></li>
 </ol>
 
 <h2>DATABASE SCHEME</h2>
