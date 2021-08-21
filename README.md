@@ -9,7 +9,7 @@
             <li>presenting description of dogs </li>
         </ul>
      </li> 
-    <li <b>Processing requests for puppies from potential pet's owners </b></li>
+    <li><b>Processing requests for puppies from potential pet's owners</b></li>
 </ol>
 
 <h2>DATABASE SCHEME</h2>
