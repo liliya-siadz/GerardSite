@@ -14,7 +14,7 @@ public class FieldsValidators {
 
     static {
         validators.put("email", new EmailFieldValidator());
-        validators.put("password", new PasswordFieldValidator());
+        validators.put("mail.user.password", new PasswordFieldValidator());
     }
 
 

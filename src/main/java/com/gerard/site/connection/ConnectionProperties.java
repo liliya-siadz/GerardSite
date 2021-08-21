@@ -1,11 +1,7 @@
 package com.gerard.site.connection;
 
 import com.gerard.site.util.AppIdentifierUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Properties;
 
 final class ConnectionProperties {
@@ -18,7 +14,6 @@ final class ConnectionProperties {
     static int quantityOfTriesToCreateConnection;
     static int quantityOfTriesToCreateValidConnection;
     private static ConnectionProperties instance;
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     private ConnectionProperties() {
         String dbConnectionResourcePath = "/connection.properties";

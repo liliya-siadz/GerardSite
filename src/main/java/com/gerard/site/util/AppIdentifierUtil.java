@@ -56,8 +56,6 @@ public class AppIdentifierUtil {
      *     <li>using input stream was not null</li>
      *     <li>loaded properties is not empty</li>
      * </ul> , otherwise throws RuntimeException
-     * @throws IOException
-     * @throws URISyntaxException
      * @throws RuntimeException
      */
     public static Properties getPropertiesByPath(
