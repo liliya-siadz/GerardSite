@@ -8,7 +8,7 @@
     <li>Processing requests for puppies from potential pet's owners</li>   
 </ol>
 
-<h2>Scheme of database</h2>
+<h2>DATABASE SCHEME</h2>
 
 ![database_scheme](https://user-images.githubusercontent.com/39922259/130320965-01f36157-5485-437f-b508-1074d94cc738.png)
 
