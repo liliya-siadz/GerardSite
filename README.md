@@ -12,7 +12,7 @@
 
 ![database_scheme](https://user-images.githubusercontent.com/39922259/130320965-01f36157-5485-437f-b508-1074d94cc738.png)
 
-<h2>Business idea:</h2>
+<h2>BUSINESS IDEA</h2>
 
 ![presentation](https://user-images.githubusercontent.com/39922259/130238710-f060da61-7411-4564-aa34-682f435a9864.jpg)
 
