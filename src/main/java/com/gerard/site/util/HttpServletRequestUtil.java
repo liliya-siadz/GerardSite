@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  * @version 1.0
  */
 public class HttpServletRequestUtil {
-    private static final Logger LOGGER = LogManager.getLogger(IdentifierUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(AppIdentifierUtil.class);
 
     private HttpServletRequestUtil() {
     }

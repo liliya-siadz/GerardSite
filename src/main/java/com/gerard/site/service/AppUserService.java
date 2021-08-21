@@ -6,7 +6,7 @@ import com.gerard.site.entity.UserEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.form.LoginForm;
 import com.gerard.site.util.BCrypt;
-import com.gerard.site.util.IdentifierUtil;
+import com.gerard.site.util.AppIdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,16 +57,15 @@ public class AppUserService {
             }
             LOGGER.info("No user found with presented credentials. Email: " + email);
             return Optional.empty();
-        } catch (DaoException | IOException | URISyntaxException exception) {
+        } catch (DaoException exception) {
             throw new ServiceException("Unable to find record from form:  "
                     + loginForm + " . " + exception.getMessage(), exception);
         }
     }
 
-    private String getToken() throws IOException, URISyntaxException {
+    private String getToken()  {
         String securityFileResourcePath = "/security.properties";
-        Properties securityProperties
-                = IdentifierUtil.getPropertiesByPath(
+        Properties securityProperties = AppIdentifierUtil.getPropertiesByPath(
                 instance, securityFileResourcePath);
         String passwordToken = "passwordToken";
         String token = securityProperties.getProperty(passwordToken);

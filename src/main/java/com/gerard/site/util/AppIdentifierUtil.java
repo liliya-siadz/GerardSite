@@ -21,11 +21,11 @@ import org.apache.logging.log4j.Logger;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class IdentifierUtil {
+public class AppIdentifierUtil {
     private static final Logger LOGGER =
-            LogManager.getLogger(IdentifierUtil.class);
+            LogManager.getLogger(AppIdentifierUtil.class);
 
-    private IdentifierUtil() {
+    private AppIdentifierUtil() {
     }
 
     /**
@@ -61,25 +61,33 @@ public class IdentifierUtil {
      * @throws RuntimeException
      */
     public static Properties getPropertiesByPath(
-            Object objectToCallOn, String path)
-            throws IOException, URISyntaxException {
+            Object objectToCallOn, String path) {
         Class<?> classToLoad = objectToCallOn.getClass();
         URL resourceUrl = classToLoad.getResource(path);
-        boolean isResourceReadable = isResourceReadable(resourceUrl);
+        boolean isResourceReadable = false;
         boolean isInputStreamNull = true;
         boolean isPropertiesEmpty = true;
-        if (isResourceReadable) {
-            try (InputStream inputStream = classToLoad.getResourceAsStream(path)) {
-                isInputStreamNull = (inputStream == null);
-                if (!isInputStreamNull) {
-                    Properties properties = new Properties();
-                    properties.load(inputStream);
-                    isPropertiesEmpty = (properties.isEmpty());
-                    if (!isPropertiesEmpty) {
-                        return properties;
+        try {
+            isResourceReadable = isResourceReadable(resourceUrl);
+            if (isResourceReadable) {
+                try (InputStream inputStream = classToLoad.getResourceAsStream(path)) {
+                    isInputStreamNull = (inputStream == null);
+                    if (!isInputStreamNull) {
+                        Properties properties = new Properties();
+                        properties.load(inputStream);
+                        isPropertiesEmpty = (properties.isEmpty());
+                        if (!isPropertiesEmpty) {
+                            return properties;
+                        }
                     }
+                } catch (IOException exception) {
+                    LOGGER.error("Errors while loading resource: " + path
+                    + exception.getMessage(), exception);
                 }
             }
+        } catch (URISyntaxException exception) {
+            LOGGER.error("Errors while loading resource: " + path
+                    + exception.getMessage(), exception);
         }
         LOGGER.info("Specified path: " + path + " is "
                 + (isResourceReadable ? "readable" : "not readable"));

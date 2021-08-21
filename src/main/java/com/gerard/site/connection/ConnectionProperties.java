@@ -1,6 +1,6 @@
 package com.gerard.site.connection;
 
-import com.gerard.site.util.IdentifierUtil;
+import com.gerard.site.util.AppIdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,8 +22,7 @@ final class ConnectionProperties {
 
     private ConnectionProperties() {
         String dbConnectionResourcePath = "/connection.properties";
-        try {
-            dbConnectionProperties = IdentifierUtil.getPropertiesByPath(this, dbConnectionResourcePath);
+            dbConnectionProperties = AppIdentifierUtil.getPropertiesByPath(this, dbConnectionResourcePath);
             String poolSizePropertyKey = "size";
             String quantityOfTriesToOfferFreeConnectionsPropertyKey = "triesToOfferFreeConnections.quantity";
             String antiLeakingConnectionsStartMinPropertyKey = "antiLeakingConnectionsStart.min";
@@ -44,12 +43,6 @@ final class ConnectionProperties {
             url = dbConnectionProperties.getProperty(urlPropertyKey);
             quantityOfTriesToCreateConnection = Integer.parseInt(
                     dbConnectionProperties.getProperty(quantityOfTriesToCreateConnectionPropertyKey));
-        } catch (IOException | URISyntaxException exception) {
-            LOGGER.fatal("Database connection properties resource file CONTENT: "
-                    + dbConnectionResourcePath + "is invalid!");
-            throw new RuntimeException("Database connection properties resource file CONTENT: "
-                    + dbConnectionResourcePath + "is invalid! " + exception.getMessage(), exception);
-        }
     }
 
     static void init() {
