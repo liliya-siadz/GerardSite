@@ -68,7 +68,7 @@ public class DogEntity extends AbstractEntity<Integer> {
     /**
      * Represents column 'fullname' in the table <i>gerard.dog</i> .
      */
-    private String fullName;
+    private String fullname;
 
     /**
      * Represents column 'birthday' in the table <i>gerard.dog</i> .
@@ -79,13 +79,13 @@ public class DogEntity extends AbstractEntity<Integer> {
      * Represents column 'mother_dog_id' in the table <i>gerard.dog</i> .
      * Can be null value in the table
      */
-    private int motherId;
+    private int motherDogId;
 
     /**
      * Represents column 'father_dog_id' in the table <i>gerard.dog</i> .
      * Can be null value in the table
      */
-    private int fatherId;
+    private int fatherDogId;
 
     /**
      * Represents column 'avatar_photo_path' in the table <i>gerard.dog</i> .
@@ -131,12 +131,12 @@ public class DogEntity extends AbstractEntity<Integer> {
         this.nickname = nickname;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public Date getBirthday() {
@@ -147,20 +147,20 @@ public class DogEntity extends AbstractEntity<Integer> {
         this.birthday = birthday;
     }
 
-    public int getMotherId() {
-        return motherId;
+    public int getMotherDogId() {
+        return motherDogId;
     }
 
-    public void setMotherId(int motherId) {
-        this.motherId = motherId;
+    public void setMotherDogId(int motherDogId) {
+        this.motherDogId = motherDogId;
     }
 
-    public int getFatherId() {
-        return fatherId;
+    public int getFatherDogId() {
+        return fatherDogId;
     }
 
-    public void setFatherId(int fatherId) {
-        this.fatherId = fatherId;
+    public void setFatherDogId(int fatherDogId) {
+        this.fatherDogId = fatherDogId;
     }
 
     public String getAvatarPhotoPath() {
@@ -207,10 +207,10 @@ public class DogEntity extends AbstractEntity<Integer> {
         hashcode = hash * hashcode + (dogStatus == null ? 0 : dogStatus.hashCode());
         hashcode = hash * hashcode + (dogSex == null ? 0 : dogSex.hashCode());
         hashcode = hash * hashcode + (nickname == null ? 0 : nickname.hashCode());
-        hashcode = hash * hashcode + (fullName == null ? 0 : fullName.hashCode());
+        hashcode = hash * hashcode + (fullname == null ? 0 : fullname.hashCode());
         hashcode = hash * hashcode + (birthday == null ? 0 : birthday.hashCode());
-        hashcode = hash * hashcode + motherId;
-        hashcode = hash * hashcode + fatherId;
+        hashcode = hash * hashcode + motherDogId;
+        hashcode = hash * hashcode + fatherDogId;
         hashcode = hash * hashcode + (avatarPhotoPath == null ? 0 : avatarPhotoPath.hashCode());
         hashcode = hash * hashcode + (pedigreePhotoPath == null ? 0 : avatarPhotoPath.hashCode());
         hashcode = hash * hashcode + (description == null ? 0 : description.hashCode());
@@ -224,10 +224,10 @@ public class DogEntity extends AbstractEntity<Integer> {
                 + ", dogStatus=" + dogStatus
                 + ", dogSex=" + dogSex
                 + ", nickname='" + nickname + '\''
-                + ", fullName='" + fullName + '\''
+                + ", fullname='" + fullname + '\''
                 + ", birthday=" + birthday
-                + ", motherId=" + motherId
-                + ", fatherId=" + fatherId
+                + ", motherId=" + motherDogId
+                + ", fatherId=" + fatherDogId
                 + ", avatarMediaId=" + avatarPhotoPath
                 + ", pedigreeMediaId=" + pedigreePhotoPath
                 + ", description='" + description + '\''
@@ -266,8 +266,8 @@ public class DogEntity extends AbstractEntity<Integer> {
             return this;
         }
 
-        public Builder fullName(String fullName) {
-            dogEntity.fullName = fullName;
+        public Builder fullname(String fullname) {
+            dogEntity.fullname = fullname;
             return this;
         }
 
@@ -276,23 +276,23 @@ public class DogEntity extends AbstractEntity<Integer> {
             return this;
         }
 
-        public Builder motherId(int motherId) {
-            dogEntity.motherId = motherId;
+        public Builder motherDogId(int motherId) {
+            dogEntity.motherDogId = motherId;
             return this;
         }
 
-        public Builder fatherId(int fatherId) {
-            dogEntity.fatherId = fatherId;
+        public Builder fatherDogId(int fatherDogId) {
+            dogEntity.fatherDogId = fatherDogId;
             return this;
         }
 
-        public Builder avatarMediaId(String avatarMediaId) {
-            dogEntity.avatarPhotoPath = avatarMediaId;
+        public Builder avatarPhotoPath(String avatarPhotoPath) {
+            dogEntity.avatarPhotoPath = avatarPhotoPath;
             return this;
         }
 
-        public Builder pedigreeMediaId(String pedigreeMediaId) {
-            dogEntity.pedigreePhotoPath = pedigreeMediaId;
+        public Builder pedigreePhotoPath(String pedigreePhotoPath) {
+            dogEntity.pedigreePhotoPath = pedigreePhotoPath;
             return this;
         }
 

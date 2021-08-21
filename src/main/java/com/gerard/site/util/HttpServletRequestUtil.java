@@ -53,14 +53,16 @@ public class HttpServletRequestUtil {
      * @param request    request to find cookie in
      * @param cookieName cookie name to find in the specified request
      * @return returns target cookie by specified name,
-     * otherwise returns {@code null}
+     *         otherwise returns {@code null}
      */
     public static Cookie getCookieByName(HttpServletRequest request, String cookieName) {
         Cookie[] cookies = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals(cookieName)) {
-                LOGGER.info("Cookie with name: '" + cookieName + "' was found.");
-                return cookies[i];
+        if (cookies !=null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals(cookieName)) {
+                    LOGGER.info("Cookie with name: '" + cookieName + "' was found.");
+                    return cookies[i];
+                }
             }
         }
         LOGGER.warn("Null will be returned . ");

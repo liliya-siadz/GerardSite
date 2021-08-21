@@ -1,5 +1,6 @@
 package com.gerard.site.controller;
 
+import com.gerard.site.exception.ServiceException;
 import com.gerard.site.localization.Language;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,7 +47,7 @@ interface Action {
      *     <li>Returning target url page. </li>
      * </ol>
      */
-    String execute(HttpServletRequest request, HttpServletResponse response);
+    String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException;
 
     /**
      * Gets come request's url

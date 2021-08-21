@@ -29,7 +29,6 @@
     <link rel="icon" type="image/x-icon" href="${applicationPath}/favicon.ico">
     <link rel="stylesheet" href="${applicationPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${applicationPath}/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="${applicationPath}/css/custom.css">
     <meta name="description" content="Kennel presentation for clients"/>
     <meta name="keywords"
           content="dog, leonberger, Gerard, leon, kennel, собака, питомник, Жерард, леонбергер,сабака, пітомнік, Жерард, леонбергер"/>
@@ -38,5 +37,6 @@
 <body>
 <script src="${applicationPath}/js/jquery-3.1.0.min.js"></script>
 <script src="${applicationPath}/js/bootstrap.min.js"></script>
+<script src="${applicationPath}/js/jquery-3.1.0.min.js" type="text/javascript"></script>
 </body>
 </html>

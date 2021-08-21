@@ -1,5 +1,11 @@
 <html>
 <head>
+    <style>
+    a.headerLink:hover {
+      color: red;
+      text-decoration: none;
+      }
+   </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">

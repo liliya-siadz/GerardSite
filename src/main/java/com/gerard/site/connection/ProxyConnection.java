@@ -413,6 +413,6 @@ public final class ProxyConnection implements Connection {
 
     @Override
     public String toString() {
-        return "ProxyConnection { hashcode " + hashCode() + " }";
+        return "ProxyConnection { " + hashCode() + " }";
     }
 }

@@ -154,6 +154,11 @@
     <!--    error pages config start-->
     <error-page>
         <!-- Missing login -->
+        <error-code>400</error-code>
+        <location>/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <!-- Missing login -->
         <error-code>401</error-code>
         <location>/pages/error.jsp</location>
     </error-page>

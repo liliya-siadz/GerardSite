@@ -53,12 +53,8 @@ public class DefineLanguageAttributesTag extends TagSupport {
                 request, LANGUAGE_CODE_COOKIE_NAME);
         if (((languageCode == null) || (languageCode.getValue() == null))
                 || (Language.getLanguage(languageCode.getValue().toUpperCase()).isEmpty())) {
-            LOGGER.trace("Full language information wasn't found in the cookies .");
-            Set<Language> supportedLocales =
-                    findSupportedLanguagesFromRequestHeader(request);
-            Language assignedLanguage = (supportedLocales.size() == 0)
-                                         ? DEFAULT_LANGUAGE
-                                         : supportedLocales.stream().findFirst().get();
+            LOGGER.trace("Full language information was not found in the cookies .");
+            Language assignedLanguage =  DEFAULT_LANGUAGE;
             languageCode = new Cookie(LANGUAGE_CODE_COOKIE_NAME,
                     assignedLanguage.name().toLowerCase());
             Cookie bundle = new Cookie(BUNDLE_BASE_NAME_COOKIE_NAME,
@@ -80,15 +76,5 @@ public class DefineLanguageAttributesTag extends TagSupport {
                 + "Used languageCode: " + locale
                 + " . Used bundle: " + bundleBaseName);
         return SKIP_BODY;
-    }
-
-    private Set<Language> findSupportedLanguagesFromRequestHeader(
-            HttpServletRequest request) {
-        String[] acceptedLanguagesCodes = HttpServletRequestUtil.
-                getAcceptedLanguagesCodesFromHeader(request);
-        Set<Language> supportedLanguagesFromRequestHeader =
-                CustomStringUtil.getMatchedEnumValuesSet(
-                        acceptedLanguagesCodes, Language.values());
-        return supportedLanguagesFromRequestHeader;
     }
 }
