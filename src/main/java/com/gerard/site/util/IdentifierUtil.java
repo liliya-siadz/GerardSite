@@ -46,31 +46,49 @@ public class IdentifierUtil {
 
     /**
      * Provides properties, that is located in resource folder .
-     * <b>May return null value .</b>
+     * <b>May produce RuntimeException {@link RuntimeException}.</b>
      *
      * @param objectToCallOn object which class will use these properties
      * @param path           relative to resources folder path of properties
-     * @return provided properties if path is readable,
-     * otherwise returns null
+     * @return returns provided properties if:
+     * <ul>
+     *     <li>path is readable</li>
+     *     <li>using input stream was not null</li>
+     *     <li>loaded properties is not empty</li>
+     * </ul> , otherwise throws RuntimeException
      * @throws IOException
      * @throws URISyntaxException
+     * @throws RuntimeException
      */
     public static Properties getPropertiesByPath(
             Object objectToCallOn, String path)
             throws IOException, URISyntaxException {
         Class<?> classToLoad = objectToCallOn.getClass();
         URL resourceUrl = classToLoad.getResource(path);
-        if (isResourceReadable(resourceUrl)) {
+        boolean isResourceReadable = isResourceReadable(resourceUrl);
+        boolean isInputStreamNull = true;
+        boolean isPropertiesEmpty = true;
+        if (isResourceReadable) {
             try (InputStream inputStream = classToLoad.getResourceAsStream(path)) {
-                Properties properties = new Properties();
-                properties.load(inputStream);
-                return properties;
+                isInputStreamNull = (inputStream == null);
+                if (!isInputStreamNull) {
+                    Properties properties = new Properties();
+                    properties.load(inputStream);
+                    isPropertiesEmpty = (properties.isEmpty());
+                    if (!isPropertiesEmpty) {
+                        return properties;
+                    }
+                }
             }
-        } else {
-            LOGGER.error("Specified path: " + path + "is not readable !");
-            LOGGER.warn("Null will be returned");
-            return null;
         }
+        LOGGER.info("Specified path: " + path + " is "
+                + (isResourceReadable ? "readable" : "not readable"));
+        LOGGER.info("Resources input stream: " + "is "
+                + (isInputStreamNull ? "null" : "not null"));
+        LOGGER.info("Properties " + (isPropertiesEmpty ? "was loaded" : "was not loaded"));
+        LOGGER.fatal("Properties didn't load correctly! " + " Resource FILE: '" + path + "'");
+        throw new RuntimeException("Properties didn't load correctly! "
+                + " Resource FILE: '" + path + "'");
     }
 
     /**

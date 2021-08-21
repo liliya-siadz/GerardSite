@@ -68,14 +68,6 @@ public class AppUserService {
         Properties securityProperties
                 = IdentifierUtil.getPropertiesByPath(
                 instance, securityFileResourcePath);
-        if ((securityProperties == null)) {
-            LOGGER.fatal("Security properties is null! "
-                    + "Security properties file path: "
-                    + securityFileResourcePath);
-            throw new RuntimeException("Security properties is null! "
-                    + "Security properties file path: "
-                    + securityFileResourcePath);
-        }
         String passwordToken = "passwordToken";
         String token = securityProperties.getProperty(passwordToken);
         return token;

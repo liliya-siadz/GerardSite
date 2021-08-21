@@ -24,12 +24,6 @@ final class ConnectionProperties {
         String dbConnectionResourcePath = "/connection.properties";
         try {
             dbConnectionProperties = IdentifierUtil.getPropertiesByPath(this, dbConnectionResourcePath);
-            if (dbConnectionProperties == null) {
-                LOGGER.fatal("Database connection properties is null! "
-                        + "Resource FILE: " + dbConnectionResourcePath);
-                throw new RuntimeException("Database connection properties is null! "
-                        + "Resource FILE: " + dbConnectionResourcePath);
-            }
             String poolSizePropertyKey = "size";
             String quantityOfTriesToOfferFreeConnectionsPropertyKey = "triesToOfferFreeConnections.quantity";
             String antiLeakingConnectionsStartMinPropertyKey = "antiLeakingConnectionsStart.min";
