@@ -1,9 +1,8 @@
 .idea/**
 .settings/**
 target/**
-PLAN.txt
-requirements.pdf
 TODO.txt
-VOCABULARY.txt
 *.iml
-src/main/java/com/gerard/site/Main.java
+src/main/resources/connection.properties
+src/main/resources/mail.properties
+src/main/resources/security.properties
