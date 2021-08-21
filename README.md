@@ -3,9 +3,8 @@
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 <h4>The main purposes of the web-app:</h4>
 <ol type="1">
-
-    <li>Showing actual information regarding dogs/puppies in the kennel</li> 
-    <li>Processing requests for puppies from potential pet's owners</li>   
+    <li>Showing actual information regarding dogs/puppies in the kennel </li> 
+    <li>Processing requests for puppies from potential pet's owners </li>   
 </ol>
 
 <h2>DATABASE SCHEME</h2>
