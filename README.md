@@ -10,7 +10,7 @@
         </ul>
      </li> 
     <li><b>Processing requests for puppies from potential pet's owners</b></li>
-    <li><b>Provide contact information of the kennel</b></li>
+    <li><b>Providing contact information of the kennel</b></li>
 </ol>
 
 
