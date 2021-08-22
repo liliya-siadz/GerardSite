@@ -1,6 +1,5 @@
 package com.gerard.site.controller;
 
-import com.gerard.site.entity.UserEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import static com.gerard.site.entity.UserEntity.AppUserRole.*;
 import static com.gerard.site.controller.ActionFactory.Command.*;
 
 /**
@@ -37,18 +35,17 @@ enum ActionFactory {
         GET_ALL_DOGS,
         GET_ALL_PUPPIES,
         GET_ALL_PHOTOS,
-        MAKE_REQUEST (CLIENT),
+        MAKE_REQUEST,
+        LOGIN,
 
-        SIGN_IN,
-        SING_UP,
-        SIGN_OUT (CLIENT, ADMIN),
-        GET_NEW_PASSWORD (CLIENT, ADMIN);
+        LOGOUT,
+        RENEW_PASSWORD,
 
-        private UserEntity.AppUserRole[] appUserRoles;
-
-        Command(UserEntity.AppUserRole... appUserRoles) {
-            this.appUserRoles = appUserRoles;
-        }
+        GET_ALL_REQUESTS,
+        PROCESS_REQUEST,
+        ADD_DOG,
+        EDIT_DOG,
+        DELETE_DOG;
     }
 
     private static final Logger LOGGER = LogManager.getLogger(ActionFactory.class);
@@ -70,8 +67,7 @@ enum ActionFactory {
     private final Action defaultAction = Error404PageAction.INSTANCE;
 
     ActionFactory() {
-        actions.put(SIGN_IN, SignInAction.INSTANCE);
-        actions.put(SIGN_OUT, SignOutAction.INSTANCE);
+        actions.put(LOGIN, LoginAction.INSTANCE);
         actions.put(SET_LOCALE_TO_EN, SetLocaleToEnAction.INSTANCE);
         actions.put(SET_LOCALE_TO_BE, SetLocaleToBeAction.INSTANCE);
         actions.put(SET_LOCALE_TO_RU, SetLocaleToRuAction.INSTANCE);

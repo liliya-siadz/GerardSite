@@ -14,6 +14,10 @@
 <body style="background-image: url(${applicationPath}/img/background.jpg);">
 <%@include file="fragment/dynamic-headering.jsp" %>
 
+
+<%--parse dogs--%>
+
+
 <div style="display:inline-block;">
     <c:set var="dogs" value="${allDogs}" scope="request"/>
     <c:forEach items="${dogs}" var="dog">
@@ -34,7 +38,7 @@
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.name"/> </b>
+                <h3><b><fmt:message key="page.dogs.view.title.nickname"/> </b>
                     <c:out value="${dog.nickname}"/>
                 </h3>
             </div>

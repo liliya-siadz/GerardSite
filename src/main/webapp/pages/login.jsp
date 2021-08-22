@@ -9,22 +9,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><fmt:message key="page.sign.title"/></title>
+    <title><fmt:message key="page.login.title"/></title>
 </head>
 <body>
 <%@include file="fragment/headers/header.jsp"%>
 <%@include file="fragment/validation_variables.jsp"%>
 
+<%--1 LOGIN--%>
+
 <c:if test="${not empty sessionScope.isUserFound}">
     <c:if test="${not sessionScope.isUserFound}">
-        <p style="color: red"><fmt:message key="page.sign.authorization.result"/></p>
+        <p style="color: red"><fmt:message key="page.login.authorization.result"/></p>
     </c:if>
 </c:if>
 <form method="POST"
       action="${applicationPath}${controllerUrl}">
 
 <%--    email start --%>
-    <label for="emailId"><fmt:message key="page.sign.field.email.label"/></label>
+    <label for="emailId"><fmt:message key="page.login.field.email.label"/></label>
     <input id="emailId"
            type="text"
            name="email"
@@ -38,7 +40,7 @@
 <%--    email end--%>
 
 <%--    password start--%>
-    <label for="passwordId"><fmt:message key="page.sign.field.password.label"/></label>
+    <label for="passwordId"><fmt:message key="page.login.field.password.label"/></label>
     <input id="passwordId"
            type="password"
            name="password"/>
@@ -48,13 +50,13 @@
     <input type="hidden" name="command" value="LOGIN"/>
     <button type="submit"
             class="btn btn-xs navbar-btn">
-        <fmt:message key="header.link.sign_in.name"/>
+        <fmt:message key="page.login.button.login.name"/>
     </button>
 <%--    LOGIN command end--%>
 </form>
-<c:if test="${not empty sessionScope.loginValidationErrors}">
-    <c:if test="${not sessionScope.loginValidationErrors.email}">
-        <fmt:message key="page.sign.field.email.validation.message"/>
+<c:if test="${not empty sessionScope.loginValidationMap}">
+    <c:if test="${not sessionScope.loginValidationMap.email}">
+        <fmt:message key="page.login.field.email.validation.message"/>
     </c:if>
 </c:if>
 <%@ include file="fragment/footers/footer.jsp" %>

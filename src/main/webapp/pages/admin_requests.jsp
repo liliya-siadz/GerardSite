@@ -8,13 +8,14 @@
 <%@ include file="fragment/include.jsp" %>
 <html>
 <head>
-    <title><fmt:message key="page.photos.title"/></title>
+    <title><fmt:message key="page.admin_requests.title"/></title>
 </head>
 <body>
 
-<%--parse photos--%>
+<%--  parse requests--%>
+<%--+ edit button  1 PROCESS_REQUEST--%>
 
-<%@include file="fragment/dynamic-headering.jsp"%>
+<%@ include file="fragment/headers/admin_header.jsp" %>
 <%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

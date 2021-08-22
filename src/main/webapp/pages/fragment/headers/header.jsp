@@ -11,10 +11,11 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <%@ include file="../logo.jsp" %>
+        <%@ include file="../switch_locale_panel.jsp" %>
         <a href="${pageContext.request.contextPath}/home"
            role="button"
            class="btn btn-xs navbar-btn headerLink">
-            <fmt:message key="header.link.home.name"/>
+            <fmt:message key="page.home.header"/>
         </a>
         <div class="btn-group btn-group-xs" role="header">
             <form method="GET"
@@ -23,29 +24,27 @@
                         name="command"
                         class="btn btn-xs navbar-btn"
                         value="GET_ALL_DOGS">
-                    <fmt:message key="header.link.dogs.name"/>
+                    <fmt:message key="page.dogs.header"/>
                 </button>
                 <button type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn"
                         value="GET_ALL_PUPPIES">
-                    <fmt:message key="header.link.puppies.name"/>
+                    <fmt:message key="page.puppies.header"/>
                 </button>
                 <button type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn"
                         value="GET_ALL_PHOTOS">
-                    <fmt:message key="header.link.photos.name"/>
+                    <fmt:message key="page.photos.header"/>
                 </button>
             </form>
         </div>
-        <a href="${pageContext.request.contextPath}/sign"
+        <a href="${pageContext.request.contextPath}/login"
            role="button"
            class="btn btn-xs navbar-btn headerLink">
-            <fmt:message key="header.link.make_request.name"/>
+            <fmt:message key="page.login.header"/>
         </a>
-        <%@ include file="../sign_in_up_button.jsp" %>
-        <%@ include file="../switch_locale_panel.jsp" %>
     </div>
 </nav>
 </body>

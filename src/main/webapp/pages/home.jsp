@@ -11,6 +11,8 @@
     <title><fmt:message key="page.home.title"/></title>
     </head>
     <body>
+
+<%--    fill in view--%>
     <%@include file="fragment/dynamic-headering.jsp"%>
     <%@ include file="fragment/footers/footer.jsp" %>
     </body>

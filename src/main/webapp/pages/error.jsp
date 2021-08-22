@@ -44,7 +44,6 @@
     </style>
 </head>
 <body>
-<%@include file="fragment/dynamic-headering.jsp" %>
 <h1 style="text-align: center">
     <b><fmt:message key="error.word"/> !
         <fmt:message key="page.error.message.alternative_action"/>
@@ -63,7 +62,7 @@
             <h3><b><fmt:message key="page.error.message.action"/></b>
                 <a href="${pageContext.request.contextPath}/home">
                     &#8962;
-                    <fmt:message key="header.link.home.name"/>
+                    <fmt:message key="page.home.header"/>
                 </a>
             </h3>
         </div>

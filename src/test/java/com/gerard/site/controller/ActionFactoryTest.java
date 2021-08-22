@@ -10,8 +10,7 @@ public class ActionFactoryTest {
     @DataProvider(name = "testGetActionDataProvider")
     public Object[][] testGetActionDataProvider() {
         return new Object[][]{
-                {"LOGIN", SignInAction.INSTANCE},
-                {"LOGOUT", SignOutAction.INSTANCE},
+                {"LOGIN", LoginAction.INSTANCE},
                 {"unknown command", Error404PageAction.INSTANCE},
                 {"im a danger hacker :)", Error404PageAction.INSTANCE},
                 {null, Error404PageAction.INSTANCE}

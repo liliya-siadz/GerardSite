@@ -1,4 +1,6 @@
-package com.gerard.site.entity;
+package com.gerard.site.entity.extra;
+
+import com.gerard.site.entity.AbstractEntity;
 
 /**
  * Class represents single record from table <i>gerard.health_test_type</i> ,
@@ -18,11 +20,12 @@ public class HealthTestTypeEntity extends AbstractEntity<String> {
     private String healthTestTypeDescr;
 
     /**
-     * Represents column 'status_active' in the table <i>gerard.health_test_type</i> .
+     * Represents column 'is_active' in the table <i>gerard.health_test_type</i> .
      */
-    private boolean statusActive;
+    private boolean isActive;
 
     public HealthTestTypeEntity() {
+        throw new UnsupportedOperationException();
     }
 
     public String getHealthTestTypeDescr() {
@@ -33,12 +36,12 @@ public class HealthTestTypeEntity extends AbstractEntity<String> {
         this.healthTestTypeDescr = healthTestTypeDescr;
     }
 
-    public boolean isStatusActive() {
-        return statusActive;
+    public boolean isActive() {
+        return isActive;
     }
 
-    public void setStatusActive(boolean statusActive) {
-        this.statusActive = statusActive;
+    public void setActive(boolean active) {
+        this.isActive = active;
     }
 
     @Override
@@ -59,7 +62,7 @@ public class HealthTestTypeEntity extends AbstractEntity<String> {
         int hash = 7;
         int hashcode = super.hashCode();
         hashcode = hash * hashcode + (healthTestTypeDescr == null ? 0 : healthTestTypeDescr.hashCode());
-        hashcode = hash * hashcode + (statusActive ? 1 : 0);
+        hashcode = hash * hashcode + (isActive ? 1 : 0);
         return hashcode;
     }
 
@@ -67,9 +70,8 @@ public class HealthTestTypeEntity extends AbstractEntity<String> {
     public String toString() {
         return "HealthTestType{"
                 + "id=" + id
-                + ", healthTestTypeDescr='"
-                + healthTestTypeDescr + '\''
-                + ", statusActive=" + statusActive
+                + ", healthTestTypeDescr='" + healthTestTypeDescr + '\''
+                + ", isActive=" + isActive
                 + '}';
     }
 }

@@ -1,42 +1,44 @@
-package com.gerard.site.entity;
+package com.gerard.site.entity.extra;
+
+import com.gerard.site.entity.AbstractEntity;
 
 import java.sql.Date;
 
 /**
- * Class represents single record from table <i>gerard.breeding</i> ,
+ * Class represents single record from table <i>gerard.wedding</i> ,
  * note that primary key of record is represented
  * by is superclass AbstractEntity {@link AbstractEntity}
  * by it's instance filed 'id' {@link AbstractEntity#id} .
  *
- * <b>Primary key column is named 'breeding_id' </b> .
+ * <b>Primary key column is named 'wedding_id' </b> .
  *
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class BreedingEntity extends AbstractEntity<Integer> {
+public class WeddingEntity extends AbstractEntity<Integer> {
     /**
-     * Represents column 'date_planned' in the table <i>gerard.breeding</i> .
+     * Represents column 'date_planned' in the table <i>gerard.wedding</i> .
      */
     private Date datePlanned;
 
     /**
-     * Represents column 'male_dog_id' in the table <i>gerard.breeding</i> .
+     * Represents column 'male_dog_id' in the table <i>gerard.wedding</i> .
      */
     private int maleDogId;
 
     /**
-     * Represents column 'female_dog_id' in the table <i>gerard.breeding</i> .
+     * Represents column 'female_dog_id' in the table <i>gerard.wedding</i> .
      */
     private int femaleDogId;
 
     /**
-     * Represents column 'date_fact' in the table <i>gerard.breeding</i> .
+     * Represents column 'date_fact' in the table <i>gerard.wedding</i> .
      * Can be null value in the table
      */
     private Date dateFact;
 
-    private BreedingEntity() {
-        super();
+    private WeddingEntity() {
+        throw new UnsupportedOperationException();
     }
 
     public Date getDatePlanned() {
@@ -76,10 +78,10 @@ public class BreedingEntity extends AbstractEntity<Integer> {
         if (this == object) {
             return true;
         }
-        if (object instanceof BreedingEntity breedingEntity) {
+        if (object instanceof WeddingEntity weedingEntity) {
             return id == null
-                    ? breedingEntity.id == null
-                    : id.equals(breedingEntity.id);
+                    ? weedingEntity.id == null
+                    : id.equals(weedingEntity.id);
         }
         return false;
     }
@@ -97,7 +99,7 @@ public class BreedingEntity extends AbstractEntity<Integer> {
 
     @Override
     public String toString() {
-        return "BreedingEntity{"
+        return "WeddingEntity{"
                 + "id=" + id
                 + ", datePlanned=" + datePlanned
                 + ", maleDogId=" + maleDogId

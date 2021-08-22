@@ -1,4 +1,6 @@
-package com.gerard.site.entity;
+package com.gerard.site.entity.extra;
+
+import com.gerard.site.entity.AbstractEntity;
 
 import java.sql.Date;
 
@@ -35,6 +37,7 @@ public class HealthTestEntity extends AbstractEntity<Integer> {
     private String result;
 
     public HealthTestEntity() {
+        throw new UnsupportedOperationException();
     }
 
     public String getHealthTestType() {

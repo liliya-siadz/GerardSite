@@ -1,30 +1,49 @@
 <html>
 <head>
     <style>
-    a.headerLink:hover {
-      color: red;
-      text-decoration: none;
-      }
-   </style>
+        a.headerLink:hover {
+            color: red;
+            text-decoration: none;
+        }
+        button.headerButton {
+            color: red;
+            text-decoration: none;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <%@ include file="../logo.jsp" %>
-      <li><a href="${pageContext.request.contextPath}/home"><fmt:message key="header.link.home.name"/></a></li>
-      <li><a href="${pageContext.request.contextPath}/dogs?command=GET_ALL_DOGS"><fmt:message key="header.link.dogs.name"/></a></li>
-      <li><a href="${pageContext.request.contextPath}/puppies"><fmt:message key="header.link.puppies.name"/></a></li>
-      <li><a href="${pageContext.request.contextPath}/photos"><fmt:message key="header.link.photos.name"/></a></li>
-      <li><a style="color: #8a6d3b" href="${pageContext.request.contextPath}/admin/admin_dogs"><fmt:message key="header.link.admin_dogs.name"/></a></li>
-      <li><a style="color: #8a6d3b" href="${pageContext.request.contextPath}/admin/admin_photos"><fmt:message key="header.link.admin_photos.name"/></a></li>
-      <li><a style="color: #8a6d3b" href="${pageContext.request.contextPath}/admin/users"><fmt:message key="header.link.users.name"/></a></li>
-      <li><a style="color: #8a6d3b" href="${pageContext.request.contextPath}/admin/requests"><fmt:message key="header.link.requests.name"/></a></li>
-      <li><a style="color: #8a6d3b" href="${pageContext.request.contextPath}/authaccessed/my_profile"><fmt:message key="header.link.my_profile.name"/></a></li>
-    </ul>
-    <%@ include file="../sign_out_button.jsp" %>
-    <%@ include file="../switch_locale_panel.jsp" %>
-  </div>
+    <div class="container-fluid">
+        <%@ include file="../logo.jsp" %>
+        <%@ include file="../switch_locale_panel.jsp" %>
+        <a href="${pageContext.request.contextPath}/home"
+           role="button"
+           class="btn btn-xs navbar-btn headerLink">
+            <fmt:message key="page.home.header"/>
+        </a>
+            <div class="btn-group btn-group-xs" role="header">
+            <form method="GET"
+              action="${applicationPath}${controllerUrl}">
+            <button type="submit"
+                    name="command"
+                    class="btn btn-xs navbar-btn headerButton"
+                    value="GET_ALL_DOGS">
+                <fmt:message key="page.admin_dogs.title"/>
+                    <button type="submit"
+                        name="command"
+                        class="btn btn-xs navbar-btn headerButton"
+                        value="GET_ALL_REQUESTS">
+                    <fmt:message key="page.admin_requests.header"/>
+                    <button type="submit"
+                            name="command"
+                            class="btn btn-xs navbar-btn headerButton"
+                            value="LOGOUT">
+                   <fmt:message key="admin.button.logout.name"/>
+        </form>
+            </div>
+    </div>
 </nav>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class RequestEntity extends AbstractEntity<Integer> {
          * Represents next request's status:
          * request was accepted.
          */
-        CONTACT,
+        ACCEPTED,
 
         /**
          * Represents next request's status:
@@ -192,5 +192,90 @@ public class RequestEntity extends AbstractEntity<Integer> {
                 + ", dateFact=" + dateFact
                 + ", reply='" + reply + '\''
                 + '}';
+    }
+
+
+    /**
+     * Nested service class that provides
+     * creating object of class DogEntity {@link DogEntity}
+     * and realizes creational design pattern 'Builder' .
+     */
+    public static class Builder {
+        private RequestEntity requestEntity;
+
+        public Builder() {
+            requestEntity = new RequestEntity();
+        }
+
+        public RequestEntity.Builder id(Integer id) {
+            requestEntity.id = id;
+            return this;
+        }
+
+        public RequestEntity.Builder requestStatus(RequestStatus requestStatus) {
+            requestEntity.requestStatus = requestStatus;
+            return this;
+        }
+
+        public RequestEntity.Builder requestType(RequestType requestType) {
+            requestEntity.requestType = requestType;
+            return this;
+        }
+
+        public RequestEntity.Builder email(String email) {
+            requestEntity.email = email;
+            return this;
+        }
+
+        public RequestEntity.Builder dogId(int dogId) {
+            requestEntity.dogId = dogId;
+            return this;
+        }
+
+        public RequestEntity.Builder content(String content) {
+            requestEntity.content = content;
+            return this;
+        }
+
+        public RequestEntity.Builder dateFact(Date dateFact) {
+            requestEntity.dateFact = dateFact;
+            return this;
+        }
+
+        public RequestEntity.Builder reply(String reply) {
+            requestEntity.reply = reply;
+            return this;
+        }
+
+        public RequestEntity build() {
+            return requestEntity;
+        }
+
+        @Override
+        public boolean equals(Object object) {
+            if (this == object) {
+                return true;
+            }
+            if (object instanceof RequestEntity.Builder requestEntityBuilder) {
+                return (requestEntity == null)
+                        ? requestEntityBuilder.requestEntity == null
+                        : requestEntity.equals(requestEntityBuilder.requestEntity);
+            }
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 7;
+            int hashcode = hash + 31 * (requestEntity == null ? 0 : requestEntity.hashCode());
+            return hashcode;
+        }
+
+        @Override
+        public String toString() {
+            return "RequestEntity.Builder{"
+                    + "requestEntity=" + requestEntity
+                    + '}';
+        }
     }
 }

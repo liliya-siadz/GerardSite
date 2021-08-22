@@ -2,32 +2,30 @@ package com.gerard.site.dao;
 
 import com.gerard.site.connection.ConnectionException;
 import com.gerard.site.connection.ConnectionPool;
-import com.gerard.site.entity.UserEntity;
+import com.gerard.site.entity.AppUserEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.gerard.site.entity.UserEntity.AppUserRole;
-import static com.gerard.site.entity.UserEntity.AppUserStatus;
-import static com.gerard.site.entity.UserEntity.AppUserSex;
-
-public class AppUserDao extends AbstractDao<UserEntity> {
-    //todo check methods for null args
+public class AppUserDao extends AbstractDao<AppUserEntity> {
     private static AppUserDao instance;
     private static final String TABLE_NAME = "gerard.app_user";
     private static final String COLUMN_LABEL_1 = "app_user_id";
-    private static final String COLUMN_LABEL_2 = "app_user_status";
-    private static final String COLUMN_LABEL_3 = "app_user_role";
-    private static final String COLUMN_LABEL_4 = "email";
-    private static final String COLUMN_LABEL_5 = "password";
-    private static final String COLUMN_LABEL_6 = "name";
-    private static final String COLUMN_LABEL_7 = "surname";
-    private static final String COLUMN_LABEL_8 = "patronymic";
-    private static final String COLUMN_LABEL_9 = "phone";
-    private static final String COLUMN_LABEL_10 = "app_user_sex";
+    private static final String COLUMN_LABEL_2 = "email";
+    private static final String COLUMN_LABEL_3 = "password";
+    private static final String COLUMN_LABEL_4 = "name";
+    private static final String COLUMN_LABEL_5 = "surname";
+    private static final String COLUMN_LABEL_6 = "patronymic";
+    private static final String COLUMN_LABEL_7 = "phone";
+    private static final String COLUMN_LABEL_8 = "is_admin";
+
     private static final Logger LOGGER = LogManager.getLogger(AppUserDao.class);
 
     private AppUserDao() {
@@ -42,7 +40,7 @@ public class AppUserDao extends AbstractDao<UserEntity> {
     }
 
     @Override
-    public UserEntity findRecord(UserEntity user) throws DaoException {
+    public AppUserEntity findRecord(AppUserEntity user) throws DaoException {
         if (user == null) {
             throw new DaoException("Parameter 'user' is null");
         }
@@ -56,7 +54,7 @@ public class AppUserDao extends AbstractDao<UserEntity> {
                 preparedStatement.setString(1, email);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.isBeforeFirst()) {
-                    UserEntity selectedUser = null;
+                    AppUserEntity selectedUser = null;
                     while (resultSet.next()) {
                         selectedUser = parseResultSet(resultSet);
                     }
@@ -65,7 +63,7 @@ public class AppUserDao extends AbstractDao<UserEntity> {
                     LOGGER.info("No records were found in table: "
                             + TABLE_NAME + ". "
                             + "Used next columns values: "
-                            + TABLE_NAME + "." + COLUMN_LABEL_4 + " : " + email
+                            + TABLE_NAME + "." + COLUMN_LABEL_2 + " : " + email
                             + " . ");
                     LOGGER.warn("Null will be returned");
                     return null;
@@ -79,13 +77,13 @@ public class AppUserDao extends AbstractDao<UserEntity> {
     }
 
     @Override
-    public List<UserEntity> selectAllRecords() throws DaoException {
+    public List<AppUserEntity> selectAllRecords() throws DaoException {
         final String selectAllUsers = "SELECT * FROM " + TABLE_NAME;
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(selectAllUsers);
                 if (resultSet.isBeforeFirst()) {
-                    List<UserEntity> selectedUsers = new ArrayList<>();
+                    List<AppUserEntity> selectedUsers = new ArrayList<>();
                     while (resultSet.next()) {
                         selectedUsers.add(parseResultSet(resultSet));
                     }
@@ -104,24 +102,6 @@ public class AppUserDao extends AbstractDao<UserEntity> {
         }
     }
 
-    @Override
-    public boolean update(UserEntity user, UserEntity newUserVersion) throws DaoException {
-        if (user == null) {
-            throw new DaoException("Parameter 'user' is null");
-        }
-        if (newUserVersion == null) {
-            throw new DaoException("Parameter 'newUserVersion' is null");
-        }
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean create(UserEntity user) throws DaoException {
-        if (user == null) {
-            throw new DaoException("Parameter 'user' is null");
-        }
-        throw new UnsupportedOperationException();
-    }
 
     public String selectUserPasswordByEmail(String token, String email)
             throws DaoException {
@@ -131,24 +111,23 @@ public class AppUserDao extends AbstractDao<UserEntity> {
                 throw new DaoException("Parameter 'email' is null");
             }
             final String selectUserPasswordByEmail
-                    = "SELECT " + COLUMN_LABEL_5
-                    + " FROM " + TABLE_NAME + " where email =?";
+                    = "SELECT " + COLUMN_LABEL_3 + " FROM " + TABLE_NAME + " where email =?";
             try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
                 try (PreparedStatement preparedStatement
-                        = connection.prepareStatement(selectUserPasswordByEmail)) {
+                             = connection.prepareStatement(selectUserPasswordByEmail)) {
                     preparedStatement.setString(1, email);
                     ResultSet resultSet = preparedStatement.executeQuery();
                     if (resultSet.isBeforeFirst()) {
                         String password = null;
                         while (resultSet.next()) {
-                            password = resultSet.getString(COLUMN_LABEL_5);
+                            password = resultSet.getString(COLUMN_LABEL_3);
                         }
                         return password;
                     } else {
                         LOGGER.info("No records were found in table: "
                                 + TABLE_NAME + ". "
                                 + "Used next columns values: "
-                                + TABLE_NAME + "." + COLUMN_LABEL_4 + " : " + email
+                                + TABLE_NAME + "." + COLUMN_LABEL_2 + " : " + email
                                 + " . ");
 
                         LOGGER.warn("Null will be returned");
@@ -167,31 +146,44 @@ public class AppUserDao extends AbstractDao<UserEntity> {
         }
     }
 
+
     @Override
-    public UserEntity parseResultSet(ResultSet resultSet) throws SQLException {
+    public boolean update(AppUserEntity user, AppUserEntity newUserVersion) throws DaoException {
+        if (user == null) {
+            throw new DaoException("Parameter 'user' is null");
+        }
+        if (newUserVersion == null) {
+            throw new DaoException("Parameter 'newUserVersion' is null");
+        }
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean create(AppUserEntity user) throws DaoException {
+        if (user == null) {
+            throw new DaoException("Parameter 'user' is null");
+        }
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public AppUserEntity parseResultSet(ResultSet resultSet) throws SQLException {
         int appUserId = resultSet.getInt(COLUMN_LABEL_1);
-        AppUserStatus appUserStatus = AppUserStatus.valueOf(
-                resultSet.getString(COLUMN_LABEL_2).toUpperCase());
-        AppUserRole appUserRole = AppUserRole.valueOf(
-                resultSet.getString(COLUMN_LABEL_3).toUpperCase());
-        String email = resultSet.getString(COLUMN_LABEL_4);
-        String name = resultSet.getString(COLUMN_LABEL_6);
-        String surname = resultSet.getString(COLUMN_LABEL_7);
-        String patronymic = resultSet.getString(COLUMN_LABEL_8);
-        int phone = resultSet.getInt(COLUMN_LABEL_9);
-        AppUserSex appUserSex = AppUserSex.valueOf(
-                resultSet.getString(COLUMN_LABEL_10).toUpperCase());
-        UserEntity user = new UserEntity.Builder()
+        String email = resultSet.getString(COLUMN_LABEL_2);
+        String name = resultSet.getString(COLUMN_LABEL_4);
+        String surname = resultSet.getString(COLUMN_LABEL_5);
+        String patronymic = resultSet.getString(COLUMN_LABEL_6);
+        int phone = resultSet.getInt(COLUMN_LABEL_7);
+        boolean isAdmin = resultSet.getBoolean(COLUMN_LABEL_8);
+        AppUserEntity appUserEntity = new AppUserEntity.Builder()
                 .id(appUserId)
-                .appUserStatus(appUserStatus)
-                .appUserRole(appUserRole)
                 .email(email)
                 .name(name)
                 .surname(surname)
                 .patronymic(patronymic)
                 .phone(phone)
-                .appUserSex(appUserSex)
+                .isAdmin(isAdmin)
                 .build();
-        return user;
+        return appUserEntity;
     }
 }

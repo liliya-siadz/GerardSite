@@ -2,7 +2,7 @@ package com.gerard.site.service;
 
 import com.gerard.site.dao.AppUserDao;
 import com.gerard.site.dao.DaoException;
-import com.gerard.site.entity.UserEntity;
+import com.gerard.site.entity.AppUserEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.form.LoginForm;
 import com.gerard.site.util.BCrypt;
@@ -10,8 +10,6 @@ import com.gerard.site.util.AppIdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -33,7 +31,7 @@ public class AppUserService {
         }return instance;
     }
 
-    public Optional<UserEntity> authenticate(LoginForm loginForm)
+    public Optional<AppUserEntity> authenticate(LoginForm loginForm)
             throws ServiceException {
         if (loginForm == null) {
             throw new ServiceException("Parameter 'loginForm' is null!");
@@ -43,9 +41,9 @@ public class AppUserService {
         if((email == null) || (password == null)) {
             throw new ServiceException("Login form has null values!");
         }
-        UserEntity user = new UserEntity.Builder().email(email).build();
+        AppUserEntity user = new AppUserEntity.Builder().email(email).build();
         try {
-            UserEntity realUser = AppUserDao.getInstance().findRecord(user);
+            AppUserEntity realUser = AppUserDao.getInstance().findRecord(user);
             if (realUser != null) {
                 String token = getToken();
                 String userPassword = AppUserDao.getInstance()

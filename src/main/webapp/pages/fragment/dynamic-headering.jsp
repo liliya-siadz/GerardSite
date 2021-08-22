@@ -10,8 +10,7 @@
 </head>
 <body>
 <c:choose>
-    <c:when test="${role eq 'admin'}"><%@include file="headers/admin_header.jsp" %></c:when>
-    <c:when test="${role eq 'client'}"><%@include file="headers/client_header.jsp" %></c:when>
+    <c:when test="${admin}"><%@include file="headers/admin_header.jsp" %></c:when>
     <c:otherwise><%@include file="headers/header.jsp" %></c:otherwise>
 </c:choose>
 </body>

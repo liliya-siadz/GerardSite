@@ -15,33 +15,6 @@ import java.sql.Date;
  */
 public class DogEntity extends AbstractEntity<Integer> {
     /**
-     * Possible values for instance field {@code dogStatus}
-     * {@link DogEntity#dogStatus} .
-     */
-    public enum DogStatus {
-        /**
-         * Represents next dog's status:
-         * dog is ready for exhibition
-         * and can be displayed on view .
-         */
-        EXHIBITION,
-
-        /**
-         * Represents next dog's status:
-         * dog is ready for exhibition or marriage
-         * and can be displayed on view .
-         */
-        EXHIBITION_FERTILE,
-
-        /**
-         * Represents next dog's status:
-         * dog is retired on on vacation
-         * and can not be displayed on view .
-         */
-        NON_ACTIVE
-    }
-
-    /**
      * Possible values for instance field {@code dogSex}
      * {@link DogEntity#dogSex} .
      */
@@ -49,11 +22,6 @@ public class DogEntity extends AbstractEntity<Integer> {
         MALE,
         FEMALE
     }
-
-    /**
-     * Represents column 'dog_status' in the table <i>gerard.dog</i> .
-     */
-    private DogStatus dogStatus;
 
     /**
      * Represents column 'dog_sex' in the table <i>gerard.dog</i> .
@@ -76,18 +44,6 @@ public class DogEntity extends AbstractEntity<Integer> {
     private Date birthday;
 
     /**
-     * Represents column 'mother_dog_id' in the table <i>gerard.dog</i> .
-     * Can be null value in the table
-     */
-    private int motherDogId;
-
-    /**
-     * Represents column 'father_dog_id' in the table <i>gerard.dog</i> .
-     * Can be null value in the table
-     */
-    private int fatherDogId;
-
-    /**
      * Represents column 'avatar_photo_path' in the table <i>gerard.dog</i> .
      */
     private String avatarPhotoPath;
@@ -103,16 +59,13 @@ public class DogEntity extends AbstractEntity<Integer> {
      */
     private String description;
 
+    /**
+     * Represents column 'is_active' in the table <i>gerard.dog</i> .
+     */
+    private boolean isActive;
+
     public DogEntity() {
         super();
-    }
-
-    public DogStatus getDogStatus() {
-        return dogStatus;
-    }
-
-    public void setDogStatus(DogStatus dogStatus) {
-        this.dogStatus = dogStatus;
     }
 
     public DogSex getDogSex() {
@@ -147,22 +100,6 @@ public class DogEntity extends AbstractEntity<Integer> {
         this.birthday = birthday;
     }
 
-    public int getMotherDogId() {
-        return motherDogId;
-    }
-
-    public void setMotherDogId(int motherDogId) {
-        this.motherDogId = motherDogId;
-    }
-
-    public int getFatherDogId() {
-        return fatherDogId;
-    }
-
-    public void setFatherDogId(int fatherDogId) {
-        this.fatherDogId = fatherDogId;
-    }
-
     public String getAvatarPhotoPath() {
         return avatarPhotoPath;
     }
@@ -187,6 +124,14 @@ public class DogEntity extends AbstractEntity<Integer> {
         this.description = description;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -204,16 +149,14 @@ public class DogEntity extends AbstractEntity<Integer> {
     public int hashCode() {
         int hash = 7;
         int hashcode = super.hashCode();
-        hashcode = hash * hashcode + (dogStatus == null ? 0 : dogStatus.hashCode());
         hashcode = hash * hashcode + (dogSex == null ? 0 : dogSex.hashCode());
         hashcode = hash * hashcode + (nickname == null ? 0 : nickname.hashCode());
         hashcode = hash * hashcode + (fullname == null ? 0 : fullname.hashCode());
         hashcode = hash * hashcode + (birthday == null ? 0 : birthday.hashCode());
-        hashcode = hash * hashcode + motherDogId;
-        hashcode = hash * hashcode + fatherDogId;
         hashcode = hash * hashcode + (avatarPhotoPath == null ? 0 : avatarPhotoPath.hashCode());
-        hashcode = hash * hashcode + (pedigreePhotoPath == null ? 0 : avatarPhotoPath.hashCode());
+        hashcode = hash * hashcode + (pedigreePhotoPath == null ? 0 : pedigreePhotoPath.hashCode());
         hashcode = hash * hashcode + (description == null ? 0 : description.hashCode());
+        hashcode = hash * hashcode + (isActive ? 1 : 0);
         return hashcode;
     }
 
@@ -221,16 +164,14 @@ public class DogEntity extends AbstractEntity<Integer> {
     public String toString() {
         return "DogEntity{"
                 + "id=" + id
-                + ", dogStatus=" + dogStatus
                 + ", dogSex=" + dogSex
                 + ", nickname='" + nickname + '\''
                 + ", fullname='" + fullname + '\''
                 + ", birthday=" + birthday
-                + ", motherId=" + motherDogId
-                + ", fatherId=" + fatherDogId
                 + ", avatarMediaId=" + avatarPhotoPath
                 + ", pedigreeMediaId=" + pedigreePhotoPath
                 + ", description='" + description + '\''
+                + ", isActive='" + isActive + '\''
                 + '}';
     }
 
@@ -248,11 +189,6 @@ public class DogEntity extends AbstractEntity<Integer> {
 
         public Builder id(Integer id) {
             dogEntity.id = id;
-            return this;
-        }
-
-        public Builder dogStatus(DogStatus dogStatus) {
-            dogEntity.dogStatus = dogStatus;
             return this;
         }
 
@@ -276,16 +212,6 @@ public class DogEntity extends AbstractEntity<Integer> {
             return this;
         }
 
-        public Builder motherDogId(int motherId) {
-            dogEntity.motherDogId = motherId;
-            return this;
-        }
-
-        public Builder fatherDogId(int fatherDogId) {
-            dogEntity.fatherDogId = fatherDogId;
-            return this;
-        }
-
         public Builder avatarPhotoPath(String avatarPhotoPath) {
             dogEntity.avatarPhotoPath = avatarPhotoPath;
             return this;
@@ -298,6 +224,12 @@ public class DogEntity extends AbstractEntity<Integer> {
 
         public Builder description(String description) {
             dogEntity.description = description;
+            return this;
+        }
+
+
+        public Builder isActive(boolean isActive) {
+            dogEntity.isActive = isActive;
             return this;
         }
 

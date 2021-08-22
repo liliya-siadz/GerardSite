@@ -6,7 +6,11 @@ import com.gerard.site.entity.DogEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +18,14 @@ public class DogDao extends AbstractDao<DogEntity> {
     private static DogDao instance;
     private static final String TABLE_NAME = "gerard.dog";
     private static final String COLUMN_LABEL_1 = "dog_id";
-    private static final String COLUMN_LABEL_2 = "dog_status";
-    private static final String COLUMN_LABEL_3 = "dog_sex";
-    private static final String COLUMN_LABEL_4 = "nickname";
-    private static final String COLUMN_LABEL_5 = "fullname";
-    private static final String COLUMN_LABEL_6 = "birthday";
-    private static final String COLUMN_LABEL_7 = "mother_dog_id";
-    private static final String COLUMN_LABEL_8 = "father_dog_id";
-    private static final String COLUMN_LABEL_9 = "avatar_photo_path";
-    private static final String COLUMN_LABEL_10 = "pedigree_photo_path";
-    private static final String COLUMN_LABEL_11 = "description";
+    private static final String COLUMN_LABEL_2 = "dog_sex";
+    private static final String COLUMN_LABEL_3 = "nickname";
+    private static final String COLUMN_LABEL_4 = "fullname";
+    private static final String COLUMN_LABEL_5 = "birthday";
+    private static final String COLUMN_LABEL_6 = "avatar_photo_path";
+    private static final String COLUMN_LABEL_7 = "pedigree_photo_path";
+    private static final String COLUMN_LABEL_8 = "description";
+    private static final String COLUMN_LABEL_9 = "is_active";
     private static final Logger LOGGER = LogManager.getLogger(DogDao.class);
 
     private DogDao() {
@@ -39,12 +41,12 @@ public class DogDao extends AbstractDao<DogEntity> {
 
     @Override
     public DogEntity findRecord(DogEntity entity) throws DaoException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<DogEntity> selectAllRecords() throws DaoException {
-        final String selectAllDogs = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_LABEL_4;
+        final String selectAllDogs = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_LABEL_3;
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(selectAllDogs);
@@ -70,43 +72,35 @@ public class DogDao extends AbstractDao<DogEntity> {
 
     @Override
     public boolean update(DogEntity entity, DogEntity newEntityVersion) throws DaoException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean create(DogEntity entity) throws DaoException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public DogEntity parseResultSet(ResultSet resultSet) throws SQLException {
         int dogId = resultSet.getInt(COLUMN_LABEL_1);
-        DogEntity.DogStatus dogStatus =
-                DogEntity.DogStatus.valueOf(
-                        resultSet.getString(COLUMN_LABEL_2).toUpperCase());
-        DogEntity.DogSex dogSex =
-                DogEntity.DogSex.valueOf(
-                        resultSet.getString(COLUMN_LABEL_3).toUpperCase());
-        String nickname = resultSet.getString(COLUMN_LABEL_4);
-        String fullname = resultSet.getString(COLUMN_LABEL_5);
-        Date birthday = resultSet.getDate(COLUMN_LABEL_6);
-        int motherDogId = resultSet.getInt(COLUMN_LABEL_7);
-        int fatherDogId = resultSet.getInt(COLUMN_LABEL_8);
-        String avatarPhotoPath = resultSet.getString(COLUMN_LABEL_9);
-        String pedigreePhotoPath = resultSet.getString(COLUMN_LABEL_10);
-        String description = resultSet.getString(COLUMN_LABEL_11);
+        DogEntity.DogSex dogSex = DogEntity.DogSex.valueOf(resultSet.getString(COLUMN_LABEL_2).toUpperCase());
+        String nickname = resultSet.getString(COLUMN_LABEL_3);
+        String fullname = resultSet.getString(COLUMN_LABEL_4);
+        Date birthday = resultSet.getDate(COLUMN_LABEL_5);
+        String avatarPhotoPath = resultSet.getString(COLUMN_LABEL_6);
+        String pedigreePhotoPath = resultSet.getString(COLUMN_LABEL_7);
+        String description = resultSet.getString(COLUMN_LABEL_8);
+        boolean isActive = resultSet.getBoolean(COLUMN_LABEL_9);
         DogEntity dog = new DogEntity.Builder()
                 .id(dogId)
-                .dogStatus(dogStatus)
-                .birthday(birthday)
                 .dogSex(dogSex)
                 .nickname(nickname)
+                .birthday(birthday)
                 .fullname(fullname)
-                .motherDogId(motherDogId)
-                .fatherDogId(fatherDogId)
                 .avatarPhotoPath(avatarPhotoPath)
                 .pedigreePhotoPath(pedigreePhotoPath)
                 .description(description)
+                .isActive(isActive)
                 .build();
         return dog;
     }

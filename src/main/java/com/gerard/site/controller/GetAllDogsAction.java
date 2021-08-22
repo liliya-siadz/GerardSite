@@ -9,19 +9,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
 enum GetAllDogsAction implements Action {
-    INSTANCE("/dogs");
+    INSTANCE("allDogs");
 
-    GetAllDogsAction(String successUrl){
-        this.successUrl = successUrl;
+    GetAllDogsAction(String viewAttributeName){
+        this.viewAttributeName = viewAttributeName;
     }
 
-    private final String successUrl;
+    private final String viewAttributeName;
 
     @Override
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) throws ServiceException {
         List<DogEntity> allDogs =  DogService.getInstance().provideAllDogs();
-        request.setAttribute("allDogs", allDogs);
-        return successUrl;
+        request.setAttribute(viewAttributeName, allDogs);
+        return Page.DOGS.getUrl();
     }
 }

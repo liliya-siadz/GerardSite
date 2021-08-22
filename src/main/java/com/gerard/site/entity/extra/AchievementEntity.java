@@ -1,4 +1,6 @@
-package com.gerard.site.entity;
+package com.gerard.site.entity.extra;
+
+import com.gerard.site.entity.AbstractEntity;
 
 import java.sql.Date;
 
@@ -30,7 +32,7 @@ public class AchievementEntity extends AbstractEntity<Integer> {
     private Date achievementDate;
 
     public AchievementEntity() {
-        super();
+        throw new UnsupportedOperationException();
     }
 
     public String getAchievementType() {
