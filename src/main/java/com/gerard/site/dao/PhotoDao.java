@@ -3,7 +3,6 @@ package com.gerard.site.dao;
 import com.gerard.site.connection.ConnectionException;
 import com.gerard.site.connection.ConnectionPool;
 import com.gerard.site.dto.PhotoWithDog;
-import com.gerard.site.entity.DogEntity;
 import com.gerard.site.entity.PhotoEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

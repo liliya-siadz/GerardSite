@@ -6,17 +6,58 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ include file="fragment/include.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title><fmt:message key="page.puppies.title"/></title>
+    <title><fmt:message key="page.dogs.title"/></title>
 </head>
-<body>
-<%-- !add button to make a request--%>
-<%--parse dogs--%>
+<body style="background-image: url(${applicationPath}/img/background.jpg);">
+<%@include file="fragment/dynamic-headering.jsp" %>
 
-<%--1 MAKE_REQUEST--%>
+<%--1 MAKE REQUEST--%>
 
-<%@include file="fragment/dynamic-headering.jsp"%>
+<div style="display:inline-block;">
+    <c:set var="puppies" value="${allPuppies}" scope="request"/>
+    <c:forEach items="${puppies}" var="puppy">
+        <c:set var="avatar" value="${puppy.avatarPhotoPath}"/>
+        <img class="img"
+             src="${applicationPath}/${avatar}"
+             alt="?"
+             width="512"/>
+        <c:set var="pedigree" value="${puppy.pedigreePhotoPath}"/>
+        <img class="img"
+             src="${applicationPath}/${pedigree}"
+             alt="?"
+             width="512"/>
+        <div>
+            <div style="display:block;">
+                <h3><b><fmt:message key="page.dogs.view.title.sex"/> </b>
+                    <c:out value="${puppy.dogSex}"/>
+                </h3>
+            </div>
+            <div style="display:block;">
+                <h3><b><fmt:message key="page.dogs.view.title.nickname"/> </b>
+                    <c:out value="${puppy.nickname}"/>
+                </h3>
+            </div>
+            <div style="display:block;">
+                <h3><b><fmt:message key="page.dogs.view.title.fullname"/> </b>
+                    <c:out value="${puppy.fullname}"/>
+                </h3>
+            </div>
+            <div style="display:block;">
+                <h3><b><fmt:message key="page.dogs.view.title.birthday"/> </b>
+                    <c:out value="${puppy.birthday}"/>
+                </h3>
+            </div>
+            <div style="display:block;">
+                <h3><b><fmt:message key="page.dogs.view.title.description"/> </b>
+                    <c:out value="${puppy.description}"/><c:if test="${empty puppy.description}">&#10006;</c:if>
+                </h3>
+            </div>
+        </div>
+    </c:forEach>
+</div>
 <%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

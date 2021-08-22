@@ -19,14 +19,14 @@
 
 
 <div style="display:inline-block;">
-    <c:set var="dogs" value="${allDogs}" scope="request"/>
-    <c:forEach items="${dogs}" var="dog">
-        <c:set var="avatar" value="${dog.avatarPhotoPath}"/>
+    <c:set var="puppies" value="${allDogs}" scope="request"/>
+    <c:forEach items="${puppies}" var="puppy">
+        <c:set var="avatar" value="${puppy.avatarPhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${avatar}"
              alt="?"
              width="512"/>
-        <c:set var="pedigree" value="${dog.pedigreePhotoPath}"/>
+        <c:set var="pedigree" value="${puppy.pedigreePhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${pedigree}"
              alt="?"
@@ -34,27 +34,22 @@
         <div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.sex"/> </b>
-                    <c:out value="${dog.dogSex}"/>
+                    <c:out value="${puppy.dogSex}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.nickname"/> </b>
-                    <c:out value="${dog.nickname}"/>
+                    <c:out value="${puppy.nickname}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.fullname"/> </b>
-                    <c:out value="${dog.fullname}"/>
+                    <c:out value="${puppy.fullname}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.birthday"/> </b>
-                    <c:out value="${dog.birthday}"/>
-                </h3>
-            </div>
-            <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.description"/> </b>
-                    <c:out value="${dog.description}"/><c:if test="${empty dog.description}">&#10006;</c:if>
+                    <c:out value="${puppy.birthday}"/>
                 </h3>
             </div>
         </div>

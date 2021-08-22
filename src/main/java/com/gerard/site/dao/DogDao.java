@@ -46,7 +46,9 @@ public class DogDao extends AbstractDao<DogEntity> {
 
     @Override
     public List<DogEntity> selectAll() throws DaoException {
-        final String selectAllDogs = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_LABEL_3;
+        final String selectAllDogs = "SELECT * FROM " + TABLE_NAME
+                +" WHERE " + COLUMN_LABEL_9 + " is true "
+                + " ORDER BY " + COLUMN_LABEL_3;
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(selectAllDogs);
