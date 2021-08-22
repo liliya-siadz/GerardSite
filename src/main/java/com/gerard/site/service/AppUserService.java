@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 import java.util.Properties;
 
-public class AppUserService implements Service{
+public class AppUserService implements Service<Integer, AppUserEntity>{
     private static AppUserService instance;
     private static final Logger LOGGER = LogManager.getLogger(AppUserService.class);
 

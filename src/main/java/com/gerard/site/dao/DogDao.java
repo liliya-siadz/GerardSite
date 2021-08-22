@@ -2,15 +2,12 @@ package com.gerard.site.dao;
 
 import com.gerard.site.connection.ConnectionException;
 import com.gerard.site.connection.ConnectionPool;
+import com.gerard.site.entity.AppUserEntity;
 import com.gerard.site.entity.DogEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class DogDao extends AbstractDao<DogEntity> {
      static final String COLUMN_LABEL_1 = "dog_id";
      static final String COLUMN_LABEL_2 = "dog_sex";
      static final String COLUMN_LABEL_3 = "nickname";
-    static final String COLUMN_LABEL_4 = "fullname";
+     static final String COLUMN_LABEL_4 = "fullname";
      static final String COLUMN_LABEL_5 = "birthday";
      static final String COLUMN_LABEL_6 = "avatar_photo_path";
      static final String COLUMN_LABEL_7 = "pedigree_photo_path";
@@ -41,7 +38,39 @@ public class DogDao extends AbstractDao<DogEntity> {
 
     @Override
     public DogEntity find(DogEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
+        if (entity == null) {
+            throw new DaoException("Parameter 'entity' is null");
+        }
+        final String selectDogById
+                = "SELECT * FROM " + TABLE_NAME + " where " +  COLUMN_LABEL_1 + "=?";
+        int id = entity.getId();
+        try (Connection connection
+                     = ConnectionPool.getInstance().giveOutConnection()) {
+            try (PreparedStatement preparedStatement
+                         = connection.prepareStatement(selectDogById)) {
+                preparedStatement.setInt(1, id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.isBeforeFirst()) {
+                    DogEntity selectedDog = null;
+                    while (resultSet.next()) {
+                        selectedDog = parseResultSet(resultSet);
+                    }
+                    return selectedDog;
+                } else {
+                    LOGGER.info("No records were found in table: "
+                            + TABLE_NAME + ". "
+                            + "Used next columns values: "
+                            + TABLE_NAME + "." + COLUMN_LABEL_1 + " : " + id
+                            + " . ");
+                    LOGGER.warn("Null will be returned");
+                    return null;
+                }
+            }
+        } catch (ConnectionException | SQLException exception) {
+            throw new DaoException("Unable to get data from table: "
+                    + TABLE_NAME + " ! "
+                    + exception.getMessage(), exception);
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ include file="fragment/include.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title><fmt:message key="page.admin_dogs.title"/></title>

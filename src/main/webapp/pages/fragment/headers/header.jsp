@@ -38,17 +38,18 @@
                         value="GET_ALL_PHOTOS">
                     <fmt:message key="page.photos.header"/>
                 </button>
+                <button type="submit"
+                        name="command"
+                        class="btn btn-xs navbar-btn"
+                        value="GO_TO_MAKE_REQUEST_PAGE">
+                    <fmt:message key="page.make_request.header"/>
+                </button>
             </form>
         </div>
         <a href="${pageContext.request.contextPath}/login"
            role="button"
            class="btn btn-xs navbar-btn headerLink">
             <fmt:message key="page.login.header"/>
-        </a>
-        <a href="${pageContext.request.contextPath}/make_request"
-           role="button"
-           class="btn btn-xs navbar-btn headerLink">
-            <fmt:message key="page.make_request.header"/>
         </a>
     </div>
 </nav>

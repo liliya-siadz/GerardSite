@@ -3,13 +3,14 @@ package com.gerard.site.service;
 import com.gerard.site.dao.DaoException;
 import com.gerard.site.dao.PhotoDao;
 import com.gerard.site.dto.PhotoWithDog;
+import com.gerard.site.entity.PhotoEntity;
 import com.gerard.site.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class PhotoService implements Service {
+public class PhotoService implements Service<Integer, PhotoEntity> {
     private static PhotoService instance;
     private static final Logger LOGGER = LogManager.getLogger(PhotoService.class);
 

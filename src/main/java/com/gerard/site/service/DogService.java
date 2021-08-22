@@ -13,12 +13,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 import java.util.function.UnaryOperator;
 
-public class DogService implements Service {
+public class DogService implements Service<Integer, DogEntity> {
     private static DogService instance;
     private static final Logger LOGGER = LogManager.getLogger(DogService.class);
     private static final int PUPPY_AGE_MAX_MONTHS_QUANTITY = 8;
@@ -30,6 +31,19 @@ public class DogService implements Service {
             instance = new DogService();
         }
         return instance;
+    }
+
+    public Optional<DogEntity> find(int id) throws ServiceException {
+       DogEntity dogEntity = new DogEntity();
+       dogEntity.setId(id);
+        try {
+            Optional<DogEntity> foundDog = Optional.ofNullable(DogDao.getInstance().find(dogEntity));
+            return foundDog;
+        } catch (DaoException exception) {
+            throw new ServiceException(
+                    "Unable to provide information from database! "
+                            + exception.getMessage(), exception);
+        }
     }
 
     public List<DogEntity> provideAllDogs() throws ServiceException {

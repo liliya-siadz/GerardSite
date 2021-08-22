@@ -35,7 +35,9 @@ enum ActionFactory {
         GET_ALL_DOGS,
         GET_ALL_PUPPIES,
         GET_ALL_PHOTOS,
+        GO_TO_MAKE_REQUEST_PAGE,
         MAKE_REQUEST,
+        DISPLAY_CHOSEN_PUPPY,
         LOGIN,
 
         LOGOUT,
@@ -76,6 +78,9 @@ enum ActionFactory {
         actions.put(GET_ALL_DOGS, GetAllDogsAction.INSTANCE);
         actions.put(GET_ALL_PHOTOS, GetAllPhotosAction.INSTANCE);
         actions.put(GET_ALL_PUPPIES, GetAllPuppiesAction.INSTANCE);
+        actions.put(GO_TO_MAKE_REQUEST_PAGE, GoToMakeRequestPageAction.INSTANCE);
+        actions.put(DISPLAY_CHOSEN_PUPPY, DisplayPuppyAction.INSTANCE);
+
     }
 
     /**
