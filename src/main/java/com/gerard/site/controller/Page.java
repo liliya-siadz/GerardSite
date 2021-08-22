@@ -9,7 +9,8 @@ enum Page {
     PHOTOS(false, "/photos"),
     PUPPIES(false, "/puppies"),
     ERROR(false, "/error"),
-    ERROR_404(false, "/error-404");
+    ERROR_404(false, "/error-404"),
+    MAKE_REQUEST(false, "/make_request");
 
     private final boolean hasAuthAccess;
     private final String url;

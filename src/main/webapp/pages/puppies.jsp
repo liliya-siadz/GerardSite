@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><fmt:message key="page.dogs.title"/></title>
+    <title><fmt:message key="page.puppies.title"/></title>
 </head>
 <body style="background-image: url(${applicationPath}/img/background.jpg);">
 <%@include file="fragment/dynamic-headering.jsp" %>
@@ -55,6 +55,15 @@
                     <c:out value="${puppy.description}"/><c:if test="${empty puppy.description}">&#10006;</c:if>
                 </h3>
             </div>
+            <h3><b>
+            <a href="${pageContext.request.contextPath}/make_request?dogId=${puppy.id}"
+               role="button btn-primary"
+               style="background-color: greenyellow;"
+               class="btn btn-xs">
+               <fmt:message key="page.puppies.button.make_request.name"/>
+            </a>
+            </b>
+            </h3>
         </div>
     </c:forEach>
 </div>

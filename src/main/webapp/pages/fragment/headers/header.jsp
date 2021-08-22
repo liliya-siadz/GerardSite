@@ -45,6 +45,11 @@
            class="btn btn-xs navbar-btn headerLink">
             <fmt:message key="page.login.header"/>
         </a>
+        <a href="${pageContext.request.contextPath}/make_request"
+           role="button"
+           class="btn btn-xs navbar-btn headerLink">
+            <fmt:message key="page.make_request.header"/>
+        </a>
     </div>
 </nav>
 </body>

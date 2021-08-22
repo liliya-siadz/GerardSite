@@ -14,10 +14,6 @@
 <body style="background-image: url(${applicationPath}/img/background.jpg);">
 <%@include file="fragment/dynamic-headering.jsp" %>
 
-
-<%--parse dogs--%>
-
-
 <div style="display:inline-block;">
     <c:set var="puppies" value="${allDogs}" scope="request"/>
     <c:forEach items="${puppies}" var="puppy">
