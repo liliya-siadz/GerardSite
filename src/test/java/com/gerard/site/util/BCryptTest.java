@@ -1,16 +1,7 @@
 package com.gerard.site.util;
 
-import com.gerard.site.connection.ConnectionException;
-import com.gerard.site.connection.ConnectionPool;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
@@ -56,26 +47,5 @@ public class BCryptTest {
             dataProvider = "dataProviderTestCheckpwPasswordAndHash")
     public void testCheckpw(String password, String hashedPassword) {
         assertTrue(BCrypt.checkpw(password, hashedPassword));
-    }
-
-    @Test
-    public void test() throws ConnectionException, SQLException {
-
-        String selectUserPassword = "select password from app_user";
-        Connection connection = ConnectionPool.getInstance().giveOutConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(selectUserPassword);
-        List<String> passwords = new ArrayList<>();
-        while (resultSet.next()) {
-            passwords.add(resultSet.getString(1));
-        }
-
-        resultSet.close();
-        statement.close();
-        ConnectionPool.getInstance().getBackConnection(connection);
-
-        for (String password : passwords) {
-            System.out.println(BCrypt.checkpw("strekoza18", password));
-        }
     }
 }

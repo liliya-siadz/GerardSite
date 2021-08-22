@@ -21,7 +21,6 @@ public class CustomStringUtilTest {
                         new String[]{"asdwddd3d"}}};
     }
 
-
     @Test(dataProvider = "dataProviderTestSplitByRegex")
     public void testSplitByRegex(String row, String regex, boolean cleanWhiteSpaces,
                                  String[] expected) {
@@ -36,6 +35,5 @@ public class CustomStringUtilTest {
         Set<Language> expected = Set.of(Language.EN, Language.RU);
         assertEquals(actual, expected);
     }
-
 }
 

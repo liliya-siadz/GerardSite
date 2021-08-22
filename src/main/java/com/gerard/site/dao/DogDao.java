@@ -16,17 +16,17 @@ import java.util.List;
 
 public class DogDao extends AbstractDao<DogEntity> {
     private static DogDao instance;
-    private static final String TABLE_NAME = "gerard.dog";
-    private static final String COLUMN_LABEL_1 = "dog_id";
-    private static final String COLUMN_LABEL_2 = "dog_sex";
-    private static final String COLUMN_LABEL_3 = "nickname";
-    private static final String COLUMN_LABEL_4 = "fullname";
-    private static final String COLUMN_LABEL_5 = "birthday";
-    private static final String COLUMN_LABEL_6 = "avatar_photo_path";
-    private static final String COLUMN_LABEL_7 = "pedigree_photo_path";
-    private static final String COLUMN_LABEL_8 = "description";
-    private static final String COLUMN_LABEL_9 = "is_active";
-    private static final Logger LOGGER = LogManager.getLogger(DogDao.class);
+     static final String TABLE_NAME = "gerard.dog";
+     static final String COLUMN_LABEL_1 = "dog_id";
+     static final String COLUMN_LABEL_2 = "dog_sex";
+     static final String COLUMN_LABEL_3 = "nickname";
+    static final String COLUMN_LABEL_4 = "fullname";
+     static final String COLUMN_LABEL_5 = "birthday";
+     static final String COLUMN_LABEL_6 = "avatar_photo_path";
+     static final String COLUMN_LABEL_7 = "pedigree_photo_path";
+     static final String COLUMN_LABEL_8 = "description";
+     static final String COLUMN_LABEL_9 = "is_active";
+     static final Logger LOGGER = LogManager.getLogger(DogDao.class);
 
     private DogDao() {
         super();
@@ -40,12 +40,12 @@ public class DogDao extends AbstractDao<DogEntity> {
     }
 
     @Override
-    public DogEntity findRecord(DogEntity entity) throws DaoException {
+    public DogEntity find(DogEntity entity) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<DogEntity> selectAllRecords() throws DaoException {
+    public List<DogEntity> selectAll() throws DaoException {
         final String selectAllDogs = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_LABEL_3;
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
             try (Statement statement = connection.createStatement()) {

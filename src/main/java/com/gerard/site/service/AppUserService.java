@@ -13,12 +13,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 import java.util.Properties;
 
-
-//params form/entity/any other object
-//returns entity/dto
-
-public class AppUserService {
-
+public class AppUserService implements Service{
     private static AppUserService instance;
     private static final Logger LOGGER = LogManager.getLogger(AppUserService.class);
 
@@ -43,7 +38,7 @@ public class AppUserService {
         }
         AppUserEntity user = new AppUserEntity.Builder().email(email).build();
         try {
-            AppUserEntity realUser = AppUserDao.getInstance().findRecord(user);
+            AppUserEntity realUser = AppUserDao.getInstance().find(user);
             if (realUser != null) {
                 String token = getToken();
                 String userPassword = AppUserDao.getInstance()

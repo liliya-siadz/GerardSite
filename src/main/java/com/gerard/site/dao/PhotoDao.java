@@ -1,23 +1,26 @@
 package com.gerard.site.dao;
 
+import com.gerard.site.connection.ConnectionException;
+import com.gerard.site.connection.ConnectionPool;
+import com.gerard.site.dto.PhotoWithDog;
+import com.gerard.site.entity.DogEntity;
 import com.gerard.site.entity.PhotoEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoDao extends AbstractDao<PhotoEntity> {
     private static PhotoDao instance;
-    private static final String TABLE_NAME = "gerard.photo";
-    private static final String COLUMN_LABEL_1 = "photo_id";
-    private static final String COLUMN_LABEL_2 = "photo_path";
-    private static final String COLUMN_LABEL_3 = "name";
-    private static final String COLUMN_LABEL_4 = "dog_id";
-    private static final String COLUMN_LABEL_5 = "photo_date";
-    private static final Logger LOGGER = LogManager.getLogger(PhotoDao.class);
+     static final String TABLE_NAME = "gerard.photo";
+     static final String COLUMN_LABEL_1 = "photo_id";
+     static final String COLUMN_LABEL_2 = "photo_path";
+     static final String COLUMN_LABEL_3 = "name";
+     static final String COLUMN_LABEL_4 = "dog_id";
+     static final String COLUMN_LABEL_5 = "photo_date";
+     static final Logger LOGGER = LogManager.getLogger(PhotoDao.class);
 
     private PhotoDao() {
         super();
@@ -30,13 +33,45 @@ public class PhotoDao extends AbstractDao<PhotoEntity> {
         return instance;
     }
 
+    public List<PhotoWithDog> selectAllPhotosWithDogs() throws DaoException {
+        final String selectAllPhotosWithDogs =
+                        "select photo_path, dog.nickname, photo_date " +
+                        "from photo left join dog " +
+                        "on photo.dog_id = dog.dog_id order by photo_date desc";
+        try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
+            try (Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(selectAllPhotosWithDogs);
+                if (resultSet.isBeforeFirst()) {
+                    List<PhotoWithDog> selectedPhotos = new ArrayList<>();
+                    while (resultSet.next()) {
+                        String photoPath = resultSet.getString(COLUMN_LABEL_2);
+                        Date photoDate = resultSet.getDate(COLUMN_LABEL_5);
+                        String nickname = resultSet.getString(DogDao.COLUMN_LABEL_3);
+                        PhotoWithDog photoWithDog = new PhotoWithDog(photoPath, photoDate, nickname);
+                        selectedPhotos.add(photoWithDog);
+                    }
+                    return selectedPhotos;
+                } else {
+                    LOGGER.info("No records were found in table: "
+                            + TABLE_NAME + ". ");
+                    LOGGER.warn("Null will be returned");
+                    return null;
+                }
+            }
+        } catch (ConnectionException | SQLException exception) {
+            throw new DaoException("Unable to get data from table: "
+                    + TABLE_NAME + " ! "
+                    + "Reason: " + exception.getMessage(), exception);
+        }
+    }
+
     @Override
-    public PhotoEntity findRecord(PhotoEntity entity) throws DaoException {
+    public PhotoEntity find(PhotoEntity entity) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<PhotoEntity> selectAllRecords() throws DaoException {
+    public List<PhotoEntity> selectAll() throws DaoException {
         throw new UnsupportedOperationException();
     }
 

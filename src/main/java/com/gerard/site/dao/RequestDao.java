@@ -35,12 +35,12 @@ public class RequestDao extends AbstractDao<RequestEntity> {
     }
 
     @Override
-    public RequestEntity findRecord(RequestEntity entity) throws DaoException {
+    public RequestEntity find(RequestEntity entity) throws DaoException {
         return null;
     }
 
     @Override
-    public List<RequestEntity> selectAllRecords() throws DaoException {
+    public List<RequestEntity> selectAll() throws DaoException {
         return null;
     }
 

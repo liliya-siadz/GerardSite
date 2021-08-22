@@ -8,6 +8,6 @@ enum Error404PageAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException();
+        return Page.ERROR_404.getUrl();
     }
 }

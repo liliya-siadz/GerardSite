@@ -16,15 +16,15 @@ import java.util.List;
 
 public class AppUserDao extends AbstractDao<AppUserEntity> {
     private static AppUserDao instance;
-    private static final String TABLE_NAME = "gerard.app_user";
-    private static final String COLUMN_LABEL_1 = "app_user_id";
-    private static final String COLUMN_LABEL_2 = "email";
-    private static final String COLUMN_LABEL_3 = "password";
-    private static final String COLUMN_LABEL_4 = "name";
-    private static final String COLUMN_LABEL_5 = "surname";
-    private static final String COLUMN_LABEL_6 = "patronymic";
-    private static final String COLUMN_LABEL_7 = "phone";
-    private static final String COLUMN_LABEL_8 = "is_admin";
+     static final String TABLE_NAME = "gerard.app_user";
+     static final String COLUMN_LABEL_1 = "app_user_id";
+     static final String COLUMN_LABEL_2 = "email";
+     static final String COLUMN_LABEL_3 = "password";
+     static final String COLUMN_LABEL_4 = "name";
+     static final String COLUMN_LABEL_5 = "surname";
+     static final String COLUMN_LABEL_6 = "patronymic";
+     static final String COLUMN_LABEL_7 = "phone";
+     static final String COLUMN_LABEL_8 = "is_admin";
 
     private static final Logger LOGGER = LogManager.getLogger(AppUserDao.class);
 
@@ -40,7 +40,7 @@ public class AppUserDao extends AbstractDao<AppUserEntity> {
     }
 
     @Override
-    public AppUserEntity findRecord(AppUserEntity user) throws DaoException {
+    public AppUserEntity find(AppUserEntity user) throws DaoException {
         if (user == null) {
             throw new DaoException("Parameter 'user' is null");
         }
@@ -77,7 +77,7 @@ public class AppUserDao extends AbstractDao<AppUserEntity> {
     }
 
     @Override
-    public List<AppUserEntity> selectAllRecords() throws DaoException {
+    public List<AppUserEntity> selectAll() throws DaoException {
         final String selectAllUsers = "SELECT * FROM " + TABLE_NAME;
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
             try (Statement statement = connection.createStatement()) {

@@ -74,6 +74,7 @@ enum ActionFactory {
         actions.put(ERROR, ErrorPageAction.INSTANCE);
         actions.put(ERROR_404, Error404PageAction.INSTANCE);
         actions.put(GET_ALL_DOGS, GetAllDogsAction.INSTANCE);
+        actions.put(GET_ALL_PHOTOS, GetAllPhotosAction.INSTANCE);
     }
 
     /**

@@ -7,14 +7,9 @@ import com.gerard.site.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
-public class DogService {
+public class DogService implements Service {
     private static DogService instance;
     private static final Logger LOGGER = LogManager.getLogger(DogService.class);
 
@@ -28,10 +23,9 @@ public class DogService {
         return instance;
     }
 
-
     public List<DogEntity> provideAllDogs() throws ServiceException {
         try {
-            List<DogEntity> allDogs = DogDao.getInstance().selectAllRecords();
+            List<DogEntity> allDogs = DogDao.getInstance().selectAll();
             return allDogs;
         } catch (DaoException exception) {
             throw new ServiceException(
