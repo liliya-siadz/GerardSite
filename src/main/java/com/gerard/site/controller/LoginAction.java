@@ -40,18 +40,18 @@ enum LoginAction implements Action {
         Map<String, Boolean> validationMap = loginForm.getValidationMap();
         if (validationMap.containsValue(false)) {
             session.setAttribute(validationMapNameAttributeName, validationMap);
-            return Action.getRefererUrl(request);
+            return Page.LOGIN.getUrl();
         } else {
             try {
                 Optional<AppUserEntity> possibleAuthenticatedUser
                         = AppUserService.getInstance().authenticate(loginForm);
                 if (possibleAuthenticatedUser.isEmpty()) {
                     session.setAttribute(authenticationResultAttributeName, false);
-                    return Action.getRefererUrl(request);
+                    return Page.LOGIN.getUrl();
                 } else {
                     session.setAttribute(authenticationResultAttributeName, true);
                     session.setAttribute(authenticationIdentifierAttributeName, true);
-                   return Page.HOME.getUrl();
+                    return Page.ADMIN_REQUESTS.getUrl();
                 }
             } catch (ServiceException exception) {
                 LOGGER.fatal("Unable to execute authentication."

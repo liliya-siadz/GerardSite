@@ -19,14 +19,14 @@
 
 <c:if test="${not empty sessionScope.isUserFound}">
     <c:if test="${not sessionScope.isUserFound}">
-        <p style="color: red"><fmt:message key="page.login.authorization.result"/></p>
+        <p style="color: red"><fmt:message key="page.login.process.authorization.result"/></p>
     </c:if>
 </c:if>
 <form method="POST"
       action="${applicationPath}${controllerUrl}">
 
 <%--    email start --%>
-    <label for="emailId"><fmt:message key="page.login.field.email.label"/></label>
+    <label for="emailId"><fmt:message key="field.email.label"/></label>
     <input id="emailId"
            type="text"
            name="email"
@@ -40,7 +40,7 @@
 <%--    email end--%>
 
 <%--    password start--%>
-    <label for="passwordId"><fmt:message key="page.login.field.password.label"/></label>
+    <label for="passwordId"><fmt:message key="field.password.label"/></label>
     <input id="passwordId"
            type="password"
            name="password"/>
@@ -56,7 +56,7 @@
 </form>
 <c:if test="${not empty sessionScope.loginValidationMap}">
     <c:if test="${not sessionScope.loginValidationMap.email}">
-        <fmt:message key="page.login.field.email.validation.message"/>
+        <fmt:message key="field.email.validation.message"/>
     </c:if>
 </c:if>
 <%@ include file="fragment/footers/footer.jsp" %>

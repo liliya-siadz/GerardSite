@@ -55,7 +55,11 @@ interface Action {
      */
     static String getRefererUrl(HttpServletRequest request) {
         String requestRefererUrl = request.getHeader(REQUEST_HEADER_REFERER_HEADER_NAME);
-        return requestRefererUrl;
+        String url = requestRefererUrl
+                .replace(Controller.SCHEMA
+                        + Controller.DOMAIN
+                        + Controller.APPLICATION_CONTEXT,"");
+        return url;
     }
 
     /**

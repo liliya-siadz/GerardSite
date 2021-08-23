@@ -71,6 +71,7 @@ enum ActionFactory {
 
     ActionFactory() {
         actions.put(LOGIN, LoginAction.INSTANCE);
+        actions.put(LOGOUT, LogoutAction.INSTANCE);
         actions.put(SET_LOCALE_TO_EN, SetLocaleToEnAction.INSTANCE);
         actions.put(SET_LOCALE_TO_BE, SetLocaleToBeAction.INSTANCE);
         actions.put(SET_LOCALE_TO_RU, SetLocaleToRuAction.INSTANCE);

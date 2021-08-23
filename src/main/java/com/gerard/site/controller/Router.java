@@ -37,7 +37,7 @@ class Router {
     /**
      * File extension for pages. Is using for preparing page path
      */
-    private static final String FILE_EXTENSION = ".jsp";
+    static final String FILE_EXTENSION = ".jsp";
 
     private static final Logger LOGGER = LogManager.getLogger(Router.class);
 

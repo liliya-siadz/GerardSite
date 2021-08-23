@@ -18,11 +18,6 @@
     <div class="container-fluid">
         <%@ include file="../logo.jsp" %>
         <%@ include file="../switch_locale_panel.jsp" %>
-        <a href="${pageContext.request.contextPath}/home"
-           role="button"
-           class="btn btn-xs navbar-btn headerLink">
-            <fmt:message key="page.home.header"/>
-        </a>
             <div class="btn-group btn-group-xs" role="header">
             <form method="GET"
               action="${applicationPath}${controllerUrl}">

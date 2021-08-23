@@ -26,6 +26,8 @@ public class AppUserService implements Service<Integer, AppUserEntity>{
         }return instance;
     }
 
+
+    //TODO CHECK if admin is no: access denied
     public Optional<AppUserEntity> authenticate(LoginForm loginForm)
             throws ServiceException {
         if (loginForm == null) {

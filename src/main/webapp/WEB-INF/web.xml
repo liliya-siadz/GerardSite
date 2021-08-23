@@ -89,11 +89,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>requests</servlet-name>
-        <jsp-file>/pages/requests.jsp</jsp-file>
+        <jsp-file>/pages/admin_requests.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>requests</servlet-name>
-        <url-pattern>/requests</url-pattern>
+        <url-pattern>/admin_requests</url-pattern>
     </servlet-mapping>
 <!--    admin pages end-->
     <!--    error pages config start-->

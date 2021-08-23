@@ -1,6 +1,6 @@
 package com.gerard.site.validation.field;
 
 @FunctionalInterface
-public interface FieldValidator {
-    boolean isValid(String field);
+public interface FieldValidator<T> {
+    boolean isValid(T field);
 }

@@ -12,11 +12,12 @@
     <title><fmt:message key="page.admin_requests.title"/></title>
 </head>
 <body>
-
 <%--  parse requests--%>
 <%--+ edit button  1 PROCESS_REQUEST--%>
-
 <%@ include file="fragment/headers/admin_header.jsp" %>
+
+ADMIN REQUESTS
+
 <%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

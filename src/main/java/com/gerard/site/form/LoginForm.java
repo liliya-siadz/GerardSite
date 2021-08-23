@@ -9,7 +9,7 @@ import java.util.List;
 public class LoginForm extends AbstractForm<LoginFormValidator> {
 
     public static final String EMAIL_PARAMETER_NAME = "email";
-    public static final String PASSWORD_PARAMETER_NAME = "mail.user.password";
+    public static final String PASSWORD_PARAMETER_NAME = "password";
     private String email;
     private String password;
 
@@ -17,7 +17,6 @@ public class LoginForm extends AbstractForm<LoginFormValidator> {
         super(request, List.of(EMAIL_PARAMETER_NAME, PASSWORD_PARAMETER_NAME), new LoginFormValidator());
         FieldsValidators.init();
     }
-
 
     public String getEmail() {
         return email;

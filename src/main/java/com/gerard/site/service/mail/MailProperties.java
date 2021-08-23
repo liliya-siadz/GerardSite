@@ -14,7 +14,7 @@ class MailProperties {
     private MailProperties() {
         mailProperties = AppIdentifierUtil.getPropertiesByPath(this, MAIL_PROPERTIES_RESOURCE_PATH);
         String userNamePropertyKey = "mail.user";
-        String passwordPropertyKey = "mail.user.password";
+        String passwordPropertyKey = "password";
         userName = mailProperties.getProperty(userNamePropertyKey);
         password = mailProperties.getProperty(passwordPropertyKey);
     }

@@ -28,7 +28,9 @@ public class Controller extends HttpServlet {
     /**
      * Application context on server. Is using for preparing page path
      */
-    private static String APPLICATION_CONTEXT = "/gerard";
+     static final String SCHEMA = "http://";
+     static final String DOMAIN = "localhost:8080";
+     static final String APPLICATION_CONTEXT = "/gerard";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

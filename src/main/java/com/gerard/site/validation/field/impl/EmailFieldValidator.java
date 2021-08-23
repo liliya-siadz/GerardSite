@@ -1,11 +1,14 @@
 package com.gerard.site.validation.field.impl;
 
 import com.gerard.site.validation.field.FieldValidator;
+import org.apache.commons.validator.routines.EmailValidator;
 
-public class EmailFieldValidator implements FieldValidator {
+public class EmailFieldValidator implements FieldValidator<String> {
 
-    //todo: think about null | empty | blank inside validate
-    public boolean isValid(String login) {
-        return !login.isEmpty();
+    public boolean isValid(String email) {
+        EmailValidator emailValidator =
+                EmailValidator.getInstance(false,true);
+        boolean isEmailValid = emailValidator.isValid(email);
+        return isEmailValid;
     }
 }
