@@ -8,19 +8,20 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
 
-public enum MakeRequestAction implements Action {
+public enum DisplayChosenPuppyAction implements Action {
     INSTANCE;
 
-    private String targetParameterName = "chosenPuppy";
-    private String viewAttributeResultName = "isRequestMade";
+    private final String targetParameterName = "chosenPuppyId";
+    private final String viewAttributeName = "chosenPuppy";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServiceException {
-        DogEntity dogEntity = (DogEntity) request.getSession().getAttribute(targetParameterName);
-        request.getSession().setAttribute(viewAttributeResultName,true);
-        String content = request.getParameter("content");
-        request.getSession().setAttribute("content", content);
+        int selectedDogId = Integer.parseInt(request.getParameter(targetParameterName));
+        Optional<DogEntity> dogEntity = DogService.getInstance().find(selectedDogId);
+        if (dogEntity.isPresent()) {
+            request.getSession().setAttribute(viewAttributeName, dogEntity.get());
+        }
         return Page.MAKE_REQUEST.getUrl();
     }
 }

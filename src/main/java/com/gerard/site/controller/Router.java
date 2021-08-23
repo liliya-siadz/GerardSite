@@ -33,6 +33,7 @@ class Router {
      */
     private static final String DIRECTORY_NAME = "/pages";
 
+
     /**
      * File extension for pages. Is using for preparing page path
      */
@@ -80,7 +81,7 @@ class Router {
      */
     static String preparePath(HttpServletRequest request, HttpServletResponse response) {
         String url = prepareUrl(request, response);
-        String path = DIRECTORY_NAME + url + FILE_EXTENSION;
+        String path =  DIRECTORY_NAME + url + FILE_EXTENSION;
         return path;
     }
 }

@@ -42,6 +42,7 @@ enum ActionFactory {
 
         LOGOUT,
         RENEW_PASSWORD,
+        INVALIDATE_SESSION,
 
         GET_ALL_REQUESTS,
         PROCESS_REQUEST,
@@ -79,7 +80,9 @@ enum ActionFactory {
         actions.put(GET_ALL_PHOTOS, GetAllPhotosAction.INSTANCE);
         actions.put(GET_ALL_PUPPIES, GetAllPuppiesAction.INSTANCE);
         actions.put(GO_TO_MAKE_REQUEST_PAGE, GoToMakeRequestPageAction.INSTANCE);
-        actions.put(DISPLAY_CHOSEN_PUPPY, DisplayPuppyAction.INSTANCE);
+        actions.put(DISPLAY_CHOSEN_PUPPY, DisplayChosenPuppyAction.INSTANCE);
+        actions.put(MAKE_REQUEST, MakeRequestAction.INSTANCE);
+        actions.put(INVALIDATE_SESSION, InvalidateSessionAction.INSTANCE);
 
     }
 

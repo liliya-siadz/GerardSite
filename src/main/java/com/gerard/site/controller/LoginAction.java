@@ -51,7 +51,7 @@ enum LoginAction implements Action {
                 } else {
                     session.setAttribute(authenticationResultAttributeName, true);
                     session.setAttribute(authenticationIdentifierAttributeName, true);
-                   return Action.APPLICATION_CONTEXT + Page.HOME.getUrl();
+                   return Page.HOME.getUrl();
                 }
             } catch (ServiceException exception) {
                 LOGGER.fatal("Unable to execute authentication."

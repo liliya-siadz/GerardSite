@@ -9,13 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
 enum GetAllDogsAction implements Action {
-    INSTANCE("allDogs");
+    INSTANCE;
 
-    GetAllDogsAction(String viewAttributeName){
-        this.viewAttributeName = viewAttributeName;
-    }
-
-    private final String viewAttributeName;
+    private final String viewAttributeName = "allDogs";
 
     @Override
     public String execute(HttpServletRequest request,

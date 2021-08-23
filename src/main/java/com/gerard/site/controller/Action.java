@@ -32,7 +32,6 @@ import static com.gerard.site.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
 @FunctionalInterface
 interface Action {
     String REQUEST_HEADER_REFERER_HEADER_NAME = "Referer";
-    String APPLICATION_CONTEXT = "/gerard";
 
     /**
      * Services commands that came to router .

@@ -13,14 +13,12 @@
 </head>
 <body>
 <%--+ ADD button  1 MAKE_REQUEST--%>
-
 <%@ include file="fragment/headers/header.jsp" %>
-
-    <c:set var="puppies" value="${allPuppies}" scope="request"/>
-    <c:if test="${empty chosenPuppyDisplay}">
+    <c:set var="puppies" value="${allPuppies}" scope="application"/>
+    <c:if test="${empty chosenPuppy and not isRequestMade}">
     <form method="GET"
           action="${applicationPath}${controllerUrl}">
-        <select name="chosenPuppy">
+        <select name="chosenPuppyId">
             <c:forEach var="puppy" items="${puppies}">
                 <option value="${puppy.id}">
                         ${puppy.fullname}
@@ -29,39 +27,59 @@
         </select>
         <button type="submit"
                 name="command"
+                style="background-color: rebeccapurple"
                 class="btn btn-xs navbar-btn"
                 value="DISPLAY_CHOSEN_PUPPY">
             <fmt:message key="page.make_request.button.choose.name"/>
         </button>
     </form>
     </c:if>
-    <c:if test="${not empty chosenPuppyDisplay and empty chosenPuppy}">
-        <c:set var="avatar" value="${chosenPuppyDisplay.avatarPhotoPath}"/>
-        <div>
-            <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.fullname"/> </b>
-                    <c:out value="${chosenPuppyDisplay.fullname}"/>
-                </h3>
-            </div>
-            <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.birthday"/> </b>
-                    <c:out value="${chosenPuppyDisplay.birthday}"/>
-                </h3>
-            </div>
-        </div>
-        <img class="img"
-             src="${applicationPath}/${avatar}"
-             alt="?"
-             width="512"/>
-    <form method="GET"
+    <c:if test="${not empty chosenPuppy and not isRequestMade}">
+        <form method="POST"
+              action="${applicationPath}${controllerUrl}">
+            <label for="content">
+                PLACE CONTENT HERE:
+                <textarea value="content" name="content"> </textarea>
+            </label>
+            <button type="submit"
+                    name="command"
+                    class="btn btn-xs navbar-btn"
+                    style="background-color: orangered"
+                    value="MAKE_REQUEST">
+                <fmt:message key="page.make_request.button.make_request.name"/>
+            </button>
+        </form>
+        <%@ include file="fragment/chosen_puppy.jsp" %>
+        <form method="GET"
           action="${applicationPath}${controllerUrl}">
         <button type="submit"
                 name="command"
                 class="btn btn-xs navbar-btn"
+                style="background-color: rebeccapurple"
                 value="GO_TO_MAKE_REQUEST_PAGE">
             <fmt:message key="page.make_request.button.look.name"/>
         </button>
     </form>
+    </c:if>
+    <c:if test="${not empty isRequestMade and isRequestMade}">
+        <div style="display: block;text-align: center; margin-left:5%" >
+            <h2><fmt:message key="page.make_request.result.text"/></h2>
+                <h3><b><fmt:message key="page.dogs.view.title.description"/></b>
+                    <c:out value="${content}"/>
+                </h3>
+            <form method="POST"
+                  action="${applicationPath}${controllerUrl}">
+                <button type="submit"
+                        name="command"
+                        style="background-color: forestgreen"
+                        class="btn btn-md"
+                        value="INVALIDATE_SESSION">
+                    <fmt:message key="isee.word"/>
+                </button>
+            </form>
+            <hr>
+            <%@include file="fragment/chosen_puppy.jsp"%>
+        </div>
     </c:if>
 <%@ include file="fragment/footers/footer.jsp" %>
 </body>

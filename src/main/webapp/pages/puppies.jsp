@@ -17,7 +17,7 @@
 <%--1 MAKE REQUEST--%>
 
 <div style="display:inline-block;">
-    <c:set var="puppies" value="${allPuppies}" scope="request"/>
+    <c:set var="puppies" value="${allPuppies}" scope="application"/>
     <c:forEach items="${puppies}" var="puppy">
         <c:set var="avatar" value="${puppy.avatarPhotoPath}"/>
         <img class="img"

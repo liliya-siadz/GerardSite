@@ -10,13 +10,8 @@ import java.util.List;
 
 enum GetAllPhotosAction implements Action {
 
-    INSTANCE("allPhotosWithDogsName");
-
-    GetAllPhotosAction(String viewAttributeName){
-        this.viewAttributeName = viewAttributeName;
-    }
-
-    private final String viewAttributeName;;
+    INSTANCE;
+    private final String viewAttributeName = "allPhotosWithDogsName";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {

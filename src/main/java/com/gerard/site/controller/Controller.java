@@ -25,11 +25,17 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet
 public class Controller extends HttpServlet {
+    /**
+     * Application context on server. Is using for preparing page path
+     */
+    private static String APPLICATION_CONTEXT = "/gerard";
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         String url = Router.prepareUrl(request, response);
-        response.sendRedirect(url);
+        String location = APPLICATION_CONTEXT + url;
+        response.sendRedirect(location);
     }
 
     @Override

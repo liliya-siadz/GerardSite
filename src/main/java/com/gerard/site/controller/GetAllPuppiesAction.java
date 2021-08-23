@@ -10,13 +10,9 @@ import java.util.List;
 
 public enum GetAllPuppiesAction implements Action {
 
-    INSTANCE("allPuppies");
+    INSTANCE;
 
-    GetAllPuppiesAction(String viewAttributeName){
-        this.viewAttributeName = viewAttributeName;
-    }
-
-    private final String viewAttributeName;
+    private final String viewAttributeName = "allPuppies";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)

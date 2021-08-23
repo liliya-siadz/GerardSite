@@ -10,13 +10,8 @@ import java.util.List;
 
 public enum GoToMakeRequestPageAction implements Action {
 
-    INSTANCE("allPuppies");
-
-    GoToMakeRequestPageAction(String viewAttributeName){
-        this.viewAttributeName = viewAttributeName;
-    }
-
-    private final String viewAttributeName;
+    INSTANCE;
+    private final String viewAttributeName = "allPuppies";
 
     @Override
     public String execute(HttpServletRequest request,
@@ -24,8 +19,6 @@ public enum GoToMakeRequestPageAction implements Action {
             throws ServiceException {
         List<DogEntity> allPuppies =  DogService.getInstance().provideAllPuppies();
         request.setAttribute(viewAttributeName, allPuppies);
-       // request.getSession().setAttribute(viewAttributeName, dogEntity.get());
-      //  request.getSession().setAttribute(changedAttributeName, dogEntity.get());
         return Page.MAKE_REQUEST.getUrl();
     }
 }
