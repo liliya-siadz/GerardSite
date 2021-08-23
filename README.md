@@ -1,5 +1,5 @@
 <h2><i>Private monobreed dog kennel </i>.</h2>
-<h2>Desktop Web-app(web-site) "Gerard" </h2>
+<h2>Desktop Web-application "Gerard" </h2>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
 <h3>The main purposes of the web-app:</h3>
 <ol type="1">
