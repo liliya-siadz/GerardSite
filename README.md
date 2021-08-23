@@ -13,6 +13,10 @@
     <li><b>Providing contact information of the kennel</b></li>
 </ol>
 
+<h2>DIAGRAM</h2>
+
+![diagram](https://user-images.githubusercontent.com/39922259/130496387-6f10768f-c394-414a-80b5-dfbf5eb7603d.png)
+
 
 <h2>DATABASE SCHEME</h2>
 
