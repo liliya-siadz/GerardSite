@@ -1,13 +1,15 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.dto.RequestAndAppUserWithMessageDto;
+import com.gerard.site.dao.DaoException;
+import com.gerard.site.dao.RequestDao;
+import com.gerard.site.entity.RequestAndAppUserAndDog;
+import com.gerard.site.entity.RequestEntity;
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.form.RequestForm;
 import com.gerard.site.service.RequestService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Optional;
+import java.util.List;
 
 public class RequestServiceImpl implements RequestService {
     private static RequestServiceImpl instance;
@@ -24,16 +26,33 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public Optional<RequestAndAppUserWithMessageDto> createRequest(int dogId, RequestForm requestForm)
-    throws ServiceException {
-        //call  RequestEntity requestEntity =
-        // 1 RequestDao.createRequest(RequestEntity requestEntity)
-        //          if request was created:
-        // 2
-        //  add message and create request with message dto
-        //            //RequestAndAppUserWithMessage result
-        //            // = createRequest(Integer dogId, RequestForm requestForm)
-        //
-        throw new UnsupportedOperationException();
+    public List<RequestAndAppUserAndDog> provideAllRequests() throws ServiceException {
+        try {
+            List<RequestAndAppUserAndDog> requestsAndAppUserAndDogList
+                    = RequestDao.getInstance().selectAllRequestsAndAppUserAndDog();
+            return requestsAndAppUserAndDogList;
+        } catch (DaoException exception) {
+            throw new ServiceException(
+                    "Unable to provide information from database! "
+                            + exception.getMessage(), exception);
+        }
+    }
+
+    @Override
+    public List<RequestAndAppUserAndDog> provideAllPendingRequests() throws ServiceException {
+        try {
+            List<RequestAndAppUserAndDog> requestsAndAppUserAndDogList
+                    = RequestDao.getInstance().selectAllRequestsAndAppUserAndDog();
+            List<RequestAndAppUserAndDog> pendingRequestsAndAppUserAndDogList =
+                    requestsAndAppUserAndDogList.stream()
+                    .filter(row->row.getRequestStatus()
+                            .equals(RequestEntity.RequestStatus.PENDING))
+                    .toList();
+            return pendingRequestsAndAppUserAndDogList;
+        } catch (DaoException exception) {
+            throw new ServiceException(
+                    "Unable to provide information from database! "
+                            + exception.getMessage(), exception);
+        }
     }
 }

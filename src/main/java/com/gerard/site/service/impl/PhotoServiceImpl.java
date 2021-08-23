@@ -2,7 +2,8 @@ package com.gerard.site.service.impl;
 
 import com.gerard.site.dao.DaoException;
 import com.gerard.site.dao.PhotoDao;
-import com.gerard.site.dto.PhotoAndDog;
+import com.gerard.site.entity.PhotoAndDog;
+import com.gerard.site.entity.PhotoEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.service.PhotoService;
 import org.apache.logging.log4j.LogManager;
@@ -29,15 +30,27 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<PhotoAndDog> provideAllPhotosAndDogs() throws ServiceException {
+    public List<PhotoAndDog> provideAllPhotosOfDogs() throws ServiceException {
         try {
             List<PhotoAndDog> allPhotosWithDogs =
-                    PhotoDao.getInstance().selectAllPhotosWithDogs();
+                    PhotoDao.getInstance().selectAllPhotosAndDogs();
             allPhotosWithDogs = allPhotosWithDogs.stream()
                     .filter(photoAndDog ->
                             photoAndDog.getPhotoPath().contains(PHOTO_FOLDER_NAME))
                     .toList();
             return allPhotosWithDogs;
+        } catch (DaoException exception) {
+            throw new ServiceException(
+                    "Unable to provide information from database! "
+                            + exception.getMessage(), exception);
+        }
+    }
+
+    @Override
+    public List<PhotoEntity> provideAllPhotos() throws ServiceException {
+        try {
+            List<PhotoEntity> allPhotos = PhotoDao.getInstance().selectAll();
+            return allPhotos;
         } catch (DaoException exception) {
             throw new ServiceException(
                     "Unable to provide information from database! "

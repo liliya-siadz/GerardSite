@@ -1,5 +1,6 @@
-package com.gerard.site.form;
+package com.gerard.site.controller.form;
 
+import com.gerard.site.validator.FormValidator;
 import com.gerard.site.validator.field.FieldsValidators;
 
 import java.util.HashMap;

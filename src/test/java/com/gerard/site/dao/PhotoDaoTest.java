@@ -1,6 +1,7 @@
 package com.gerard.site.dao;
 
-import com.gerard.site.dto.PhotoAndDog;
+import com.gerard.site.entity.PhotoAndDog;
+import com.gerard.site.entity.PhotoEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
@@ -14,8 +15,16 @@ public class PhotoDaoTest {
 
     @Test
     public void testSelectAllPhotosWithDogs() throws DaoException {
-        List<PhotoAndDog> photoAndDogList = PhotoDao.getInstance().selectAllPhotosWithDogs();
+        List<PhotoAndDog> photoAndDogList = PhotoDao.getInstance().selectAllPhotosAndDogs();
         LOGGER.info(photoAndDogList);
         assertFalse(photoAndDogList.isEmpty());
+    }
+
+    @Test
+    public void testSelectAll() throws DaoException {
+        List<PhotoEntity> allPhotos =
+                PhotoDao.getInstance().selectAll();
+        LOGGER.info(allPhotos);
+        assertFalse(allPhotos.isEmpty());
     }
 }

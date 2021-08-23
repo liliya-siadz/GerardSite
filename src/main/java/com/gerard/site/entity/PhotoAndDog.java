@@ -1,13 +1,20 @@
-package com.gerard.site.dto;
+package com.gerard.site.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public final class PhotoAndDog {
+public class PhotoAndDog implements Serializable {
+
+    private static final long serialVersionUID=1L;
 
     private String photoPath;
     private Date photoDate;
     private String nickname;
+
+    public PhotoAndDog(){
+
+    }
 
     public PhotoAndDog(String photoPath, Date photoDate, String nickname) {
         this.photoPath = photoPath;

@@ -1,5 +1,6 @@
 package com.gerard.site.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,7 +14,10 @@ import java.sql.Date;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class DogEntity extends AbstractEntity<Integer> {
+public class DogEntity extends AbstractEntity<Integer> implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
     /**
      * Possible values for instance field {@code dogSex}
      * {@link DogEntity#dogSex} .
@@ -60,12 +64,11 @@ public class DogEntity extends AbstractEntity<Integer> {
     private String description;
 
     /**
-     * Represents column 'is_active' in the table <i>gerard.dog</i> .
+     * Represents column 'active' in the table <i>gerard.dog</i> .
      */
-    private boolean isActive;
+    private boolean active;
 
     public DogEntity() {
-        super();
     }
 
     public DogSex getDogSex() {
@@ -125,11 +128,11 @@ public class DogEntity extends AbstractEntity<Integer> {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     @Override
@@ -156,7 +159,7 @@ public class DogEntity extends AbstractEntity<Integer> {
         hashcode = hash * hashcode + (avatarPhotoPath == null ? 0 : avatarPhotoPath.hashCode());
         hashcode = hash * hashcode + (pedigreePhotoPath == null ? 0 : pedigreePhotoPath.hashCode());
         hashcode = hash * hashcode + (description == null ? 0 : description.hashCode());
-        hashcode = hash * hashcode + (isActive ? 1 : 0);
+        hashcode = hash * hashcode + (active ? 1 : 0);
         return hashcode;
     }
 
@@ -171,7 +174,7 @@ public class DogEntity extends AbstractEntity<Integer> {
                 + ", avatarMediaId=" + avatarPhotoPath
                 + ", pedigreeMediaId=" + pedigreePhotoPath
                 + ", description='" + description + '\''
-                + ", isActive='" + isActive + '\''
+                + ", isActive='" + active + '\''
                 + '}';
     }
 
@@ -228,8 +231,8 @@ public class DogEntity extends AbstractEntity<Integer> {
         }
 
 
-        public Builder isActive(boolean isActive) {
-            dogEntity.isActive = isActive;
+        public Builder active(boolean isActive) {
+            dogEntity.active = isActive;
             return this;
         }
 

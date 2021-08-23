@@ -14,14 +14,14 @@
 <body>
 <%--+ ADD button  1 MAKE_REQUEST--%>
 <%@ include file="fragment/headers/header.jsp" %>
-    <c:set var="puppies" value="${allPuppies}" scope="session"/>
+    <c:set var="dogs" value="${allPuppies}" scope="session"/>
     <c:if test="${empty chosenPuppy and not isRequestMade}">
     <form method="GET"
           action="${applicationPath}${controllerUrl}">
         <select name="chosenPuppyId">
-            <c:forEach var="puppy" items="${puppies}">
-                <option value="${puppy.id}">
-                        ${puppy.fullname}
+            <c:forEach var="dog" items="${dogs}">
+                <option value="${dog.id}">
+                        ${dog.fullname}
                 </option>
             </c:forEach>
         </select>

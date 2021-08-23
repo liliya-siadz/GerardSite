@@ -1,4 +1,4 @@
-package com.gerard.site.form;
+package com.gerard.site.validator;
 
 import java.util.Map;
 

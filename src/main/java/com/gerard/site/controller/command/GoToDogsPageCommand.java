@@ -11,15 +11,12 @@ import java.util.List;
 
 public enum GoToDogsPageCommand implements Command {
     INSTANCE;
-    //TODO
-    //SHOW ALL ACTIVE
-    private final String viewAttributeName = "allDogs";
-
+    private final String viewAttributeName = "allActiveDogs";
     @Override
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) throws ServiceException {
-        List<DogEntity> allDogs =  DogServiceImpl.getInstance().provideActiveDogs();
-        request.setAttribute(viewAttributeName, allDogs);
+        List<DogEntity> allActiveDogs =  DogServiceImpl.getInstance().provideActiveDogs();
+        request.setAttribute(viewAttributeName, allActiveDogs);
         return Page.DOGS.getPageUrl();
     }
 }

@@ -22,6 +22,7 @@ public enum CommandIdentifier {
 
     GO_TO_ADMIN_DOGS_PAGE,
     GO_TO_ADMIN_REQUESTS_PAGE,
+    GO_TO_ADMIN_PHOTOS_PAGE,
 
     MAKE_REQUEST,
     DISPLAY_CHOSEN_PUPPY,
@@ -34,5 +35,8 @@ public enum CommandIdentifier {
     PROCESS_REQUEST,
     ADD_DOG,
     EDIT_DOG,
-    DELETE_DOG;
+    DELETE_DOG,
+
+    DELETE_PHOTO,
+    ADD_PHOTO;
 }

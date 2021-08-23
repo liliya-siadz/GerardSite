@@ -10,7 +10,7 @@ public class EncodingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         String encodingParameterName="encoding";
-        encoding = filterConfig.getInitParameter(encoding);
+        encoding = filterConfig.getInitParameter(encodingParameterName);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.gerard.site.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,7 +14,9 @@ import java.sql.Date;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class PhotoEntity extends AbstractEntity<Integer> {
+public class PhotoEntity extends AbstractEntity<Integer> implements Serializable {
+    private static final long serialVersionUID=1L;
+
 
     /**
      * Represents column 'path' in the table <i>gerard.photo</i> .
@@ -72,6 +75,8 @@ public class PhotoEntity extends AbstractEntity<Integer> {
     public void setPhotoDate(Date photoDate) {
         this.photoDate = photoDate;
     }
+
+
 
     @Override
     public boolean equals(Object object) {

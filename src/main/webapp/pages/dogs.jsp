@@ -11,18 +11,18 @@
 <head>
     <title><fmt:message key="page.dogs.title"/></title>
 </head>
-<body style="background-image: url(${applicationPath}/img/background.jpg);">
+<body>
 <%@include file="fragment/dynamic-headering.jsp" %>
 
 <div style="display:inline-block;">
-    <c:set var="puppies" value="${allDogs}" scope="request"/>
-    <c:forEach items="${puppies}" var="puppy">
-        <c:set var="avatar" value="${puppy.avatarPhotoPath}"/>
+    <c:set var="dogs" value="${allActiveDogs}" scope="request"/>
+    <c:forEach items="${dogs}" var="dog">
+        <c:set var="avatar" value="${dog.avatarPhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${avatar}"
              alt="?"
              width="512"/>
-        <c:set var="pedigree" value="${puppy.pedigreePhotoPath}"/>
+        <c:set var="pedigree" value="${dog.pedigreePhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${pedigree}"
              alt="?"
@@ -30,22 +30,22 @@
         <div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.sex"/> </b>
-                    <c:out value="${puppy.dogSex}"/>
+                    <c:out value="${dog.dogSex}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.nickname"/> </b>
-                    <c:out value="${puppy.nickname}"/>
+                    <c:out value="${dog.nickname}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.fullname"/> </b>
-                    <c:out value="${puppy.fullname}"/>
+                    <c:out value="${dog.fullname}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.dogs.view.title.birthday"/> </b>
-                    <c:out value="${puppy.birthday}"/>
+                    <c:out value="${dog.birthday}"/>
                 </h3>
             </div>
         </div>

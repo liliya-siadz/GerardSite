@@ -3,7 +3,7 @@ package com.gerard.site.controller.command;
 import com.gerard.site.controller.Page;
 import com.gerard.site.entity.DogEntity;
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.form.RequestForm;
+import com.gerard.site.controller.form.RequestForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

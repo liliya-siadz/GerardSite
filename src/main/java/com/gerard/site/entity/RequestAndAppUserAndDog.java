@@ -1,11 +1,11 @@
-package com.gerard.site.dto;
+package com.gerard.site.entity;
 
-import com.gerard.site.entity.DogEntity;
-import com.gerard.site.entity.RequestEntity;
-
+import java.io.Serializable;
 import java.sql.Date;
 
-public final class RequestAndAppUserAndDog {
+public  class RequestAndAppUserAndDog implements Serializable {
+    private static final long serialVersionUID=1L;
+
     private int requestId;
     private RequestEntity.RequestStatus requestStatus;
     private RequestEntity.RequestType requestType;
@@ -24,7 +24,7 @@ public final class RequestAndAppUserAndDog {
     private String avatarPhotoPath;
 
 
-    private RequestAndAppUserAndDog() {
+    public RequestAndAppUserAndDog() {
     }
 
     public int getRequestId() {

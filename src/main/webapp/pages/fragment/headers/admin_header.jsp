@@ -30,7 +30,12 @@
                         name="command"
                         class="btn btn-xs navbar-btn headerButton"
                         value="GO_TO_ADMIN_DOGS_PAGE">
-                <fmt:message key="page.admin_dogs.title"/>
+                <fmt:message key="page.admin_dogs.header"/>
+                    <button type="submit"
+                            name="command"
+                            class="btn btn-xs navbar-btn headerButton"
+                            value="GO_TO_ADMIN_PHOTOS_PAGE">
+                        <fmt:message key="page.admin_photos.header"/>
                     <button type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn headerButton"
@@ -41,6 +46,7 @@
                             class="btn btn-xs navbar-btn headerButton"
                             value="LOGOUT">
                    <fmt:message key="admin.button.logout.name"/>
+
             </form>
             </div>
     </div>

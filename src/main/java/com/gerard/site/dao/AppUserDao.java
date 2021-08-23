@@ -25,18 +25,18 @@ public class AppUserDao extends AbstractDao<AppUserEntity> {
     static final String COLUMN_LABEL_5 = "surname";
     static final String COLUMN_LABEL_6 = "patronymic";
     static final String COLUMN_LABEL_7 = "phone";
-    static final String COLUMN_LABEL_8 = "is_admin";
+    static final String COLUMN_LABEL_8 = "admin";
 
     private static final String SELECT_USER_PASSWORD_BY_EMAIL
             = "select password from app_user where email =?";
 
     private static final String SELECT_USER_BY_EMAIL
             = "select app_user_id, email, name, surname, patronymic," +
-            "phone, is_admin from app_user where email =?";
+            "phone, admin from app_user where email =?";
 
     private static final String SELECT_ALL_USERS
             = "select app_user_id, email, name, surname, patronymic," +
-              "phone, is_admin from app_user";
+              "phone, admin from app_user";
 
     private static final Logger LOGGER = LogManager.getLogger(AppUserDao.class);
 
@@ -158,7 +158,7 @@ public class AppUserDao extends AbstractDao<AppUserEntity> {
         String surname = resultSet.getString(COLUMN_LABEL_5);
         String patronymic = resultSet.getString(COLUMN_LABEL_6);
         String phone = resultSet.getString(COLUMN_LABEL_7);
-        boolean isAdmin = resultSet.getBoolean(COLUMN_LABEL_8);
+        boolean admin = resultSet.getBoolean(COLUMN_LABEL_8);
         AppUserEntity appUserEntity = new AppUserEntity.Builder()
                 .id(appUserId)
                 .email(email)
@@ -166,7 +166,7 @@ public class AppUserDao extends AbstractDao<AppUserEntity> {
                 .surname(surname)
                 .patronymic(patronymic)
                 .phone(phone)
-                .isAdmin(isAdmin)
+                .admin(admin)
                 .build();
         return appUserEntity;
     }

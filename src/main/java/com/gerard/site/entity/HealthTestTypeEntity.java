@@ -1,6 +1,4 @@
-package com.gerard.site.entity.extra;
-
-import com.gerard.site.entity.AbstractEntity;
+package com.gerard.site.entity;
 
 import java.io.Serializable;
 

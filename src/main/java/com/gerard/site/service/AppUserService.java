@@ -1,10 +1,7 @@
 package com.gerard.site.service;
 
-import com.gerard.site.entity.AppUserEntity;
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.form.LoginForm;
-
-import java.util.Optional;
+import com.gerard.site.controller.form.LoginForm;
 
 public interface AppUserService {
     boolean authenticate(LoginForm loginForm)

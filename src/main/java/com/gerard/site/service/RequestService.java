@@ -1,12 +1,14 @@
 package com.gerard.site.service;
 
-import com.gerard.site.dto.RequestAndAppUserWithMessageDto;
-import com.gerard.site.exception.ServiceException;
-import com.gerard.site.form.RequestForm;
 
-import java.util.Optional;
+import com.gerard.site.dao.DaoException;
+import com.gerard.site.entity.RequestAndAppUserAndDog;
+import com.gerard.site.exception.ServiceException;
+
+import java.util.List;
 
 public interface RequestService {
-    Optional<RequestAndAppUserWithMessageDto> createRequest(
-            int dogId, RequestForm requestForm) throws ServiceException;
+
+    List<RequestAndAppUserAndDog> provideAllRequests() throws DaoException, ServiceException;
+    List<RequestAndAppUserAndDog> provideAllPendingRequests() throws ServiceException;
 }

@@ -3,6 +3,7 @@ package com.gerard.site.controller;
 public enum Page {
     ADMIN_DOGS("/admin_dogs"),
     ADMIN_REQUESTS ("/admin_requests"),
+    ADMIN_PHOTOS ("/admin_photos"),
     DOGS("/dogs"),
     HOME("/home"),
     LOGIN( "/login"),

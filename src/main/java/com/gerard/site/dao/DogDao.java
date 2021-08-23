@@ -22,14 +22,14 @@ public class DogDao extends AbstractDao<DogEntity> {
     static final String COLUMN_LABEL_6 = "avatar_photo_path";
     static final String COLUMN_LABEL_7 = "pedigree_photo_path";
     static final String COLUMN_LABEL_8 = "description";
-    static final String COLUMN_LABEL_9 = "is_active";
+    static final String COLUMN_LABEL_9 = "active";
 
-    private static final String SELECT_DOG_BY_ID = "select dog_id, dog_sex, nickname," +
-            "fullname, birthday,avatar_photo_path, pedigree_photo_path," +
-            "description, is_active from dog where dog_id=?";
+    private static final String SELECT_DOG_BY_ID = "select dog_id, dog_sex, nickname,"
+            + "fullname, birthday,avatar_photo_path, pedigree_photo_path,"
+            + "description, active from dog where dog_id=?";
 
     private static final String SELECT_ALL_DOGS = "select dog_id, dog_sex, nickname," +
-            "fullname, birthday,avatar_photo_path, pedigree_photo_path, is_active, description from dog";
+            "fullname, birthday,avatar_photo_path, pedigree_photo_path, active, description from dog";
     private static final Logger LOGGER = LogManager.getLogger(DogDao.class);
 
     private DogDao() {
@@ -110,7 +110,7 @@ public class DogDao extends AbstractDao<DogEntity> {
         String avatarPhotoPath = resultSet.getString(COLUMN_LABEL_6);
         String pedigreePhotoPath = resultSet.getString(COLUMN_LABEL_7);
         String description = resultSet.getString(COLUMN_LABEL_8);
-        boolean isActive = resultSet.getBoolean(COLUMN_LABEL_9);
+        boolean active = resultSet.getBoolean(COLUMN_LABEL_9);
         DogEntity dog = new DogEntity.Builder()
                 .id(dogId)
                 .dogSex(dogSex)
@@ -120,7 +120,7 @@ public class DogDao extends AbstractDao<DogEntity> {
                 .avatarPhotoPath(avatarPhotoPath)
                 .pedigreePhotoPath(pedigreePhotoPath)
                 .description(description)
-                .isActive(isActive)
+                .active(active)
                 .build();
         return dog;
     }

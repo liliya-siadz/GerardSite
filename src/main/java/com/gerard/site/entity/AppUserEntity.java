@@ -1,5 +1,7 @@
 package com.gerard.site.entity;
 
+import java.io.Serializable;
+
 /**
  * Class represents single record from table <i>gerard.app_user</i> ,
  * note that primary key of record is represented
@@ -18,7 +20,10 @@ package com.gerard.site.entity;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class AppUserEntity extends AbstractEntity<Integer> {
+public class AppUserEntity extends AbstractEntity<Integer> implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
 
     /**
      * Represents column 'email' in the table <i>gerard.app_user</i> .
@@ -48,12 +53,11 @@ public class AppUserEntity extends AbstractEntity<Integer> {
     private String phone;
 
     /**
-     * Represents column 'is_admin' in the table <i>gerard.app_user</i> .
+     * Represents column 'admin' in the table <i>gerard.app_user</i> .
      */
-    private boolean isAdmin;
+    private boolean admin;
 
     public AppUserEntity() {
-        super();
     }
 
     public String getEmail() {
@@ -97,11 +101,11 @@ public class AppUserEntity extends AbstractEntity<Integer> {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     public void setAdmin(boolean admin) {
-        isAdmin = admin;
+        this.admin = admin;
     }
 
     @Override
@@ -126,7 +130,7 @@ public class AppUserEntity extends AbstractEntity<Integer> {
         hashcode = hash * hashcode + (surname == null ? 0 : surname.hashCode());
         hashcode = hash * hashcode + (patronymic == null ? 0 : patronymic.hashCode());
         hashcode = hash * hashcode + (phone == null ? 0 : phone.hashCode());
-        hashcode = hash * hashcode + (isAdmin ? 1 : 0);
+        hashcode = hash * hashcode + (admin ? 1 : 0);
         return hashcode;
     }
 
@@ -139,7 +143,7 @@ public class AppUserEntity extends AbstractEntity<Integer> {
                 + ", surname='" + surname + '\''
                 + ", patronymic='" + patronymic + '\''
                 + ", phone=" + phone
-                + ", isAdmin=" + isAdmin
+                + ", isAdmin=" + admin
                 + '}';
     }
 
@@ -187,8 +191,8 @@ public class AppUserEntity extends AbstractEntity<Integer> {
         }
 
 
-        public Builder isAdmin(boolean isAdmin) {
-            appUserEntity.isAdmin = isAdmin;
+        public Builder admin(boolean admin) {
+            appUserEntity.admin = admin;
             return this;
         }
 

@@ -4,7 +4,7 @@ import com.gerard.site.dao.AppUserDao;
 import com.gerard.site.dao.DaoException;
 import com.gerard.site.entity.AppUserEntity;
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.form.LoginForm;
+import com.gerard.site.controller.form.LoginForm;
 import com.gerard.site.service.AppUserService;
 import com.gerard.site.util.BCrypt;
 import com.gerard.site.util.AppIdentifierUtil;

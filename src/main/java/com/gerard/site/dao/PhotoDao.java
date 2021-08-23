@@ -2,7 +2,8 @@ package com.gerard.site.dao;
 
 import com.gerard.site.connection.ConnectionException;
 import com.gerard.site.connection.ConnectionPool;
-import com.gerard.site.dto.PhotoAndDog;
+import com.gerard.site.entity.DogEntity;
+import com.gerard.site.entity.PhotoAndDog;
 import com.gerard.site.entity.PhotoEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,11 +21,14 @@ public class PhotoDao extends AbstractDao<PhotoEntity> {
     static final String COLUMN_LABEL_3 = "name";
     static final String COLUMN_LABEL_4 = "dog_id";
     static final String COLUMN_LABEL_5 = "photo_date";
-    static final Logger LOGGER = LogManager.getLogger(PhotoDao.class);
+
+    private static final String SELECT_ALL_PHOTOS=
+            "select photo_path, photo_date, photo_id,name, photo_path, dog_id from photo";
     private static final String SELECT_ALL_PHOTOS_AND_DOGS =
-            "select photo_path, dog.nickname, photo_date " +
-                    "from photo left join dog " +
-                    "on photo.dog_id = dog.dog_id order by photo_date desc";
+            "select photo_path, dog.nickname, photo_date "
+                    + "from photo left join dog "
+                    + "on photo.dog_id = dog.dog_id order by photo_date desc";
+    private static final Logger LOGGER = LogManager.getLogger(PhotoDao.class);
 
     private PhotoDao() {
         super();
@@ -37,7 +41,7 @@ public class PhotoDao extends AbstractDao<PhotoEntity> {
         return instance;
     }
 
-    public List<PhotoAndDog> selectAllPhotosWithDogs() throws DaoException {
+    public List<PhotoAndDog> selectAllPhotosAndDogs() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL_PHOTOS_AND_DOGS);
@@ -70,7 +74,22 @@ public class PhotoDao extends AbstractDao<PhotoEntity> {
 
     @Override
     public List<PhotoEntity> selectAll() throws DaoException {
-        throw new UnsupportedOperationException();
+        try (Connection connection = ConnectionPool.getInstance().giveOutConnection()) {
+            try (Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(SELECT_ALL_PHOTOS);
+                List<PhotoEntity> selectedUsers = new ArrayList<>();
+                if (resultSet.isBeforeFirst()) {
+                    while (resultSet.next()) {
+                        selectedUsers.add(parseResultSet(resultSet));
+                    }
+                }
+                return selectedUsers;
+            }
+        } catch (ConnectionException | SQLException exception) {
+            throw new DaoException("Unable to get data from table: "
+                    + TABLE_NAME + " ! "
+                    + "Reason: " + exception.getMessage(), exception);
+        }
     }
 
     @Override

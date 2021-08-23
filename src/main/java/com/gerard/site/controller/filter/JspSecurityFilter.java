@@ -4,10 +4,12 @@ import jakarta.servlet.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-public class PageRedirectSecurityFilter implements Filter {
+public class JspSecurityFilter implements Filter {
     private String defaultLocation;
 
     @Override

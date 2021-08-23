@@ -1,5 +1,6 @@
 package com.gerard.site.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,7 +14,9 @@ import java.sql.Date;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class RequestEntity extends AbstractEntity<Integer> {
+public class RequestEntity extends AbstractEntity<Integer> implements Serializable {
+    private static final long serialVersionUID=1L;
+
     /**
      * Possible values for instance field {@code requestStatus}
      * {@link RequestEntity#requestStatus} .

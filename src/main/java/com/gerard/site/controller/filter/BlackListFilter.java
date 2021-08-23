@@ -23,9 +23,9 @@ public class BlackListFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         if(httpRequest.getSession().getAttribute("admin")==null) {
             httpResponse.sendRedirect(httpRequest.getServletContext() + defaultLocation);
+            LOGGER.warn("Denied access try past.");
         }
         chain.doFilter(request, response);
-        LOGGER.warn("Black list filter: " + this + " was processed.");
     }
 
     @Override

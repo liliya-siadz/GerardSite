@@ -95,6 +95,14 @@
         <servlet-name>requests</servlet-name>
         <url-pattern>/admin_requests</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>admin_photos</servlet-name>
+        <jsp-file>/pages/admin_photos.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin_photos</servlet-name>
+        <url-pattern>/admin_photos</url-pattern>
+    </servlet-mapping>
     <!--    admin pages end-->
     <!--    error pages config start-->
     <servlet-mapping>
@@ -184,7 +192,7 @@
     </filter-mapping>
     <filter>
         <filter-name>jspSecurityFilter</filter-name>
-        <filter-class>com.gerard.site.controller.filter.PageRedirectSecurityFilter</filter-class>
+        <filter-class>com.gerard.site.controller.filter.JspSecurityFilter</filter-class>
         <init-param>
             <param-name>defaultLocation</param-name>
             <param-value>/error-404</param-value>
@@ -206,6 +214,7 @@
         <filter-name>blackListFilter</filter-name>
         <url-pattern>/admin_dogs</url-pattern>
         <url-pattern>/admin_requests</url-pattern>
+        <url-pattern>/admin_photos</url-pattern>
     </filter-mapping>
 <!--        filters config end-->
 </web-app>
