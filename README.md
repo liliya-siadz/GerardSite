@@ -1,7 +1,7 @@
 <h2><i>Private monobreed dog kennel </i>.</h2>
 <h2>Desktop Web-application "gerard" </h2>
 ☆ Class project after online-training "Java Web development" by EPAM ☆
-<h3>The main purposes of the web-app:</h3>
+<h3>Main purposes app:</h3>
 <ol type="1">
     <li> <b> Providing actual information regarding dogs/puppies in the kennel </b>
         <ul>
