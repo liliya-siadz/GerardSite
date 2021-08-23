@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-<!--    application start-->
+    <!--    application start-->
     <session-config>
         <session-timeout>60</session-timeout>
     </session-config>
@@ -27,8 +27,8 @@
         <param-name>application_url</param-name>
         <param-value>http://localhost:8080/gerard</param-value>
     </context-param>
-<!--    application end-->
-<!--guest pages start-->
+    <!--    application end-->
+    <!--guest pages start-->
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -77,8 +77,8 @@
         <servlet-name>login</servlet-name>
         <jsp-file>/pages/login.jsp</jsp-file>
     </servlet>
-<!--    guest pages end-->
-<!-- admin pages start-->
+    <!--    guest pages end-->
+    <!-- admin pages start-->
     <servlet>
         <servlet-name>admin_dogs</servlet-name>
         <jsp-file>/pages/admin_dogs.jsp</jsp-file>
@@ -95,7 +95,7 @@
         <servlet-name>requests</servlet-name>
         <url-pattern>/admin_requests</url-pattern>
     </servlet-mapping>
-<!--    admin pages end-->
+    <!--    admin pages end-->
     <!--    error pages config start-->
     <servlet-mapping>
         <servlet-name>error</servlet-name>
@@ -169,4 +169,43 @@
         <location>/pages/error.jsp</location>
     </error-page>
     <!--    error pages config end-->
+    <!--    filters config start-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>com.gerard.site.controller.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>jspSecurityFilter</filter-name>
+        <filter-class>com.gerard.site.controller.filter.PageRedirectSecurityFilter</filter-class>
+        <init-param>
+            <param-name>defaultLocation</param-name>
+            <param-value>/error-404</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>jspSecurityFilter</filter-name>
+        <url-pattern>/pages/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>blackListFilter</filter-name>
+        <filter-class>com.gerard.site.controller.filter.BlackListFilter</filter-class>
+        <init-param>
+            <param-name>defaultLocation</param-name>
+            <param-value>/error</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>blackListFilter</filter-name>
+        <url-pattern>/admin_dogs</url-pattern>
+        <url-pattern>/admin_requests</url-pattern>
+    </filter-mapping>
+<!--        filters config end-->
 </web-app>

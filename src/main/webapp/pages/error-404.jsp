@@ -45,7 +45,7 @@
 </head>
 <body>
 <h1 style="text-align: center">
-    <b><fmt:message key="error.word"/>${pageContext.errorData.statusCode} !
+    <b><fmt:message key="error.word"/> 404 !
     <fmt:message key="page.error.message.alternative_action"/></b>
     &#9758;
     <button class="btn btn-md" onclick="history.back()">

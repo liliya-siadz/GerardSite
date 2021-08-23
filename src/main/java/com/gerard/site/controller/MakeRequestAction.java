@@ -36,8 +36,8 @@ public enum MakeRequestAction implements Action {
             //put to session request and content attribute
             // RequestWithUserDto (content + puppy + appUser )
         }
-        DogEntity dogEntity = (DogEntity) request.getSession().getAttribute(targetParameterName);
-        request.getSession().setAttribute(viewAttributeResultName,true);
+       // DogEntity dogEntity = (DogEntity) request.getSession().getAttribute(targetParameterName);
+        //request.getSession().setAttribute(viewAttributeResultName,true);
 
         return Page.MAKE_REQUEST.getUrl();
     }

@@ -35,7 +35,7 @@
     </form>
     </c:if>
     <c:if test="${not empty chosenPuppy and not isRequestMade}">
-        <%@ include file="fragment/chosen_puppy.jsp" %>
+<%--        text notification that is sending email to:--%>
         <form method="POST"
               action="${applicationPath}${controllerUrl}">
                     <h3>
@@ -73,6 +73,7 @@
                 <fmt:message key="page.make_request.button.make_request.name"/>
             </button>
         </form>
+        <%@ include file="fragment/chosen_puppy.jsp" %>
         <form method="GET"
           action="${applicationPath}${controllerUrl}">
         <button type="submit"
