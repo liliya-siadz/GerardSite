@@ -3,7 +3,7 @@ package com.gerard.site.dto;
 import java.sql.Date;
 import java.util.Objects;
 
-public class PhotoAndDog implements PhotoDto {
+public final class PhotoAndDog {
 
     private String photoPath;
     private Date photoDate;
@@ -51,10 +51,7 @@ public class PhotoAndDog implements PhotoDto {
         return Objects.equals(photoPath, that.photoPath);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(photoPath);
-    }
+
 
     @Override
     public String toString() {

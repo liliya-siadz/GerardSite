@@ -2,6 +2,7 @@ package com.gerard.site.entity.extra;
 
 import com.gerard.site.entity.AbstractEntity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -15,7 +16,10 @@ import java.sql.Date;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class WeddingEntity extends AbstractEntity<Integer> {
+public class WeddingEntity extends AbstractEntity<Integer> implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
     /**
      * Represents column 'date_planned' in the table <i>gerard.wedding</i> .
      */

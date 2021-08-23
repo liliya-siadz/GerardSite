@@ -2,6 +2,8 @@ package com.gerard.site.entity.extra;
 
 import com.gerard.site.entity.AbstractEntity;
 
+import java.io.Serializable;
+
 /**
  * Class represents single record from table <i>gerard.achievement_type</i> ,
  * note that primary key of record is represented
@@ -13,16 +15,18 @@ import com.gerard.site.entity.AbstractEntity;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class AchievementTypeEntity extends AbstractEntity<String> {
+public class AchievementTypeEntity extends AbstractEntity<String> implements Serializable {
+    private static final long serialVersionUID=1L;
+
     /**
      * Represents column 'achievement_type_descr' in the table <i>gerard.app_user</i> .
      */
     private String achievementTypeDescr;
 
     /**
-     * Represents column 'is_active' in the table <i>gerard.app_user</i> .
+     * Represents column 'active' in the table <i>gerard.app_user</i> .
      */
-    private boolean isActive;
+    private boolean active;
 
     public AchievementTypeEntity() {
         throw new UnsupportedOperationException();
@@ -37,11 +41,11 @@ public class AchievementTypeEntity extends AbstractEntity<String> {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        this.isActive = active;
+        this.active = active;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class AchievementTypeEntity extends AbstractEntity<String> {
         hashcode = hash * hashcode + (achievementTypeDescr == null
                                       ? 0
                                       : achievementTypeDescr.hashCode());
-        hashcode = hash * hashcode + (isActive ? 1 : 0);
+        hashcode = hash * hashcode + (active ? 1 : 0);
         return hashcode;
     }
 
@@ -73,7 +77,7 @@ public class AchievementTypeEntity extends AbstractEntity<String> {
         return "AchievementType{"
                 + "id=" + id
                 + ", achievementTypeDescr='" + achievementTypeDescr + '\''
-                + ", isActive=" + isActive
+                + ", isActive=" + active
                 + '}';
     }
 }

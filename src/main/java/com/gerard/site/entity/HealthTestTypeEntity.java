@@ -2,6 +2,8 @@ package com.gerard.site.entity.extra;
 
 import com.gerard.site.entity.AbstractEntity;
 
+import java.io.Serializable;
+
 /**
  * Class represents single record from table <i>gerard.health_test_type</i> ,
  * note that primary key of record is represented
@@ -13,16 +15,19 @@ import com.gerard.site.entity.AbstractEntity;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class HealthTestTypeEntity extends AbstractEntity<String> {
+public class HealthTestTypeEntity extends AbstractEntity<String> implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
     /**
      * Represents column 'health_test_type_descr' in the table <i>gerard.health_test_type</i> .
      */
     private String healthTestTypeDescr;
 
     /**
-     * Represents column 'is_active' in the table <i>gerard.health_test_type</i> .
+     * Represents column 'active' in the table <i>gerard.health_test_type</i> .
      */
-    private boolean isActive;
+    private boolean active;
 
     public HealthTestTypeEntity() {
         throw new UnsupportedOperationException();
@@ -37,11 +42,11 @@ public class HealthTestTypeEntity extends AbstractEntity<String> {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        this.isActive = active;
+        this.active = active;
     }
 
     @Override
@@ -62,7 +67,7 @@ public class HealthTestTypeEntity extends AbstractEntity<String> {
         int hash = 7;
         int hashcode = super.hashCode();
         hashcode = hash * hashcode + (healthTestTypeDescr == null ? 0 : healthTestTypeDescr.hashCode());
-        hashcode = hash * hashcode + (isActive ? 1 : 0);
+        hashcode = hash * hashcode + (active ? 1 : 0);
         return hashcode;
     }
 
@@ -71,7 +76,7 @@ public class HealthTestTypeEntity extends AbstractEntity<String> {
         return "HealthTestType{"
                 + "id=" + id
                 + ", healthTestTypeDescr='" + healthTestTypeDescr + '\''
-                + ", isActive=" + isActive
+                + ", isActive=" + active
                 + '}';
     }
 }
