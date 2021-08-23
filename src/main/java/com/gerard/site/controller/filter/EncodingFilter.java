@@ -1,8 +1,6 @@
 package com.gerard.site.controller.filter;
 
 import jakarta.servlet.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 

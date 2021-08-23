@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class BlackListFilter implements Filter {
     private String defaultLocation;
-    private static final Logger LOGGER = LogManager.getLogger(EncodingFilter.class);
+    private static final Logger LOGGER = LogManager.getLogger(BlackListFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
