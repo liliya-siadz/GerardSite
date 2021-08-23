@@ -15,23 +15,13 @@ import java.util.Optional;
 
 enum LoginAction implements Action {
 
-    INSTANCE("loginValidationMap",
-            "isUserFound",
-                                      "admin");
+    INSTANCE;
 
-    private final String validationMapNameAttributeName;
-    private final String authenticationResultAttributeName;
-    private final String authenticationIdentifierAttributeName;
+    private final String validationMapNameAttributeName="loginValidationMap";
+    private final String authenticationResultAttributeName= "isUserFound";
+    private final String authenticationIdentifierAttributeName = "admin";
 
     private static final Logger LOGGER = LogManager.getLogger(LoginAction.class);
-
-    LoginAction(String validationMapNameAttributeName,
-                String authenticationResultAttributeName,
-                String authenticationIdentifierAttributeName) {
-        this.validationMapNameAttributeName = validationMapNameAttributeName;
-        this.authenticationResultAttributeName = authenticationResultAttributeName;
-        this.authenticationIdentifierAttributeName = authenticationIdentifierAttributeName;
-    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

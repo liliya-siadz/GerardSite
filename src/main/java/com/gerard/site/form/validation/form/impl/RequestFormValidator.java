@@ -1,14 +1,15 @@
-package com.gerard.site.validation.form.impl;
+package com.gerard.site.form.validation.form.impl;
 
 import com.gerard.site.form.RequestForm;
-import com.gerard.site.validation.field.FieldsValidators;
-import com.gerard.site.validation.form.FormValidator;
+import com.gerard.site.form.validation.field.FieldsValidators;
+import com.gerard.site.form.validation.form.FormValidator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gerard.site.form.RequestForm.*;
+import static com.gerard.site.form.validation.field.Fields.*;
 
+//todo simplify how
 public class RequestFormValidator implements FormValidator<RequestForm> {
     @Override
     public Map<String, Boolean> validateForm(RequestForm requestForm) {

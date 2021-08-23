@@ -1,6 +1,6 @@
 package com.gerard.site.form;
 
-import com.gerard.site.validation.form.FormValidator;
+import com.gerard.site.form.validation.form.FormValidator;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;

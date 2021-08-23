@@ -1,4 +1,4 @@
-package com.gerard.site.validation.field;
+package com.gerard.site.form.validation.field;
 
 @FunctionalInterface
 public interface FieldValidator<T> {

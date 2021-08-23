@@ -14,7 +14,7 @@
 <body>
 <%--+ ADD button  1 MAKE_REQUEST--%>
 <%@ include file="fragment/headers/header.jsp" %>
-    <c:set var="puppies" value="${allPuppies}" scope="application"/>
+    <c:set var="puppies" value="${allPuppies}" scope="session"/>
     <c:if test="${empty chosenPuppy and not isRequestMade}">
     <form method="GET"
           action="${applicationPath}${controllerUrl}">
@@ -35,11 +35,35 @@
     </form>
     </c:if>
     <c:if test="${not empty chosenPuppy and not isRequestMade}">
+        <%@ include file="fragment/chosen_puppy.jsp" %>
         <form method="POST"
               action="${applicationPath}${controllerUrl}">
+                    <h3>
+                        <b><fmt:message key="page.make_request.request_form.label"/></b>
+                    </h3>
             <label for="content">
-                PLACE CONTENT HERE:
-                <textarea value="content" name="content"> </textarea>
+                <fmt:message key="field.content.label"/>
+                <textarea value="content"> </textarea>
+            </label>
+            <label for="email">
+                <fmt:message key="field.email.label"/>
+                <input value="email" name="email"/>
+            </label>
+            <label for="name">
+                <fmt:message key="field.name.label"/>
+                <input value="name" name="name"/>
+            </label>
+            <label for="surname">
+                <fmt:message key="field.surname.label"/>
+                <input value="surname" name="surname"/>
+            </label>
+            <label for="patronymic">
+                <fmt:message key="field.patronymic.label"/>
+                <input value="patronymic" name="patronymic"/>
+            </label>
+            <label for="phone">
+                <fmt:message key="field.phone.label"/>
+                <input value="phone" name="phone"/>
             </label>
             <button type="submit"
                     name="command"
@@ -49,7 +73,6 @@
                 <fmt:message key="page.make_request.button.make_request.name"/>
             </button>
         </form>
-        <%@ include file="fragment/chosen_puppy.jsp" %>
         <form method="GET"
           action="${applicationPath}${controllerUrl}">
         <button type="submit"
@@ -63,10 +86,7 @@
     </c:if>
     <c:if test="${not empty isRequestMade and isRequestMade}">
         <div style="display: block;text-align: center; margin-left:5%" >
-            <h2><fmt:message key="page.make_request.result.text"/></h2>
-                <h3><b><fmt:message key="page.dogs.view.title.description"/></b>
-                    <c:out value="${content}"/>
-                </h3>
+<%--          display response app user + request +dog--%>
             <form method="POST"
                   action="${applicationPath}${controllerUrl}">
                 <button type="submit"
@@ -78,7 +98,7 @@
                 </button>
             </form>
             <hr>
-            <%@include file="fragment/chosen_puppy.jsp"%>
+<%--            <%@include file="fragment/chosen_puppy.jsp"%>--%>
         </div>
     </c:if>
 <%@ include file="fragment/footers/footer.jsp" %>

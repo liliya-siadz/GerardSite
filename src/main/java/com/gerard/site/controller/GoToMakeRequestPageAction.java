@@ -18,6 +18,7 @@ public enum GoToMakeRequestPageAction implements Action {
                           HttpServletResponse response)
             throws ServiceException {
         List<DogEntity> allPuppies =  DogService.getInstance().provideAllPuppies();
+        InvalidateSessionAction.INSTANCE.execute(request,response);
         request.setAttribute(viewAttributeName, allPuppies);
         return Page.MAKE_REQUEST.getUrl();
     }

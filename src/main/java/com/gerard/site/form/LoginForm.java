@@ -1,15 +1,15 @@
 package com.gerard.site.form;
 
-import com.gerard.site.validation.field.FieldsValidators;
-import com.gerard.site.validation.form.impl.LoginFormValidator;
+import com.gerard.site.form.validation.field.FieldsValidators;
+import com.gerard.site.form.validation.form.impl.LoginFormValidator;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
+import static com.gerard.site.form.validation.field.Fields.*;
 
 public class LoginForm extends AbstractForm<LoginFormValidator> {
 
-    public static final String EMAIL_PARAMETER_NAME = "email";
-    public static final String PASSWORD_PARAMETER_NAME = "password";
+
     private String email;
     private String password;
 

@@ -1,4 +1,4 @@
-package com.gerard.site.validation.form;
+package com.gerard.site.form.validation.form;
 
 import com.gerard.site.form.AbstractForm;
 

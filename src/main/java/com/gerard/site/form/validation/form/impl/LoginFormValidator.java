@@ -1,12 +1,12 @@
-package com.gerard.site.validation.form.impl;
+package com.gerard.site.form.validation.form.impl;
 
 import com.gerard.site.form.LoginForm;
-import com.gerard.site.validation.form.FormValidator;
-import com.gerard.site.validation.field.FieldsValidators;
+import com.gerard.site.form.validation.form.FormValidator;
+import com.gerard.site.form.validation.field.FieldsValidators;
 
 import java.util.HashMap;
 import java.util.Map;
-import static com.gerard.site.form.LoginForm.*;
+import static com.gerard.site.form.validation.field.Fields.*;
 
 public class LoginFormValidator implements FormValidator<LoginForm> {
     @Override
