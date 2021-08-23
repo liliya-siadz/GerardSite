@@ -23,19 +23,19 @@
                 <button type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn"
-                        value="GET_ALL_DOGS">
+                        value="GO_TO_DOGS_PAGE">
                     <fmt:message key="page.dogs.header"/>
                 </button>
                 <button type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn"
-                        value="GET_ALL_PUPPIES">
+                        value="GO_TO_PUPPIES_PAGE">
                     <fmt:message key="page.puppies.header"/>
                 </button>
                 <button type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn"
-                        value="GET_ALL_PHOTOS">
+                        value="GO_TO_PHOTOS_PAGE">
                     <fmt:message key="page.photos.header"/>
                 </button>
                 <button type="submit"

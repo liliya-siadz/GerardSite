@@ -1,5 +1,7 @@
 package com.gerard.site.dao;
 
+import com.gerard.site.dto.RequestAndAppUserWithMessageDto;
+import com.gerard.site.entity.AppUserEntity;
 import com.gerard.site.entity.RequestEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,20 +10,21 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class RequestDao extends AbstractDao<RequestEntity> {
 
     private static RequestDao instance;
-    private static final String TABLE_NAME = "gerard.request";
-    private static final String COLUMN_LABEL_1 = "request_id";
-    private static final String COLUMN_LABEL_2 = "request_status";
-    private static final String COLUMN_LABEL_3 = "request_type";
-    private static final String COLUMN_LABEL_4 = "content";
-    private static final String COLUMN_LABEL_5 = "date_fact";
-    private static final String COLUMN_LABEL_6 = "reply";
-    private static final String COLUMN_LABEL_7 = "dog_id";
-    private static final String COLUMN_LABEL_8 = "email";
-    private static final Logger LOGGER = LogManager.getLogger(RequestDao.class);
+    static final String TABLE_NAME = "gerard.request";
+    static final String COLUMN_LABEL_1 = "request_id";
+    static final String COLUMN_LABEL_2 = "request_status";
+    static final String COLUMN_LABEL_3 = "request_type";
+    static final String COLUMN_LABEL_4 = "content";
+    static final String COLUMN_LABEL_5 = "date_fact";
+    static final String COLUMN_LABEL_6 = "reply";
+    static final String COLUMN_LABEL_7 = "dog_id";
+    static final String COLUMN_LABEL_8 = "email";
+    static final Logger LOGGER = LogManager.getLogger(RequestDao.class);
 
     private RequestDao() {
         super();
@@ -35,8 +38,8 @@ public class RequestDao extends AbstractDao<RequestEntity> {
     }
 
     @Override
-    public RequestEntity find(RequestEntity entity) throws DaoException {
-        return null;
+    public Optional<RequestEntity> find(RequestEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -50,9 +53,20 @@ public class RequestDao extends AbstractDao<RequestEntity> {
     }
 
     @Override
-    public boolean create(RequestEntity entity) throws DaoException {
-        return false;
+    public Optional<RequestEntity> create(RequestEntity entity) throws DaoException {
+        if (entity == null) {
+            throw new DaoException("Parameter 'entity' is null");
+        }
+        throw new UnsupportedOperationException();
     }
+
+    public Optional<RequestAndAppUserWithMessageDto> createRequestWithUser(RequestEntity entity, AppUserEntity appUserEntity) throws DaoException {
+        if (entity == null) {
+            throw new DaoException("Parameter 'entity' is null");
+        }
+        throw new UnsupportedOperationException();
+    }
+
 
     @Override
     public RequestEntity parseResultSet(ResultSet resultSet) throws SQLException {
@@ -80,5 +94,4 @@ public class RequestDao extends AbstractDao<RequestEntity> {
                 .build();
         return requestEntity;
     }
-
 }

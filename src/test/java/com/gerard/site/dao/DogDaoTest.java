@@ -5,6 +5,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
+import java.util.Optional;
+
 import static org.testng.Assert.*;
 
 public class DogDaoTest {
@@ -14,8 +16,8 @@ public class DogDaoTest {
     public void testFind() throws DaoException {
         DogEntity existingDogEntity = new DogEntity();
         existingDogEntity.setId(1);
-        DogEntity dogEntity = DogDao.getInstance().find(existingDogEntity);
+        Optional<DogEntity> dogEntity = DogDao.getInstance().find(existingDogEntity);
         LOGGER.info(dogEntity);
-        assertNotNull(dogEntity);
+        assertTrue(dogEntity.isPresent());
     }
 }

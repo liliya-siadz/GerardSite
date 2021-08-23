@@ -18,25 +18,30 @@
     <div class="container-fluid">
         <%@ include file="../logo.jsp" %>
         <%@ include file="../switch_locale_panel.jsp" %>
+        <a href="${pageContext.request.contextPath}/home"
+           role="button"
+           class="btn btn-xs navbar-btn headerLink">
+            <fmt:message key="page.home.header"/>
+        </a>
             <div class="btn-group btn-group-xs" role="header">
-            <form method="GET"
-              action="${applicationPath}${controllerUrl}">
-            <button type="submit"
-                    name="command"
-                    class="btn btn-xs navbar-btn headerButton"
-                    value="GET_ALL_DOGS">
+                <form   method="GET"
+                        action="${applicationPath}${controllerUrl}">
+                        <button type="submit"
+                        name="command"
+                        class="btn btn-xs navbar-btn headerButton"
+                        value="GO_TO_ADMIN_DOGS_PAGE">
                 <fmt:message key="page.admin_dogs.title"/>
                     <button type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn headerButton"
-                        value="GET_ALL_REQUESTS">
+                        value="GO_TO_ADMIN_REQUESTS_PAGE">
                     <fmt:message key="page.admin_requests.header"/>
                     <button type="submit"
                             name="command"
                             class="btn btn-xs navbar-btn headerButton"
                             value="LOGOUT">
                    <fmt:message key="admin.button.logout.name"/>
-        </form>
+            </form>
             </div>
     </div>
 </nav>

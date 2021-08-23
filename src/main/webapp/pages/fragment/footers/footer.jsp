@@ -13,7 +13,7 @@
     <div class="row">
         <small>
             <div class="col-md-1">
-                <a href="home">
+                <a href="${pageContext.request.contextPath}/home">
             <fmt:message key="footer.link.home.name"/>
                 </a>
             </div>

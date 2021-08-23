@@ -1,21 +1,21 @@
 package com.gerard.site.form;
 
-import com.gerard.site.form.validation.field.FieldsValidators;
-import com.gerard.site.form.validation.form.impl.LoginFormValidator;
-import jakarta.servlet.http.HttpServletRequest;
+import com.gerard.site.validator.field.FieldsValidators;
 
-import java.util.List;
-import static com.gerard.site.form.validation.field.Fields.*;
+import java.util.HashMap;
+import java.util.Map;
 
-public class LoginForm extends AbstractForm<LoginFormValidator> {
+import static com.gerard.site.validator.field.Fields.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.field.Fields.PASSWORD_PARAMETER_NAME;
 
+public class LoginForm implements FormValidator {
 
     private String email;
     private String password;
 
-    public LoginForm(HttpServletRequest request) {
-        super(request, List.of(EMAIL_PARAMETER_NAME, PASSWORD_PARAMETER_NAME), new LoginFormValidator());
-        FieldsValidators.init();
+    public LoginForm(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -26,9 +26,15 @@ public class LoginForm extends AbstractForm<LoginFormValidator> {
         return password;
     }
 
-    protected void readInputs(HttpServletRequest request) {
-        email = request.getParameter(EMAIL_PARAMETER_NAME);
-        password = request.getParameter(PASSWORD_PARAMETER_NAME);
+    @Override
+    public Map<String, Boolean> validateForm() {
+        Map<String, Boolean> validationResult = new HashMap<>();
+        validationResult.put(EMAIL_PARAMETER_NAME,
+                FieldsValidators.getValidator(EMAIL_PARAMETER_NAME)
+                        .isValid(email));
+        validationResult.put(PASSWORD_PARAMETER_NAME,
+                FieldsValidators.getValidator(PASSWORD_PARAMETER_NAME)
+                        .isValid(password));
+        return validationResult;
     }
-
 }

@@ -45,7 +45,7 @@ public class AppUserEntity extends AbstractEntity<Integer> {
     /**
      * Represents column 'phone' in the table <i>gerard.app_user</i> .
      */
-    private int phone;
+    private String phone;
 
     /**
      * Represents column 'is_admin' in the table <i>gerard.app_user</i> .
@@ -88,11 +88,11 @@ public class AppUserEntity extends AbstractEntity<Integer> {
         this.patronymic = patronymic;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -125,8 +125,8 @@ public class AppUserEntity extends AbstractEntity<Integer> {
         hashcode = hash * hashcode + (name == null ? 0 : name.hashCode());
         hashcode = hash * hashcode + (surname == null ? 0 : surname.hashCode());
         hashcode = hash * hashcode + (patronymic == null ? 0 : patronymic.hashCode());
+        hashcode = hash * hashcode + (phone == null ? 0 : phone.hashCode());
         hashcode = hash * hashcode + (isAdmin ? 1 : 0);
-        hashcode = hash * hashcode + phone;
         return hashcode;
     }
 
@@ -181,7 +181,7 @@ public class AppUserEntity extends AbstractEntity<Integer> {
             return this;
         }
 
-        public Builder phone(int phone) {
+        public Builder phone(String phone) {
             appUserEntity.phone = phone;
             return this;
         }

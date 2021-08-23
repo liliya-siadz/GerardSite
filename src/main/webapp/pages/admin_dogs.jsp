@@ -12,6 +12,10 @@
     <title><fmt:message key="page.admin_dogs.title"/></title>
 </head>
 <body>
+
+
+<%@ include file="fragment/headers/admin_header.jsp" %>
+ADMIN DOGS
 <%-- parse dogs --%>
 <%--
 + add button 1 ADD_DOG--%>
@@ -19,7 +23,6 @@
 + edit button 2 EDIT_DOG
 + delete button 3 DELETE_DOG--%>
 
-<%@ include file="fragment/headers/admin_header.jsp" %>
 <%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

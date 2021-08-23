@@ -1,8 +1,7 @@
 package com.gerard.site.tag;
 
-import com.gerard.site.localization.Language;
+import com.gerard.site.util.localization.Language;
 import com.gerard.site.util.HttpServletRequestUtil;
-import com.gerard.site.util.CustomStringUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,10 +11,8 @@ import org.apache.logging.log4j.Logger;
 
 import jakarta.servlet.jsp.tagext.TagSupport;
 
-import java.util.Set;
-
-import static com.gerard.site.localization.Language.BUNDLE_BASE_NAME_COOKIE_NAME;
-import static com.gerard.site.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
+import static com.gerard.site.util.localization.Language.BUNDLE_BASE_NAME_COOKIE_NAME;
+import static com.gerard.site.util.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
 
 /**
  * Custom JSP-tag, defines and sets in the app

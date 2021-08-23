@@ -1,5 +1,7 @@
 package com.gerard.site.controller;
 
+import com.gerard.site.controller.command.Command;
+import com.gerard.site.controller.command.CommandFactory;
 import com.gerard.site.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,20 +14,20 @@ import org.apache.logging.log4j.Logger;
  * <p>
  * To find needing route extracts special parameter from
  * request. Then uses this parameter value to find
- * and execute specified action by calling method
- * getAction() in class com.gerard.site.controller.ActionFactory
- * {@link ActionFactory#getAction(String)}.
+ * and execute specified command by calling method
+ * getCommand() in class com.gerard.site.controller.CommandFactory
+ * {@link CommandFactory#getCommand(String)}.
  * </p>
  *
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-class Router {
+public class Router {
     /**
      * Request parameter name to be extracted from the request .
-     * Is using as action identifier
+     * Is using as command identifier
      */
-    private static final String ACTION_IDENTIFIER_REQUEST_PARAMETER_NAME = "command";
+    private static final String COMMAND_IDENTIFIER_REQUEST_PARAMETER_NAME = "command";
 
     /**
      * Root directory name where must be stored all pages .
@@ -50,38 +52,40 @@ class Router {
      *
      * @param request  HTTP request to extract parameter from
      * @param response HTTP response assigned to this HTTP request
-     * @return page url
+     * @return page's url
      */
     static String prepareUrl(HttpServletRequest request, HttpServletResponse response) {
-        String command = request.getParameter(ACTION_IDENTIFIER_REQUEST_PARAMETER_NAME);
-        Action action = ActionFactory.INSTANCE.getAction(command);
-        String url;
+        String commandName = request.getParameter(COMMAND_IDENTIFIER_REQUEST_PARAMETER_NAME);
+        Command command = CommandFactory.INSTANCE.getCommand(commandName);
+        String pageUrl;
         try {
-            url = action.execute(request, response);
+            pageUrl = command.execute(request, response);
         } catch (ServiceException exception) {
-            LOGGER.fatal("Unable to prepare url for command! "
-                    + "Command name: " + command
-                    + "Action: " + action
+            LOGGER.fatal("Unable to prepare page url! "
+                    + "Command name: " + commandName
+                    + "Command: " + command
                     + exception.getMessage(), exception);
-            throw new RuntimeException("Unable to prepare target url! "
-                    + "Command name: " + command
-                    + "Action: " + action
+            throw new RuntimeException("Unable to prepare page url! "
+                    + "Command name: " + commandName
+                    + "Command: " + command
                     + "Request: " + request
                     + exception.getMessage(), exception);
         }
-        return url;
+        return pageUrl;
     }
 
     /**
-     * Prepares target page's path by extracting specified request's parameter.
+     * Prepares target page's path, uses method, than
+     * specifies page's url to it's path
+     * {@link #prepareUrl(HttpServletRequest, HttpServletResponse)}
      *
-     * @param request  HTTP request to extract parameter from
+     * @param request  HTTP request
      * @param response HTTP response assigned to this HTTP request
      * @return page path
      */
     static String preparePath(HttpServletRequest request, HttpServletResponse response) {
-        String url = prepareUrl(request, response);
-        String path =  DIRECTORY_NAME + url + FILE_EXTENSION;
-        return path;
+        String pageUrl = prepareUrl(request, response);
+        String pagePath =  DIRECTORY_NAME + pageUrl + FILE_EXTENSION;
+        return pagePath;
     }
 }

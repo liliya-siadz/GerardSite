@@ -1,6 +1,6 @@
 package com.gerard.site.util;
 
-import com.gerard.site.localization.Language;
+import com.gerard.site.util.localization.Language;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
