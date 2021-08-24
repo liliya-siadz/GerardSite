@@ -1,4 +1,4 @@
-package com.gerard.site.validator.field;
+package com.gerard.site.validator;
 
 public final class Fields {
     public static final String EMAIL_PARAMETER_NAME = "email";

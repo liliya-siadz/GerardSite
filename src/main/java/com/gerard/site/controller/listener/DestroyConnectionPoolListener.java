@@ -5,9 +5,8 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 
 public class DestroyConnectionPoolListener implements ServletContextListener {
-    //todo how check does it works
     @Override
-    public void contextDestroyed(ServletContextEvent sce) {
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
         ConnectionPool.getInstance().destroy();
     }
 }

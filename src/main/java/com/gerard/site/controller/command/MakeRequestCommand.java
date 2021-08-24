@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.Map;
 
-import static com.gerard.site.validator.field.Fields.*;
+import static com.gerard.site.validator.Fields.*;
 
 public enum MakeRequestCommand implements Command {
     INSTANCE;

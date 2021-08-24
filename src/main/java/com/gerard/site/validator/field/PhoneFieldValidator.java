@@ -1,34 +1,22 @@
 package com.gerard.site.validator.field;
 
-//        ЧИСЛОВЫЕ ЗНАЧЕНИЯ
-//        0 длина поля: кол-во знаков
-//        1 максимальное значение
-//        2 минимальное значение
-//        3 может ли быть  empty/blank/null
+import com.gerard.site.validator.FieldValidator;
 
-
-public class PhoneFieldValidator implements FieldValidator<String> {
-
-
-    private static PhoneFieldValidator instance;
-
-    private PhoneFieldValidator() {
-    }
-
-     static PhoneFieldValidator getInstance() {
-        if (instance == null) {
-            instance = new PhoneFieldValidator();
-        }
-        return instance;
-    }
-
+public enum PhoneFieldValidator implements FieldValidator<String> {
+    INSTANCE;
     @Override
-    public boolean isValid(String field) {
-        int minValue;
-        int maxValue;
-        String regex;
-        //belarus code phones:
-        //29 44 33 25
-        return true;
+    public boolean isValid(String phone) {
+        if (phone == null || phone.isBlank()) {
+            return false;
+        }
+        int strongLength = 9;
+        String validRegex = "^[25|44|33|29]\\d*";
+        return (phone.length() == strongLength)
+                && (phone.matches(validRegex));
     }
+
+    //strong length 10
+    //belarusian mobile phone number
+    //starts from 29 / 44 / 33 / 25
+    //only numbers
 }

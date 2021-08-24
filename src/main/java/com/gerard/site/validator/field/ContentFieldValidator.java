@@ -1,38 +1,23 @@
 package com.gerard.site.validator.field;
 
-public class ContentFieldValidator implements FieldValidator<String> {
+import com.gerard.site.validator.FieldValidator;
 
-    private static ContentFieldValidator instance;
-
-    private ContentFieldValidator() {
-    }
-
-     static ContentFieldValidator getInstance() {
-        if (instance == null) {
-            instance = new ContentFieldValidator();
-        }
-        return instance;
-    }
-
+public enum ContentFieldValidator implements FieldValidator<String> {
+    INSTANCE;
 
     @Override
     public boolean isValid(String content) {
-        int maxLength;
-        int minLength;
-        String regex;
-        if(content==null || content.isBlank()){
-            return true;
+        if (content == null || content.isBlank()) {
+            return false;
         }
-        return true;
-//        СТРОКОВЫЕ ЗНАЧЕНИЯ
-//        1 макс длина
-//        2 мин длина
-//        3 regex
-//
-//        ЧИСЛОВЫЕ ЗНАЧЕНИЯ
-//        0 длина поля
-//        1 максимальное значение
-//        2 минимальное значение
-//        3 может ли быть  empty/blank/null
+        int maxLength = 450;
+        int minLength = 10;
+        String validRegex = "[\\w!.?,:\s]*";
+        return (content.length() >= minLength)
+                && (content.length() <= maxLength)
+                && (content.matches(validRegex));
     }
+
+    //length between 10 and 450 symbols inclusively
+    //may has space or _ or , or ?  or !
 }

@@ -1,13 +1,13 @@
 package com.gerard.site.controller.form;
 
 import com.gerard.site.validator.FormValidator;
-import com.gerard.site.validator.field.FieldsValidators;
+import com.gerard.site.validator.FieldsValidators;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gerard.site.validator.field.Fields.EMAIL_PARAMETER_NAME;
-import static com.gerard.site.validator.field.Fields.PASSWORD_PARAMETER_NAME;
+import static com.gerard.site.validator.Fields.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.Fields.PASSWORD_PARAMETER_NAME;
 
 public class LoginForm implements FormValidator {
 

@@ -1,21 +1,22 @@
 package com.gerard.site.validator.field;
 
-public class NameFieldValidator implements FieldValidator<String> {
-    private static NameFieldValidator instance;
+import com.gerard.site.validator.FieldValidator;
 
-    private NameFieldValidator() {
-    }
-
-    public static NameFieldValidator getInstance() {
-        if (instance == null) {
-            instance = new NameFieldValidator();
-        }
-        return instance;
-    }
-
+public enum NameFieldValidator implements FieldValidator<String> {
+     INSTANCE;
 
     @Override
-    public boolean isValid(String field) {
-        return true;
+    public boolean isValid(String name) {
+        if (name == null || name.isBlank()) {
+            return false;
+        }
+        int maxLength = 250;
+        int minLength = 3;
+        String validRegex = "[\\w]*";
+        return (name.length() >= minLength)
+                && (name.length() <= maxLength)
+                && (name.matches(validRegex));
     }
+
+    //only letters, any case, for.ex: "Olga", "OLga", "OLGA"
 }

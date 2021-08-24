@@ -1,22 +1,22 @@
 package com.gerard.site.validator.field;
 
-public class PasswordFieldValidator implements FieldValidator<String> {
+import com.gerard.site.validator.FieldValidator;
 
-    private static PasswordFieldValidator instance;
-
-    private PasswordFieldValidator() {
-    }
-
-     static PasswordFieldValidator getInstance() {
-        if (instance == null) {
-            instance = new PasswordFieldValidator();
-        }
-        return instance;
-    }
-
+public enum PasswordFieldValidator implements FieldValidator<String> {
+    INSTANCE;
 
     @Override
     public boolean isValid(String password) {
-        return true;
+        if (password == null || password.isBlank()) {
+            return false;
+        }
+        int maxLength = 15;
+        int minLength = 6;
+        String validRegex = "[\\w]*";
+        return (password.length() >= minLength)
+                && (password.length() <= maxLength)
+                && (password.matches(validRegex));
     }
+
+    //
 }
