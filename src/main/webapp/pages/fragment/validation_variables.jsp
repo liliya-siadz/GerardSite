@@ -28,6 +28,14 @@
 <c:set var="nameMaxLength" value="250"/>
 <c:set var="nameMinLength" value="3"/>
 
+<fmt:message key="field.surname.validation.message"
+             var="surnameValidationMessage"
+             scope="application"/>
+
+<fmt:message key="field.patronymic.validation.message"
+             var="patronymicValidationMessage"
+             scope="application"/>
+
 
 <fmt:message key="field.content.validation.message"
              var="contentValidationMessage"

@@ -1,11 +1,12 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 public class PhotoAndDog implements Serializable {
-
+    @Serial
     private static final long serialVersionUID=1L;
 
     private String photoPath;
@@ -57,8 +58,6 @@ public class PhotoAndDog implements Serializable {
         PhotoAndDog that = (PhotoAndDog) object;
         return Objects.equals(photoPath, that.photoPath);
     }
-
-
 
     @Override
     public String toString() {

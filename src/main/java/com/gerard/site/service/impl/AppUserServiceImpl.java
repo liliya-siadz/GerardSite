@@ -3,7 +3,7 @@ package com.gerard.site.service.impl;
 import com.gerard.site.dao.impl.AppUserDaoImpl;
 import com.gerard.site.dao.impl.DaoException;
 import com.gerard.site.service.entity.AppUserEntity;
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import com.gerard.site.controller.form.LoginForm;
 import com.gerard.site.service.AppUserService;
 import com.gerard.site.service.util.BCrypt;
@@ -16,7 +16,8 @@ import java.util.Properties;
 
 public class AppUserServiceImpl implements AppUserService {
     private static AppUserServiceImpl instance;
-    private static final Logger LOGGER = LogManager.getLogger(AppUserServiceImpl.class);
+    private static final Logger LOGGER =
+            LogManager.getLogger(AppUserServiceImpl.class);
 
     private AppUserServiceImpl() {
     }

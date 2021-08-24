@@ -6,22 +6,20 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import static com.gerard.site.controller.command.CommandIdentifier.*;
 
 /**
  * Factory for providing objects that implements {@code interface Command}
  * {@link Command} .
- * Works as command-key command-value map, singleton object, realizes
- * pattern factory .
+ * Works as command-key command-value map, realizes singleton factory .
  *
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
 public enum CommandFactory {
     INSTANCE;
-
     private static final Logger LOGGER = LogManager.getLogger(CommandFactory.class);
+
     /**
      * Stores commands identifiers mapped to their commands .
      */
@@ -39,6 +37,7 @@ public enum CommandFactory {
         commands.put(SET_LOCALE_TO_EN, SetLocaleToEnCommand.INSTANCE);
         commands.put(SET_LOCALE_TO_BE, SetLocaleToBeCommand.INSTANCE);
         commands.put(SET_LOCALE_TO_RU, SetLocaleToRuCommand.INSTANCE);
+
         commands.put(ERROR, ErrorPageCommand.INSTANCE);
         commands.put(ERROR_404, Error404PageCommand.INSTANCE);
 
@@ -46,34 +45,33 @@ public enum CommandFactory {
         commands.put(GO_TO_DOGS_PAGE, GoToDogsPageCommand.INSTANCE);
         commands.put(GO_TO_PUPPIES_PAGE, GoToPuppiesPageCommand.INSTANCE);
         commands.put(GO_TO_PHOTOS_PAGE, GoToPhotosPageCommand.INSTANCE);
-        commands.put(GO_TO_ADMIN_PHOTOS_PAGE, GoToAdminPhotosPageCommand.INSTANCE);
-
-        commands.put(GO_TO_ADMIN_DOGS_PAGE, GoToAdminDogsPageCommand.INSTANCE);
-        commands.put(GO_TO_ADMIN_REQUESTS_PAGE, GoToAdminRequestsPageCommand.INSTANCE);
-        commands.put(ADD_DOG, AddPhotoCommand.INSTANCE);
-        commands.put(DELETE_PHOTO, DeletePhotoCommand.INSTANCE);
-
-
 
         commands.put(DISPLAY_CHOSEN_PUPPY, DisplayChosenPuppyCommand.INSTANCE);
         commands.put(MAKE_REQUEST, MakeRequestCommand.INSTANCE);
+
+        commands.put(GO_TO_ADMIN_PHOTOS_PAGE, GoToAdminPhotosPageCommand.INSTANCE);
+        commands.put(GO_TO_ADMIN_DOGS_PAGE, GoToAdminDogsPageCommand.INSTANCE);
+        commands.put(GO_TO_ADMIN_REQUESTS_PAGE, GoToAdminRequestsPageCommand.INSTANCE);
+
+        commands.put(ADD_PHOTO, AddPhotoCommand.INSTANCE);
+
         commands.put(INVALIDATE_SESSION, InvalidateSessionCommand.INSTANCE);
     }
 
     /**
-     * Defines command by incoming it's identifier,
-     * if command's identifier is unknown,
-     * sets default command's identifier
-     * {@link CommandFactory#defaultCommandIdentifier}
+     * Defines command by it's identifier,
+     * identifier is unknown, sets default command's identifier
+     * {@link CommandFactory#defaultCommandIdentifier} .
      *
-     * @param command incoming command's identifier,
+     * @param command command's identifier,
      *                presents key from commands map
      *                {@link CommandFactory#commands},
-     *                if command's identifier is unknown
-     *                default command's identifier will be used
-     * @return command specified to command's identifier,
+     *                if identifier is unknown
+     *                will be used default command's identifier
+     * @return command specified to command's identifier
+     *         {@link Command},
      *         presents value from commands map
-     *         {@link CommandFactory#commands},
+     * {@link CommandFactory#commands},
      */
     public Command getCommand(String command) {
         CommandIdentifier targetCommandIdentifier;

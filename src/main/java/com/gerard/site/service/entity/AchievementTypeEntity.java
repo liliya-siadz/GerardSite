@@ -1,5 +1,6 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -13,16 +14,21 @@ import java.io.Serializable;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class AchievementTypeEntity extends AbstractEntity<String> implements Serializable {
-    private static final long serialVersionUID=1L;
+public class AchievementTypeEntity
+        extends AbstractEntity<String>
+        implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
-     * Represents column 'achievement_type_descr' in the table <i>gerard.app_user</i> .
+     * Represents column 'achievement_type_descr'
+     * in the table <i>gerard.app_user</i> .
      */
     private String achievementTypeDescr;
 
     /**
-     * Represents column 'active' in the table <i>gerard.app_user</i> .
+     * Represents column 'active'
+     * in the table <i>gerard.app_user</i> .
      */
     private boolean active;
 
@@ -64,8 +70,8 @@ public class AchievementTypeEntity extends AbstractEntity<String> implements Ser
         int hash = 7;
         int hashcode = super.hashCode();
         hashcode = hash * hashcode + (achievementTypeDescr == null
-                                      ? 0
-                                      : achievementTypeDescr.hashCode());
+                ? 0
+                : achievementTypeDescr.hashCode());
         hashcode = hash * hashcode + (active ? 1 : 0);
         return hashcode;
     }

@@ -6,5 +6,6 @@ import com.gerard.site.service.entity.RequestAndAppUserAndDog;
 import java.util.List;
 
 public interface RequestDao {
-    List<RequestAndAppUserAndDog> selectAllRequestsAndAppUserAndDog() throws DaoException;
+    List<RequestAndAppUserAndDog> selectAllRequestsAndAppUserAndDog()
+            throws DaoException;
 }

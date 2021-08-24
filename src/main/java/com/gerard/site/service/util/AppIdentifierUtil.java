@@ -80,7 +80,7 @@ public class AppIdentifierUtil {
                     }
                 } catch (IOException exception) {
                     LOGGER.error("Errors while loading resource: " + path
-                    + exception.getMessage(), exception);
+                            + exception.getMessage(), exception);
                 }
             }
         } catch (URISyntaxException exception) {

@@ -1,6 +1,5 @@
 package com.gerard.site.controller.form;
 
-import com.gerard.site.validator.FormValidator;
 import com.gerard.site.validator.field.FieldValidatorFactory;
 
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import static com.gerard.site.validator.field.FieldIdentifier.EMAIL_PARAMETER_NA
 import static com.gerard.site.validator.field.FieldIdentifier.PASSWORD_PARAMETER_NAME;
 
 public class LoginForm implements FormValidator {
-
     private String email;
     private String password;
 
@@ -49,7 +47,8 @@ public class LoginForm implements FormValidator {
             return false;
         }
         LoginForm loginForm = (LoginForm) object;
-        return Objects.equals(email, loginForm.email) && Objects.equals(password, loginForm.password);
+        return Objects.equals(email, loginForm.email)
+                && Objects.equals(password, loginForm.password);
     }
 
     @Override

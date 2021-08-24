@@ -1,5 +1,6 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -15,28 +16,32 @@ import java.sql.Date;
  * @version 1.0
  */
 public class PhotoEntity extends AbstractEntity<Integer> implements Serializable {
+    @Serial
     private static final long serialVersionUID=1L;
 
-
     /**
-     * Represents column 'path' in the table <i>gerard.photo</i> .
+     * Represents column 'path'
+     * in the table <i>gerard.photo</i> .
      */
     private String photoPath;
 
     /**
-     * Represents column 'name' in the table <i>gerard.photo</i> .
+     * Represents column 'name'
+     * in the table <i>gerard.photo</i> .
      */
     private String name;
 
     /**
-     * Represents column 'dog_id' in the table <i>gerard.photo</i> .
+     * Represents column 'dog_id'
+     * in the table <i>gerard.photo</i> .
      * Can be null value in the table
      */
     private int dogId;
 
 
     /**
-     * Represents column 'photo_date' in the table <i>gerard.photo</i> .
+     * Represents column 'photo_date'
+     * in the table <i>gerard.photo</i> .
      * Can be null value in the table
      */
     private Date photoDate;
@@ -75,8 +80,6 @@ public class PhotoEntity extends AbstractEntity<Integer> implements Serializable
     public void setPhotoDate(Date photoDate) {
         this.photoDate = photoDate;
     }
-
-
 
     @Override
     public boolean equals(Object object) {

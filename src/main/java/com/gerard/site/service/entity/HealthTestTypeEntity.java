@@ -1,5 +1,6 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,15 +16,18 @@ import java.io.Serializable;
  */
 public class HealthTestTypeEntity extends AbstractEntity<String> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID=1L;
 
     /**
-     * Represents column 'health_test_type_descr' in the table <i>gerard.health_test_type</i> .
+     * Represents column 'health_test_type_descr'
+     * in the table <i>gerard.health_test_type</i> .
      */
     private String healthTestTypeDescr;
 
     /**
-     * Represents column 'active' in the table <i>gerard.health_test_type</i> .
+     * Represents column 'active'
+     * in the table <i>gerard.health_test_type</i> .
      */
     private boolean active;
 
@@ -64,7 +68,8 @@ public class HealthTestTypeEntity extends AbstractEntity<String> implements Seri
     public int hashCode() {
         int hash = 7;
         int hashcode = super.hashCode();
-        hashcode = hash * hashcode + (healthTestTypeDescr == null ? 0 : healthTestTypeDescr.hashCode());
+        hashcode = hash * hashcode
+                + (healthTestTypeDescr == null ? 0 : healthTestTypeDescr.hashCode());
         hashcode = hash * hashcode + (active ? 1 : 0);
         return hashcode;
     }

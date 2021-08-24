@@ -1,10 +1,10 @@
 package com.gerard.site.controller.form;
 
-import com.gerard.site.validator.FormValidator;
 import com.gerard.site.validator.field.FieldValidatorFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_NAME_PARAMETER_NAME;
 import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
@@ -14,14 +14,12 @@ import static com.gerard.site.validator.field.FieldIdentifier.EMAIL_PARAMETER_NA
 import static com.gerard.site.validator.field.FieldIdentifier.PHONE_PARAMETER_NAME;
 
 public class RequestForm implements FormValidator {
-
     private String email;
     private String content;
     private String name;
     private String surname;
     private String patronymic;
     private String phone;
-
 
     public RequestForm(String email,
                        String content,
@@ -34,7 +32,6 @@ public class RequestForm implements FormValidator {
     public String getEmail() {
         return email;
     }
-
 
 
     public String getContent() {
@@ -83,5 +80,40 @@ public class RequestForm implements FormValidator {
                 FieldValidatorFactory.getValidator(PHONE_PARAMETER_NAME)
                         .isValid(phone));
         return validationResult;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        RequestForm that = (RequestForm) object;
+        return Objects.equals(email, that.email)
+                && Objects.equals(content, that.content)
+                && Objects.equals(name, that.name)
+                && Objects.equals(surname, that.surname)
+                && Objects.equals(patronymic, that.patronymic)
+                && Objects.equals(phone, that.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, content, name, surname, patronymic, phone);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("RequestForm{");
+        sb.append("email='").append(email).append('\'');
+        sb.append(", content='").append(content).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", patronymic='").append(patronymic).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

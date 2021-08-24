@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * only 'GET' and 'POST' HTTP requests, works as role controller .
  * <p>Redirects 'POST' requests . Forwards 'GET' requests .
  * Uses class Router {@link Router}
- * for preparing url and preparing location
+ * for preparing page url and preparing page location,
  * for redirecting and forwarding respectively .
  * </p>
  *

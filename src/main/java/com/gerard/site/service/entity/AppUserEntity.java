@@ -1,5 +1,6 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -21,39 +22,44 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class AppUserEntity extends AbstractEntity<Integer> implements Serializable {
-
+    @Serial
     private static final long serialVersionUID=1L;
 
-
     /**
-     * Represents column 'email' in the table <i>gerard.app_user</i> .
+     * Represents column 'email'
+     * in the table <i>gerard.app_user</i> .
      */
     private String email;
 
     /**
-     * Represents column 'name' in the table <i>gerard.app_user</i> .
+     * Represents column 'name'
+     * in the table <i>gerard.app_user</i> .
      */
     private String name;
 
     /**
-     * Represents column 'surname' in the table <i>gerard.app_user</i> .
+     * Represents column 'surname'
+     * in the table <i>gerard.app_user</i> .
      * Can be null value in the table
      */
     private String surname;
 
     /**
-     * Represents column 'patronymic' in the table <i>gerard.app_user</i> .
+     * Represents column 'patronymic'
+     * in the table <i>gerard.app_user</i> .
      * Can be null value in the table
      */
     private String patronymic;
 
     /**
-     * Represents column 'phone' in the table <i>gerard.app_user</i> .
+     * Represents column 'phone'
+     * in the table <i>gerard.app_user</i> .
      */
     private String phone;
 
     /**
-     * Represents column 'admin' in the table <i>gerard.app_user</i> .
+     * Represents column 'admin'
+     * in the table <i>gerard.app_user</i> .
      */
     private boolean admin;
 

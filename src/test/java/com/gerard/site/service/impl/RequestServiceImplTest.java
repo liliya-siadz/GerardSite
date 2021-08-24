@@ -1,7 +1,7 @@
 package com.gerard.site.service.impl;
 
 import com.gerard.site.service.entity.RequestAndAppUserAndDog;
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;

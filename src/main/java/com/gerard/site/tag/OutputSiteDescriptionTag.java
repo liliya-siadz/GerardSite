@@ -35,7 +35,6 @@ import java.util.Optional;
  * @see SingleDocDomParser
  */
 public class OutputSiteDescriptionTag extends TagSupport {
-
     /**
      * URI for finding description file .
      */

@@ -1,5 +1,6 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -14,22 +15,27 @@ import java.sql.Date;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
-public class AchievementEntity extends AbstractEntity<Integer> implements Serializable {
-
-    private static final long serialVersionUID=1L;
+public class AchievementEntity
+        extends AbstractEntity<Integer>
+        implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
-     * Represents column 'achievement_type' in the table <i>gerard.achievement</i>.
+     * Represents column 'achievement_type'
+     * in the table <i>gerard.achievement</i>.
      */
     private String achievementType;
 
     /**
-     * Represents column 'dog_id' in the table <i>gerard.achievement</i>.
+     * Represents column 'dog_id'
+     * in the table <i>gerard.achievement</i>.
      */
     private int dogId;
 
     /**
-     * Represents column 'achievement_date' in the table <i>gerard.achievement</i>.
+     * Represents column 'achievement_date'
+     * in the table <i>gerard.achievement</i>.
      */
     private Date achievementDate;
 
@@ -78,9 +84,11 @@ public class AchievementEntity extends AbstractEntity<Integer> implements Serial
     public int hashCode() {
         int hash = 7;
         int hashcode = super.hashCode();
-        hashcode = hash * hashcode + (achievementType == null ? 0 : achievementType.hashCode());
+        hashcode = hash * hashcode
+                + (achievementType == null ? 0 : achievementType.hashCode());
         hashcode = hash * hashcode + dogId;
-        hashcode = hash * hashcode + (achievementDate == null ? 0 : achievementDate.hashCode());
+        hashcode = hash * hashcode
+                + (achievementDate == null ? 0 : achievementDate.hashCode());
         return hashcode;
     }
 

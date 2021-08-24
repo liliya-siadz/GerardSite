@@ -1,6 +1,6 @@
 package com.gerard.site.tag;
 
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.util.AppIdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,9 +30,7 @@ import java.util.Optional;
  * @see SingleDocDomParser#getChildElementContent(String)
  */
 public class SingleDocDomParser {
-
-    private static final Logger LOGGER =
-            LogManager.getLogger(SingleDocDomParser.class);
+    private static final Logger LOGGER = LogManager.getLogger(SingleDocDomParser.class);
 
     /**
      * Document url that is used for parsing .

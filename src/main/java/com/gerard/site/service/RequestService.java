@@ -1,9 +1,7 @@
 package com.gerard.site.service;
 
 
-import com.gerard.site.dao.impl.DaoException;
 import com.gerard.site.service.entity.RequestAndAppUserAndDog;
-import com.gerard.site.exception.ServiceException;
 
 import java.util.List;
 

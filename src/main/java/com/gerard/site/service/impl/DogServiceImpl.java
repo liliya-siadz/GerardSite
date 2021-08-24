@@ -3,7 +3,7 @@ package com.gerard.site.service.impl;
 import com.gerard.site.dao.impl.DaoException;
 import com.gerard.site.dao.impl.DogDaoImpl;
 import com.gerard.site.service.entity.DogEntity;
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.DogService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,13 +17,15 @@ import java.util.function.ToLongFunction;
 
 public class DogServiceImpl implements DogService {
     private static DogServiceImpl instance;
-    private static final Logger LOGGER = LogManager.getLogger(DogServiceImpl.class);
     private static final int PUPPY_AGE_MAX_MONTHS_QUANTITY = 8;
-    private DogServiceImpl(){
+    private static final Logger LOGGER =
+            LogManager.getLogger(DogServiceImpl.class);
+
+    private DogServiceImpl() {
     }
 
     public static DogServiceImpl getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new DogServiceImpl();
         }
         return instance;
@@ -31,8 +33,8 @@ public class DogServiceImpl implements DogService {
 
     @Override
     public Optional<DogEntity> find(int id) throws ServiceException {
-       DogEntity dogEntity = new DogEntity();
-       dogEntity.setId(id);
+        DogEntity dogEntity = new DogEntity();
+        dogEntity.setId(id);
         try {
             Optional<DogEntity> foundDog = DogDaoImpl.getInstance().find(dogEntity);
             return foundDog;
@@ -82,15 +84,15 @@ public class DogServiceImpl implements DogService {
     @Override
     public List<DogEntity> provideAllPuppies() throws ServiceException {
         List<DogEntity> allDogs = provideAllDogs();
-        List<DogEntity> allPuppies =  allDogs.stream().filter(new IsPuppy()).toList();
+        List<DogEntity> allPuppies = allDogs.stream().filter(new IsPuppy()).toList();
         return allPuppies;
     }
 
     public class IsPuppy implements Predicate<DogEntity> {
         @Override
         public boolean test(DogEntity dogEntity) {
-             long dogAgeInMoths = new DogAge().applyAsLong(dogEntity);
-             return dogAgeInMoths < PUPPY_AGE_MAX_MONTHS_QUANTITY;
+            long dogAgeInMoths = new DogAge().applyAsLong(dogEntity);
+            return dogAgeInMoths < PUPPY_AGE_MAX_MONTHS_QUANTITY;
         }
     }
 

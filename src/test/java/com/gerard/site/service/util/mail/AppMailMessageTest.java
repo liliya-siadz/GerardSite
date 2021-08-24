@@ -1,6 +1,6 @@
 package com.gerard.site.service.util.mail;
 
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -16,7 +16,7 @@ public class AppMailMessageTest {
             LocalDate.now(ZoneId.of("Europe/Paris"));
 
     @DataProvider(name = "dataProviderTestSend")
-    public Object[][] dataProviderCorrectRecipientsTestSend() {
+    public Object[][] dataProviderTestSend() {
         return new Object[][]{
                 {"sidelnikova.liliya@gmail.com"},
                 {"johnny890legend@gmail.com"},
@@ -24,7 +24,7 @@ public class AppMailMessageTest {
         };
     }
 
-    @Test(dataProvider = "dataProviderCorrectRecipientsTestSend")
+    @Test(dataProvider = "dataProviderTestSend")
     public void testSendToCorrectRecipients(String recipient) throws ServiceException {
         AppMailMessage message = new AppMailMessage(testMessageSubject,
                 testMessageContent, recipient);

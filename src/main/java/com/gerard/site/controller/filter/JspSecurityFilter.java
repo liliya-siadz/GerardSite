@@ -9,18 +9,28 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
+/**
+ * Filters direct access to files with ".jsp" extension
+ * (application pages)
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
+ */
 public class JspSecurityFilter implements Filter {
     private String defaultLocation;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        String defaultLocationParameterName="defaultLocation";
-        this.defaultLocation = filterConfig.getInitParameter(defaultLocationParameterName);
+        String defaultLocationParameterName = "defaultLocation";
+        this.defaultLocation =
+                filterConfig.getInitParameter(defaultLocationParameterName);
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request,
+                         ServletResponse response,
+                         FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.sendRedirect(httpRequest.getServletContext() + defaultLocation);

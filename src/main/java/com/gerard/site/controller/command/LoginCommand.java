@@ -1,7 +1,7 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Page;
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import com.gerard.site.controller.form.LoginForm;
 import com.gerard.site.service.impl.AppUserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,14 +15,11 @@ import java.util.Map;
 import static com.gerard.site.validator.field.FieldIdentifier.*;
 
 public enum LoginCommand implements Command {
-
     INSTANCE;
-
+    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
     private final String validationMapNameAttributeName = "loginValidationMap";
     private final String authenticationResultAttributeName = "isUserFound";
     private final String authenticationIdentifierAttributeName = "admin";
-
-    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {

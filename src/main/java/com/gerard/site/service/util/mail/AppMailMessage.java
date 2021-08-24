@@ -1,6 +1,6 @@
 package com.gerard.site.service.util.mail;
 
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,10 +14,8 @@ import javax.mail.internet.MimeMessage;
 
 public final class AppMailMessage {
     private static final String messageType = "text/html";
-    private static final Message.RecipientType recipientType =
-            Message.RecipientType.TO;
-    private static final Logger LOGGER =
-            LogManager.getLogger(AppMailMessage.class);
+    private static final Message.RecipientType recipientType = Message.RecipientType.TO;
+    private static final Logger LOGGER = LogManager.getLogger(AppMailMessage.class);
     private String subject;
     private String content;
     private String recipient;

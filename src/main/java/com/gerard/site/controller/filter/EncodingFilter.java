@@ -4,20 +4,32 @@ import jakarta.servlet.*;
 
 import java.io.IOException;
 
+/**
+ * Sets up if needs default character encoding
+ * of the request of the response
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
+ */
 public class EncodingFilter implements Filter {
+    /**
+     * Default encoding value
+     */
     private String encoding;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        String encodingParameterName="encoding";
+        String encodingParameterName = "encoding";
         encoding = filterConfig.getInitParameter(encodingParameterName);
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request,
+                         ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         String requestCharacterEncoding = request.getCharacterEncoding();
-        if((this.encoding != null)
-                && (!requestCharacterEncoding.equals(encoding))) {
+        if ((this.encoding != null)
+             && (!requestCharacterEncoding.equals(encoding))) {
             request.setCharacterEncoding(encoding);
             response.setCharacterEncoding(encoding);
         }

@@ -10,9 +10,17 @@
 <html>
 <head>
     <title><fmt:message key="page.make_request.title"/></title>
+    <title><fmt:message key="page.login.title"/></title>
+    <style>
+        input:invalid {
+            border: 2px dashed red;
+        }
+        input:valid {
+            border: 2px solid black;
+        }
+    </style>
 </head>
 <body>
-
 <%------------------base flow go: step 1
                 chose puppy for request section--%>
 <%@ include file="fragment/headers/header.jsp" %>
@@ -39,66 +47,83 @@
 <%------------------base flow go: step 2(a)
                             display request form for chosen puppy--%>
 <c:if test="${not empty chosenPuppy and not isRequestMade}">
+    <h3 style="color: green">
+        <b><fmt:message key="page.make_request.choose.result.text"/></b>
+    </h3>
+    <%@ include file="fragment/chosen_puppy.jsp" %>
     <form method="POST"
           action="${applicationPath}${controllerUrl}">
         <h3 style="color: maroon">
             <b><fmt:message key="page.make_request.request_form.label"/></b>
         </h3>
-        <label>
-            <fmt:message key="field.content.label"/> (${contentValidationMessage})
-            <textarea value="content"
+            <p><fmt:message key="field.content.label"/> (${contentValidationMessage})</p>
+            <p><textarea name="content"
+                         size="${contentMaxLength}"
                       required
                       pattern="${contentPattern}"
                       maxlength="${contentMaxLength}"
                       minlength="${contentMinLength}"
                       oninvalid="setCustomValidity('?')" >
             </textarea>
-        </label>
-        <label>
-            <fmt:message key="field.email.label"/>(${emailValidationMessage})
-            <input value="email"
+            </p>
+        <p><fmt:message key="field.email.label"/>(${emailValidationMessage})</p>
+           <p><input
+                   name="email"
+                   id="emailId"
                    required
+                   size="${emailMaxLength}"
+                   type="text"
                    placeholder="${emailPlaceholder}"
                    pattern="${emailPattern}"
                    maxlength="${emailMaxLength}"
                    minlength="${emailMinLength}"
                    oninvalid="setCustomValidity('?')"/>
-        </label>
-        <label>
-            <fmt:message key="field.name.label"/>(${nameValidationMessage})
-            <input value="name"
+           </p>
+         <p><fmt:message key="field.name.label"/>(${nameValidationMessage})</p>
+         <p><input
+                 name="name"
+                   type="text"
                    required
+                   size="${nameMaxLength}"
                    pattern="${namePattern}"
                    maxlength="${nameMaxLength}"
                    minlength="${nameMinLength}"
                    oninvalid="setCustomValidity('?')"/>
-        </label>
-        <label>
-            <fmt:message key="field.surname.label"/>(${nameValidationMessage})
-            <input value="surname"
+        </p>
+        <p><fmt:message key="field.surname.label"/>(${surnameValidationMessage})</p>
+         <p><input
+                 name="surname"
+                   type="text"
                    required
+                   size="${nameMaxLength}"
                    pattern="${namePattern}"
                    maxlength="${nameMaxLength}"
                    minlength="${nameMinLength}"
                    oninvalid="setCustomValidity('?')"/>
-        </label>
-        <label>
-            <fmt:message key="field.patronymic.label"/>(${nameValidationMessage})
-            <input value="patronymic"
+        </p>
+         <p><fmt:message key="field.patronymic.label"/>(${patronymicValidationMessage})</p>
+        <p><input
+                name="patronymic"
+                   type="text"
+                   size="${nameMaxLength}"
                    pattern="${namePattern}"
                    maxlength="${nameMaxLength}"
                    minlength="${nameMinLength}"
                    oninvalid="setCustomValidity('?')"/>
-        </label>
-        <label>
-            <fmt:message key="field.phone.label"/>(${phoneValidationMessage})
-            <input value="phone"
+        </p>
+
+        <p><fmt:message key="field.phone.label"/>(${phoneValidationMessage})</p>
+         <p> <input
+                 name="phone"
+                   type="text"
+                   required
+                   size="${strongLength}"
                    placeholder="${phonePlaceholder}"
                    pattern="${phonePattern}"
                    maxlength="${strongLength}"
                    minlength="${strongLength}"
                    oninvalid="setCustomValidity('?')"/>
-        </label>
+         </p>
         <button type="submit"
                 name="command"
                 class="btn btn-xs navbar-btn"
@@ -107,8 +132,6 @@
             <fmt:message key="page.make_request.button.make_request.name"/>
         </button>
     </form>
-    <%@ include file="fragment/chosen_puppy.jsp" %>
-
 <%------------------base flow go: step 2(b)
                 chose puppy again and go to step 1--%>
     <form method="GET"

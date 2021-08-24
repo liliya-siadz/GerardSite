@@ -1,5 +1,6 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -15,7 +16,7 @@ import java.sql.Date;
  * @version 1.0
  */
 public class DogEntity extends AbstractEntity<Integer> implements Serializable {
-
+    @Serial
     private static final long serialVersionUID=1L;
 
     /**
@@ -28,43 +29,50 @@ public class DogEntity extends AbstractEntity<Integer> implements Serializable {
     }
 
     /**
-     * Represents column 'dog_sex' in the table <i>gerard.dog</i> .
+     * Represents column 'dog_sex'
+     * in the table <i>gerard.dog</i> .
      */
     private DogSex dogSex;
 
     /**
-     * Represents column 'nickname' in the table <i>gerard.dog</i> .
+     * Represents column 'nickname'
+     * in the table <i>gerard.dog</i> .
      */
     private String nickname;
 
     /**
-     * Represents column 'fullname' in the table <i>gerard.dog</i> .
+     * Represents column 'fullname'
+     * in the table <i>gerard.dog</i> .
      */
     private String fullname;
 
     /**
-     * Represents column 'birthday' in the table <i>gerard.dog</i> .
+     * Represents column 'birthday'
+     * in the table <i>gerard.dog</i> .
      */
     private Date birthday;
 
     /**
-     * Represents column 'avatar_photo_path' in the table <i>gerard.dog</i> .
+     * Represents column 'avatar_photo_path'
+     * in the table <i>gerard.dog</i> .
      */
     private String avatarPhotoPath;
 
     /**
-     * Represents column 'pedigree_photo_path' in the table <i>gerard.dog</i> .
+     * Represents column 'pedigree_photo_path'
+     * in the table <i>gerard.dog</i> .
      */
     private String pedigreePhotoPath;
 
-
     /**
-     * Represents column 'description' in the table <i>gerard.dog</i> .
+     * Represents column 'description'
+     * in the table <i>gerard.dog</i> .
      */
     private String description;
 
     /**
-     * Represents column 'active' in the table <i>gerard.dog</i> .
+     * Represents column 'active'
+     * in the table <i>gerard.dog</i> .
      */
     private boolean active;
 

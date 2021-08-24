@@ -1,11 +1,12 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 
 public  class RequestAndAppUserAndDog implements Serializable {
+    @Serial
     private static final long serialVersionUID=1L;
-
     private int requestId;
     private RequestEntity.RequestStatus requestStatus;
     private RequestEntity.RequestType requestType;
@@ -22,7 +23,6 @@ public  class RequestAndAppUserAndDog implements Serializable {
     private DogEntity.DogSex dogSex;
     private Date birthday;
     private String avatarPhotoPath;
-
 
     public RequestAndAppUserAndDog() {
     }

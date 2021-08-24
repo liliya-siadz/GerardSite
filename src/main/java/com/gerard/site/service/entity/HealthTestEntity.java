@@ -1,5 +1,6 @@
 package com.gerard.site.service.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -15,25 +16,30 @@ import java.sql.Date;
  * @version 1.0
  */
 public class HealthTestEntity extends AbstractEntity<Integer> implements Serializable {
+    @Serial
     private static final long serialVersionUID=1L;
 
     /**
-     * Represents column 'health_test_type' in the table <i>gerard.health_test</i> .
+     * Represents column 'health_test_type'
+     * in the table <i>gerard.health_test</i> .
      */
     private String healthTestType;
 
     /**
-     * Represents column 'dog_id' in the table <i>gerard.health_test</i> .
+     * Represents column 'dog_id'
+     * in the table <i>gerard.health_test</i> .
      */
     private int dogId;
 
     /**
-     * Represents column 'date_fact' in the table <i>gerard.health_test</i> .
+     * Represents column 'date_fact'
+     * in the table <i>gerard.health_test</i> .
      */
     private Date dateFact;
 
     /**
-     * Represents column 'result' in the table <i>gerard.health_test</i> .
+     * Represents column 'result'
+     * in the table <i>gerard.health_test</i> .
      */
     private String result;
 

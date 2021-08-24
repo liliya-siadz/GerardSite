@@ -2,7 +2,7 @@ package com.gerard.site.controller;
 
 import com.gerard.site.controller.command.Command;
 import com.gerard.site.controller.command.CommandFactory;
-import com.gerard.site.exception.ServiceException;
+import com.gerard.site.service.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
@@ -38,14 +38,11 @@ public class Router {
      */
     private static final String DIRECTORY_NAME = "/pages";
 
-
     /**
      * File extension for pages. Is using for preparing page path
      */
-    static final String FILE_EXTENSION = ".jsp";
-
+    private static final String FILE_EXTENSION = ".jsp";
     private static final Logger LOGGER = LogManager.getLogger(Router.class);
-
 
     private Router() {
     }
@@ -56,6 +53,7 @@ public class Router {
      * @param request  HTTP request to extract parameter from
      * @param response HTTP response assigned to this HTTP request
      * @return page's url
+     * @see Page
      */
     static String prepareUrl(HttpServletRequest request, HttpServletResponse response) {
         String commandName = request.getParameter(COMMAND_IDENTIFIER_REQUEST_PARAMETER_NAME);
@@ -90,5 +88,4 @@ public class Router {
         String pagePath = DIRECTORY_NAME + pageUrl + FILE_EXTENSION;
         return pagePath;
     }
-
 }

@@ -8,9 +8,19 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
+/**
+ * Filters non authenticated users from only auth-accessible pages
+ *
+ * @author Liliya Siadzelnikava
+ * @version 1.0
+ */
 public class BlackListFilter implements Filter {
-    private String defaultLocation;
     private static final Logger LOGGER = LogManager.getLogger(BlackListFilter.class);
+
+    /**
+     * Default location to redirect to
+     */
+    private String defaultLocation;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
