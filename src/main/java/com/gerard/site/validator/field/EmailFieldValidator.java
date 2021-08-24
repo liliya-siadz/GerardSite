@@ -14,5 +14,4 @@ public enum EmailFieldValidator implements FieldValidator<String> {
         return isEmailValid;
     }
 
-    //standard email address, ex."sidelnikova.liliya@gmail.com"
 }

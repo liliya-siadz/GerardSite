@@ -5,9 +5,9 @@ import com.gerard.site.validator.FieldsValidators;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-import static com.gerard.site.validator.Fields.EMAIL_PARAMETER_NAME;
-import static com.gerard.site.validator.Fields.PASSWORD_PARAMETER_NAME;
+import static com.gerard.site.validator.Fields.*;
 
 public class LoginForm implements FormValidator {
 
@@ -38,4 +38,32 @@ public class LoginForm implements FormValidator {
                         .isValid(password));
         return validationResult;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        LoginForm loginForm = (LoginForm) object;
+        return Objects.equals(email, loginForm.email) && Objects.equals(password, loginForm.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("LoginForm{");
+        sb.append("email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+
 }

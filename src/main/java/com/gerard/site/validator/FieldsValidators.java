@@ -14,11 +14,12 @@ public class FieldsValidators {
 
     static {
         validators.put(EMAIL_PARAMETER_NAME, EmailFieldValidator.INSTANCE);
-        validators.put(PASSWORD_PARAMETER_NAME, PasswordFieldValidator.INSTANCE);
+        validators.put(REPLY_PARAMETER_NAME, PasswordFieldValidator.INSTANCE);
         validators.put(CONTENT_PARAMETER_NAME, ContentFieldValidator.INSTANCE);
         validators.put(APP_USER_NAME_PARAMETER_NAME, NameFieldValidator.INSTANCE);
         validators.put(APP_USER_SURNAME_PARAMETER_NAME, NameFieldValidator.INSTANCE);
         validators.put(PHONE_PARAMETER_NAME, PhoneFieldValidator.INSTANCE);
+        validators.put(PASSWORD_PARAMETER_NAME, PasswordFieldValidator.INSTANCE);
         validators.put(APP_USER_PATRONYMIC_PARAMETER_NAME, NameFieldValidator.INSTANCE);
     }
 

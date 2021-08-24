@@ -34,6 +34,7 @@ public class AppUserServiceImpl implements AppUserService {
         if (loginForm == null) {
             throw new ServiceException("Parameter 'loginForm' is null!");
         }
+        LOGGER.trace("Authenticate service was called. Login form: " + loginForm);
         String email = loginForm.getEmail();
         String password = loginForm.getPassword();
         if ((email == null) || (password == null)) {

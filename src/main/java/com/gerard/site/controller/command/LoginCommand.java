@@ -26,22 +26,26 @@ public enum LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.trace("Login command was called.");
         HttpSession session = request.getSession();
         String email = request.getParameter(EMAIL_PARAMETER_NAME);
         String password = request.getParameter(PASSWORD_PARAMETER_NAME);
         LoginForm loginForm = new LoginForm(email, password);
-        Map<String, Boolean> validationMap = loginForm.validateForm();
-        if (validationMap.containsValue(false)) {
-            session.setAttribute(validationMapNameAttributeName, validationMap);
-            return Page.LOGIN.getPageUrl();
-        } else {
+      //  Map<String, Boolean> loginValidationMap = loginForm.validateForm();
+        //if (loginValidationMap.containsValue(false)) {
+       //     session.setAttribute(validationMapNameAttributeName, loginValidationMap);
+        //    LOGGER.trace("Login form: " + loginForm +  " has validation errors: " + loginValidationMap);
+       //     return Page.LOGIN.getPageUrl();
+       // } else {
             try {
                boolean userWasAuthenticated = AppUserServiceImpl.getInstance().authenticate(loginForm);
                if(userWasAuthenticated) {
+                   LOGGER.trace("User was authenticated.");
                    session.setAttribute(authenticationResultAttributeName, true);
                    session.setAttribute(authenticationIdentifierAttributeName, true);
                    return Page.HOME.getPageUrl();
                } else {
+                   LOGGER.trace("User was NOT authenticated.");
                    session.setAttribute(authenticationResultAttributeName, false);
                    return Page.LOGIN.getPageUrl();
                }
@@ -53,6 +57,6 @@ public enum LoginCommand implements Command {
                         + "Request:  " + request + ". Login form: " + loginForm
                         + exception.getMessage(), exception);
             }
-        }
+       // }
     }
 }

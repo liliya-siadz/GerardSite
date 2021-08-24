@@ -14,9 +14,4 @@ public enum PhoneFieldValidator implements FieldValidator<String> {
         return (phone.length() == strongLength)
                 && (phone.matches(validRegex));
     }
-
-    //strong length 10
-    //belarusian mobile phone number
-    //starts from 29 / 44 / 33 / 25
-    //only numbers
 }

@@ -18,6 +18,4 @@ public enum ContentFieldValidator implements FieldValidator<String> {
                 && (content.matches(validRegex));
     }
 
-    //length between 10 and 450 symbols inclusively
-    //may has space or _ or , or ?  or !
 }

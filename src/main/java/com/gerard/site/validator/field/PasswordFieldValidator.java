@@ -3,7 +3,9 @@ package com.gerard.site.validator.field;
 import com.gerard.site.validator.FieldValidator;
 
 public enum PasswordFieldValidator implements FieldValidator<String> {
+
     INSTANCE;
+
 
     @Override
     public boolean isValid(String password) {
@@ -17,6 +19,4 @@ public enum PasswordFieldValidator implements FieldValidator<String> {
                 && (password.length() <= maxLength)
                 && (password.matches(validRegex));
     }
-
-    //
 }

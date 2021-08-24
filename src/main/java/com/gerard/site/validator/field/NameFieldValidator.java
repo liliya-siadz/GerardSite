@@ -17,6 +17,4 @@ public enum NameFieldValidator implements FieldValidator<String> {
                 && (name.length() <= maxLength)
                 && (name.matches(validRegex));
     }
-
-    //only letters, any case, for.ex: "Olga", "OLga", "OLGA"
 }

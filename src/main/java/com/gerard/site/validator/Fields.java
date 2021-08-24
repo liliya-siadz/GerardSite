@@ -8,4 +8,5 @@ public final class Fields {
     public static final String APP_USER_PATRONYMIC_PARAMETER_NAME = "patronymic";
     public static final String PHONE_PARAMETER_NAME = "phone";
     public static final String PASSWORD_PARAMETER_NAME = "password";
+    public static final String REPLY_PARAMETER_NAME = "reply";
 }
