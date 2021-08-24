@@ -1,11 +1,8 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Page;
-import com.gerard.site.entity.DogEntity;
-import com.gerard.site.entity.RequestAndAppUserAndDog;
+import com.gerard.site.service.entity.RequestAndAppUserAndDog;
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.service.RequestService;
-import com.gerard.site.service.impl.DogServiceImpl;
 import com.gerard.site.service.impl.RequestServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

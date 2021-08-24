@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
-import static com.gerard.site.validator.Fields.*;
+import static com.gerard.site.validator.field.FieldIdentifier.*;
 
 public enum LoginCommand implements Command {
 
@@ -25,20 +25,20 @@ public enum LoginCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         LOGGER.trace("Login command was called.");
         HttpSession session = request.getSession();
         String email = request.getParameter(EMAIL_PARAMETER_NAME);
         String password = request.getParameter(PASSWORD_PARAMETER_NAME);
         LoginForm loginForm = new LoginForm(email, password);
-      //  Map<String, Boolean> loginValidationMap = loginForm.validateForm();
-        //if (loginValidationMap.containsValue(false)) {
-       //     session.setAttribute(validationMapNameAttributeName, loginValidationMap);
-        //    LOGGER.trace("Login form: " + loginForm +  " has validation errors: " + loginValidationMap);
-       //     return Page.LOGIN.getPageUrl();
-       // } else {
-            try {
-               boolean userWasAuthenticated = AppUserServiceImpl.getInstance().authenticate(loginForm);
+        Map<String, Boolean> loginValidationMap = loginForm.validateForm();
+        if (loginValidationMap.containsValue(false)) {
+            session.setAttribute(validationMapNameAttributeName, loginValidationMap);
+            LOGGER.trace("Login form: " + loginForm +  " has validation errors: " + loginValidationMap);
+            return Page.LOGIN.getPageUrl();
+        } else {
+               boolean userWasAuthenticated =
+                       AppUserServiceImpl.getInstance().authenticate(loginForm);
                if(userWasAuthenticated) {
                    LOGGER.trace("User was authenticated.");
                    session.setAttribute(authenticationResultAttributeName, true);
@@ -49,14 +49,6 @@ public enum LoginCommand implements Command {
                    session.setAttribute(authenticationResultAttributeName, false);
                    return Page.LOGIN.getPageUrl();
                }
-            } catch (ServiceException exception) {
-                LOGGER.fatal("Unable to execute authentication."
-                        + "Request:  " + request + ". Login form: " + loginForm
-                        + exception.getMessage(), exception);
-                throw new RuntimeException("Unable to execute authentication."
-                        + "Request:  " + request + ". Login form: " + loginForm
-                        + exception.getMessage(), exception);
-            }
-       // }
+       }
     }
 }

@@ -23,7 +23,6 @@
 </head>
 <body>
 <%@include file="fragment/headers/header.jsp"%>
-<%@include file="fragment/validation_variables.jsp"%>
 <c:if test="${not empty sessionScope.isUserFound}">
     <c:if test="${not sessionScope.isUserFound}">
         <p style="color: red"><fmt:message key="page.login.command.authorization.result"/></p>
@@ -31,22 +30,30 @@
 </c:if>
 <form method="POST"
       action="${applicationPath}${controllerUrl}">
-    <label for="emailId"><fmt:message key="field.email.label"/></label>
-    <p>(${loginValidationMessage})</p>
-    <input id="emailId"
+    <p><fmt:message key="field.email.label"/>:(${emailValidationMessage})</p>
+    <p><input id="emailId"
            type="text"
            name="email"
            required
+           size="${emailMaxLength}"
            placeholder="${emailPlaceholder}"
            pattern="${emailPattern}"
            maxlength="${emailMaxLength}"
            minlength="${emailMinLength}"
            oninvalid="setCustomValidity('?')"/>
-    <label for="passwordId"><fmt:message key="field.password.label"/></label>
-    <input id="passwordId"
+    </p>
+    <p><fmt:message key="field.password.label"/>:(${passwordValidationMessage}) </p>
+    <p><input id="passwordId"
            type="password"
+           size="${passwordMaxLength}"
            required
-           name="password"/>
+           name="password"
+           placeholder="${passwordPlaceholder}"
+           pattern="${passwordPattern}"
+           maxlength="${passwordMaxLength}"
+           minlength="${passwordMinLength}"
+           oninvalid="setCustomValidity('?')"/>
+    </p>
     <button type="submit"
             name="command"
             value="LOGIN"
@@ -54,7 +61,7 @@
         <fmt:message key="page.login.button.login.name"/>
     </button>
 </form>
-
+<%--------------------        server-side validation erros---------------------%>
 <c:if test="${not empty sessionScope.loginValidationMap}">
              <c:if test="${not sessionScope.loginValidationMap.email}">
                  &#9888;<b>   <fmt:message key="field.email.label"/> </b>&#9746;

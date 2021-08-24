@@ -8,7 +8,6 @@
 <html>
 <head></head>
 <body>
-<%--footer start--%>
 <div class="container-fluid panel-footer" style="{ font-size: 5px; }">
     <div class="row">
         <small>
@@ -16,6 +15,7 @@
                 <a href="${pageContext.request.contextPath}/home">
             <fmt:message key="footer.link.home.name"/>
                 </a>
+                <p><small><fmt:message key="cookie.notification" /></small></p>
             </div>
         </small>
         <small>
@@ -61,6 +61,6 @@
         </small>
     </div>
 </div>
-<%--footer end----%>
+
 </body>
 </html>

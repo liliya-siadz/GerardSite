@@ -1,13 +1,17 @@
 package com.gerard.site.controller.form;
 
 import com.gerard.site.validator.FormValidator;
-import com.gerard.site.validator.FieldsValidators;
+import com.gerard.site.validator.field.FieldValidatorFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gerard.site.validator.Fields.*;
-import static com.gerard.site.validator.Fields.PHONE_PARAMETER_NAME;
+import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_NAME_PARAMETER_NAME;
+import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
+import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_SURNAME_PARAMETER_NAME;
+import static com.gerard.site.validator.field.FieldIdentifier.CONTENT_PARAMETER_NAME;
+import static com.gerard.site.validator.field.FieldIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.field.FieldIdentifier.PHONE_PARAMETER_NAME;
 
 public class RequestForm implements FormValidator {
 
@@ -61,22 +65,22 @@ public class RequestForm implements FormValidator {
     public Map<String, Boolean> validateForm() {
         Map<String, Boolean> validationResult = new HashMap<>();
         validationResult.put(EMAIL_PARAMETER_NAME,
-                FieldsValidators.getValidator(EMAIL_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(EMAIL_PARAMETER_NAME)
                         .isValid(email));
         validationResult.put(CONTENT_PARAMETER_NAME,
-                FieldsValidators.getValidator(CONTENT_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(CONTENT_PARAMETER_NAME)
                         .isValid(content));
         validationResult.put(APP_USER_NAME_PARAMETER_NAME,
-                FieldsValidators.getValidator(APP_USER_NAME_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(APP_USER_NAME_PARAMETER_NAME)
                         .isValid(name));
         validationResult.put(APP_USER_SURNAME_PARAMETER_NAME,
-                FieldsValidators.getValidator(APP_USER_SURNAME_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(APP_USER_SURNAME_PARAMETER_NAME)
                         .isValid(surname));
         validationResult.put(APP_USER_PATRONYMIC_PARAMETER_NAME,
-                FieldsValidators.getValidator(APP_USER_PATRONYMIC_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(APP_USER_PATRONYMIC_PARAMETER_NAME)
                         .isValid(patronymic));
         validationResult.put(PHONE_PARAMETER_NAME,
-                FieldsValidators.getValidator(PHONE_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(PHONE_PARAMETER_NAME)
                         .isValid(phone));
         return validationResult;
     }

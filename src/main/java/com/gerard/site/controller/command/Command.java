@@ -3,13 +3,13 @@ package com.gerard.site.controller.command;
 import com.gerard.site.controller.Controller;
 import com.gerard.site.controller.Router;
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.util.localization.Language;
+import com.gerard.site.service.util.localization.Language;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import static com.gerard.site.util.localization.Language.BUNDLE_BASE_NAME_COOKIE_NAME;
-import static com.gerard.site.util.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
+import static com.gerard.site.service.util.localization.Language.BUNDLE_BASE_NAME_COOKIE_NAME;
+import static com.gerard.site.service.util.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
 
 /**
  * This functional interface services commands
@@ -17,7 +17,7 @@ import static com.gerard.site.util.localization.Language.LANGUAGE_CODE_COOKIE_NA
  * It's implementations should be used with {@code CommandFactory}
  * {@link CommandFactory}
  * <p>Has static method that gets current command invoked request url
- * {@link Command#getRefererUrl(HttpServletRequest)} . </p>
+ * {@link Command#getRefererAppContextUrl(HttpServletRequest)} . </p>
  * <p>
  * Has static method that changes localization by specified Language {@link Language}
  * {@link Command#changeLocale(HttpServletRequest, HttpServletResponse, Language)} .
@@ -51,16 +51,14 @@ public interface Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException;
 
     /**
-     * Gets come request's url
+     * Gets come request's referer url
      * @param request come request
      * @return url of come request
      */
-     static String getRefererUrl(HttpServletRequest request) {
-        String schema = "http://";
-        String domain = "localhost:8080";
+     static String getRefererAppContextUrl(HttpServletRequest request) {
         String requestRefererUrl = request.getHeader(REQUEST_HEADER_REFERER_HEADER_NAME);
         String url = requestRefererUrl
-                .replace(schema + domain + Controller.APPLICATION_CONTEXT,"");
+                .replace(Router.SCHEMA + Router.DOMAIN + Controller.APPLICATION_CONTEXT,"");
         return url;
     }
 
@@ -81,6 +79,7 @@ public interface Command {
         Cookie bundle = new Cookie(BUNDLE_BASE_NAME_COOKIE_NAME, language.getBundleBaseName());
         response.addCookie(locale);
         response.addCookie(bundle);
-        return getRefererUrl(request);
+        return getRefererAppContextUrl(request);
     }
+
 }

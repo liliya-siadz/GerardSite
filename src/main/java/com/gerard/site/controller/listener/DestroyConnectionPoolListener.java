@@ -1,6 +1,6 @@
 package com.gerard.site.controller.listener;
 
-import com.gerard.site.connection.ConnectionPool;
+import com.gerard.site.dao.connection.ConnectionPool;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 

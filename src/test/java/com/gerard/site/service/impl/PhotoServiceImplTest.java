@@ -1,7 +1,7 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.entity.PhotoAndDog;
-import com.gerard.site.entity.PhotoEntity;
+import com.gerard.site.service.entity.PhotoAndDog;
+import com.gerard.site.service.entity.PhotoEntity;
 import com.gerard.site.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

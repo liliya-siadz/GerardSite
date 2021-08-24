@@ -4,6 +4,5 @@ import com.gerard.site.exception.ServiceException;
 import com.gerard.site.controller.form.LoginForm;
 
 public interface AppUserService {
-    boolean authenticate(LoginForm loginForm)
-            throws ServiceException;
+    boolean authenticate(LoginForm loginForm) throws ServiceException;
 }

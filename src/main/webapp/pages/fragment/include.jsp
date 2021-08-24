@@ -26,6 +26,7 @@
 <!DOCTYPE html>
 <html dir="ltr">
 <head>
+    <%@include file="validation_variables.jsp"%>
     <link rel="icon" type="image/x-icon" href="${applicationPath}/favicon.ico">
     <link rel="stylesheet" href="${applicationPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${applicationPath}/css/bootstrap-theme.min.css">

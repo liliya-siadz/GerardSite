@@ -1,7 +1,5 @@
 package com.gerard.site.validator.field;
 
-import com.gerard.site.validator.FieldValidator;
-
 public enum ContentFieldValidator implements FieldValidator<String> {
     INSTANCE;
 

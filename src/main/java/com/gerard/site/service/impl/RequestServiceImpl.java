@@ -1,9 +1,9 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.dao.DaoException;
-import com.gerard.site.dao.RequestDao;
-import com.gerard.site.entity.RequestAndAppUserAndDog;
-import com.gerard.site.entity.RequestEntity;
+import com.gerard.site.dao.impl.DaoException;
+import com.gerard.site.dao.impl.RequestDaoImpl;
+import com.gerard.site.service.entity.RequestAndAppUserAndDog;
+import com.gerard.site.service.entity.RequestEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.service.RequestService;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +29,7 @@ public class RequestServiceImpl implements RequestService {
     public List<RequestAndAppUserAndDog> provideAllRequests() throws ServiceException {
         try {
             List<RequestAndAppUserAndDog> requestsAndAppUserAndDogList
-                    = RequestDao.getInstance().selectAllRequestsAndAppUserAndDog();
+                    = RequestDaoImpl.getInstance().selectAllRequestsAndAppUserAndDog();
             return requestsAndAppUserAndDogList;
         } catch (DaoException exception) {
             throw new ServiceException(
@@ -42,7 +42,7 @@ public class RequestServiceImpl implements RequestService {
     public List<RequestAndAppUserAndDog> provideAllPendingRequests() throws ServiceException {
         try {
             List<RequestAndAppUserAndDog> requestsAndAppUserAndDogList
-                    = RequestDao.getInstance().selectAllRequestsAndAppUserAndDog();
+                    = RequestDaoImpl.getInstance().selectAllRequestsAndAppUserAndDog();
             List<RequestAndAppUserAndDog> pendingRequestsAndAppUserAndDogList =
                     requestsAndAppUserAndDogList.stream()
                     .filter(row->row.getRequestStatus()

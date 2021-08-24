@@ -1,7 +1,7 @@
 package com.gerard.site.tag;
 
 import com.gerard.site.exception.ServiceException;
-import com.gerard.site.util.AppIdentifierUtil;
+import com.gerard.site.service.util.AppIdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;

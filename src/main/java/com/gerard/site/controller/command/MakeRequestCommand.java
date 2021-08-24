@@ -1,7 +1,7 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Page;
-import com.gerard.site.entity.DogEntity;
+import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.controller.form.RequestForm;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.Map;
 
-import static com.gerard.site.validator.Fields.*;
+import static com.gerard.site.validator.field.FieldIdentifier.*;
 
 public enum MakeRequestCommand implements Command {
     INSTANCE;

@@ -23,6 +23,9 @@ import org.apache.logging.log4j.Logger;
  * @version 1.0
  */
 public class Router {
+    public static final String SCHEMA = "http://";
+    public static final String DOMAIN = "localhost:8080";
+
     /**
      * Request parameter name to be extracted from the request .
      * Is using as command identifier
@@ -60,17 +63,16 @@ public class Router {
         String pageUrl;
         try {
             pageUrl = command.execute(request, response);
+            LOGGER.trace("Command: " + commandName + "was executed.");
         } catch (ServiceException exception) {
-            LOGGER.fatal("Unable to prepare page url! "
+            LOGGER.error("Unable to prepare page url! "
                     + "Command name: " + commandName
                     + "Command: " + command
                     + exception.getMessage(), exception);
-            throw new RuntimeException("Unable to prepare page url! "
-                    + "Command name: " + commandName
-                    + "Command: " + command
-                    + "Request: " + request
-                    + exception.getMessage(), exception);
+            LOGGER.debug("Error page url will be returned .");
+            return Page.ERROR.getPageUrl();
         }
+        LOGGER.trace("Route to: " + pageUrl);
         return pageUrl;
     }
 
@@ -85,7 +87,8 @@ public class Router {
      */
     static String preparePath(HttpServletRequest request, HttpServletResponse response) {
         String pageUrl = prepareUrl(request, response);
-        String pagePath =  DIRECTORY_NAME + pageUrl + FILE_EXTENSION;
+        String pagePath = DIRECTORY_NAME + pageUrl + FILE_EXTENSION;
         return pagePath;
     }
+
 }

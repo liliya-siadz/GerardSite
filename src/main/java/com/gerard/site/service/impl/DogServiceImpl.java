@@ -1,8 +1,8 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.dao.DaoException;
-import com.gerard.site.dao.DogDao;
-import com.gerard.site.entity.DogEntity;
+import com.gerard.site.dao.impl.DaoException;
+import com.gerard.site.dao.impl.DogDaoImpl;
+import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.service.DogService;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +34,7 @@ public class DogServiceImpl implements DogService {
        DogEntity dogEntity = new DogEntity();
        dogEntity.setId(id);
         try {
-            Optional<DogEntity> foundDog = DogDao.getInstance().find(dogEntity);
+            Optional<DogEntity> foundDog = DogDaoImpl.getInstance().find(dogEntity);
             return foundDog;
         } catch (DaoException exception) {
             throw new ServiceException(
@@ -45,7 +45,7 @@ public class DogServiceImpl implements DogService {
 
     public List<DogEntity> provideActiveDogs() throws ServiceException {
         try {
-            List<DogEntity> allDogs = DogDao.getInstance().selectAll();
+            List<DogEntity> allDogs = DogDaoImpl.getInstance().selectAll();
             allDogs.removeIf(dogEntity -> !dogEntity.isActive());
             return allDogs;
         } catch (DaoException exception) {
@@ -57,7 +57,7 @@ public class DogServiceImpl implements DogService {
 
     public List<DogEntity> provideActivePuppies() throws ServiceException {
         try {
-            List<DogEntity> allDogs = DogDao.getInstance().selectAll();
+            List<DogEntity> allDogs = DogDaoImpl.getInstance().selectAll();
             allDogs.removeIf(new IsPuppy().negate());
             return allDogs;
         } catch (DaoException exception) {
@@ -70,7 +70,7 @@ public class DogServiceImpl implements DogService {
     @Override
     public List<DogEntity> provideAllDogs() throws ServiceException {
         try {
-            List<DogEntity> allDogs = DogDao.getInstance().selectAll();
+            List<DogEntity> allDogs = DogDaoImpl.getInstance().selectAll();
             return allDogs;
         } catch (DaoException exception) {
             throw new ServiceException(

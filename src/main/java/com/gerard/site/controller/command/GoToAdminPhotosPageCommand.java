@@ -1,9 +1,7 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Page;
-import com.gerard.site.controller.command.Command;
-import com.gerard.site.entity.PhotoAndDog;
-import com.gerard.site.entity.PhotoEntity;
+import com.gerard.site.service.entity.PhotoEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.service.impl.PhotoServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;

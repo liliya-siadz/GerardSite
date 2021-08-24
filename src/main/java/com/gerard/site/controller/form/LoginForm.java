@@ -1,13 +1,14 @@
 package com.gerard.site.controller.form;
 
 import com.gerard.site.validator.FormValidator;
-import com.gerard.site.validator.FieldsValidators;
+import com.gerard.site.validator.field.FieldValidatorFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.gerard.site.validator.Fields.*;
+import static com.gerard.site.validator.field.FieldIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.field.FieldIdentifier.PASSWORD_PARAMETER_NAME;
 
 public class LoginForm implements FormValidator {
 
@@ -31,10 +32,10 @@ public class LoginForm implements FormValidator {
     public Map<String, Boolean> validateForm() {
         Map<String, Boolean> validationResult = new HashMap<>();
         validationResult.put(EMAIL_PARAMETER_NAME,
-                FieldsValidators.getValidator(EMAIL_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(EMAIL_PARAMETER_NAME)
                         .isValid(email));
         validationResult.put(PASSWORD_PARAMETER_NAME,
-                FieldsValidators.getValidator(PASSWORD_PARAMETER_NAME)
+                FieldValidatorFactory.getValidator(PASSWORD_PARAMETER_NAME)
                         .isValid(password));
         return validationResult;
     }

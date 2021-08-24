@@ -1,6 +1,6 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.entity.DogEntity;
+import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.exception.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

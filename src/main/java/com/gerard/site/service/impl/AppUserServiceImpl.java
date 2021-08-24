@@ -1,13 +1,13 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.dao.AppUserDao;
-import com.gerard.site.dao.DaoException;
-import com.gerard.site.entity.AppUserEntity;
+import com.gerard.site.dao.impl.AppUserDaoImpl;
+import com.gerard.site.dao.impl.DaoException;
+import com.gerard.site.service.entity.AppUserEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.controller.form.LoginForm;
 import com.gerard.site.service.AppUserService;
-import com.gerard.site.util.BCrypt;
-import com.gerard.site.util.AppIdentifierUtil;
+import com.gerard.site.service.util.BCrypt;
+import com.gerard.site.service.util.AppIdentifierUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,14 +42,14 @@ public class AppUserServiceImpl implements AppUserService {
         }
         AppUserEntity user = new AppUserEntity.Builder().email(email).build();
         try {
-            Optional<AppUserEntity> realUser = AppUserDao.getInstance().find(user);
+            Optional<AppUserEntity> realUser = AppUserDaoImpl.getInstance().find(user);
             boolean userWasAuthenticated = false;
             if (realUser.isPresent()) {
                 if (!realUser.get().isAdmin()) {
                     return false;
                 }
                 String token = getToken();
-                String userPassword = AppUserDao.getInstance()
+                String userPassword = AppUserDaoImpl.getInstance()
                         .selectUserPasswordByEmail(token, email).get();
                 boolean isPasswordCorrect = BCrypt.checkpw(password, userPassword);
                 if (isPasswordCorrect) {

@@ -1,9 +1,8 @@
 package com.gerard.site.validator.field;
 
-import com.gerard.site.validator.FieldValidator;
-
 public enum PhoneFieldValidator implements FieldValidator<String> {
     INSTANCE;
+
     @Override
     public boolean isValid(String phone) {
         if (phone == null || phone.isBlank()) {

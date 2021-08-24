@@ -8,7 +8,8 @@ public enum LogoutCommand implements Command {
     INSTANCE;
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
         return InvalidateSessionCommand.INSTANCE.execute(request,response);
     }
 }

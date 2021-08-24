@@ -33,13 +33,6 @@ public enum CommandFactory {
      */
     private final CommandIdentifier defaultCommandIdentifier = ERROR_404;
 
-    /**
-     * Used as default command attached to default command identifier
-     * {@link CommandFactory#defaultCommandIdentifier},
-     * implements functional {@code interface Command} {@link Command} .
-     */
-    private final Command defaultCommand = Error404PageCommand.INSTANCE;
-
     CommandFactory() {
         commands.put(LOGIN, LoginCommand.INSTANCE);
         commands.put(LOGOUT, LogoutCommand.INSTANCE);
@@ -72,7 +65,6 @@ public enum CommandFactory {
      * if command's identifier is unknown,
      * sets default command's identifier
      * {@link CommandFactory#defaultCommandIdentifier}
-     * and default command {@link CommandFactory#defaultCommand} .
      *
      * @param command incoming command's identifier,
      *                presents key from commands map
@@ -82,17 +74,16 @@ public enum CommandFactory {
      * @return command specified to command's identifier,
      *         presents value from commands map
      *         {@link CommandFactory#commands},
-     *          for default command's identifier provides default command
      */
     public Command getCommand(String command) {
         CommandIdentifier targetCommandIdentifier;
         try {
             targetCommandIdentifier = CommandIdentifier.valueOf(command);
-        } catch (NullPointerException | IllegalArgumentException exception) {
-            LOGGER.warn("'" + command + "' command not found");
+        } catch (IllegalArgumentException exception) {
+            LOGGER.error("'" + command + "' command not found");
             targetCommandIdentifier = defaultCommandIdentifier;
         }
         Command targetCommand = commands.get(targetCommandIdentifier);
-        return targetCommand == null ? defaultCommand : targetCommand;
+        return targetCommand;
     }
 }

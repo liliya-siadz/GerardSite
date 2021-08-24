@@ -1,6 +1,6 @@
 package com.gerard.site.controller.command;
 
-import com.gerard.site.util.localization.Language;
+import com.gerard.site.service.util.localization.Language;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 

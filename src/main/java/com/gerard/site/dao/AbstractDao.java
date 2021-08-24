@@ -1,6 +1,7 @@
 package com.gerard.site.dao;
 
-import com.gerard.site.entity.AbstractEntity;
+import com.gerard.site.dao.impl.DaoException;
+import com.gerard.site.service.entity.AbstractEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

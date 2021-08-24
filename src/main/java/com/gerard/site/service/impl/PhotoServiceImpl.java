@@ -1,9 +1,9 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.dao.DaoException;
-import com.gerard.site.dao.PhotoDao;
-import com.gerard.site.entity.PhotoAndDog;
-import com.gerard.site.entity.PhotoEntity;
+import com.gerard.site.dao.impl.DaoException;
+import com.gerard.site.dao.impl.PhotoDaoImpl;
+import com.gerard.site.service.entity.PhotoAndDog;
+import com.gerard.site.service.entity.PhotoEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.service.PhotoService;
 import org.apache.logging.log4j.LogManager;
@@ -33,7 +33,7 @@ public class PhotoServiceImpl implements PhotoService {
     public List<PhotoAndDog> provideAllPhotosOfDogs() throws ServiceException {
         try {
             List<PhotoAndDog> allPhotosWithDogs =
-                    PhotoDao.getInstance().selectAllPhotosAndDogs();
+                    PhotoDaoImpl.getInstance().selectAllPhotosAndDogs();
             allPhotosWithDogs = allPhotosWithDogs.stream()
                     .filter(photoAndDog ->
                             photoAndDog.getPhotoPath().contains(PHOTO_FOLDER_NAME))
@@ -49,7 +49,7 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public List<PhotoEntity> provideAllPhotos() throws ServiceException {
         try {
-            List<PhotoEntity> allPhotos = PhotoDao.getInstance().selectAll();
+            List<PhotoEntity> allPhotos = PhotoDaoImpl.getInstance().selectAll();
             return allPhotos;
         } catch (DaoException exception) {
             throw new ServiceException(

@@ -1,7 +1,7 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Page;
-import com.gerard.site.entity.DogEntity;
+import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.exception.ServiceException;
 import com.gerard.site.service.impl.DogServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +12,7 @@ import java.util.List;
 public enum GoToDogsPageCommand implements Command {
     INSTANCE;
     private final String viewAttributeName = "allActiveDogs";
+
     @Override
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) throws ServiceException {
