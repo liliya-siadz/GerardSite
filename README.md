@@ -3,14 +3,14 @@
 
 <h3>Main use of app:</h3>
 <ol type="1">
-    <li> <b>Provide actual information regarding dogs/puppies in the kennel </b>
-        <ul>
+    <li> Provide actual information regarding dogs/puppies in the kennel 
+        <ol>
             <li>displaying photos dogs photos </li>
             <li>presenting description dogs descriptions </li>
-        </ul>
+        </ol>
      </li> 
-    <li><b>Provide service for making requests for puppies from potential pet's owners</b></li>
-    <li><b>Provide service for processing requests</b></li>
+    <li>Provide service for making requests for puppies from potential pet's owners</b></li>
+    <li>Provide service for processing requests</b></li>
 </ol>
 
 ☉ class project after online-training "Java Web development by EPAM"
