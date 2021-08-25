@@ -1,7 +1,7 @@
 <h2><i>Private monobreed dog kennel </i>.</h2>
 <h2>Desktop Web-application "gerard" </h2>
 
-<h3>Main use of app:</h3>
+<h2>MAIN USE OF APP</h2>
 <ol type="1">
     <li> Provide actual information regarding dogs/puppies in the kennel 
         <ol>
