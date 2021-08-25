@@ -1,5 +1,5 @@
 <h2><i>Gerard</i></h2>
-<h1>desktop Web-application for private monobreed dog kennel </h1>
+<h1>desktop web-application for private monobreed dog kennel </h1>
 ☛ class project after online-training "Java Web development by EPAM"
 
 <h2>MAIN USE OF APP</h2>
