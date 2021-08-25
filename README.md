@@ -2,7 +2,7 @@
 
 ☛ class project after online-training "Java Web development by EPAM"
 
-<h2>Desktop Web-application "gerard" </h2>
+<h1>desktop Web-application "gerard" </h1>
 
 <h2>MAIN USE OF APP</h2>
 <ol type="1">
