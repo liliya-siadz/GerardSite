@@ -1,17 +1,19 @@
 <h2><i>Private monobreed dog kennel </i>.</h2>
 <h2>Desktop Web-application "gerard" </h2>
-☆ Class project after online-training "Java Web development" by EPAM ☆
-<h3>Main purposes app:</h3>
+
+<h3>Main use of app:</h3>
 <ol type="1">
-    <li> <b> Providing actual information regarding dogs/puppies in the kennel </b>
+    <li> <b>Provide actual information regarding dogs/puppies in the kennel </b>
         <ul>
-            <li>displaying photos of dogs </li>
-            <li>presenting description of dogs </li>
+            <li>displaying photos dogs photos </li>
+            <li>presenting description dogs descriptions </li>
         </ul>
      </li> 
-    <li><b>Processing requests for puppies from potential pet's owners</b></li>
-    <li><b>Providing contact information of the kennel</b></li>
+    <li><b>Provide service for making requests for puppies from potential pet's owners</b></li>
+    <li><b>Provide service for processing requests</b></li>
 </ol>
+
+☉ class project after online-training "Java Web development by EPAM"
 
 <h2>APPLICATION ACTIONS</h2>
 
