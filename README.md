@@ -15,7 +15,7 @@
 
 <h2>APPLICATION ACTIONS</h2>
 
-![APP_ACTIONS](https://user-images.githubusercontent.com/39922259/130766900-64ccae9e-9725-4f58-b116-6caaf95434d3.png)
+![APP_ACTIONS](https://user-images.githubusercontent.com/39922259/130767024-aa72ec69-9289-47ba-9bdf-ef7dfe387253.png)
 
 <h2>DATABASE SCHEME</h2>
 
