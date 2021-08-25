@@ -13,7 +13,6 @@
             position: relative;
             animation: custom_animation 10s linear 0s infinite alternate;
         }
-
         @keyframes custom_animation {
             0% {
                 background-color: red;

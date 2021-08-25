@@ -15,5 +15,4 @@ public enum ContentFieldValidator implements FieldValidator<String> {
                 && (content.length() <= maxLength)
                 && (content.matches(validRegex));
     }
-
 }

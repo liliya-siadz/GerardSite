@@ -12,5 +12,4 @@ public enum EmailFieldValidator implements FieldValidator<String> {
         boolean isEmailValid = emailValidator.isValid(email);
         return isEmailValid;
     }
-
 }

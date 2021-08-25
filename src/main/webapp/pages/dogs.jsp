@@ -13,7 +13,6 @@
 </head>
 <body>
 <%@include file="fragment/dynamic-headering.jsp" %>
-
 <div style="display:inline-block;">
     <c:set var="dogs" value="${allActiveDogs}" scope="request"/>
     <c:forEach items="${dogs}" var="dog">

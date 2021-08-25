@@ -12,7 +12,6 @@
     <title><fmt:message key="page.admin_requests.title"/></title>
 </head>
 <body>
-<%--+ edit button  1 PROCESS_REQUEST--%>
 <%@ include file="fragment/headers/admin_header.jsp" %>
 <div style="display:inline-block;margin-left: 15%;">
     <br>

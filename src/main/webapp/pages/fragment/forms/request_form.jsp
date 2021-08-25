@@ -4,7 +4,7 @@
         <b><fmt:message key="page.make_request.request_form.label"/></b>
     </h3>
     <p><fmt:message key="field.content.label"/> (${contentValidationMessage})</p>
-    <p><textarea name="content" size="${contentMaxLength}"
+    <p><textarea name="content"
                  required
                  pattern="${contentPattern}"
                  maxlength="${contentMaxLength}"
@@ -16,7 +16,7 @@
             name="email"
             id="emailId"
             required
-            size="${emailMaxLength}"
+            size="${50}"
             type="text"
             placeholder="${emailPlaceholder}"
             pattern="${emailPattern}"
@@ -29,7 +29,7 @@
             name="name"
             type="text"
             required
-            size="${nameMaxLength}"
+            size="${50}"
             pattern="${namePattern}"
             maxlength="${nameMaxLength}"
             minlength="${nameMinLength}"
@@ -40,7 +40,7 @@
             name="surname"
             type="text"
             required
-            size="${nameMaxLength}"
+            size="${50}"
             pattern="${namePattern}"
             maxlength="${nameMaxLength}"
             minlength="${nameMinLength}"
@@ -51,7 +51,7 @@
     <p><input
             name="patronymic"
             type="text"
-            size="${nameMaxLength}"
+            size="${50}"
             pattern="${namePattern}"
             maxlength="${nameMaxLength}"
             minlength="${nameMinLength}"
@@ -73,7 +73,7 @@
     <button type="submit"
             name="command"
             class="btn btn-xs navbar-btn"
-            style="background-color: orangered"
+            style="background-color: red"
             value="MAKE_REQUEST">
         <fmt:message key="page.make_request.button.make_request.name"/>
     </button>

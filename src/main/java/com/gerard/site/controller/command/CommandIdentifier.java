@@ -30,7 +30,7 @@ public enum CommandIdentifier {
     GO_TO_ADMIN_REQUESTS_PAGE,
     GO_TO_ADMIN_PHOTOS_PAGE,
 
-    ADD_PHOTO,
+    UPLOAD_DOG_PHOTO,
     DELETE_PHOTO,
     PROCESS_REQUEST,
 

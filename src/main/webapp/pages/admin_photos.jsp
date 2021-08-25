@@ -13,24 +13,10 @@
 </head>
 <body>
 <%@ include file="fragment/headers/admin_header.jsp" %>
-
-<form method="POST"
-      action="${applicationPath}${controllerUrl}">
-    <button type="submit"
-            name="command"
-            style="background-color: forestgreen"
-            class="btn btn-lg"
-            value="ADD_PHOTO">
-        <b><fmt:message key="page.admin_photos.button.add_photo.title"/></b>
-    </button>
-</form>
 <div style="display:inline-block;margin-left: 15%;">
     <c:set var="photos" value="${allPhotos}" scope="request"/>
     <c:forEach items="${photos}" var="photo">
-    <h2><b><fmt:message key="page.admin_photos.view.title"/>
-            #
-    <c:out value="${photo.id}"/>
-    </b></h2>
+         # <c:out value="${photo.id}"/>
         <img class="img"
              src="${applicationPath}/${photo.photoPath}"
              alt="?"

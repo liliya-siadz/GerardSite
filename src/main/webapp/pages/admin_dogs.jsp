@@ -12,10 +12,7 @@
     <title><fmt:message key="page.admin_dogs.title"/></title>
 </head>
 <body>
-
-
 <%@ include file="fragment/headers/admin_header.jsp" %>
-
 <div style="display:inline-block;">
     <c:set var="dogs" value="${allDogs}" scope="request"/>
     <c:forEach items="${dogs}" var="dog">

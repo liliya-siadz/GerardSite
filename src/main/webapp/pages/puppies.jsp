@@ -13,9 +13,6 @@
 </head>
 <body>
 <%@include file="fragment/dynamic-headering.jsp" %>
-
-<%--1 MAKE REQUEST--%>
-
 <div style="display:inline-block;">
     <c:set var="dogs" value="${allPuppies}" scope="application"/>
     <c:forEach items="${dogs}" var="dog">
@@ -56,7 +53,7 @@
                 </h3>
             </div>
             <h3><b>
-            <a href="${pageContext.request.contextPath}/make_request?dogId=${dog.id}"
+            <a href="${pageContext.request.contextPath}/make_request?chosenPuppyId=${dog.id}"
                role="button btn-primary"
                style="background-color: greenyellow;"
                class="btn btn-xs">
