@@ -1,8 +1,7 @@
-<h2><i>Private monobreed dog kennel "Gerard</i>.</h2>
-
+<h2><i>"Gerard"</i></h2>
 ☛ class project after online-training "Java Web development by EPAM"
 
-<h1>desktop Web-application</h1>
+<h1>desktop Web-application for private monobreed dog kennel </h1>
 
 <h2>MAIN USE OF APP</h2>
 <ol type="1">
