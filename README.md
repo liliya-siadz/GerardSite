@@ -19,11 +19,11 @@
 
 
 <h2>DATABASE SCHEME</h2>
+![database_scheme](https://user-images.githubusercontent.com/39922259/130765746-676de60b-141d-4be6-a19f-6527547b3b9c.png)
 
-![database_scheme](https://user-images.githubusercontent.com/39922259/130322258-1242d98f-a3fb-4aeb-b7bd-1745e9489166.png)
 
 <!-- 
-<h2>CLIENT'S IDEA</h2> -->
+<h2>CLIENT'S requirements</h2> -->
 <!-- 
 ![presentation](https://user-images.githubusercontent.com/39922259/130238710-f060da61-7411-4564-aa34-682f435a9864.jpg)
  -->
