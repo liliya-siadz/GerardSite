@@ -2,6 +2,8 @@
 <h1>desktop web-application for private monobreed dog kennel </h1>
 ☛ class project after online-training "Java Web development by EPAM"
 
+<a href="https://bit.ly/3B9OZSH">documentation</a>
+
 <h2>MAIN USE OF APP</h2>
 <ol type="1">
     <li> Provide actual information regarding dogs/puppies in the kennel 
