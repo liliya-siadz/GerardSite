@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface PhotoService {
     List<PhotoAndDog> provideAllPhotosOfDogs() throws ServiceException;
+
     List<PhotoEntity> provideAllPhotos() throws ServiceException;
 }

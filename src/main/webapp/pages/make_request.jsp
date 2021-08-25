@@ -60,6 +60,7 @@
         </form>
     </c:if>
     <c:if test="${isRequestMade}">
+        <%@ include file="fragment/forms/chosen_puppy_display.jsp" %>
         <div style="display: block;text-align: center; margin-left:5%">
             <form method="POST"
                   action="${applicationPath}${controllerUrl}">

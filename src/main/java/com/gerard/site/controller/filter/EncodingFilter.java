@@ -1,6 +1,7 @@
 package com.gerard.site.controller.filter;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
+@WebFilter
 public class EncodingFilter implements Filter {
     /**
      * Default encoding value

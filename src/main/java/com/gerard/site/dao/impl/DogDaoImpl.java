@@ -27,12 +27,15 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
     static final String COLUMN_LABEL_8 = "description";
     static final String COLUMN_LABEL_9 = "active";
 
-    private static final String SELECT_DOG_BY_ID = "select dog_id, dog_sex, nickname,"
+    private static final String SELECT_DOG_BY_ID =
+            "select dog_id, dog_sex, nickname,"
             + "fullname, birthday,avatar_photo_path, pedigree_photo_path,"
             + "description, active from dog where dog_id=?";
 
-    private static final String SELECT_ALL_DOGS = "select dog_id, dog_sex, nickname," +
-            "fullname, birthday,avatar_photo_path, pedigree_photo_path, active, description from dog";
+    private static final String SELECT_ALL_DOGS =
+            "select dog_id, dog_sex, nickname,"
+            + "fullname, birthday,avatar_photo_path,"
+                    + " pedigree_photo_path, active, description from dog";
     private static final Logger LOGGER = LogManager.getLogger(DogDaoImpl.class);
 
     private DogDaoImpl() {
@@ -74,7 +77,8 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
 
     @Override
     public List<DogEntity> selectAll() throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
+        try (Connection connection =
+                     ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL_DOGS);
                 if (resultSet.isBeforeFirst()) {
@@ -95,24 +99,11 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
     }
 
     @Override
-    public boolean remove(DogEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean update(DogEntity entity, DogEntity newEntityVersion) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean create(DogEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public DogEntity parseResultSet(ResultSet resultSet) throws SQLException {
         int dogId = resultSet.getInt(COLUMN_LABEL_1);
-        DogEntity.DogSex dogSex = DogEntity.DogSex.valueOf(resultSet.getString(COLUMN_LABEL_2).toUpperCase());
+        DogEntity.DogSex dogSex =
+                DogEntity.DogSex.valueOf(
+                        resultSet.getString(COLUMN_LABEL_2).toUpperCase());
         String nickname = resultSet.getString(COLUMN_LABEL_3);
         String fullname = resultSet.getString(COLUMN_LABEL_4);
         Date birthday = resultSet.getDate(COLUMN_LABEL_5);
@@ -132,5 +123,26 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
                 .active(active)
                 .build();
         return dog;
+    }
+
+    @Override
+    public boolean remove(DogEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean update(DogEntity entity,
+                          DogEntity newEntityVersion) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean create(DogEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean updateDogStatus(DogEntity dogEntity) throws DaoException {
+        throw new UnsupportedOperationException();
     }
 }

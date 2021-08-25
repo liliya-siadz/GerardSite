@@ -34,16 +34,16 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
             = "select password from app_user where email =?";
 
     private static final String SELECT_USER_BY_EMAIL
-            = "select app_user_id, email, name, surname, patronymic," +
-            "phone, admin from app_user where email =?";
+            = "select app_user_id, email, name, surname, patronymic,"
+            + "phone, admin from app_user where email =?";
 
     private static final String SELECT_ALL_USERS
-            = "select app_user_id, email, name, surname, patronymic," +
-            "phone, admin from app_user";
+            = "select app_user_id, email, name, surname, patronymic,"
+            + "phone, admin from app_user";
 
 
     private static final String CREATE_IF_EXISTS_OTHERWISE_UPDATE =
-            """
+                    """
                     INSERT INTO app_user
                      (email, surname, name, patronymic, phone)
                      VALUES
@@ -118,11 +118,6 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     }
 
     @Override
-    public boolean remove(AppUserEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public Optional<String> selectUserPasswordByEmail(String token, String email)
             throws DaoException {
         String passwordToken = "electronDance18";
@@ -156,7 +151,8 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     }
 
     @Override
-    public boolean createIfExistsOtherwiseUpdate(AppUserEntity appUser) throws DaoException {
+    public boolean createIfExistsOtherwiseUpdate(
+            AppUserEntity appUser) throws DaoException {
         if (appUser == null) {
             throw new DaoException("Parameter 'appUser' is null");
         }
@@ -168,7 +164,8 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
         Connection connection = null;
         try {
             connection = ConnectionPool.getInstance().giveOutConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_IF_EXISTS_OTHERWISE_UPDATE);
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(CREATE_IF_EXISTS_OTHERWISE_UPDATE);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, surname);
             preparedStatement.setString(3, name);
@@ -209,6 +206,27 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     }
 
     @Override
+    public AppUserEntity parseResultSet(ResultSet resultSet) throws SQLException {
+        int appUserId = resultSet.getInt(COLUMN_LABEL_1);
+        String email = resultSet.getString(COLUMN_LABEL_2);
+        String name = resultSet.getString(COLUMN_LABEL_4);
+        String surname = resultSet.getString(COLUMN_LABEL_5);
+        String patronymic = resultSet.getString(COLUMN_LABEL_6);
+        String phone = resultSet.getString(COLUMN_LABEL_7);
+        boolean admin = resultSet.getBoolean(COLUMN_LABEL_8);
+        AppUserEntity appUserEntity = new AppUserEntity.Builder()
+                .id(appUserId)
+                .email(email)
+                .name(name)
+                .surname(surname)
+                .patronymic(patronymic)
+                .phone(phone)
+                .admin(admin)
+                .build();
+        return appUserEntity;
+    }
+
+    @Override
     public boolean update(AppUserEntity user, AppUserEntity newUserVersion)
             throws DaoException {
         if (user == null) {
@@ -229,23 +247,7 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     }
 
     @Override
-    public AppUserEntity parseResultSet(ResultSet resultSet) throws SQLException {
-        int appUserId = resultSet.getInt(COLUMN_LABEL_1);
-        String email = resultSet.getString(COLUMN_LABEL_2);
-        String name = resultSet.getString(COLUMN_LABEL_4);
-        String surname = resultSet.getString(COLUMN_LABEL_5);
-        String patronymic = resultSet.getString(COLUMN_LABEL_6);
-        String phone = resultSet.getString(COLUMN_LABEL_7);
-        boolean admin = resultSet.getBoolean(COLUMN_LABEL_8);
-        AppUserEntity appUserEntity = new AppUserEntity.Builder()
-                .id(appUserId)
-                .email(email)
-                .name(name)
-                .surname(surname)
-                .patronymic(patronymic)
-                .phone(phone)
-                .admin(admin)
-                .build();
-        return appUserEntity;
+    public boolean remove(AppUserEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
     }
 }

@@ -68,11 +68,6 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
     }
 
     @Override
-    public Optional<PhotoEntity> find(PhotoEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public List<PhotoEntity> selectAll() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
@@ -95,22 +90,6 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
     }
 
     @Override
-    public boolean remove(PhotoEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean update(PhotoEntity entity, PhotoEntity newEntityVersion)
-            throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean create(PhotoEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public PhotoEntity parseResultSet(ResultSet resultSet) throws SQLException {
         int photoId = resultSet.getInt(COLUMN_LABEL_1);
         String photoPath = resultSet.getString(COLUMN_LABEL_2);
@@ -124,5 +103,26 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
         photoEntity.setDogId(dogId);
         photoEntity.setPhotoDate(photoDate);
         return photoEntity;
+    }
+
+    @Override
+    public Optional<PhotoEntity> find(PhotoEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean remove(PhotoEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean update(PhotoEntity entity, PhotoEntity newEntityVersion)
+            throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean create(PhotoEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
     }
 }

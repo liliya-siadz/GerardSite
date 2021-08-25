@@ -4,7 +4,6 @@ import com.gerard.site.dao.AbstractDao;
 import com.gerard.site.dao.RequestDao;
 import com.gerard.site.dao.connection.ConnectionException;
 import com.gerard.site.dao.connection.ConnectionPool;
-import com.gerard.site.service.entity.AppUserEntity;
 import com.gerard.site.service.entity.RequestAndAppUserAndDog;
 import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.entity.RequestEntity;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class RequestDaoImpl extends AbstractDao<RequestEntity> implements RequestDao {
-
     private static RequestDaoImpl instance;
     static final String TABLE_NAME = "gerard.request";
     static final String COLUMN_LABEL_1 = "request_id";
@@ -35,11 +33,11 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                     + "date_fact, reply, dog_id, email from request";
 
     private static final String SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS =
-            """
+                    """
                     select request_id, request_status, request_type, content,
                     date_fact, reply, request.email,
                     app_user.name, app_user.surname, app_user.patronymic,
-                    app_user.phone, 
+                    app_user.phone,
                     dog.nickname, dog.fullname , dog.dog_sex, dog.birthday,
                     dog.avatar_photo_path
                     from request
@@ -65,11 +63,6 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
     }
 
     @Override
-    public Optional<RequestEntity> find(RequestEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public List<RequestEntity> selectAll() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
@@ -91,16 +84,13 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
         }
     }
 
-    @Override
-    public boolean remove(RequestEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
     public List<RequestAndAppUserAndDog> selectAllRequestsAndAppUserAndDog()
             throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
+        try (Connection connection =
+                     ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS);
+            ResultSet resultSet = statement.executeQuery(
+                    SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS);
             if (resultSet.isBeforeFirst()) {
                 List<RequestAndAppUserAndDog> selectedUsers = new ArrayList<>();
                 while (resultSet.next()) {
@@ -136,10 +126,13 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
         String phone = resultSet.getString(AppUserDaoImpl.COLUMN_LABEL_7);
         String nickname = resultSet.getString(DogDaoImpl.COLUMN_LABEL_3);
         String fullname = resultSet.getString(DogDaoImpl.COLUMN_LABEL_4);
-        DogEntity.DogSex dogSex = DogEntity.DogSex.valueOf(resultSet.getString(DogDaoImpl.COLUMN_LABEL_2).toUpperCase());
+        DogEntity.DogSex dogSex =
+                DogEntity.DogSex.valueOf(
+                        resultSet.getString(DogDaoImpl.COLUMN_LABEL_2).toUpperCase());
         Date birthday = resultSet.getDate(DogDaoImpl.COLUMN_LABEL_5);
         String avatarPhotoPath = resultSet.getString(DogDaoImpl.COLUMN_LABEL_6);
-        RequestAndAppUserAndDog requestAndAppUserAndDog = new RequestAndAppUserAndDog.Builder()
+        RequestAndAppUserAndDog requestAndAppUserAndDog =
+                new RequestAndAppUserAndDog.Builder()
                 .requestId(requestId)
                 .requestStatus(requestStatus)
                 .requestType(requestType)
@@ -158,12 +151,6 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                 .avatarPhotoPath(avatarPhotoPath)
                 .build();
         return requestAndAppUserAndDog;
-    }
-
-    @Override
-    public boolean update(RequestEntity entity, RequestEntity newEntityVersion)
-            throws DaoException {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -237,5 +224,21 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                 .email(email)
                 .build();
         return requestEntity;
+    }
+
+    @Override
+    public Optional<RequestEntity> find(RequestEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean update(RequestEntity entity, RequestEntity newEntityVersion)
+            throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean remove(RequestEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
     }
 }

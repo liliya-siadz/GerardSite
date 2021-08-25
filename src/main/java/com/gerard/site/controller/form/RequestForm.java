@@ -1,6 +1,6 @@
 package com.gerard.site.controller.form;
 
-import com.gerard.site.validator.field.FieldValidatorFactory;
+import com.gerard.site.validator.FieldValidatorFactory;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_NAME_PARAMETER_NAME;
-import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
-import static com.gerard.site.validator.field.FieldIdentifier.APP_USER_SURNAME_PARAMETER_NAME;
-import static com.gerard.site.validator.field.FieldIdentifier.CONTENT_PARAMETER_NAME;
-import static com.gerard.site.validator.field.FieldIdentifier.EMAIL_PARAMETER_NAME;
-import static com.gerard.site.validator.field.FieldIdentifier.PHONE_PARAMETER_NAME;
+import static com.gerard.site.validator.FieldIdentifier.APP_USER_NAME_PARAMETER_NAME;
+import static com.gerard.site.validator.FieldIdentifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
+import static com.gerard.site.validator.FieldIdentifier.APP_USER_SURNAME_PARAMETER_NAME;
+import static com.gerard.site.validator.FieldIdentifier.CONTENT_PARAMETER_NAME;
+import static com.gerard.site.validator.FieldIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.FieldIdentifier.PHONE_PARAMETER_NAME;
 
 public class RequestForm implements FormValidator, Serializable {
     @Serial

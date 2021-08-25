@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-    <!--    application start-->
+    <!--    application params start-->
     <session-config>
         <session-timeout>60</session-timeout>
     </session-config>
@@ -27,7 +27,7 @@
         <param-name>application_url</param-name>
         <param-value>http://localhost:8080/gerard</param-value>
     </context-param>
-    <!--    application end-->
+    <!--                                    application params end-->
     <!--guest pages start-->
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -77,7 +77,7 @@
         <servlet-name>login</servlet-name>
         <jsp-file>/pages/login.jsp</jsp-file>
     </servlet>
-    <!--    guest pages end-->
+    <!--                                                    guest pages end-->
     <!-- admin pages start-->
     <servlet>
         <servlet-name>admin_dogs</servlet-name>
@@ -103,8 +103,7 @@
         <servlet-name>admin_photos</servlet-name>
         <url-pattern>/admin_photos</url-pattern>
     </servlet-mapping>
-    <!--    admin pages end-->
-    <!--    error pages config start-->
+    <!--                                        admin pages end-->
     <servlet-mapping>
         <servlet-name>error</servlet-name>
         <url-pattern>/error</url-pattern>
@@ -176,8 +175,6 @@
         <error-code>505</error-code>
         <location>/pages/error.jsp</location>
     </error-page>
-    <!--    error pages config end-->
-    <!--    filters config start-->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>com.gerard.site.controller.filter.EncodingFilter</filter-class>
@@ -216,5 +213,4 @@
         <url-pattern>/admin_requests</url-pattern>
         <url-pattern>/admin_photos</url-pattern>
     </filter-mapping>
-<!--        filters config end-->
 </web-app>

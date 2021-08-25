@@ -1,6 +1,7 @@
 package com.gerard.site.controller.filter;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,7 @@ import java.io.IOException;
  * @author Liliya Siadzelnikava
  * @version 1.0
  */
+@WebFilter
 public class BlackListFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(BlackListFilter.class);
 

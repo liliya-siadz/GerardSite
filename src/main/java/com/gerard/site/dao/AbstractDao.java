@@ -13,9 +13,14 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
     }
 
     public abstract Optional<E> find(E entity) throws DaoException;
+
     public abstract List<E> selectAll() throws DaoException;
+
     public abstract boolean remove(E entity) throws DaoException;
+
     public abstract boolean update(E entity, E newEntityVersion) throws DaoException;
+
     public abstract boolean create(E entity) throws DaoException;
+
     protected abstract E parseResultSet(ResultSet resultSet) throws SQLException;
 }
