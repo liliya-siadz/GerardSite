@@ -1,4 +1,7 @@
 <h2><i>Private monobreed dog kennel </i>.</h2>
+
+☛ class project after online-training "Java Web development by EPAM"
+
 <h2>Desktop Web-application "gerard" </h2>
 
 <h2>MAIN USE OF APP</h2>
@@ -12,8 +15,6 @@
     <li>Provide service for making requests for puppies from potential pet's owners</b></li>
     <li>Provide service for processing requests</b></li>
 </ol>
-
-☉ class project after online-training "Java Web development by EPAM"
 
 <h2>APPLICATION ACTIONS</h2>
 
