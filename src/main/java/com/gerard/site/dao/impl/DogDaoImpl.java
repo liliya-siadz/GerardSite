@@ -95,12 +95,17 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
     }
 
     @Override
+    public boolean remove(DogEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean update(DogEntity entity, DogEntity newEntityVersion) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Optional<DogEntity> create(DogEntity entity) throws DaoException {
+    public boolean create(DogEntity entity) throws DaoException {
         throw new UnsupportedOperationException();
     }
 

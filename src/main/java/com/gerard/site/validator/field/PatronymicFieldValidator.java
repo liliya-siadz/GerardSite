@@ -8,11 +8,13 @@ public enum PatronymicFieldValidator implements FieldValidator<String> {
         if (name == null || name.isBlank()) {
             return true;
         }
-        int maxLength = 250;
-        int minLength = 3;
-        String validRegex = "[\\w]*";
-        return (name.length() >= minLength)
-                && (name.length() <= maxLength)
-                && (name.matches(validRegex));
+        else {
+            int maxLength = 250;
+            int minLength = 3;
+            String validRegex = "[a-zA-Z]*|[ЁёА-я]*";
+            return (name.length() >= minLength)
+                    && (name.length() <= maxLength)
+                    && (name.matches(validRegex));
+        }
     }
 }

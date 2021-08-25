@@ -13,6 +13,7 @@ public class PasswordFieldValidatorTest {
                 {"sweety1234", true},
                 {"sunshine0", true},
                 {"candis90", true},
+                {"валера", false},
                 {"skyline3", true},
                 {"strekoza18", true},
                 {"////d123123sfgdfgdfg", false},

@@ -46,7 +46,7 @@ public enum CommandFactory {
         commands.put(GO_TO_PUPPIES_PAGE, GoToPuppiesPageCommand.INSTANCE);
         commands.put(GO_TO_PHOTOS_PAGE, GoToPhotosPageCommand.INSTANCE);
 
-        commands.put(DISPLAY_CHOSEN_PUPPY, DisplayChosenPuppyCommand.INSTANCE);
+        commands.put(CHOSE_PUPPY, ChosePuppyCommand.INSTANCE);
         commands.put(MAKE_REQUEST, MakeRequestCommand.INSTANCE);
 
         commands.put(GO_TO_ADMIN_PHOTOS_PAGE, GoToAdminPhotosPageCommand.INSTANCE);

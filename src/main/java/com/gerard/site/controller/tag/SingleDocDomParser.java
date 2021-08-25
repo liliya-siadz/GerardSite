@@ -1,4 +1,4 @@
-package com.gerard.site.tag;
+package com.gerard.site.controller.tag;
 
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.util.AppIdentifierUtil;
@@ -37,7 +37,7 @@ public class SingleDocDomParser {
      */
     private String documentUrl;
 
-    public SingleDocDomParser(String documentUrl) {
+     SingleDocDomParser(String documentUrl) {
         try {
             setDocumentUrl(documentUrl);
         } catch (ServiceException exception) {

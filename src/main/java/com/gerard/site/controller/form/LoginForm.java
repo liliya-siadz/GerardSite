@@ -2,6 +2,8 @@ package com.gerard.site.controller.form;
 
 import com.gerard.site.validator.field.FieldValidatorFactory;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,7 +11,9 @@ import java.util.Objects;
 import static com.gerard.site.validator.field.FieldIdentifier.EMAIL_PARAMETER_NAME;
 import static com.gerard.site.validator.field.FieldIdentifier.PASSWORD_PARAMETER_NAME;
 
-public class LoginForm implements FormValidator {
+public class LoginForm implements FormValidator, Serializable {
+    @Serial
+    private static final long serialVersionUID=1L;
     private String email;
     private String password;
 

@@ -23,7 +23,7 @@ public enum CommandIdentifier {
     GO_TO_PHOTOS_PAGE,
     GO_TO_PUPPIES_PAGE,
 
-    DISPLAY_CHOSEN_PUPPY,
+    CHOSE_PUPPY,
     MAKE_REQUEST,
 
     GO_TO_ADMIN_DOGS_PAGE,

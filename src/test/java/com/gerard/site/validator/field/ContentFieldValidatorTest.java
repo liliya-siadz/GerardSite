@@ -11,6 +11,7 @@ public class ContentFieldValidatorTest {
     public Object[][] dataProviderIsValid() {
         return new Object[][] {
                 {"Hello this is my message.", true},
+                {"Здравствуйте.", true},
                 {"Hello dfgdfg !", true},
                 {"sdfsdf 1512154f48sd fsdfeef4646131", true},
                 {"GDFGDFGDFG, SFEFEFES 1231 23", true},

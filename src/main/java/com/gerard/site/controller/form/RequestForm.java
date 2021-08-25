@@ -2,6 +2,8 @@ package com.gerard.site.controller.form;
 
 import com.gerard.site.validator.field.FieldValidatorFactory;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -13,7 +15,9 @@ import static com.gerard.site.validator.field.FieldIdentifier.CONTENT_PARAMETER_
 import static com.gerard.site.validator.field.FieldIdentifier.EMAIL_PARAMETER_NAME;
 import static com.gerard.site.validator.field.FieldIdentifier.PHONE_PARAMETER_NAME;
 
-public class RequestForm implements FormValidator {
+public class RequestForm implements FormValidator, Serializable {
+    @Serial
+    private static final long serialVersionUID=1L;
     private String email;
     private String content;
     private String name;
@@ -21,18 +25,11 @@ public class RequestForm implements FormValidator {
     private String patronymic;
     private String phone;
 
-    public RequestForm(String email,
-                       String content,
-                       String name,
-                       String surname,
-                       String patronymic,
-                       String phone) {
-    }
+    public RequestForm(){ }
 
     public String getEmail() {
         return email;
     }
-
 
     public String getContent() {
         return content;
@@ -56,6 +53,30 @@ public class RequestForm implements FormValidator {
 
     public String getPhone() {
         return phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

@@ -41,6 +41,19 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
             = "select app_user_id, email, name, surname, patronymic," +
             "phone, admin from app_user";
 
+
+    private static final String CREATE_IF_EXISTS_OTHERWISE_UPDATE =
+            """
+                    INSERT INTO app_user
+                     (email, surname, name, patronymic, phone)
+                     VALUES
+                     (?, ?, ?, ?, ?)
+                     ON DUPLICATE KEY UPDATE
+                     surname =?,
+                     name =?,
+                     patronymic = ?,
+                     phone =?
+                      """;
     private static final Logger LOGGER = LogManager.getLogger(AppUserDaoImpl.class);
 
     private AppUserDaoImpl() {
@@ -61,18 +74,18 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
         }
         String email = user.getEmail();
         try (Connection connection =
-                     ConnectionPool.getInstance().giveOutConnection() ;
+                     ConnectionPool.getInstance().giveOutConnection();
              PreparedStatement preparedStatement =
                      connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
-                preparedStatement.setString(1, email);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                AppUserEntity selectedUser = null;
-                if (resultSet.isBeforeFirst()) {
-                    while (resultSet.next()) {
-                        selectedUser = parseResultSet(resultSet);
-                    }
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            AppUserEntity selectedUser = null;
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    selectedUser = parseResultSet(resultSet);
                 }
-                return Optional.ofNullable(selectedUser);
+            }
+            return Optional.ofNullable(selectedUser);
         } catch (ConnectionException | SQLException exception) {
             throw new DaoException("Unable to get data from table: "
                     + TABLE_NAME + " ! "
@@ -84,24 +97,29 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     public List<AppUserEntity> selectAll() throws DaoException {
         try (Connection connection =
                      ConnectionPool.getInstance().giveOutConnection();
-            Statement statement =
-                    connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery(SELECT_ALL_USERS);
-                if (resultSet.isBeforeFirst()) {
-                    List<AppUserEntity> selectedUsers = new ArrayList<>();
-                    while (resultSet.next()) {
-                        selectedUsers.add(parseResultSet(resultSet));
-                    }
-                    return selectedUsers;
-                } else {
-                    LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
-                    return Collections.emptyList();
+             Statement statement =
+                     connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_USERS);
+            if (resultSet.isBeforeFirst()) {
+                List<AppUserEntity> selectedUsers = new ArrayList<>();
+                while (resultSet.next()) {
+                    selectedUsers.add(parseResultSet(resultSet));
                 }
+                return selectedUsers;
+            } else {
+                LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
+                return Collections.emptyList();
+            }
         } catch (ConnectionException | SQLException exception) {
             throw new DaoException("Unable to get data from table: "
                     + TABLE_NAME + " ! "
                     + "Reason: " + exception.getMessage(), exception);
         }
+    }
+
+    @Override
+    public boolean remove(AppUserEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -114,17 +132,17 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
             }
             try (Connection connection =
                          ConnectionPool.getInstance().giveOutConnection();
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(SELECT_USER_PASSWORD_BY_EMAIL)) {
-                    preparedStatement.setString(1, email);
-                    ResultSet resultSet = preparedStatement.executeQuery();
-                    String password = null;
-                    if (resultSet.isBeforeFirst()) {
-                        while (resultSet.next()) {
-                            password = resultSet.getString(COLUMN_LABEL_3);
-                        }
+                 PreparedStatement preparedStatement =
+                         connection.prepareStatement(SELECT_USER_PASSWORD_BY_EMAIL)) {
+                preparedStatement.setString(1, email);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                String password = null;
+                if (resultSet.isBeforeFirst()) {
+                    while (resultSet.next()) {
+                        password = resultSet.getString(COLUMN_LABEL_3);
                     }
-                    return Optional.ofNullable(password);
+                }
+                return Optional.ofNullable(password);
             } catch (SQLException | ConnectionException exception) {
                 throw new DaoException("Unable to get data from table: "
                         + TABLE_NAME + " ! "
@@ -137,6 +155,58 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
         }
     }
 
+    @Override
+    public boolean createIfExistsOtherwiseUpdate(AppUserEntity appUser) throws DaoException {
+        if (appUser == null) {
+            throw new DaoException("Parameter 'appUser' is null");
+        }
+        String email = appUser.getEmail();
+        String surname = appUser.getSurname();
+        String name = appUser.getName();
+        String patronymic = appUser.getPatronymic();
+        String phone = appUser.getPhone();
+        Connection connection = null;
+        try {
+            connection = ConnectionPool.getInstance().giveOutConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_IF_EXISTS_OTHERWISE_UPDATE);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setString(3, name);
+            preparedStatement.setString(4, patronymic);
+            preparedStatement.setString(5, phone);
+
+            preparedStatement.setString(6, surname);
+            preparedStatement.setString(7, name);
+            preparedStatement.setString(8, patronymic);
+            preparedStatement.setString(9, phone);
+            connection.setAutoCommit(false);
+            int updatedRowsQuantity = preparedStatement.executeUpdate();
+            connection.commit();
+            preparedStatement.close();
+            ConnectionPool.getInstance().getBackConnection(connection);
+            LOGGER.info(updatedRowsQuantity
+                    + " rows was updated in table " + TABLE_NAME
+                    + "Used entity: " + appUser);
+        } catch (ConnectionException | SQLException exception) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                    LOGGER.trace("Unsuccessfully");
+                    return false;
+                }else {
+                    LOGGER.warn("Connection is null");
+                }
+            } catch (SQLException throwables) {
+                LOGGER.error("Unable to rollback transaction! "
+                        + throwables.getMessage(), throwables);
+            }
+            throw new DaoException("Unable to update data in table: "
+                    + TABLE_NAME + " ! "
+                    + exception.getMessage(), exception);
+        }
+        LOGGER.trace("Successfully");
+        return true;
+    }
 
     @Override
     public boolean update(AppUserEntity user, AppUserEntity newUserVersion)
@@ -151,7 +221,7 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     }
 
     @Override
-    public Optional<AppUserEntity> create(AppUserEntity user) throws DaoException {
+    public boolean create(AppUserEntity user) throws DaoException {
         if (user == null) {
             throw new DaoException("Parameter 'user' is null");
         }

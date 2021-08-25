@@ -1,4 +1,4 @@
-package com.gerard.site.tag;
+package com.gerard.site.controller.tag;
 
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.TagSupport;

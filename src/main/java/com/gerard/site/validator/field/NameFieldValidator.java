@@ -10,7 +10,7 @@ public enum NameFieldValidator implements FieldValidator<String> {
         }
         int maxLength = 250;
         int minLength = 3;
-        String validRegex = "[\\w]*";
+        String validRegex = "[a-zA-Z]*|[ЁёА-я]*";
         return (name.length() >= minLength)
                 && (name.length() <= maxLength)
                 && (name.matches(validRegex));

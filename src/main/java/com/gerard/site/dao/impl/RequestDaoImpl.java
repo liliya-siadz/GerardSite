@@ -4,6 +4,7 @@ import com.gerard.site.dao.AbstractDao;
 import com.gerard.site.dao.RequestDao;
 import com.gerard.site.dao.connection.ConnectionException;
 import com.gerard.site.dao.connection.ConnectionPool;
+import com.gerard.site.service.entity.AppUserEntity;
 import com.gerard.site.service.entity.RequestAndAppUserAndDog;
 import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.entity.RequestEntity;
@@ -34,17 +35,24 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                     + "date_fact, reply, dog_id, email from request";
 
     private static final String SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS =
-            "select request_id, request_status, request_type, content,"
-                    + "date_fact, reply, request.email, "
-                    + "app_user.name," + "app_user.surname, app_user.patronymic, "
-                    + "app_user.phone, "
-                    + "dog.nickname, " + "dog.fullname ," + " dog.dog_sex, " + " dog.birthday, "
-                    + "dog.avatar_photo_path "
-                    + "from request "
-                    + "inner join app_user "
-                    + "on request.email = app_user.email "
-                    + "inner join dog "
-                    + "on dog.dog_id = request.dog_id";
+            """
+                    select request_id, request_status, request_type, content,
+                    date_fact, reply, request.email,
+                    app_user.name, app_user.surname, app_user.patronymic,
+                    app_user.phone, 
+                    dog.nickname, dog.fullname , dog.dog_sex, dog.birthday,
+                    dog.avatar_photo_path
+                    from request
+                    inner join app_user
+                    on request.email = app_user.email
+                    inner join dog
+                    on dog.dog_id = request.dog_id
+                    """;
+
+    private static final String CREATE_NEW_REQUEST =
+            "insert into request (email, content,dog_id, date_fact)"
+                    + "values(?,?,?,?)";
+
     private RequestDaoImpl() {
         super();
     }
@@ -65,17 +73,17 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
     public List<RequestEntity> selectAll() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery(SELECT_ALL_REQUESTS);
-                if (resultSet.isBeforeFirst()) {
-                    List<RequestEntity> selectedUsers = new ArrayList<>();
-                    while (resultSet.next()) {
-                        selectedUsers.add(parseResultSet(resultSet));
-                    }
-                    return selectedUsers;
-                } else {
-                    LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
-                    return Collections.emptyList();
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_REQUESTS);
+            if (resultSet.isBeforeFirst()) {
+                List<RequestEntity> selectedUsers = new ArrayList<>();
+                while (resultSet.next()) {
+                    selectedUsers.add(parseResultSet(resultSet));
                 }
+                return selectedUsers;
+            } else {
+                LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
+                return Collections.emptyList();
+            }
         } catch (ConnectionException | SQLException exception) {
             throw new DaoException("Unable to get data from table: "
                     + TABLE_NAME + " ! "
@@ -83,20 +91,25 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
         }
     }
 
+    @Override
+    public boolean remove(RequestEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
     public List<RequestAndAppUserAndDog> selectAllRequestsAndAppUserAndDog()
             throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery(SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS);
-                if (resultSet.isBeforeFirst()) {
-                    List<RequestAndAppUserAndDog> selectedUsers = new ArrayList<>();
-                    while (resultSet.next()) {
-                        selectedUsers.add(parseResultSetRequestAndAppUserAndDog(resultSet));
-                    }
-                    return selectedUsers;
-                } else {
-                    return Collections.emptyList();
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS);
+            if (resultSet.isBeforeFirst()) {
+                List<RequestAndAppUserAndDog> selectedUsers = new ArrayList<>();
+                while (resultSet.next()) {
+                    selectedUsers.add(parseResultSetRequestAndAppUserAndDog(resultSet));
                 }
+                return selectedUsers;
+            } else {
+                return Collections.emptyList();
+            }
         } catch (ConnectionException | SQLException exception) {
             throw new DaoException("Unable to get data from table: "
                     + TABLE_NAME + " ! "
@@ -150,15 +163,53 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
     @Override
     public boolean update(RequestEntity entity, RequestEntity newEntityVersion)
             throws DaoException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Optional<RequestEntity> create(RequestEntity entity) throws DaoException {
+    public boolean create(RequestEntity entity) throws DaoException {
         if (entity == null) {
             throw new DaoException("Parameter 'entity' is null");
         }
-        throw new UnsupportedOperationException();
+        String email = entity.getEmail();
+        String content = entity.getContent();
+        int dogId = entity.getDogId();
+        Date dateFact = entity.getDateFact();
+        Connection connection = null;
+        try {connection =
+                     ConnectionPool.getInstance().giveOutConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement(CREATE_NEW_REQUEST);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, content);
+            preparedStatement.setInt(3, dogId);
+            preparedStatement.setDate(4, dateFact);
+            connection.setAutoCommit(false);
+            int updatedRowsQuantity = preparedStatement.executeUpdate();
+            connection.commit();
+            preparedStatement.close();
+            ConnectionPool.getInstance().getBackConnection(connection);
+            LOGGER.info(updatedRowsQuantity
+                    + " rows was updated in table " + TABLE_NAME
+                    + "Used entity: " + entity);
+            return (updatedRowsQuantity == 1);
+        } catch (ConnectionException | SQLException exception) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                    LOGGER.trace("Unsuccessfully");
+                    return false;
+                }else {
+                    LOGGER.warn("Connection is null");
+                }
+            } catch (SQLException throwables) {
+                LOGGER.error("Unable to rollback transaction! "
+                        + throwables.getMessage(), throwables);
+            }
+            throw new DaoException("Unable to get data from table: "
+                    + TABLE_NAME + " ! "
+                    + exception.getMessage(), exception);
+        }
     }
 
     @Override

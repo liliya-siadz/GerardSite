@@ -10,7 +10,7 @@ public enum ContentFieldValidator implements FieldValidator<String> {
         }
         int maxLength = 450;
         int minLength = 10;
-        String validRegex = "[\\w!.?,:\s]*";
+        String validRegex = "[\\w!.?,:\s]*|[[ЁёА-я]!.?,:\s]*";
         return (content.length() >= minLength)
                 && (content.length() <= maxLength)
                 && (content.matches(validRegex));

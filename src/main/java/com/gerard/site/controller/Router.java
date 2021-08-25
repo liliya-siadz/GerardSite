@@ -61,7 +61,7 @@ public class Router {
         String pageUrl;
         try {
             pageUrl = command.execute(request, response);
-            LOGGER.trace("Command: " + commandName + "was executed.");
+            LOGGER.trace("Command: " + commandName + " was executed.");
         } catch (ServiceException exception) {
             LOGGER.error("Unable to prepare page url! "
                     + "Command name: " + commandName

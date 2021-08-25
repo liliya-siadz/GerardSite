@@ -6,23 +6,25 @@ import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.impl.DogServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.Optional;
 
-public enum DisplayChosenPuppyCommand implements Command {
+public enum ChosePuppyCommand implements Command {
     INSTANCE;
 
-    private final String targetParameterName = "chosenPuppyId";
-    private final String viewAttributeName = "chosenPuppy";
+    private final String chosenPuppyIdParameterName = "chosenPuppyId";
+    private final String chosenPuppyAttributeName = "chosenPuppy";
+    private final String isPuppyChosenAttributeName = "isPuppyChosen";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServiceException {
-        int selectedDogId = Integer.parseInt(request.getParameter(targetParameterName));
+        int selectedDogId = Integer.parseInt(request.getParameter(chosenPuppyIdParameterName));
         Optional<DogEntity> dogEntity = DogServiceImpl.getInstance().find(selectedDogId);
-        if (dogEntity.isPresent()) {
-            request.getSession().setAttribute(viewAttributeName, dogEntity.get());
-        }
+        HttpSession session = request.getSession();
+        session.setAttribute(chosenPuppyAttributeName, dogEntity.get());
+        session.setAttribute(isPuppyChosenAttributeName, true);
         return Page.MAKE_REQUEST.getPageUrl();
     }
 }

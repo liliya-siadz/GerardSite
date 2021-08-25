@@ -20,7 +20,8 @@ public class AppMailMessageTest {
         return new Object[][]{
                 {"sidelnikova.liliya@gmail.com"},
                 {"johnny890legend@gmail.com"},
-                {"spearsb149@gmail.com"}
+                {"spearsb149@gmail.com"},
+                {"gerard.kennel@inbox.ru"}
         };
     }
 

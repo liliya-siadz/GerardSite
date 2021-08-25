@@ -95,13 +95,18 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
     }
 
     @Override
+    public boolean remove(PhotoEntity entity) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean update(PhotoEntity entity, PhotoEntity newEntityVersion)
             throws DaoException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Optional<PhotoEntity> create(PhotoEntity entity) throws DaoException {
+    public boolean create(PhotoEntity entity) throws DaoException {
         throw new UnsupportedOperationException();
     }
 

@@ -1,4 +1,4 @@
-package com.gerard.site.tag;
+package com.gerard.site.controller.tag;
 
 import com.gerard.site.service.util.localization.Language;
 import jakarta.servlet.http.Cookie;

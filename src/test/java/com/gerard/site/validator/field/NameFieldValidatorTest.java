@@ -14,13 +14,14 @@ public class NameFieldValidatorTest {
                 {"va", false},
                 {"Ira", true},
                 {"kotLeta", true},
+                {"Ирина", true},
                 {"1223", false},
                 {"////d123123sfgdfgdfg", false},
                 {" ferg           ", false},
-                {"seemslikemail", false},
+                {"seemslikmail", true},
                 {"",false},
                 {null,false},
-                {"f".repeat(250),false}
+                {"f".repeat(251),false}
         };
     }
 

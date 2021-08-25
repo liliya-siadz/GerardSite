@@ -1,5 +1,7 @@
 package com.gerard.site.service.entity;
 
+import com.gerard.site.dao.RequestDao;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
@@ -26,6 +28,7 @@ public  class RequestAndAppUserAndDog implements Serializable {
 
     public RequestAndAppUserAndDog() {
     }
+
 
     public int getRequestId() {
         return requestId;

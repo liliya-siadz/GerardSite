@@ -12,6 +12,7 @@ public class PhoneFieldValidatorTest {
         return new Object[][] {
                 {"fesfefsf", false},
                 {"2324", false},
+                {"стационарный", false},
                 {"1232134432", false},
                 {"291523", false},
                 {"293060661", true},

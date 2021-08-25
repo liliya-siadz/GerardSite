@@ -13,14 +13,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public final class AppMailMessage {
-    private static final String messageType = "text/html";
+    private static final String MESSAGE_TYPE = "text/html";
+    private static final String CHAR_SET = "UTF-8";
     private static final Message.RecipientType recipientType = Message.RecipientType.TO;
     private static final Logger LOGGER = LogManager.getLogger(AppMailMessage.class);
     private String subject;
     private String content;
     private String recipient;
 
-    public AppMailMessage(String subject, String content, String recipient)
+    AppMailMessage(String subject, String content, String recipient)
             throws ServiceException {
         if ((subject == null) || (content == null) || (recipient == null)
                 || (recipient.isBlank())) {
@@ -53,7 +54,8 @@ public final class AppMailMessage {
         MimeMessage message = new MimeMessage(session);
         try {
             message.setSubject(subject);
-            message.setContent(content, messageType);
+            message.setContent(content, MESSAGE_TYPE);
+            message.setText(content,CHAR_SET);
             Address address = new InternetAddress(recipient);
             message.setRecipient(recipientType, address);
             Transport.send(message);
