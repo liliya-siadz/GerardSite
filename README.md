@@ -13,10 +13,9 @@
     <li><b>Providing contact information of the kennel</b></li>
 </ol>
 
-<h2>DIAGRAM</h2>
+<h2>APPLICATION ACTIONS</h2>
 
-![diagram](https://user-images.githubusercontent.com/39922259/130496387-6f10768f-c394-414a-80b5-dfbf5eb7603d.png)
-
+![APP_ACTIONS](https://user-images.githubusercontent.com/39922259/130766900-64ccae9e-9725-4f58-b116-6caaf95434d3.png)
 
 <h2>DATABASE SCHEME</h2>
 
