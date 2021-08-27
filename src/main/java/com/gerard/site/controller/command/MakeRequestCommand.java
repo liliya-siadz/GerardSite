@@ -15,13 +15,15 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Map;
 
-import static com.gerard.site.validator.Identifier.*;
+import static com.gerard.site.validator.ValidatorIdentifier.*;
 
 public enum MakeRequestCommand implements Command {
     INSTANCE;
     private String chosenPuppyAttributeName = "chosenPuppy";
     private String isRequestMadeAttributeName = "isRequestMade";
     private String validationMapNameAttributeName = "requestValidationMap";
+    private String viewResultEmailAttributeName = "email";
+    private String viewResultPhoneAttributeName = "phone";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -61,6 +63,8 @@ public enum MakeRequestCommand implements Command {
                     RequestServiceImpl.getInstance()
                             .sendRequest(dogEntity, requestEntity, appUserEntity);
             session.setAttribute(isRequestMadeAttributeName, isRequestWasMade);
+            session.setAttribute(viewResultEmailAttributeName,email);
+            session.setAttribute(viewResultPhoneAttributeName,phone);
         }
         return Page.MAKE_REQUEST.getPageUrl();
     }

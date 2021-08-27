@@ -38,12 +38,12 @@
         <jsp-file>/pages/home.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>dogs</servlet-name>
-        <jsp-file>/pages/dogs.jsp</jsp-file>
+        <servlet-name>dogEntities</servlet-name>
+        <jsp-file>/pages/dogEntities.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>dogs</servlet-name>
-        <url-pattern>/dogs</url-pattern>
+        <servlet-name>dogEntities</servlet-name>
+        <url-pattern>/dogEntities</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>puppies</servlet-name>

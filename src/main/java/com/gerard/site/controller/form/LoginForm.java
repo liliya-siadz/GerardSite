@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.gerard.site.validator.Identifier.EMAIL_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.PASSWORD_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.PASSWORD_PARAMETER_NAME;
 
 public class LoginForm implements FormValidator, Serializable {
     @Serial

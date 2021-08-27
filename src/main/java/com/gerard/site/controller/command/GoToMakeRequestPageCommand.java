@@ -4,6 +4,7 @@ import com.gerard.site.controller.Page;
 import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.impl.DogServiceImpl;
+import com.gerard.site.service.view.Dog;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public enum GoToMakeRequestPageCommand implements Command {
     INSTANCE;
-    private final String viewAttributeName = "allPuppies";
+    private final String viewAttributeName = "puppies";
     private final String isPuppyChosenAttributeName = "isPuppyChosen";
     private String isRequestMadeAttributeName = "isRequestMade";
 
@@ -20,11 +21,11 @@ public enum GoToMakeRequestPageCommand implements Command {
     public String execute(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServiceException {
-        List<DogEntity> allPuppies =  DogServiceImpl.getInstance().provideActivePuppies();
+        List<Dog> puppies =  DogServiceImpl.getInstance().provideAlPuppiesForView();
         InvalidateSessionCommand.INSTANCE.execute(request,response);
         HttpSession session = request.getSession();
         session.setAttribute(isPuppyChosenAttributeName, false);
-        request.setAttribute(viewAttributeName, allPuppies);
+        request.setAttribute(viewAttributeName, puppies);
         session.setAttribute(isRequestMadeAttributeName,false);
         return Page.MAKE_REQUEST.getPageUrl();
     }

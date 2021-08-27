@@ -11,12 +11,12 @@ import java.util.List;
 
 public enum GoToAdminPhotosPageCommand implements Command {
     INSTANCE;
-    private final String viewAttributeName = "allPhotos";
+    private final String viewAttributeName = "photosForAdmin";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        List<PhotoEntity> allPhotos =  PhotoServiceImpl.getInstance().provideAllPhotos();
-        request.setAttribute(viewAttributeName, allPhotos);
+        List<PhotoEntity> photosForAdmin =  PhotoServiceImpl.getInstance().provideAllPhotosForAdmin();
+        request.setAttribute(viewAttributeName, photosForAdmin);
         return Page.ADMIN_PHOTOS.getPageUrl();
     }
 }

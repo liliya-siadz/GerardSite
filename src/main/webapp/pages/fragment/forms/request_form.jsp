@@ -6,6 +6,7 @@
     <p><fmt:message key="field.content.label"/> (${contentValidationMessage})</p>
     <p><textarea name="content"
                  required
+                 id="contentId"
                  pattern="${contentPattern}"
                  maxlength="${contentMaxLength}"
                  minlength="${contentMinLength}"
@@ -28,6 +29,7 @@
     <p><input
             name="name"
             type="text"
+            id="nameId"
             required
             size="${50}"
             pattern="${namePattern}"
@@ -39,6 +41,7 @@
     <p><input
             name="surname"
             type="text"
+            id="surnameId"
             required
             size="${50}"
             pattern="${namePattern}"
@@ -49,6 +52,7 @@
     <p><fmt:message key="field.patronymic.label"/>(${patronymicValidationMessage})</p>
     <p><input
             name="patronymic"
+            id="patronymicId"
             type="text"
             size="${50}"
             pattern="${namePattern}"
@@ -61,6 +65,7 @@
     <p> <input
             name="phone"
             type="text"
+            id="phoneId"
             required
             size="${strongLength}"
             placeholder="${phonePlaceholder}"
@@ -73,6 +78,7 @@
             name="command"
             class="btn btn-xs navbar-btn"
             style="background-color: red"
+            onClick="window.location.reload();"
             value="MAKE_REQUEST">
         <fmt:message key="page.make_request.button.make_request.name"/>
     </button>

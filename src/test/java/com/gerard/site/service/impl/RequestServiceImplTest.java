@@ -4,7 +4,7 @@ import com.gerard.site.dao.impl.DaoException;
 import com.gerard.site.dao.impl.DogDaoImpl;
 import com.gerard.site.service.entity.AppUserEntity;
 import com.gerard.site.service.entity.DogEntity;
-import com.gerard.site.service.entity.RequestAndAppUserAndDog;
+import com.gerard.site.service.view.admin.Request;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.entity.RequestEntity;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +22,7 @@ public class RequestServiceImplTest {
 
     @Test
     public void testProvideAllPendingRequests() throws ServiceException {
-        List<RequestAndAppUserAndDog> requestsAndAppUserAndDogList =
+        List<Request> requestsAndAppUserAndDogList =
                 RequestServiceImpl.getInstance().provideAllPendingRequests();
         LOGGER.info(requestsAndAppUserAndDogList);
         assertFalse(requestsAndAppUserAndDogList.isEmpty());
@@ -32,7 +32,7 @@ public class RequestServiceImplTest {
     public Object[][] dataProviderSendRequest() throws DaoException {
         DogEntity bottleDogEntity = new DogEntity();
         bottleDogEntity.setId(1);
-        DogEntity existingDog = DogDaoImpl.getInstance().find(bottleDogEntity).get();
+        DogEntity existingDogEntity = DogDaoImpl.getInstance().find(bottleDogEntity).get();
 
         AppUserEntity existingUser = new AppUserEntity();
         existingUser.setEmail("sidelnikova.liliya2.@gmail.com");
@@ -48,7 +48,7 @@ public class RequestServiceImplTest {
         request.setDogId(1);
 
         return new Object[][]{
-                {existingDog, request, existingUser},
+                {existingDogEntity, request, existingUser},
         };
     }
 
@@ -61,5 +61,13 @@ public class RequestServiceImplTest {
         boolean actual = RequestServiceImpl.getInstance().sendRequest(
                 dogEntity, requestEntity,  appUserEntity);
         assertTrue(actual);
+    }
+
+    @Test
+    public void testProvideAllRequests() throws ServiceException {
+        List<Request> requests = RequestServiceImpl.getInstance().provideAllRequestsForAdmin();
+        LOGGER.info(requests);
+        assertFalse(requests.isEmpty());
+
     }
 }

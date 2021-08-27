@@ -1,9 +1,7 @@
 package com.gerard.site.controller.form;
 
-import com.gerard.site.dao.impl.PhotoDaoImplTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;

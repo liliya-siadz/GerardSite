@@ -14,29 +14,29 @@
 <body>
 <%@ include file="fragment/headers/admin_header.jsp" %>
 <div style="display:inline-block;">
-    <c:set var="dogs" value="${allDogs}" scope="request"/>
-    <c:forEach items="${dogs}" var="dog">
-        <c:set var="avatar" value="${dog.avatarPhotoPath}"/>
+    <c:set var="dogsForAdmin" value="${dogsForAdmin}" scope="page"/>
+    <c:forEach items="${dogsForAdmin}" var="dogForAdmin">
+        <c:set var="avatar" value="${dogForAdmin.avatarPhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${avatar}"
              alt="?"
              width="512"/>
-        <c:set var="pedigree" value="${dog.pedigreePhotoPath}"/>
+        <c:set var="pedigree" value="${dogForAdmin.pedigreePhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${pedigree}"
              alt="?"
              width="512"/>
         <div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.admin_dogs.title.sex"/> </b>
-                    <c:out value="${dog.dogSex}"/>
+                <h3><b><fmt:message key="page.dogEntities.admin_dogs.title.sex"/> </b>
+                    <c:out value="${dogForAdmin.dogSex}"/>
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.admin_dogs.title.is_active"/> </b>
+                <h3><b><fmt:message key="page.dogEntities.admin_dogs.title.is_active"/> </b>
 
                     <c:choose>
-                        <c:when test="${dog.active eq true}">
+                        <c:when test="${dogForAdmin.active eq true}">
                             &#9971;</c:when>
                         <c:otherwise>
                             &#9940;
@@ -45,23 +45,23 @@
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.admin_dogs.title.birthday"/> </b>
-                    <c:out value="${dog.birthday}"/>
+                <h3><b><fmt:message key="page.dogEntities.admin_dogs.title.birthday"/> </b>
+                    <c:out value="${dogForAdmin.birthday}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.admin_dogs.view.title.nickname"/> </b>
-                    <c:out value="${dog.nickname}"/>
+                    <c:out value="${dogForAdmin.nickname}"/>
                 </h3>
             </div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.admin_dogs.view.title.fullname"/> </b>
-                    <c:out value="${dog.fullname}"/>
+                    <c:out value="${dogForAdmin.fullname}"/>
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.admin_dogs.title.description"/> </b>
-                    <c:out value="${dog.description}"/>
+                <h3><b><fmt:message key="page.dogEntities.admin_dogs.title.description"/> </b>
+                    <c:out value="${dogForAdmin.description}"/>
                 </h3>
             </div>
         </div>

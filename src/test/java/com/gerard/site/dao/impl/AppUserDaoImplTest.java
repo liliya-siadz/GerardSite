@@ -29,7 +29,7 @@ public class AppUserDaoImplTest {
             };
     }
 
-    @Test(dataProvider = "existingOrNewValidUsers", enabled = false)
+    @Test(dataProvider = "existingOrNewValidUsers")
     public void testCreateIfExistsOtherwiseUpdate(AppUserEntity validUser)
             throws DaoException {
         boolean expected =

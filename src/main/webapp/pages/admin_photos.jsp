@@ -14,32 +14,27 @@
 <body>
 <%@ include file="fragment/headers/admin_header.jsp" %>
 <div style="display:inline-block;margin-left: 15%;">
-    <c:set var="photos" value="${allPhotos}" scope="request"/>
-    <c:forEach items="${photos}" var="photo">
-         # <c:out value="${photo.id}"/>
+    <c:set var="photosForAdmin" value="${photosForAdmin}" scope="request"/>
+    <c:forEach items="${photosForAdmin}" var="photoForAdmin">
+         # <c:out value="${photoForAdmin.id}"/>
         <img class="img"
-             src="${applicationPath}/${photo.photoPath}"
+             src="${applicationPath}/${photoForAdmin.photoPath}"
              alt="?"
              width="400px"/>
             <div>
                 <div style="display:block;">
                     <h3><b><fmt:message key="page.admin_photos.view.title.photoPath"/> </b>
-                        <c:out value="${photo.photoPath}"/>
-                    </h3>
-                </div>
-                <div style="display:block;">
-                    <h3><b><fmt:message key="page.admin_photos.view.title.name"/> </b>
-                        <c:out value="${photo.name}"/>
+                        <c:out value="${photoForAdmin.photoPath}"/>
                     </h3>
                 </div>
                 <div style="display:block;">
                     <h3><b><fmt:message key="page.admin_photos.view.title.photoDate"/> </b>
-                        <c:out value="${photo.photoDate}"/>
+                        <c:out value="${photoForAdmin.photoDate}"/>
                     </h3>
                 </div>
                 <div style="display:block;">
                     <h3><b><fmt:message key="page.admin_photos.view.title.id"/> </b>
-                        <c:out value="${photo.id}"/>
+                        <c:out value="${photoForAdmin.id}"/>
                     </h3>
                 </div>
                 <div style="display: block" >

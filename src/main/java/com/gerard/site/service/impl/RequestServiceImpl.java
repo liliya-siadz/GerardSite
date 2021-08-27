@@ -5,7 +5,7 @@ import com.gerard.site.dao.impl.DaoException;
 import com.gerard.site.dao.impl.RequestDaoImpl;
 import com.gerard.site.service.entity.AppUserEntity;
 import com.gerard.site.service.entity.DogEntity;
-import com.gerard.site.service.entity.RequestAndAppUserAndDog;
+import com.gerard.site.service.view.admin.Request;
 import com.gerard.site.service.entity.RequestEntity;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.RequestService;
@@ -32,12 +32,12 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<RequestAndAppUserAndDog> provideAllRequests()
+    public List<Request> provideAllRequestsForAdmin()
             throws ServiceException {
         try {
-            List<RequestAndAppUserAndDog> requestsAndAppUserAndDogList
+            List<Request> requestsAndAppUserAndDogList
                     = RequestDaoImpl.getInstance()
-                    .selectAllRequestsAndAppUserAndDog();
+                    .selectAllRequests();
             return requestsAndAppUserAndDogList;
         } catch (DaoException exception) {
             throw new ServiceException(
@@ -47,13 +47,13 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<RequestAndAppUserAndDog> provideAllPendingRequests()
+    public List<Request> provideAllPendingRequests()
             throws ServiceException {
         try {
-            List<RequestAndAppUserAndDog> requestsAndAppUserAndDogList
+            List<Request> requestsAndAppUserAndDogList
                     = RequestDaoImpl.getInstance()
-                    .selectAllRequestsAndAppUserAndDog();
-            List<RequestAndAppUserAndDog> pendingRequestsAndAppUserAndDogList =
+                    .selectAllRequests();
+            List<Request> pendingRequestsAndAppUserAndDogList =
                     requestsAndAppUserAndDogList.stream()
                             .filter(row -> row.getRequestStatus()
                                     .equals(RequestEntity.RequestStatus.PENDING))
@@ -68,8 +68,8 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public boolean sendRequest(DogEntity dogEntity,
-                                     RequestEntity requestEntity,
-                                     AppUserEntity appUserEntity)
+                               RequestEntity requestEntity,
+                               AppUserEntity appUserEntity)
             throws ServiceException {
         try {
             AppUserDaoImpl.getInstance()
@@ -80,7 +80,7 @@ public class RequestServiceImpl implements RequestService {
             if(isRequestCreated) {
                AppMailMessage appMailMessageForAdmin =
                        AppMailMessageFactory.createAdminMessage(
-                       dogEntity, requestEntity, appUserEntity);
+                               dogEntity, requestEntity, appUserEntity);
                 isMessageWasSent = appMailMessageForAdmin.send();
            }
            return isRequestCreated && isMessageWasSent;

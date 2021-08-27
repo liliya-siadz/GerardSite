@@ -2,7 +2,7 @@ package com.gerard.site.service.impl;
 
 import com.gerard.site.dao.impl.DaoException;
 import com.gerard.site.dao.impl.PhotoDaoImpl;
-import com.gerard.site.service.entity.PhotoAndDog;
+import com.gerard.site.service.view.Photo;
 import com.gerard.site.service.entity.PhotoEntity;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.PhotoService;
@@ -29,15 +29,11 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<PhotoAndDog> provideAllPhotosOfDogs() throws ServiceException {
+    public List<Photo> provideAllPhotosForView() throws ServiceException {
         try {
-            List<PhotoAndDog> allPhotosWithDogs =
+            List<Photo> allPhotosForView =
                     PhotoDaoImpl.getInstance().selectAllPhotosAndDogs();
-            allPhotosWithDogs = allPhotosWithDogs.stream()
-                    .filter(photoAndDog ->
-                            photoAndDog.getPhotoPath().contains(PHOTO_FOLDER_NAME))
-                    .toList();
-            return allPhotosWithDogs;
+            return allPhotosForView;
         } catch (DaoException exception) {
             throw new ServiceException(
                     "Unable to provide information from database! "
@@ -46,10 +42,10 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<PhotoEntity> provideAllPhotos() throws ServiceException {
+    public List<PhotoEntity> provideAllPhotosForAdmin() throws ServiceException {
         try {
-            List<PhotoEntity> allPhotos = PhotoDaoImpl.getInstance().selectAll();
-            return allPhotos;
+            List<PhotoEntity> allPhotosForAmin = PhotoDaoImpl.getInstance().selectAll();
+            return allPhotosForAmin;
         } catch (DaoException exception) {
             throw new ServiceException(
                     "Unable to provide information from database! "

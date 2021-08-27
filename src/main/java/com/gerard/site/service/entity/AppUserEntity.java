@@ -4,7 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * Class represents single record from table <i>gerard.app_user</i> ,
+ * Class represents single record from table <i>app_user</i> ,
  * note that primary key of record is represented
  * by is superclass AbstractEntity {@link AbstractEntity}
  * by it's instance filed 'id' {@link AbstractEntity#id} .
@@ -27,39 +27,37 @@ public class AppUserEntity extends AbstractEntity<Integer> implements Serializab
 
     /**
      * Represents column 'email'
-     * in the table <i>gerard.app_user</i> .
+     * in table <i>app_user</i> .
      */
     private String email;
 
     /**
      * Represents column 'name'
-     * in the table <i>gerard.app_user</i> .
+     * in table <i>app_user</i> .
      */
     private String name;
 
     /**
      * Represents column 'surname'
-     * in the table <i>gerard.app_user</i> .
-     * Can be null value in the table
+     * in table <i>app_user</i> .
      */
     private String surname;
 
     /**
      * Represents column 'patronymic'
-     * in the table <i>gerard.app_user</i> .
-     * Can be null value in the table
+     * in table <i>app_user</i> .
      */
     private String patronymic;
 
     /**
      * Represents column 'phone'
-     * in the table <i>gerard.app_user</i> .
+     * in table <i>app_user</i> .
      */
     private String phone;
 
     /**
      * Represents column 'admin'
-     * in the table <i>gerard.app_user</i> .
+     * in table <i>app_user</i> .
      */
     private boolean admin;
 
@@ -222,7 +220,10 @@ public class AppUserEntity extends AbstractEntity<Integer> implements Serializab
         @Override
         public int hashCode() {
             int hash = 7;
-            int hashcode = hash + 31 * (appUserEntity == null ? 0 : appUserEntity.hashCode());
+            int hashcode = hash + 31 *
+                    (appUserEntity == null
+                     ? 0
+                     : appUserEntity.hashCode());
             return hashcode;
         }
 

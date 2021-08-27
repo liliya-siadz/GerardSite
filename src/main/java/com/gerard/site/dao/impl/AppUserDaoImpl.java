@@ -42,7 +42,7 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
             + "phone, admin from app_user";
 
 
-    private static final String CREATE_IF_EXISTS_OTHERWISE_UPDATE =
+    private static final String CREATE_APP_USER_IF_EXISTS_OTHERWISE_UPDATE =
                     """
                     INSERT INTO app_user
                      (email, surname, name, patronymic, phone)
@@ -165,7 +165,8 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
         try {
             connection = ConnectionPool.getInstance().giveOutConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement(CREATE_IF_EXISTS_OTHERWISE_UPDATE);
+                    connection.prepareStatement(
+                            CREATE_APP_USER_IF_EXISTS_OTHERWISE_UPDATE);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, surname);
             preparedStatement.setString(3, name);

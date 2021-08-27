@@ -21,7 +21,7 @@ public class RequestDaoImplTest {
         };
     }
 
-    @Test(dataProvider = "requestToCreate", enabled = false)
+    @Test(dataProvider = "requestToCreate")
     public void testCreate(RequestEntity requestEntity) throws DaoException {
         boolean expected =
                 RequestDaoImpl.getInstance().create(requestEntity);

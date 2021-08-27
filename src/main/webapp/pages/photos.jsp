@@ -13,14 +13,14 @@
 </head>
 <body>
 <%@include file="fragment/dynamic-headering.jsp"%>
-    <c:set var="photos" value="${allPhotosWithDogsName}" scope="request"/>
-    <c:forEach items="${photos}" var="photo">
+    <c:set var="photosForView" value="${photosForView}" scope="session"/>
+    <c:forEach items="${photosForView}" var="photoForView">
         <div style="display: block;">
-        <c:if test="${not empty photo.nickname}">
-            <h3><b style="margin-left: 15%"><c:out value="${photo.nickname} : ${photo.photoDate}"/></b></h3>
+        <c:if test="${not empty photoForView.nickname}">
+            <h3><b style="margin-left: 15%"><c:out value="${photoForView.nickname} : ${photoForView.photoDate}"/></b></h3>
         </c:if>
         <img class="img"
-             src="${applicationPath}/${photo.photoPath}"
+             src="${applicationPath}/${photoForView.photoPath}"
              alt="?"
              style="text-align: center; margin-left:15%"
              width="400px"/>

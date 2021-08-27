@@ -4,7 +4,7 @@ import com.gerard.site.dao.AbstractDao;
 import com.gerard.site.dao.PhotoDao;
 import com.gerard.site.dao.connection.ConnectionException;
 import com.gerard.site.dao.connection.ConnectionPool;
-import com.gerard.site.service.entity.PhotoAndDog;
+import com.gerard.site.service.view.Photo;
 import com.gerard.site.service.entity.PhotoEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,16 +20,20 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
     static final String TABLE_NAME = "gerard.photo";
     static final String COLUMN_LABEL_1 = "photo_id";
     static final String COLUMN_LABEL_2 = "photo_path";
-    static final String COLUMN_LABEL_3 = "name";
-    static final String COLUMN_LABEL_4 = "dog_id";
-    static final String COLUMN_LABEL_5 = "photo_date";
+    static final String COLUMN_LABEL_3 = "dog_id";
+    static final String COLUMN_LABEL_4 = "photo_date";
+    static final String COLUMN_LABEL_5 = "photo_type";
 
-    private static final String SELECT_ALL_PHOTOS=
-            "select photo_path, photo_date, photo_id,name, photo_path, dog_id from photo";
+    private static final String SELECT_ALL_PHOTOS_TYPE_PHOTO =
+            "select photo_path, photo_date, photo_id,photo_type, photo_path, dog_id"
+                    + " from photo"
+                    + " where photo_type='photo'";
     private static final String SELECT_ALL_PHOTOS_AND_DOGS =
-            "select photo_path, dog.nickname, photo_date "
-                    + "from photo left join dog "
-                    + "on photo.dog_id = dog.dog_id order by photo_date desc";
+            "select photo_path, dog.nickname, photo_date"
+                    + " from photo left join dog "
+                    + " on photo.dog_id = dog.dog_id"
+                    + " where photo_type='photo'"
+                    + " order by photo_date desc";
     private static final Logger LOGGER = LogManager.getLogger(PhotoDaoImpl.class);
 
     private PhotoDaoImpl() {
@@ -43,18 +47,18 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
         return instance;
     }
 
-    public List<PhotoAndDog> selectAllPhotosAndDogs() throws DaoException {
+    public List<Photo> selectAllPhotosAndDogs() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(SELECT_ALL_PHOTOS_AND_DOGS);
                 if (resultSet.isBeforeFirst()) {
-                    List<PhotoAndDog> selectedPhotos = new ArrayList<>();
+                    List<Photo> selectedPhotos = new ArrayList<>();
                     while (resultSet.next()) {
                         String photoPath = resultSet.getString(COLUMN_LABEL_2);
-                        Date photoDate = resultSet.getDate(COLUMN_LABEL_5);
+                        Date photoDate = resultSet.getDate(COLUMN_LABEL_4);
                         String nickname = resultSet.getString(DogDaoImpl.COLUMN_LABEL_3);
-                        PhotoAndDog photoAndDog = new PhotoAndDog(photoPath, photoDate, nickname);
-                        selectedPhotos.add(photoAndDog);
+                        Photo photo = new Photo(photoPath, photoDate, nickname);
+                        selectedPhotos.add(photo);
                     }
                     return selectedPhotos;
                 } else {
@@ -71,7 +75,7 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
     public List<PhotoEntity> selectAll() throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery(SELECT_ALL_PHOTOS);
+                ResultSet resultSet = statement.executeQuery(SELECT_ALL_PHOTOS_TYPE_PHOTO);
                 if (resultSet.isBeforeFirst()) {
                     List<PhotoEntity> selectedUsers = new ArrayList<>();
                     while (resultSet.next()) {
@@ -89,17 +93,22 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
         }
     }
 
+    public PhotoEntity parseResultSetPhotosAndDogs(ResultSet resultSet)
+            throws SQLException {
+        throw new UnsupportedOperationException();
+    }
     @Override
     public PhotoEntity parseResultSet(ResultSet resultSet) throws SQLException {
         int photoId = resultSet.getInt(COLUMN_LABEL_1);
         String photoPath = resultSet.getString(COLUMN_LABEL_2);
-        String name = resultSet.getString(COLUMN_LABEL_3);
-        int dogId = resultSet.getInt(COLUMN_LABEL_4);
-        Date photoDate = resultSet.getDate(COLUMN_LABEL_5);
+        int dogId = resultSet.getInt(COLUMN_LABEL_3);
+        Date photoDate = resultSet.getDate(COLUMN_LABEL_4);
+        PhotoEntity.PhotoType photoType = PhotoEntity.PhotoType.valueOf(
+                resultSet.getString(COLUMN_LABEL_5).toUpperCase());
         PhotoEntity photoEntity = new PhotoEntity();
         photoEntity.setId(photoId);
         photoEntity.setPhotoPath(photoPath);
-        photoEntity.setName(name);
+        photoEntity.setPhotoType(photoType);
         photoEntity.setDogId(dogId);
         photoEntity.setPhotoDate(photoDate);
         return photoEntity;

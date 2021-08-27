@@ -1,6 +1,6 @@
 package com.gerard.site.service.impl;
 
-import com.gerard.site.service.entity.PhotoAndDog;
+import com.gerard.site.service.view.Photo;
 import com.gerard.site.service.entity.PhotoEntity;
 import com.gerard.site.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -15,15 +15,16 @@ public class PhotoServiceImplTest {
     private static final Logger LOGGER = LogManager.getLogger(PhotoServiceImplTest.class);
 
     @Test
-    public void testProvideAllPhotosWithDogs() throws ServiceException {
-        List<PhotoAndDog> allPhotosWithDogsName =  PhotoServiceImpl.getInstance().provideAllPhotosOfDogs();
-        LOGGER.info(allPhotosWithDogsName);
-        assertFalse(allPhotosWithDogsName.isEmpty());
+    public void provideAllPhotosForView() throws ServiceException {
+        List<Photo> allPhotosForView =
+                PhotoServiceImpl.getInstance().provideAllPhotosForView();
+        LOGGER.info(allPhotosForView);
+        assertFalse(allPhotosForView.isEmpty());
     }
 
     @Test
     public void testProvideAllPhotos() throws ServiceException {
-        List<PhotoEntity> allPhotos =  PhotoServiceImpl.getInstance().provideAllPhotos();
+        List<PhotoEntity> allPhotos =  PhotoServiceImpl.getInstance().provideAllPhotosForAdmin();
         LOGGER.info(allPhotos);
         assertFalse(allPhotos.isEmpty());
     }

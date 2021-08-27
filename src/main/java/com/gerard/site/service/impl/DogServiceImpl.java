@@ -5,6 +5,7 @@ import com.gerard.site.dao.impl.DogDaoImpl;
 import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.DogService;
+import com.gerard.site.service.view.Dog;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,23 +46,12 @@ public class DogServiceImpl implements DogService {
         }
     }
 
-    public List<DogEntity> provideActiveDogs() throws ServiceException {
+    public List<Dog> provideAllDogsForView() throws ServiceException {
         try {
-            List<DogEntity> allDogs = DogDaoImpl.getInstance().selectAll();
-            allDogs.removeIf(dogEntity -> !dogEntity.isActive());
-            return allDogs;
-        } catch (DaoException exception) {
-            throw new ServiceException(
-                    "Unable to provide information from database! "
-                            + exception.getMessage(), exception);
-        }
-    }
-
-    public List<DogEntity> provideActivePuppies() throws ServiceException {
-        try {
-            List<DogEntity> allDogs = DogDaoImpl.getInstance().selectAll();
-            allDogs.removeIf(new IsPuppy().negate());
-            return allDogs;
+            List<Dog> allDogsForView =
+                    DogDaoImpl.getInstance().selectAllDogsWithPhotos();
+            allDogsForView.removeIf(dog-> !dog.isActive());
+            return allDogsForView;
         } catch (DaoException exception) {
             throw new ServiceException(
                     "Unable to provide information from database! "
@@ -70,10 +60,12 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public List<DogEntity> provideAllDogs() throws ServiceException {
+    public List<Dog> provideAlPuppiesForView() throws ServiceException {
         try {
-            List<DogEntity> allDogs = DogDaoImpl.getInstance().selectAll();
-            return allDogs;
+            List<Dog> allPuppiesForView =
+                    DogDaoImpl.getInstance().selectAllDogsWithPhotos();
+            allPuppiesForView.removeIf(new IsPuppy().negate());
+            return allPuppiesForView;
         } catch (DaoException exception) {
             throw new ServiceException(
                     "Unable to provide information from database! "
@@ -82,23 +74,29 @@ public class DogServiceImpl implements DogService {
     }
 
     @Override
-    public List<DogEntity> provideAllPuppies() throws ServiceException {
-        List<DogEntity> allDogs = provideAllDogs();
-        List<DogEntity> allPuppies = allDogs.stream().filter(new IsPuppy()).toList();
-        return allPuppies;
+    public List<Dog> provideAllDogsForAdmin() throws ServiceException {
+        try {
+            List<Dog> allDogsForAdmin =
+                    DogDaoImpl.getInstance().selectAllDogsWithPhotos();
+            return allDogsForAdmin;
+        } catch (DaoException exception) {
+            throw new ServiceException(
+                    "Unable to provide information from database! "
+                            + exception.getMessage(), exception);
+        }
     }
 
-    public class IsPuppy implements Predicate<DogEntity> {
+    public class IsPuppy implements Predicate<Dog> {
         @Override
-        public boolean test(DogEntity dogEntity) {
+        public boolean test(Dog dogEntity) {
             long dogAgeInMoths = new DogAge().applyAsLong(dogEntity);
             return dogAgeInMoths < PUPPY_AGE_MAX_MONTHS_QUANTITY;
         }
     }
 
-    public class DogAge implements ToLongFunction<DogEntity> {
+    public class DogAge implements ToLongFunction<Dog> {
         @Override
-        public long applyAsLong(DogEntity dogEntity) {
+        public long applyAsLong(Dog dogEntity) {
             LocalDate currentDate = LocalDate.now();
             LocalDate dogBirthday = dogEntity.getBirthday().toLocalDate();
             long dogAgeInMonths = ChronoUnit.MONTHS.between(dogBirthday, currentDate);

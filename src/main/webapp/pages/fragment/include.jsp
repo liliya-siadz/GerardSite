@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="${applicationPath}/css/bootstrap-theme.min.css">
     <meta name="description" content="Kennel presentation for clients"/>
     <meta name="keywords"
-          content="dog, leonberger, Gerard, leon, kennel, собака, питомник, Жерард, леонбергер,сабака, пітомнік, Жерард, леонбергер"/>
+          content="dogEntity, leonberger, Gerard, leon, kennel, собака, питомник, Жерард, леонбергер,сабака, пітомнік, Жерард, леонбергер"/>
     <meta name="author" content="Liliya Siadzelnikava"/>
 </head>
 <body>

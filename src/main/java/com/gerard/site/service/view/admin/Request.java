@@ -1,12 +1,13 @@
-package com.gerard.site.service.entity;
+package com.gerard.site.service.view.admin;
 
-import com.gerard.site.dao.RequestDao;
+import com.gerard.site.service.entity.DogEntity;
+import com.gerard.site.service.entity.RequestEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 
-public  class RequestAndAppUserAndDog implements Serializable {
+public class Request implements Serializable {
     @Serial
     private static final long serialVersionUID=1L;
     private int requestId;
@@ -26,7 +27,7 @@ public  class RequestAndAppUserAndDog implements Serializable {
     private Date birthday;
     private String avatarPhotoPath;
 
-    public RequestAndAppUserAndDog() {
+    public Request() {
     }
 
 
@@ -165,8 +166,8 @@ public  class RequestAndAppUserAndDog implements Serializable {
         if (this == object) {
             return true;
         }
-        if (object instanceof RequestAndAppUserAndDog requestAndAppUserAndDog) {
-            return requestId == requestAndAppUserAndDog.requestId;
+        if (object instanceof Request request) {
+            return requestId == request.requestId;
         }
         return false;
     }
@@ -200,99 +201,99 @@ public  class RequestAndAppUserAndDog implements Serializable {
      * and realizes creational design pattern 'Builder' .
      */
     public static class Builder {
-        private RequestAndAppUserAndDog requestAndAppUserAndDog;
+        private Request request;
 
         public Builder() {
-            requestAndAppUserAndDog = new RequestAndAppUserAndDog();
+            request = new Request();
         }
 
-        public RequestAndAppUserAndDog.Builder requestId(int requestId) {
-            requestAndAppUserAndDog.requestId = requestId;
+        public Request.Builder requestId(int requestId) {
+            request.requestId = requestId;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder requestStatus(
+        public Request.Builder requestStatus(
                 RequestEntity.RequestStatus requestStatus) {
-            requestAndAppUserAndDog.requestStatus = requestStatus;
+            request.requestStatus = requestStatus;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder requestType(
+        public Request.Builder requestType(
                 RequestEntity.RequestType requestType) {
-            requestAndAppUserAndDog.requestType = requestType;
+            request.requestType = requestType;
             return this;
         }
 
 
-        public RequestAndAppUserAndDog.Builder content(String content) {
-            requestAndAppUserAndDog.content = content;
+        public Request.Builder content(String content) {
+            request.content = content;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder dateFact(Date dateFact) {
-            requestAndAppUserAndDog.dateFact = dateFact;
+        public Request.Builder dateFact(Date dateFact) {
+            request.dateFact = dateFact;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder reply(String reply) {
-            requestAndAppUserAndDog.reply = reply;
+        public Request.Builder reply(String reply) {
+            request.reply = reply;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder email(String email) {
-            requestAndAppUserAndDog.email = email;
+        public Request.Builder email(String email) {
+            request.email = email;
             return this;
         }
 
 
-        public RequestAndAppUserAndDog.Builder name(String name) {
-            requestAndAppUserAndDog.name = name;
+        public Request.Builder name(String name) {
+            request.name = name;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder surname(String surname) {
-            requestAndAppUserAndDog.surname = surname;
+        public Request.Builder surname(String surname) {
+            request.surname = surname;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder patronymic(String patronymic) {
-            requestAndAppUserAndDog.patronymic = patronymic;
+        public Request.Builder patronymic(String patronymic) {
+            request.patronymic = patronymic;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder phone(String phone) {
-            requestAndAppUserAndDog.phone = phone;
+        public Request.Builder phone(String phone) {
+            request.phone = phone;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder nickname(String nickname) {
-            requestAndAppUserAndDog.nickname = nickname;
+        public Request.Builder nickname(String nickname) {
+            request.nickname = nickname;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder fullname(String fullname) {
-            requestAndAppUserAndDog.fullname = fullname;
+        public Request.Builder fullname(String fullname) {
+            request.fullname = fullname;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder dogSex(DogEntity.DogSex dogSex) {
-            requestAndAppUserAndDog.dogSex = dogSex;
+        public Request.Builder dogSex(DogEntity.DogSex dogSex) {
+            request.dogSex = dogSex;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder birthday(Date birthday) {
-            requestAndAppUserAndDog.birthday = birthday;
+        public Request.Builder birthday(Date birthday) {
+            request.birthday = birthday;
             return this;
         }
 
-        public RequestAndAppUserAndDog.Builder avatarPhotoPath(
+        public Request.Builder avatarPhotoPath(
                 String avatarPhotoPath) {
-            requestAndAppUserAndDog.avatarPhotoPath = avatarPhotoPath;
+            request.avatarPhotoPath = avatarPhotoPath;
             return this;
         }
 
-        public RequestAndAppUserAndDog build() {
-            return requestAndAppUserAndDog;
+        public Request build() {
+            return request;
         }
 
         @Override
@@ -300,12 +301,12 @@ public  class RequestAndAppUserAndDog implements Serializable {
             if (this == object) {
                 return true;
             }
-            if (object instanceof RequestAndAppUserAndDog.Builder
+            if (object instanceof Request.Builder
                     requestAndAppUserAndDogBuilder) {
-                return (requestAndAppUserAndDog == null)
-                        ? requestAndAppUserAndDogBuilder.requestAndAppUserAndDog == null
-                        : requestAndAppUserAndDog.equals(
-                                requestAndAppUserAndDogBuilder.requestAndAppUserAndDog);
+                return (request == null)
+                        ? requestAndAppUserAndDogBuilder.request == null
+                        : request.equals(
+                                requestAndAppUserAndDogBuilder.request);
             }
             return false;
         }
@@ -313,16 +314,16 @@ public  class RequestAndAppUserAndDog implements Serializable {
         @Override
         public int hashCode() {
             int hash = 7;
-            int hashcode = hash + 31 * (requestAndAppUserAndDog == null
+            int hashcode = hash + 31 * (request == null
                                         ? 0
-                                        : requestAndAppUserAndDog.hashCode());
+                                        : request.hashCode());
             return hashcode;
         }
 
         @Override
         public String toString() {
             return "DogEntity.Builder{"
-                    + "dogEntity=" + requestAndAppUserAndDog
+                    + "dogEntity=" + request
                     + '}';
         }
     }

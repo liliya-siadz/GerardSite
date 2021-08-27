@@ -1,11 +1,11 @@
-package com.gerard.site.service.entity;
+package com.gerard.site.service.view;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class PhotoAndDog implements Serializable {
+public class Photo implements Serializable {
     @Serial
     private static final long serialVersionUID=1L;
 
@@ -13,11 +13,11 @@ public class PhotoAndDog implements Serializable {
     private Date photoDate;
     private String nickname;
 
-    public PhotoAndDog(){
+    public Photo(){
 
     }
 
-    public PhotoAndDog(String photoPath, Date photoDate, String nickname) {
+    public Photo(String photoPath, Date photoDate, String nickname) {
         this.photoPath = photoPath;
         this.photoDate = photoDate;
         this.nickname = nickname;
@@ -49,14 +49,20 @@ public class PhotoAndDog implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
+        if (this == object){
             return true;
         }
-        if (object == null || getClass() != object.getClass()) {
+        if (object == null || getClass() != object.getClass()){
             return false;
         }
-        PhotoAndDog that = (PhotoAndDog) object;
-        return Objects.equals(photoPath, that.photoPath);
+        Photo that = (Photo) object;
+        return Objects.equals(photoPath, that.photoPath)
+                && Objects.equals(nickname, that.nickname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(photoPath, nickname);
     }
 
     @Override

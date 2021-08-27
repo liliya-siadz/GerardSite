@@ -1,12 +1,12 @@
 package com.gerard.site.service;
 
-import com.gerard.site.service.entity.PhotoAndDog;
+import com.gerard.site.service.view.Photo;
 import com.gerard.site.service.entity.PhotoEntity;
 
 import java.util.List;
 
 public interface PhotoService {
-    List<PhotoAndDog> provideAllPhotosOfDogs() throws ServiceException;
+    List<Photo> provideAllPhotosForView() throws ServiceException;
 
-    List<PhotoEntity> provideAllPhotos() throws ServiceException;
+    List<PhotoEntity> provideAllPhotosForAdmin() throws ServiceException;
 }

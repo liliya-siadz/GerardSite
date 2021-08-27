@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 /**
- * Class represents single record from table <i>gerard.dog</i> ,
+ * Class represents single record from table <i>dog</i> ,
  * note that primary key of record is represented
  * by is superclass AbstractEntity {@link AbstractEntity}
  * by it's instance filed 'id' {@link AbstractEntity#id} .
@@ -30,49 +30,49 @@ public class DogEntity extends AbstractEntity<Integer> implements Serializable {
 
     /**
      * Represents column 'dog_sex'
-     * in the table <i>gerard.dog</i> .
+     * in table <i>dog</i> .
      */
     private DogSex dogSex;
 
     /**
      * Represents column 'nickname'
-     * in the table <i>gerard.dog</i> .
+     * in table <i>dog</i> .
      */
     private String nickname;
 
     /**
      * Represents column 'fullname'
-     * in the table <i>gerard.dog</i> .
+     * in table <i>dog</i> .
      */
     private String fullname;
 
     /**
      * Represents column 'birthday'
-     * in the table <i>gerard.dog</i> .
+     * in table <i>dog</i> .
      */
     private Date birthday;
 
     /**
-     * Represents column 'avatar_photo_path'
-     * in the table <i>gerard.dog</i> .
+     * Represents column 'avatar_photo_id'
+     * in table <i>dog</i> .
      */
-    private String avatarPhotoPath;
+    private int avatarPhotoId;
 
     /**
-     * Represents column 'pedigree_photo_path'
-     * in the table <i>gerard.dog</i> .
+     * Represents column 'pedigree_photo_id'
+     * in table <i>dog</i> .
      */
-    private String pedigreePhotoPath;
+    private int pedigreePhotoId;
 
     /**
      * Represents column 'description'
-     * in the table <i>gerard.dog</i> .
+     * in table <i>dog</i> .
      */
     private String description;
 
     /**
      * Represents column 'active'
-     * in the table <i>gerard.dog</i> .
+     * in table <i>dog</i> .
      */
     private boolean active;
 
@@ -111,20 +111,20 @@ public class DogEntity extends AbstractEntity<Integer> implements Serializable {
         this.birthday = birthday;
     }
 
-    public String getAvatarPhotoPath() {
-        return avatarPhotoPath;
+    public int getAvatarPhotoId() {
+        return avatarPhotoId;
     }
 
-    public void setAvatarPhotoPath(String avatarPhotoPath) {
-        this.avatarPhotoPath = avatarPhotoPath;
+    public void setAvatarPhotoId(int avatarPhotoId) {
+        this.avatarPhotoId = avatarPhotoId;
     }
 
-    public String getPedigreePhotoPath() {
-        return pedigreePhotoPath;
+    public int getPedigreePhotoId() {
+        return pedigreePhotoId;
     }
 
-    public void setPedigreePhotoPath(String pedigreePhotoPath) {
-        this.pedigreePhotoPath = pedigreePhotoPath;
+    public void setPedigreePhotoId(int pedigreePhotoId) {
+        this.pedigreePhotoId = pedigreePhotoId;
     }
 
     public String getDescription() {
@@ -164,8 +164,8 @@ public class DogEntity extends AbstractEntity<Integer> implements Serializable {
         hashcode = hash * hashcode + (nickname == null ? 0 : nickname.hashCode());
         hashcode = hash * hashcode + (fullname == null ? 0 : fullname.hashCode());
         hashcode = hash * hashcode + (birthday == null ? 0 : birthday.hashCode());
-        hashcode = hash * hashcode + (avatarPhotoPath == null ? 0 : avatarPhotoPath.hashCode());
-        hashcode = hash * hashcode + (pedigreePhotoPath == null ? 0 : pedigreePhotoPath.hashCode());
+        hashcode = hash * hashcode + avatarPhotoId;
+        hashcode = hash * hashcode + pedigreePhotoId;
         hashcode = hash * hashcode + (description == null ? 0 : description.hashCode());
         hashcode = hash * hashcode + (active ? 1 : 0);
         return hashcode;
@@ -179,8 +179,8 @@ public class DogEntity extends AbstractEntity<Integer> implements Serializable {
                 + ", nickname='" + nickname + '\''
                 + ", fullname='" + fullname + '\''
                 + ", birthday=" + birthday
-                + ", avatarMediaId=" + avatarPhotoPath
-                + ", pedigreeMediaId=" + pedigreePhotoPath
+                + ", avatarPhotoId=" + avatarPhotoId
+                + ", pedigreePhotoId=" + pedigreePhotoId
                 + ", description='" + description + '\''
                 + ", isActive='" + active + '\''
                 + '}';
@@ -223,13 +223,13 @@ public class DogEntity extends AbstractEntity<Integer> implements Serializable {
             return this;
         }
 
-        public Builder avatarPhotoPath(String avatarPhotoPath) {
-            dogEntity.avatarPhotoPath = avatarPhotoPath;
+        public Builder avatarPhotoId(int avatarPhotoId) {
+            dogEntity.avatarPhotoId = avatarPhotoId;
             return this;
         }
 
-        public Builder pedigreePhotoPath(String pedigreePhotoPath) {
-            dogEntity.pedigreePhotoPath = pedigreePhotoPath;
+        public Builder pedigreePhotoId(int pedigreePhotoId) {
+            dogEntity.pedigreePhotoId = pedigreePhotoId;
             return this;
         }
 

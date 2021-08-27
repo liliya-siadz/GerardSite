@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 /**
- * Class represents single record from table <i>gerard.photo</i> ,
+ * Class represents single record from table <i>photo</i> ,
  * note that primary key of record is represented
  * by is superclass AbstractEntity {@link AbstractEntity}
  * by it's instance filed 'id' {@link AbstractEntity#id} .
@@ -16,33 +16,40 @@ import java.sql.Date;
  * @version 1.0
  */
 public class PhotoEntity extends AbstractEntity<Integer> implements Serializable {
+
+    /**
+     * Possible values for column 'photo_type'
+     * in table <i>photo</i>
+     */
+    public enum PhotoType {
+        PHOTO, AVATAR, PEDIGREE
+    }
+
     @Serial
     private static final long serialVersionUID=1L;
 
     /**
      * Represents column 'path'
-     * in the table <i>gerard.photo</i> .
+     * in table <i>photo</i> .
      */
     private String photoPath;
 
     /**
-     * Represents column 'name'
-     * in the table <i>gerard.photo</i> .
+     * Represents column 'photo_type'
+     * in table <i>photo</i>
      */
-    private String name;
+   private PhotoType photoType;
 
     /**
      * Represents column 'dog_id'
-     * in the table <i>gerard.photo</i> .
-     * Can be null value in the table
+     * in table <i>photo</i> .
      */
     private int dogId;
 
 
     /**
      * Represents column 'photo_date'
-     * in the table <i>gerard.photo</i> .
-     * Can be null value in the table
+     * in  table <i>photo</i> .
      */
     private Date photoDate;
 
@@ -57,12 +64,12 @@ public class PhotoEntity extends AbstractEntity<Integer> implements Serializable
         this.photoPath = photoPath;
     }
 
-    public String getName() {
-        return name;
+    public PhotoType getPhotoType() {
+        return photoType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPhotoType(PhotoType photoType) {
+        this.photoType = photoType;
     }
 
     public int getDogId() {
@@ -99,7 +106,7 @@ public class PhotoEntity extends AbstractEntity<Integer> implements Serializable
         int hash = 7;
         int hashcode = super.hashCode();
         hashcode = hash * hashcode + (photoPath == null ? 0 : photoPath.hashCode());
-        hashcode = hash * hashcode + (name == null ? 0 : name.hashCode());
+        hashcode = hash * hashcode + (photoType == null ? 0 : photoType.hashCode());
         hashcode = hash * hashcode + (photoDate == null ? 0 : photoDate.hashCode());
         hashcode = hash * hashcode + dogId;
         return hashcode;
@@ -110,7 +117,7 @@ public class PhotoEntity extends AbstractEntity<Integer> implements Serializable
         return "PhotoEntity{"
                 + "id=" + id
                 + ", path='" + photoPath + '\''
-                + ", name='" + name + '\''
+                + ", photoType='" + photoType + '\''
                 + ", dogId=" + dogId
                 + '}';
     }

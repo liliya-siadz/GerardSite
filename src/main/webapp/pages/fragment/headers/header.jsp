@@ -24,7 +24,7 @@
                         name="command"
                         class="btn btn-xs navbar-btn"
                         value="GO_TO_DOGS_PAGE">
-                    <fmt:message key="page.dogs.header"/>
+                    <fmt:message key="page.dogEntities.header"/>
                 </button>
                 <button type="submit"
                         name="command"

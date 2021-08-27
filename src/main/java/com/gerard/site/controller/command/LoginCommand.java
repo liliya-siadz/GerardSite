@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
-import static com.gerard.site.validator.Identifier.*;
+import static com.gerard.site.validator.ValidatorIdentifier.*;
 
 public enum LoginCommand implements Command {
     INSTANCE;

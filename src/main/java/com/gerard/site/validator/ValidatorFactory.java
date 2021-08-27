@@ -3,14 +3,14 @@ package com.gerard.site.validator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gerard.site.validator.Identifier.APP_USER_NAME_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.APP_USER_SURNAME_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.CONTENT_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.EMAIL_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.PASSWORD_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.PHONE_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.REPLY_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_NAME_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_SURNAME_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.CONTENT_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.PASSWORD_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.PHONE_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.REPLY_PARAMETER_NAME;
 
 public class ValidatorFactory {
 

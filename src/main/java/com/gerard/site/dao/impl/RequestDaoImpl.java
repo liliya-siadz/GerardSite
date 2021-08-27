@@ -4,7 +4,7 @@ import com.gerard.site.dao.AbstractDao;
 import com.gerard.site.dao.RequestDao;
 import com.gerard.site.dao.connection.ConnectionException;
 import com.gerard.site.dao.connection.ConnectionPool;
-import com.gerard.site.service.entity.RequestAndAppUserAndDog;
+import com.gerard.site.service.view.admin.Request;
 import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.entity.RequestEntity;
 import org.apache.logging.log4j.LogManager;
@@ -39,12 +39,14 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                     app_user.name, app_user.surname, app_user.patronymic,
                     app_user.phone,
                     dog.nickname, dog.fullname , dog.dog_sex, dog.birthday,
-                    dog.avatar_photo_path
+                    photo.photo_path
                     from request
                     inner join app_user
                     on request.email = app_user.email
                     inner join dog
                     on dog.dog_id = request.dog_id
+                    inner join photo on dog.dog_id = photo.dog_id
+                    where photo.photo_type ='avatar'
                     """;
 
     private static final String CREATE_NEW_REQUEST =
@@ -84,7 +86,7 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
         }
     }
 
-    public List<RequestAndAppUserAndDog> selectAllRequestsAndAppUserAndDog()
+    public List<Request> selectAllRequests()
             throws DaoException {
         try (Connection connection =
                      ConnectionPool.getInstance().giveOutConnection();
@@ -92,9 +94,9 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
             ResultSet resultSet = statement.executeQuery(
                     SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS);
             if (resultSet.isBeforeFirst()) {
-                List<RequestAndAppUserAndDog> selectedUsers = new ArrayList<>();
+                List<Request> selectedUsers = new ArrayList<>();
                 while (resultSet.next()) {
-                    selectedUsers.add(parseResultSetRequestAndAppUserAndDog(resultSet));
+                    selectedUsers.add(parseResultSetRequest(resultSet));
                 }
                 return selectedUsers;
             } else {
@@ -107,7 +109,7 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
         }
     }
 
-    public RequestAndAppUserAndDog parseResultSetRequestAndAppUserAndDog(
+    public Request parseResultSetRequest(
             ResultSet resultSet) throws SQLException {
         int requestId = resultSet.getInt(COLUMN_LABEL_1);
         RequestEntity.RequestStatus requestStatus =
@@ -130,9 +132,9 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                 DogEntity.DogSex.valueOf(
                         resultSet.getString(DogDaoImpl.COLUMN_LABEL_2).toUpperCase());
         Date birthday = resultSet.getDate(DogDaoImpl.COLUMN_LABEL_5);
-        String avatarPhotoPath = resultSet.getString(DogDaoImpl.COLUMN_LABEL_6);
-        RequestAndAppUserAndDog requestAndAppUserAndDog =
-                new RequestAndAppUserAndDog.Builder()
+        String avatarPhotoPath = resultSet.getString(PhotoDaoImpl.COLUMN_LABEL_2);
+        Request request =
+                new Request.Builder()
                 .requestId(requestId)
                 .requestStatus(requestStatus)
                 .requestType(requestType)
@@ -150,7 +152,7 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                 .birthday(birthday)
                 .avatarPhotoPath(avatarPhotoPath)
                 .build();
-        return requestAndAppUserAndDog;
+        return request;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Page;
-import com.gerard.site.service.entity.PhotoAndDog;
+import com.gerard.site.service.view.Photo;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.impl.PhotoServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,12 +11,13 @@ import java.util.List;
 
 public enum GoToPhotosPageCommand implements Command{
     INSTANCE;
-    private final String viewAttributeName = "allPhotosWithDogsName";
+    private final String viewAttributeName = "photosForView";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        List<PhotoAndDog> allPhotosWithDogsName =  PhotoServiceImpl.getInstance().provideAllPhotosOfDogs();
-        request.setAttribute(viewAttributeName, allPhotosWithDogsName);
+        List<Photo> photosForView =
+                PhotoServiceImpl.getInstance().provideAllPhotosForView();
+        request.setAttribute(viewAttributeName, photosForView);
         return Page.PHOTOS.getPageUrl();
     }
 }

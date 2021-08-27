@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.gerard.site.validator.Identifier.APP_USER_NAME_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.APP_USER_SURNAME_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.CONTENT_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.EMAIL_PARAMETER_NAME;
-import static com.gerard.site.validator.Identifier.PHONE_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_NAME_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_SURNAME_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.CONTENT_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.PHONE_PARAMETER_NAME;
 
 public class RequestForm implements FormValidator, Serializable {
     @Serial

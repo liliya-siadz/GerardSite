@@ -14,53 +14,54 @@
 <body>
 <%@include file="fragment/dynamic-headering.jsp" %>
 <div style="display:inline-block;">
-    <c:set var="dogs" value="${allPuppies}" scope="application"/>
-    <c:forEach items="${dogs}" var="dog">
-        <c:set var="avatar" value="${dog.avatarPhotoPath}"/>
+    <c:set var="puppiesForView" value="${puppies}" scope="session"/>
+    <c:forEach items="${puppiesForView}" var="puppyForView">
+        <c:set var="avatar" value="${puppyForView.avatarPhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${avatar}"
              alt="?"
              width="512"/>
-        <c:set var="pedigree" value="${dog.pedigreePhotoPath}"/>
+        <c:set var="pedigree" value="${puppyForView.pedigreePhotoPath}"/>
         <img class="img"
              src="${applicationPath}/${pedigree}"
              alt="?"
              width="512"/>
         <div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.sex"/> </b>
-                    <c:out value="${dog.dogSex}"/>
+                <h3><b><fmt:message key="page.dogEntities.view.title.sex"/> </b>
+                    <c:out value="${puppyForView.dogSex}"/>
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.nickname"/> </b>
-                    <c:out value="${dog.nickname}"/>
+                <h3><b><fmt:message key="page.dogEntities.view.title.nickname"/> </b>
+                    <c:out value="${puppyForView.nickname}"/>
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.fullname"/> </b>
-                    <c:out value="${dog.fullname}"/>
+                <h3><b><fmt:message key="page.dogEntities.view.title.fullname"/> </b>
+                    <c:out value="${puppyForView.fullname}"/>
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.birthday"/> </b>
-                    <c:out value="${dog.birthday}"/>
+                <h3><b><fmt:message key="page.dogEntities.view.title.birthday"/> </b>
+                    <c:out value="${puppyForView.birthday}"/>
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.dogs.view.title.description"/> </b>
-                    <c:out value="${dog.description}"/><c:if test="${empty dog.description}">&#10006;</c:if>
+                <h3><b><fmt:message key="page.dogEntities.view.title.description"/> </b>
+                    <c:out value="${puppyForView.description}"/><c:if test="${empty puppyForView.description}">&#10006;</c:if>
                 </h3>
             </div>
-            <h3><b>
-            <a href="${pageContext.request.contextPath}/make_request?chosenPuppyId=${dog.id}"
-               role="button btn-primary"
-               style="background-color: greenyellow;"
-               class="btn btn-xs">
-               <fmt:message key="page.puppies.button.make_request.name"/>
-            </a>
-            </b>
-            </h3>
+
+            <form method="GET"
+                  action="${applicationPath}${controllerUrl}">
+                <input type="hidden" value="${puppyForView.id}" name="chosenPuppyId"/>
+                <button type="submit"
+                        name="command"
+                        class="btn btn-lg btn-dark"
+                        value="CHOSE_PUPPY">
+                        <fmt:message key="page.puppies.button.make_request.name"/>
+            </form>
         </div>
     </c:forEach>
 </div>
