@@ -38,8 +38,8 @@ public enum CommandFactory {
         commands.put(SET_LOCALE_TO_BE, SetLocaleToBeCommand.INSTANCE);
         commands.put(SET_LOCALE_TO_RU, SetLocaleToRuCommand.INSTANCE);
 
-        commands.put(ERROR, ErrorPageCommand.INSTANCE);
-        commands.put(ERROR_404, Error404PageCommand.INSTANCE);
+        commands.put(ERROR, ErrorCommand.INSTANCE);
+        commands.put(ERROR_404, Error404Command.INSTANCE);
 
         commands.put(GO_TO_MAKE_REQUEST_PAGE, GoToMakeRequestPageCommand.INSTANCE);
         commands.put(GO_TO_DOGS_PAGE, GoToDogsPageCommand.INSTANCE);

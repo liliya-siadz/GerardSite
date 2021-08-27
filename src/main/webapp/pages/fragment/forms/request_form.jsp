@@ -9,7 +9,7 @@
                  pattern="${contentPattern}"
                  maxlength="${contentMaxLength}"
                  minlength="${contentMinLength}"
-                 oninvalid="setCustomValidity('?')" ></textarea>
+                 oninvalid="setCustomValidity('?')"></textarea>
     </p>
     <p><fmt:message key="field.email.label"/>(${emailValidationMessage})</p>
     <p><input
@@ -44,7 +44,6 @@
             pattern="${namePattern}"
             maxlength="${nameMaxLength}"
             minlength="${nameMinLength}"
-            oninvalid="setCustomValidity('?')"/>
             oninvalid="setCustomValidity('?')"/>
     </p>
     <p><fmt:message key="field.patronymic.label"/>(${patronymicValidationMessage})</p>

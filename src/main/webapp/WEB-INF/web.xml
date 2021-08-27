@@ -121,8 +121,6 @@
         <jsp-file>/pages/error-404.jsp</jsp-file>
     </servlet>
     <error-page>
-        <!-- Missing login -->
-        <error-code>400</error-code>
         <location>/pages/error.jsp</location>
     </error-page>
     <error-page>

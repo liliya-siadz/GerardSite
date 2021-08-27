@@ -49,7 +49,6 @@
         </h3>
         <%@ include file="fragment/forms/chosen_puppy_display.jsp" %>
         <%@ include file="fragment/forms/request_form.jsp" %>
-        <h3>YOUR REQUEST WAS SENT . PLEASE WAIT, WE WILL CONTACT YOUR .</h3>
         <form method="GET"
               action="${applicationPath}${controllerUrl}">
             <button type="submit"

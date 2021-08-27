@@ -1,6 +1,6 @@
 package com.gerard.site.controller.form;
 
-import com.gerard.site.validator.FieldValidatorFactory;
+import com.gerard.site.validator.ValidatorFactory;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.gerard.site.validator.FieldIdentifier.EMAIL_PARAMETER_NAME;
-import static com.gerard.site.validator.FieldIdentifier.PASSWORD_PARAMETER_NAME;
+import static com.gerard.site.validator.Identifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.Identifier.PASSWORD_PARAMETER_NAME;
 
 public class LoginForm implements FormValidator, Serializable {
     @Serial
@@ -34,10 +34,10 @@ public class LoginForm implements FormValidator, Serializable {
     public Map<String, Boolean> validateForm() {
         Map<String, Boolean> validationResult = new HashMap<>();
         validationResult.put(EMAIL_PARAMETER_NAME,
-                FieldValidatorFactory.getValidator(EMAIL_PARAMETER_NAME)
+                ValidatorFactory.getValidator(EMAIL_PARAMETER_NAME)
                         .isValid(email));
         validationResult.put(PASSWORD_PARAMETER_NAME,
-                FieldValidatorFactory.getValidator(PASSWORD_PARAMETER_NAME)
+                ValidatorFactory.getValidator(PASSWORD_PARAMETER_NAME)
                         .isValid(password));
         return validationResult;
     }

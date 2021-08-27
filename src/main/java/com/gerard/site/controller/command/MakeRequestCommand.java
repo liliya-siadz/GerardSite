@@ -15,7 +15,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Map;
 
-import static com.gerard.site.validator.FieldIdentifier.*;
+import static com.gerard.site.validator.Identifier.*;
 
 public enum MakeRequestCommand implements Command {
     INSTANCE;

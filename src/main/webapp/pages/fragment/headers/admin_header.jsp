@@ -41,14 +41,9 @@
                         class="btn btn-xs navbar-btn headerButton"
                         value="GO_TO_ADMIN_REQUESTS_PAGE">
                     <fmt:message key="page.admin_requests.header"/>
-                    <button type="submit"
-                            name="command"
-                            class="btn btn-xs navbar-btn headerButton"
-                            value="LOGOUT">
-                   <fmt:message key="admin.button.logout.name"/>
-
             </form>
             </div>
+        <%@ include file="../logout-panel.jsp" %>
     </div>
 </nav>
 </body>

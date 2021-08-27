@@ -1,6 +1,6 @@
 package com.gerard.site.controller.listener;
 
-import com.gerard.site.validator.FieldValidatorFactory;
+import com.gerard.site.validator.ValidatorFactory;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
@@ -17,6 +17,6 @@ public class FieldsValidatorsInitListener
         implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        FieldValidatorFactory.init();
+        ValidatorFactory.init();
     }
 }

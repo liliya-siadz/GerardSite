@@ -2,7 +2,7 @@ package com.gerard.site.controller;
 
 import com.gerard.site.controller.command.Command;
 import com.gerard.site.controller.command.CommandFactory;
-import com.gerard.site.controller.command.Error404PageCommand;
+import com.gerard.site.controller.command.Error404Command;
 import com.gerard.site.controller.command.LoginCommand;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -15,9 +15,9 @@ public class CommandFactoryTest {
     public Object[][] testGetCommandDataProvider() {
         return new Object[][]{
                 {"LOGIN", LoginCommand.INSTANCE},
-                {"unknown command", Error404PageCommand.INSTANCE},
-                {"im a danger hacker :)", Error404PageCommand.INSTANCE},
-                {null, Error404PageCommand.INSTANCE}
+                {"unknown command", Error404Command.INSTANCE},
+                {"im a danger hacker :)", Error404Command.INSTANCE},
+                {null, Error404Command.INSTANCE}
             };
         }
 
