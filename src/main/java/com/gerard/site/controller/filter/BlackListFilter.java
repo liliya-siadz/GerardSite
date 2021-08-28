@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,17 +24,30 @@ public class BlackListFilter implements Filter {
      * Default location to redirect to
      */
     private String defaultLocation;
+    private String expectedSessionRoleIdentifier;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        String defaultLocationParameterName="defaultLocation";
-        this.defaultLocation = filterConfig.getInitParameter(defaultLocationParameterName);
+        String defaultLocationParameterName = "defaultLocation";
+        this.defaultLocation = filterConfig.getInitParameter(
+                defaultLocationParameterName);
+        String expectedSessionRoleIdentifierParameterName
+                = "expectedSessionRoleIdentifier";
+        this.expectedSessionRoleIdentifier = filterConfig.getInitParameter(
+                expectedSessionRoleIdentifierParameterName);
     }
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request,
+                         ServletResponse response,
+                         FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        if(httpRequest.getSession().getAttribute("admin")==null) {
+        HttpSession session = httpRequest.getSession();
+        String sessionRoleIdentifierAttributeName = "sessionRoleIdentifier";
+        String sessionRoleIdentifier
+                = session.getAttribute(sessionRoleIdentifierAttributeName).toString();
+        if(!sessionRoleIdentifier.equals(expectedSessionRoleIdentifier)){
             httpResponse.sendRedirect(httpRequest.getServletContext() + defaultLocation);
             LOGGER.warn("Denied access try past.");
         }
@@ -43,5 +57,6 @@ public class BlackListFilter implements Filter {
     @Override
     public void destroy() {
         defaultLocation = null;
+        expectedSessionRoleIdentifier = null;
     }
 }

@@ -10,7 +10,7 @@ public enum InvalidateSessionCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        request.getSession().invalidate();
+        request.getSession().isNew();
         return Page.HOME.getPageUrl();
     }
 }

@@ -20,6 +20,7 @@ public enum LoginCommand implements Command {
     private final String validationMapNameAttributeName = "loginValidationMap";
     private final String authenticationResultAttributeName = "isUserFound";
     private final String authenticationIdentifierAttributeName = "admin";
+    private final String sessionRoleIdentifierAttributeName = "sessionRoleIdentifier";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
@@ -40,6 +41,7 @@ public enum LoginCommand implements Command {
                    LOGGER.trace("User was authenticated.");
                    session.setAttribute(authenticationResultAttributeName, true);
                    session.setAttribute(authenticationIdentifierAttributeName, true);
+                   session.setAttribute(sessionRoleIdentifierAttributeName, authenticationIdentifierAttributeName);
                    return Page.HOME.getPageUrl();
                } else {
                    LOGGER.trace("User was NOT authenticated.");

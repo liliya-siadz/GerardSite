@@ -17,7 +17,7 @@ public enum GoToAdminRequestsPageCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<Request> requestsForAdmin =
                 RequestServiceImpl.getInstance().provideAllRequestsForAdmin();
-        request.setAttribute(viewAttributeName, requestsForAdmin);
+        request.getSession().setAttribute(viewAttributeName, requestsForAdmin);
         return Page.ADMIN_REQUESTS.getPageUrl();
     }
 }

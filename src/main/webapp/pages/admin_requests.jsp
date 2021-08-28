@@ -15,7 +15,7 @@
 <%@ include file="fragment/headers/admin_header.jsp" %>
 <div style="display:inline-block;margin-left: 15%;">
     <br>
-    <c:set var="requestsForAdmin" value="${requestsForAdmin}" scope="request"/>
+    <c:set var="requestsForAdmin" value="${requestsForAdmin}" scope="session"/>
     <c:forEach items="${requestsForAdmin}" var="requestForAdmin">
         <c:set var="avatar" value="${requestForAdmin.avatarPhotoPath}"/>
         <h2><b><fmt:message key="page.admin_requests.view.title"/>

@@ -16,7 +16,7 @@ public enum GoToAdminPhotosPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<PhotoEntity> photosForAdmin =  PhotoServiceImpl.getInstance().provideAllPhotosForAdmin();
-        request.setAttribute(viewAttributeName, photosForAdmin);
+        request.getSession().setAttribute(viewAttributeName, photosForAdmin);
         return Page.ADMIN_PHOTOS.getPageUrl();
     }
 }

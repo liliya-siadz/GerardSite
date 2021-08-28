@@ -11,6 +11,7 @@
     <title><fmt:message key="page.home.title"/></title>
     </head>
     <body style="background-image: url(${applicationPath}/img/background.jpg);">
+
     <%@include file="fragment/dynamic-headering.jsp"%>
     <c:choose>
         <c:when test="${admin}">

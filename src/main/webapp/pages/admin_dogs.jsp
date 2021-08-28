@@ -14,7 +14,7 @@
 <body>
 <%@ include file="fragment/headers/admin_header.jsp" %>
 <div style="display:inline-block;">
-    <c:set var="dogsForAdmin" value="${dogsForAdmin}" scope="page"/>
+    <c:set var="dogsForAdmin" value="${dogsForAdmin}" scope="session"/>
     <c:forEach items="${dogsForAdmin}" var="dogForAdmin">
         <c:set var="avatar" value="${dogForAdmin.avatarPhotoPath}"/>
         <img class="img"

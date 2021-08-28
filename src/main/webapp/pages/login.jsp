@@ -31,7 +31,7 @@
 <form method="POST"
       action="${applicationPath}${controllerUrl}">
     <p><fmt:message key="field.email.label"/>:(${emailValidationMessage})</p>
-    <p><input id="emailId"
+    <p><input
            type="text"
            name="email"
            required
@@ -43,7 +43,7 @@
            oninvalid="setCustomValidity('?')"/>
     </p>
     <p><fmt:message key="field.password.label"/>:(${passwordValidationMessage}) </p>
-    <p><input id="passwordId"
+    <p><input
            type="password"
            size="${passwordMaxLength}"
            required

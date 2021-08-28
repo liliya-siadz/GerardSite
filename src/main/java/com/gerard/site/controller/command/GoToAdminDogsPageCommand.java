@@ -17,7 +17,7 @@ public enum GoToAdminDogsPageCommand implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<Dog> dogsForAdmin =  DogServiceImpl.getInstance().provideAllDogsForAdmin();
-        request.setAttribute(viewAttributeName, dogsForAdmin);
+        request.getSession().setAttribute(viewAttributeName, dogsForAdmin);
         return Page.ADMIN_DOGS.getPageUrl();
     }
 }

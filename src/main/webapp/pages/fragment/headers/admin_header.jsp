@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -24,9 +25,10 @@
             <fmt:message key="page.home.header"/>
         </a>
             <div class="btn-group btn-group-xs" role="header">
-                <form   method="GET"
+                <form   method="POST"
                         action="${applicationPath}${controllerUrl}">
-                        <button type="submit"
+                    <button
+                        type="submit"
                         name="command"
                         class="btn btn-xs navbar-btn headerButton"
                         value="GO_TO_ADMIN_DOGS_PAGE">

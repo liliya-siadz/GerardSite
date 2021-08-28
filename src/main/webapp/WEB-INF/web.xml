@@ -204,11 +204,28 @@
             <param-name>defaultLocation</param-name>
             <param-value>/error</param-value>
         </init-param>
+        <init-param>
+            <param-name>expectedSessionRoleIdentifier</param-name>
+            <param-value>admin</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>blackListFilter</filter-name>
         <url-pattern>/admin_dogs</url-pattern>
         <url-pattern>/admin_requests</url-pattern>
         <url-pattern>/admin_photos</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>authAccessedCommandsFilter</filter-name>
+        <filter-class>com.gerard.site.controller.filter.AuthAccessedCommandsFilter</filter-class>
+        <init-param>
+            <param-name>defaultLocation</param-name>
+            <param-value>/error</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>authAccessedCommandsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

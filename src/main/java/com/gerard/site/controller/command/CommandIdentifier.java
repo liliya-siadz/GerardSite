@@ -9,31 +9,41 @@ package com.gerard.site.controller.command;
  * @see CommandFactory
  */
 public enum CommandIdentifier {
-    LOGIN,
-    LOGOUT,
-    SET_LOCALE_TO_BE,
-    SET_LOCALE_TO_EN,
-    SET_LOCALE_TO_RU,
+    LOGIN(false),
+    LOGOUT(true),
+    SET_LOCALE_TO_BE(false),
+    SET_LOCALE_TO_EN(false),
+    SET_LOCALE_TO_RU(false),
 
-    ERROR,
-    ERROR_404,
+    ERROR(false),
+    ERROR_404(false),
 
-    GO_TO_MAKE_REQUEST_PAGE,
-    GO_TO_DOGS_PAGE,
-    GO_TO_PHOTOS_PAGE,
-    GO_TO_PUPPIES_PAGE,
+    GO_TO_MAKE_REQUEST_PAGE(false),
+    GO_TO_DOGS_PAGE(false),
+    GO_TO_PHOTOS_PAGE(false),
+    GO_TO_PUPPIES_PAGE(false),
 
-    CHOSE_PUPPY,
-    MAKE_REQUEST,
+    CHOSE_PUPPY(false),
+    MAKE_REQUEST(false),
 
-    GO_TO_ADMIN_DOGS_PAGE,
-    GO_TO_ADMIN_REQUESTS_PAGE,
-    GO_TO_ADMIN_PHOTOS_PAGE,
+    GO_TO_ADMIN_DOGS_PAGE(true),
+    GO_TO_ADMIN_REQUESTS_PAGE(true),
+    GO_TO_ADMIN_PHOTOS_PAGE(true),
 
-    UPLOAD_DOG_PHOTO,
-    DELETE_PHOTO,
-    PROCESS_REQUEST,
+    UPLOAD_DOG_PHOTO(true),
+    DELETE_PHOTO(true),
+    PROCESS_REQUEST(true),
 
-    INVALIDATE_SESSION,
-    RENEW_PASSWORD,
+    INVALIDATE_SESSION(false),
+    RENEW_PASSWORD(false);
+
+    private final boolean isAuthAccessedOnly;
+
+    CommandIdentifier(boolean isAuthAccessedOnly) {
+        this.isAuthAccessedOnly = isAuthAccessedOnly;
+    }
+
+    public boolean isAuthAccessedOnly() {
+        return isAuthAccessedOnly;
+    }
 }
