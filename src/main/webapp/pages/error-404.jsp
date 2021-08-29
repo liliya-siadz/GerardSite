@@ -6,13 +6,6 @@
 <head>
     <title><fmt:message key="page.error-404.title"/></title>
     <style>
-        div.customAnimation {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            position: relative;
-            animation: custom_animation 10s linear 0s infinite alternate;
-        }
         @keyframes custom_animation {
             0% {
                 background-color: red;

@@ -30,9 +30,11 @@ public enum CommandIdentifier {
     GO_TO_ADMIN_REQUESTS_PAGE(true),
     GO_TO_ADMIN_PHOTOS_PAGE(true),
 
-    UPLOAD_DOG_PHOTO(true),
+    UPLOAD_PHOTO(true),
     DELETE_PHOTO(true),
-    PROCESS_REQUEST(true),
+
+    ACCEPT_REQUEST(true),
+    REJECT_REQUEST(true),
 
     INVALIDATE_SESSION(false),
     RENEW_PASSWORD(false);

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PhotoDao {
     List<Photo> selectAllPhotosAndDogs() throws DaoException;
+    List<Photo> provideDecimalPieceOfPhotos(int pieceValue) throws DaoException;
+
 }

@@ -14,9 +14,10 @@ public enum GoToAdminRequestsPageCommand implements Command {
     private final String viewAttributeName = "requestsForAdmin";
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        List<Request> requestsForAdmin =
-                RequestServiceImpl.getInstance().provideAllRequestsForAdmin();
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
+        List<Request> requestsForAdmin
+                = RequestServiceImpl.getInstance().provideAllNotPendingRequests();
         request.getSession().setAttribute(viewAttributeName, requestsForAdmin);
         return Page.ADMIN_REQUESTS.getPageUrl();
     }

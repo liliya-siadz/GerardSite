@@ -52,4 +52,17 @@ public class PhotoServiceImpl implements PhotoService {
                             + exception.getMessage(), exception);
         }
     }
+    @Override
+    public  List<Photo> provideDecimalPieceOfPhotos(int pieceValue)
+            throws ServiceException {
+        try {
+            List<Photo> decimalPieceOfAllPhotos
+                    = PhotoDaoImpl.getInstance().provideDecimalPieceOfPhotos(pieceValue);
+            return decimalPieceOfAllPhotos;
+        } catch (DaoException exception) {
+            throw new ServiceException(
+                    "Unable to provide information from database! "
+                            + exception.getMessage(), exception);
+        }
+    }
 }

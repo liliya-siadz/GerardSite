@@ -12,14 +12,6 @@
 <html>
 <head>
     <title><fmt:message key="page.login.title"/></title>
-    <style>
-        input:invalid {
-            border: 2px dashed red;
-        }
-        input:valid {
-            border: 2px solid black;
-        }
-    </style>
 </head>
 <body>
 <%@include file="fragment/headers/header.jsp"%>

@@ -10,7 +10,7 @@ import com.gerard.site.service.entity.RequestEntity;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.RequestService;
 import com.gerard.site.service.util.mail.AppMailMessage;
-import com.gerard.site.service.util.mail.AppMailMessageFactory;
+import com.gerard.site.service.util.mail.NotificationFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,12 +32,15 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> provideAllRequestsForAdmin()
+    public List<Request> provideAllNotPendingRequests()
             throws ServiceException {
         try {
             List<Request> requestsAndAppUserAndDogList
                     = RequestDaoImpl.getInstance()
                     .selectAllRequests();
+            requestsAndAppUserAndDogList.removeIf(
+                    request -> request.getRequestStatus()
+                            == RequestEntity.RequestStatus.ACCEPTED);
             return requestsAndAppUserAndDogList;
         } catch (DaoException exception) {
             throw new ServiceException(
@@ -53,12 +56,10 @@ public class RequestServiceImpl implements RequestService {
             List<Request> requestsAndAppUserAndDogList
                     = RequestDaoImpl.getInstance()
                     .selectAllRequests();
-            List<Request> pendingRequestsAndAppUserAndDogList =
-                    requestsAndAppUserAndDogList.stream()
-                            .filter(row -> row.getRequestStatus()
-                                    .equals(RequestEntity.RequestStatus.PENDING))
-                            .toList();
-            return pendingRequestsAndAppUserAndDogList;
+            requestsAndAppUserAndDogList.removeIf(
+                    request -> request.getRequestStatus()
+                            != RequestEntity.RequestStatus.PENDING);
+            return requestsAndAppUserAndDogList;
         } catch (DaoException exception) {
             throw new ServiceException(
                     "Unable to provide information from database! "
@@ -77,13 +78,13 @@ public class RequestServiceImpl implements RequestService {
             boolean isRequestCreated =
                     RequestDaoImpl.getInstance().create(requestEntity);
             boolean isMessageWasSent = false;
-            if(isRequestCreated) {
-               AppMailMessage appMailMessageForAdmin =
-                       AppMailMessageFactory.createAdminMessage(
-                               dogEntity, requestEntity, appUserEntity);
+            if (isRequestCreated) {
+                AppMailMessage appMailMessageForAdmin =
+                        NotificationFactory.createNotificationForAdminNewRequest(
+                                dogEntity, requestEntity, appUserEntity);
                 isMessageWasSent = appMailMessageForAdmin.send();
-           }
-           return isRequestCreated && isMessageWasSent;
+            }
+            return isRequestCreated && isMessageWasSent;
         } catch (DaoException exception) {
             LOGGER.error("Unable to send request ! "
                     + "Request :" + requestEntity
@@ -92,6 +93,51 @@ public class RequestServiceImpl implements RequestService {
             throw new ServiceException("Unable to send request ! "
                     + "Request :" + requestEntity
                     + "App user: " + appUserEntity + " . "
+                    + exception.getMessage(), exception);
+        }
+    }
+
+    @Override
+    public boolean acceptRequest(int requestId) throws ServiceException {
+        try {
+            boolean isRequestWasAccepted
+                    = RequestDaoImpl.getInstance()
+                    .setRequestStatusToAccepted(requestId);
+            if (isRequestWasAccepted) {
+                Request requestToSendNotificationOn
+                        = RequestDaoImpl.getInstance().findRequestByPK(requestId).get();
+                AppMailMessage appMailMessageForAdmin =
+                        NotificationFactory
+                                .createClientNotificationForRequest(
+                                        requestToSendNotificationOn);
+                boolean isMessageWasSent = appMailMessageForAdmin.send();
+                return isMessageWasSent;
+            }
+            return false;
+        } catch (DaoException exception) {
+            LOGGER.error("Unable to accept request ! "
+                    + "Request id :" + requestId
+                    + exception.getMessage(), exception);
+            throw new ServiceException("Unable to accept request ! "
+                    + "Request id :" + requestId
+                    + exception.getMessage(), exception);
+        }
+    }
+
+    @Override
+    public boolean rejectRequest(int requestId) throws ServiceException {
+        try {
+            boolean isRequestWasRejected
+                    = RequestDaoImpl.getInstance().setRequestStatusToRejected(requestId);
+
+            //send email to user
+            return isRequestWasRejected;
+        } catch (DaoException exception) {
+            LOGGER.error("Unable to reject request ! "
+                    + "Request id :" + requestId
+                    + exception.getMessage(), exception);
+            throw new ServiceException("Unable to reject request ! "
+                    + "Request id :" + requestId
                     + exception.getMessage(), exception);
         }
     }

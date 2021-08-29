@@ -13,10 +13,12 @@
 </head>
 <body>
 <%@ include file="fragment/headers/admin_header.jsp" %>
-<div style="display:inline-block;margin-left: 15%;">
+<c:set var="requestsForAdmin" value="${requestsForAdmin}" scope="session"/>
+<c:forEach items="${requestsForAdmin}" var="requestForAdmin">
+<c:set var="itemStyle" value="${requestForAdmin.requestStatus eq 'PENDING' ? 'pendingRequest' : 'lol'}"/>
+<div style="display:inline-block;margin-left: 15%;"
+     class="${itemStyle}">
     <br>
-    <c:set var="requestsForAdmin" value="${requestsForAdmin}" scope="session"/>
-    <c:forEach items="${requestsForAdmin}" var="requestForAdmin">
         <c:set var="avatar" value="${requestForAdmin.avatarPhotoPath}"/>
         <h2><b><fmt:message key="page.admin_requests.view.title"/>
              #
@@ -24,7 +26,7 @@
         <img class="img"
              src="${applicationPath}/${avatar}"
              alt="?"
-             width="512"/>
+             width="200"/>
         <div>
             <div style="display:block;">
                 <h3><b><fmt:message key="page.admin_requests.view.title.requestStatus"/> </b>
@@ -43,7 +45,7 @@
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.admin_requests.view.title.email"/> </b>
+                <h3><b><fmt:message key="page.admin_requests.view.title.email"/></b>
                     <c:out value="${requestForAdmin.email}"/>
                 </h3>
             </div>
@@ -84,15 +86,34 @@
                 </h3>
             </div>
             <div style="display:block;">
-                <h3><b><fmt:message key="page.admin_requests.view.title.reply"/> </b>
+                <h3 style="width:50%"><b style="color: greenyellow">
+                    <fmt:message key="page.admin_requests.view.title.reply"/> </b>
                     <c:out value="${requestForAdmin.reply}"/>
                 </h3>
             </div>
         </div>
         <br>
+        <form method="POST"
+              action="${applicationPath}${controllerUrl}">
+            <input type="hidden" value="${requestForAdmin.requestId}" name="requestId"/>
+            <button type="submit"
+                    name="command"
+                    onClick="window.location.reload();"
+                    class="btn btn-lg btn-success"
+                    value="ACCEPT_REQUEST">
+                &#10004;
+            </button>
+            <button type="submit"
+                    name="command"
+                    onClick="window.location.reload();"
+                    class="btn btn-lg btn-danger"
+                    value="REJECT_REQUEST">
+                &#10006;
+            </button>
+        </form>
         <hr style=" border: 1px dashed red">
-    </c:forEach>
 </div>
+</c:forEach>
 <%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

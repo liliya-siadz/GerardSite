@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        a.headerLink:hover {
-            color: red;
-            text-decoration: none;
-        }
-        button.headerButton {
-            color: red;
-            text-decoration: none;
-            margin-left: 40px;
-            margin-right: 40px;
-        }
-    </style>
+    <link rel="stylesheet" href="${applicationPath}/css/custom.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse">

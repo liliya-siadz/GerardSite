@@ -1,15 +1,13 @@
 package com.gerard.site.controller;
 
-import com.gerard.site.controller.command.Command;
-import com.gerard.site.controller.command.CommandFactory;
-import com.gerard.site.controller.command.Error404Command;
-import com.gerard.site.controller.command.LoginCommand;
+import com.gerard.site.controller.command.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class CommandFactoryTest {
+
 
     @DataProvider(name = "testGetActionDataProvider")
     public Object[][] testGetCommandDataProvider() {
@@ -26,4 +24,5 @@ public class CommandFactoryTest {
         Command actual = CommandFactory.INSTANCE.getCommand(commandName);
         assertEquals(actual, expected);
     }
+
 }

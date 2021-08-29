@@ -53,6 +53,9 @@ public enum CommandFactory {
         commands.put(GO_TO_ADMIN_DOGS_PAGE, GoToAdminDogsPageCommand.INSTANCE);
         commands.put(GO_TO_ADMIN_REQUESTS_PAGE, GoToAdminRequestsPageCommand.INSTANCE);
 
+        commands.put(ACCEPT_REQUEST, AcceptRequestCommand.INSTANCE);
+        commands.put(REJECT_REQUEST, RejectRequestCommand.INSTANCE);
+
         commands.put(INVALIDATE_SESSION, InvalidateSessionCommand.INSTANCE);
     }
 

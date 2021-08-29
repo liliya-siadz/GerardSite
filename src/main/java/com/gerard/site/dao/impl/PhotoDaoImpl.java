@@ -4,6 +4,7 @@ import com.gerard.site.dao.AbstractDao;
 import com.gerard.site.dao.PhotoDao;
 import com.gerard.site.dao.connection.ConnectionException;
 import com.gerard.site.dao.connection.ConnectionPool;
+import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.view.Photo;
 import com.gerard.site.service.entity.PhotoEntity;
 import org.apache.logging.log4j.LogManager;
@@ -93,10 +94,32 @@ public class PhotoDaoImpl extends AbstractDao<PhotoEntity> implements PhotoDao {
         }
     }
 
-    public PhotoEntity parseResultSetPhotosAndDogs(ResultSet resultSet)
-            throws SQLException {
-        throw new UnsupportedOperationException();
+    @Override
+    public List<Photo> provideDecimalPieceOfPhotos(int pieceValue) throws DaoException{
+        try (Connection connection = ConnectionPool.getInstance().giveOutConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(buildPaginatedQuery(
+                    SELECT_ALL_PHOTOS_AND_DOGS, pieceValue));
+            if (resultSet.isBeforeFirst()) {
+                List<Photo> selectedPhotos = new ArrayList<>();
+                while (resultSet.next()) {
+                    String photoPath = resultSet.getString(COLUMN_LABEL_2);
+                    Date photoDate = resultSet.getDate(COLUMN_LABEL_4);
+                    String nickname = resultSet.getString(DogDaoImpl.COLUMN_LABEL_3);
+                    Photo photo = new Photo(photoPath, photoDate, nickname);
+                    selectedPhotos.add(photo);
+                }
+                return selectedPhotos;
+            } else {
+                LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
+                return Collections.emptyList();
+            }
+        } catch (ConnectionException | SQLException exception) {
+            throw new DaoException("Unable to get data from table: " + TABLE_NAME
+                    + " ! " + exception.getMessage(), exception);
+        }
     }
+
     @Override
     public PhotoEntity parseResultSet(ResultSet resultSet) throws SQLException {
         int photoId = resultSet.getInt(COLUMN_LABEL_1);

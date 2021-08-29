@@ -65,9 +65,16 @@ public class RequestServiceImplTest {
 
     @Test
     public void testProvideAllRequests() throws ServiceException {
-        List<Request> requests = RequestServiceImpl.getInstance().provideAllRequestsForAdmin();
+        List<Request> requests = RequestServiceImpl.getInstance().provideAllNotPendingRequests();
         LOGGER.info(requests);
         assertFalse(requests.isEmpty());
+    }
 
+    @Test
+    public void testTestProvideAllPendingRequests() throws ServiceException {
+        List<Request> pendingRequests
+                = RequestServiceImpl.getInstance().provideAllPendingRequests();
+        LOGGER.info(pendingRequests);
+        assertFalse(pendingRequests.isEmpty());
     }
 }

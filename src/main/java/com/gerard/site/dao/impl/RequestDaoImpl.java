@@ -4,6 +4,7 @@ import com.gerard.site.dao.AbstractDao;
 import com.gerard.site.dao.RequestDao;
 import com.gerard.site.dao.connection.ConnectionException;
 import com.gerard.site.dao.connection.ConnectionPool;
+import com.gerard.site.service.entity.AppUserEntity;
 import com.gerard.site.service.view.admin.Request;
 import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.entity.RequestEntity;
@@ -30,7 +31,8 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
     static final Logger LOGGER = LogManager.getLogger(RequestDaoImpl.class);
     private static final String SELECT_ALL_REQUESTS =
             "select request_id, request_status, request_type, content,"
-                    + "date_fact, reply, dog_id, email from request";
+                    + "date_fact, reply, dog_id, email "
+                    + "from request";
 
     private static final String SELECT_ALL_REQUESTS_AND_APP_USERS_AND_DOGS =
                     """
@@ -47,11 +49,44 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
                     on dog.dog_id = request.dog_id
                     inner join photo on dog.dog_id = photo.dog_id
                     where photo.photo_type ='avatar'
+                    order by request_status asc, date_fact desc
                     """;
 
     private static final String CREATE_NEW_REQUEST =
             "insert into request (email, content,dog_id, date_fact)"
                     + "values(?,?,?,?)";
+
+    private static final String SET_REQUEST_STATUS_TO_ACCEPTED=
+            """
+            update request set request_status = 'accepted',
+            reply='Your request was accepted. Please contact us by our mobile phone.' 
+            where request_id =? 
+            """;
+
+    private static final String SET_REQUEST_STATUS_TO_REJECTED=
+            """
+            update request set request_status = 'rejected',
+            reply='Sorry. Your request was rejected now. 
+            We put it to the end ot the queue. May be later we accept it ' 
+            where request_id =? 
+            """;
+
+    private static final String SELECT_REQUEST_BY_PK =
+            """
+            select request_id, request_status, request_type, content,
+                date_fact, reply, request.email,
+                app_user.name, app_user.surname, app_user.patronymic,
+                app_user.phone,
+                dog.nickname, dog.fullname , dog.dog_sex, dog.birthday,
+                photo.photo_path
+                from request
+                inner join app_user
+                on request.email = app_user.email
+                inner join dog
+                on dog.dog_id = request.dog_id
+                inner join photo on dog.dog_id = photo.dog_id
+                where request_id = ?
+            """;
 
     private RequestDaoImpl() {
         super();
@@ -106,6 +141,102 @@ public class RequestDaoImpl extends AbstractDao<RequestEntity> implements Reques
             throw new DaoException("Unable to get data from table: "
                     + TABLE_NAME + " ! "
                     + "Reason: " + exception.getMessage(), exception);
+        }
+    }
+
+    @Override
+    public boolean setRequestStatusToAccepted(int requestId) throws DaoException {
+        Connection connection = null;
+        try {
+            connection = ConnectionPool.getInstance().giveOutConnection();
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            SET_REQUEST_STATUS_TO_ACCEPTED);
+            preparedStatement.setInt(1, requestId);
+            connection.setAutoCommit(false);
+            int updatedRowsQuantity = preparedStatement.executeUpdate();
+            connection.commit();
+            preparedStatement.close();
+            ConnectionPool.getInstance().getBackConnection(connection);
+            LOGGER.info(updatedRowsQuantity
+                    + " rows was updated in table " + TABLE_NAME);
+        } catch (ConnectionException | SQLException exception) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                    LOGGER.trace("Unsuccessfully");
+                    return false;
+                }else {
+                    LOGGER.warn("Connection is null");
+                }
+            } catch (SQLException throwables) {
+                LOGGER.error("Unable to rollback transaction! "
+                        + throwables.getMessage(), throwables);
+            }
+            throw new DaoException("Unable to update data in table: "
+                    + TABLE_NAME + " ! "
+                    + exception.getMessage(), exception);
+        }
+        LOGGER.trace("Successfully");
+        return true;
+    }
+
+    @Override
+    public boolean setRequestStatusToRejected(int requestId) throws DaoException {
+        Connection connection = null;
+        try {
+            connection = ConnectionPool.getInstance().giveOutConnection();
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            SET_REQUEST_STATUS_TO_REJECTED);
+            preparedStatement.setInt(1, requestId);
+            connection.setAutoCommit(false);
+            int updatedRowsQuantity = preparedStatement.executeUpdate();
+            connection.commit();
+            preparedStatement.close();
+            ConnectionPool.getInstance().getBackConnection(connection);
+            LOGGER.info(updatedRowsQuantity
+                    + " rows was updated in table " + TABLE_NAME);
+        } catch (ConnectionException | SQLException exception) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                    LOGGER.trace("Unsuccessfully");
+                    return false;
+                }else {
+                    LOGGER.warn("Connection is null");
+                }
+            } catch (SQLException throwables) {
+                LOGGER.error("Unable to rollback transaction! "
+                        + throwables.getMessage(), throwables);
+            }
+            throw new DaoException("Unable to update data in table: "
+                    + TABLE_NAME + " ! "
+                    + exception.getMessage(), exception);
+        }
+        LOGGER.trace("Successfully");
+        return true;
+    }
+
+    @Override
+    public Optional<Request> findRequestByPK(int requestId) throws DaoException {
+        try (Connection connection =
+                     ConnectionPool.getInstance().giveOutConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement(SELECT_REQUEST_BY_PK)) {
+            preparedStatement.setInt(1, requestId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Request  selectedRequest = null;
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    selectedRequest = parseResultSetRequest(resultSet);
+                }
+            }
+            return Optional.ofNullable(selectedRequest);
+        } catch (ConnectionException | SQLException exception) {
+            throw new DaoException("Unable to get data from table: "
+                    + TABLE_NAME + " ! "
+                    + exception.getMessage(), exception);
         }
     }
 

@@ -12,7 +12,7 @@
     <title><fmt:message key="page.puppies.title"/></title>
 </head>
 <body>
-<%@include file="fragment/dynamic-headering.jsp" %>
+<%@include file="fragment/headers/header.jsp" %>
 <div style="display:inline-block;">
     <c:set var="puppiesForView" value="${puppies}" scope="session"/>
     <c:forEach items="${puppiesForView}" var="puppyForView">
@@ -52,13 +52,13 @@
                     <c:out value="${puppyForView.description}"/><c:if test="${empty puppyForView.description}">&#10006;</c:if>
                 </h3>
             </div>
-
             <form method="GET"
                   action="${applicationPath}${controllerUrl}">
                 <input type="hidden" value="${puppyForView.id}" name="chosenPuppyId"/>
                 <button type="submit"
                         name="command"
                         class="btn btn-lg btn-dark"
+                        style="background-color: red"
                         value="CHOSE_PUPPY">
                         <fmt:message key="page.puppies.button.make_request.name"/>
             </form>

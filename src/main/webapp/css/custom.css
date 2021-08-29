@@ -1,22 +1,31 @@
-
-
-html {
-    font-family: Verdana;
+a.headerLink:hover {
+    color: red;
+    text-decoration: none;
 }
-
+button.headerButton {
+    color: red;
+    text-decoration: none;
+    margin-left: 40px;
+    margin-right: 40px;
+}
 input:invalid {
     border: 2px dashed red;
 }
-
-input:invalid:required {
-    background-image: linear-gradient(to right, pink, lightgreen);
-}
-
 input:valid {
     border: 2px solid black;
 }
 
-a.headerLink:hover {
-    color: red;
-    text-decoration: none;
+.disabled {
+    pointer-events: none;
+}
+div.customAnimation {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation: custom_animation 10s linear 0s infinite alternate;
+}
+
+div.pendingRequest {
+    background-color: grey;
 }

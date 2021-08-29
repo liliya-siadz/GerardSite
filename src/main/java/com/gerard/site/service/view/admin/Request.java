@@ -160,7 +160,6 @@ public class Request implements Serializable {
     }
 
 
-
     @Override
     public boolean equals(Object object) {
         if (this == object) {

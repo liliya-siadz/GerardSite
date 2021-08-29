@@ -11,14 +11,6 @@
 <head>
     <title><fmt:message key="page.make_request.title"/></title>
     <title><fmt:message key="page.login.title"/></title>
-    <style>
-        input:invalid {
-            border: 2px dashed red;
-        }
-        input:valid {
-            border: 2px solid black;
-        }
-    </style>
 </head>
 <body>
 <%@ include file="fragment/headers/header.jsp" %>
@@ -51,12 +43,12 @@
               style="margin-left: 40%">
             <button type="submit"
                     name="command"
-                    class="btn btn-lg btn-dark"
+                    class="btn btn-lg btn-dark headerButton"
+                    style="border: 1px solid black;"
                     value="GO_TO_PUPPIES_PAGE">
                 <fmt:message key="page.puppies.header"/>
             </button>
         </form>
-        </p>
     </c:if>
     <c:if test="${not empty chosenPuppy and isPuppyChosen and not isRequestMade}">
         <h3 style="color: green">
@@ -84,7 +76,6 @@
         <fmt:message key="page.maker_request.view_result.text3" var="text3"/>
         <fmt:message key="page.maker_request.view_result.text4" var="text4"/>
         <script>
-
             confirm('${text1}'
                 + '\n ${sex}${chosenPuppy.dogSex}'
                 + '\n ${nickname}${chosenPuppy.nickname}'

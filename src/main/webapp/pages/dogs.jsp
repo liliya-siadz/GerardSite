@@ -9,10 +9,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><fmt:message key="page.dogEntities.title"/></title>
+    <title><fmt:message key="page.dogs.title"/></title>
 </head>
 <body>
-<%@include file="fragment/dynamic-headering.jsp" %>
+<%@include file="fragment/headers/header.jsp" %>
 <div style="display:inline-block;">
     <c:set var="dogsForView" value="${dogsForView}" scope="request"/>
     <c:forEach items="${dogsForView}" var="dogForView">

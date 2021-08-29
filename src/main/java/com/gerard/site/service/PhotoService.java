@@ -9,4 +9,7 @@ public interface PhotoService {
     List<Photo> provideAllPhotosForView() throws ServiceException;
 
     List<PhotoEntity> provideAllPhotosForAdmin() throws ServiceException;
+
+    List<Photo> provideDecimalPieceOfPhotos(int pieceValue) throws ServiceException;
+
 }

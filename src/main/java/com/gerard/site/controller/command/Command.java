@@ -1,12 +1,15 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Controller;
+import com.gerard.site.controller.PaginationItem;
 import com.gerard.site.controller.Router;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.util.localization.Language;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.gerard.site.service.util.localization.Language.BUNDLE_BASE_NAME_COOKIE_NAME;
 import static com.gerard.site.service.util.localization.Language.LANGUAGE_CODE_COOKIE_NAME;
@@ -28,6 +31,7 @@ import static com.gerard.site.service.util.localization.Language.LANGUAGE_CODE_C
 @FunctionalInterface
 public interface Command {
     String REQUEST_HEADER_REFERER_HEADER_NAME = "Referer";
+    Logger LOGGER = LogManager.getLogger(Command.class);
 
     /**
      * Services commands that came to router .
@@ -80,5 +84,18 @@ public interface Command {
         response.addCookie(locale);
         response.addCookie(bundle);
         return getRefererAppContextUrl(request);
+    }
+
+    static int getPage(HttpServletRequest request) {
+        int page = PaginationItem.FIRST_PAGE;
+        String strPage = request.getParameter(PaginationItem.PAGE_NUMBER);
+        if (strPage != null) {
+            try {
+                page = Integer.parseInt(strPage);
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Cannot parse page number " +  strPage + ". The first page will be used - 1", e);
+            }
+        }
+        return page;
     }
 }

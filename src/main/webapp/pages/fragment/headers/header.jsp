@@ -1,11 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <style>
-        a.headerLink:hover {
-            color: red;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="${applicationPath}/css/custom.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -22,25 +18,25 @@
                   action="${applicationPath}${controllerUrl}">
                 <button type="submit"
                         name="command"
-                        class="btn btn-xs navbar-btn"
+                        class="btn btn-xs navbar-btn headerButton"
                         value="GO_TO_DOGS_PAGE">
-                    <fmt:message key="page.dogEntities.header"/>
+                    <fmt:message key="page.dogs.header"/>
                 </button>
                 <button type="submit"
                         name="command"
-                        class="btn btn-xs navbar-btn"
+                        class="btn btn-xs navbar-btn headerButton"
                         value="GO_TO_PUPPIES_PAGE">
                     <fmt:message key="page.puppies.header"/>
                 </button>
                 <button type="submit"
                         name="command"
-                        class="btn btn-xs navbar-btn"
+                        class="btn btn-xs navbar-btn headerButton"
                         value="GO_TO_PHOTOS_PAGE">
                     <fmt:message key="page.photos.header"/>
                 </button>
                 <button type="submit"
                         name="command"
-                        class="btn btn-xs navbar-btn"
+                        class="btn btn-xs navbar-btn headerButton"
                         value="GO_TO_MAKE_REQUEST_PAGE">
                     <fmt:message key="page.make_request.header"/>
                 </button>
