@@ -6,3 +6,4 @@ target
 src/main/resources/mail.properties
 src/main/resources/connection.properties
 src/main/resources/security.properties
+/com/
