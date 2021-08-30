@@ -50,7 +50,14 @@
             </div>
         </small>
         <small>
-            <div class="col-md-3">
+            <div class="col-md-1">
+        <a href="${pageContext.request.contextPath}/login">
+            <fmt:message key="page.login.header"/>
+        </a>
+            </div>
+        </small>
+        <small>
+            <div class="col-md-2">
             <fmt:message key="footer.link.email.name"/>
                 : &#9993;
             <b><osd:output-site-description

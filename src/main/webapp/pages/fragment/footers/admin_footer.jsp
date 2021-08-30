@@ -16,5 +16,4 @@
     <div class="col-md-3"><small><b>full url from web.xml:</b> ${pageContext.request.requestURL}</small></div>
 </div>
 </body>
-<%@ include file="footer.jsp" %>
 </html>

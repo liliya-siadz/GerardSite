@@ -10,21 +10,28 @@
     <head>
     <title><fmt:message key="page.home.title"/></title>
     </head>
-    <body style="background-image: url(${applicationPath}/img/background.jpg);">
+    <body>
     <%@include file="fragment/dynamic-headering.jsp"%>
     <c:choose>
         <c:when test="${admin}">
-            <img src="${applicationPath}/img/admin.png"
+            <img src="${applicationPath}/img/admin_home.png"
                  alt="$"
-                 width="150"
+                 width="900px"
                  style="margin-top:5px;margin-right:60px">
             <h1>
                 &#8986;<fmt:formatDate type="time" value="${date}"/>
             </h1>
-            <fmt:message key="page.home.admin_welcome"/>
+            <p style="text-align: -moz-center">
+                <fmt:message key="page.home.admin_welcome"/>
+            </p>
             <%@ include file="fragment/footers/admin_footer.jsp" %>
         </c:when>
         <c:otherwise>
+            <style>
+                body {
+                    background-image: url(${applicationPath}/img/background.jpg);
+                }
+            </style>
             <div style="display: inline-block">
                 <div style="width: 400px; text-align: center" >
                     <p><b>
@@ -48,7 +55,7 @@
                      width="200"/>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2351.796632288363!2d27.436444215377048!3d53.88204334215154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbdae622536735%3A0x3a57a54c60001109!2zdnVsaWNhIMWgYXJhbmhvdmnEjWEsIE1pbnNr!5e0!3m2!1sen!2sby!4v1629635357257!5m2!1sen!2sby" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
-            <%@ include file="fragment/footers/footer.jsp" %>
+                <%@ include file="fragment/footers/footer.jsp" %>
         </c:otherwise>
     </c:choose>
     </body>

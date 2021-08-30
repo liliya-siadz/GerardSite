@@ -42,11 +42,6 @@
                 </button>
             </form>
         </div>
-        <a href="${pageContext.request.contextPath}/login"
-           role="button"
-           class="btn btn-xs navbar-btn headerLink">
-            <fmt:message key="page.login.header"/>
-        </a>
     </div>
 </nav>
 </body>
