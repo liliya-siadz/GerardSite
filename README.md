@@ -7,10 +7,10 @@
 
 <h2>MAIN USE OF APP</h2>
 <ol type="1">
-    <li> Provide actual information regarding dogEntities/puppies in the kennel
+    <li> Provide actual information regarding dogs/puppies in the kennel
         <ol>
-            <li>displaying photos dogEntities photos </li>
-            <li>presenting description dogEntities descriptions </li>
+            <li>showing dogs photos </li>
+            <li>presenting dogs descriptions </li>
         </ol>
      </li> 
     <li>Provide service for making requests for puppies from potential pet's owners</b></li>
