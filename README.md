@@ -1,4 +1,4 @@
-<h2><i>Gerard</i></h2>
+<h2><i>Gerard [PRE-ALPHA STAGE] </i></h2>
 <a href="https://bit.ly/3B9OZSH">documentation to download here</a>
 
 <h1>desktop web-application for private monobreed dog kennel </h1>
@@ -7,14 +7,22 @@
 
 <h2>MAIN USE OF APP</h2>
 <ol type="1">
-    <li> Provide actual information regarding dogs/puppies in the kennel
-        <ol>
-            <li>showing dogs photos </li>
-            <li>presenting dogs descriptions </li>
-        </ol>
-     </li> 
-    <li>Provide service for making requests for puppies from potential pet's owners</b></li>
-    <li>Provide service for processing requests</b></li>
+    <li>Provide actual information of the kennel
+        <ul>
+            <li>dos's information</li>
+            <li>kennel's contact information</li>
+            <li>dos's photos</li>
+            <li>system notification for admnistrator (by email)</li>
+        </ul>
+    </li>
+    <li>Provide service for making requests for puppies by clients</li>
+    <li>Provide service for processing requests by kennel's administrator</li>
+     <ul>
+            <li>viewing all requests</li>
+            <li>accepting request</li>
+            <li>rejecting request</li>
+            <li>*system notification for clients (by email)</li>
+    </ul>
 </ol>
 
 <h2>APPLICATION ACTIONS</h2>
