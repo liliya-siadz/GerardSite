@@ -23,7 +23,7 @@
 
 <h2>DATABASE SCHEME</h2>
 
-![database_scheme](https://user-images.githubusercontent.com/39922259/131316251-685ea760-1209-4129-b9ca-6b63eba075ce.png)
+![database_scheme_light](https://user-images.githubusercontent.com/39922259/131425865-dffcd8e2-39b7-4559-803f-d99e26c09897.png)
 
 <!-- 
 <h2>CLIENT'S requirements</h2> -->
