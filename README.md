@@ -12,7 +12,7 @@
             <li>dos's information</li>
             <li>kennel's contact information</li>
             <li>dos's photos</li>
-            <li>notification for admnistrator (by email)</li>
+            <li>notification for admnistrator</li>
         </ul>
     </li>
     <li>Provide service for making requests for puppies by clients</li>
@@ -21,7 +21,7 @@
             <li>viewing all requests</li>
             <li>accepting request</li>
             <li>rejecting request</li>
-            <li>notification for clients (by email)</li>
+            <li>notification for clients</li>
     </ul>
 </ol>
 
