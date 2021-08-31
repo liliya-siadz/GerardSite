@@ -1,8 +1,7 @@
 package com.gerard.site.controller;
 
 /**
- * @author Denis Kotov <a href="https://github.com/KotofeyG/"/>
- * <p>
+ * @author Denis Kotov
  * The type PaginationItem.
  */
 public class PaginationItem {
