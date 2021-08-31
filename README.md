@@ -1,30 +1,38 @@
-<h2><i>Gerard</i></h2>
-<a href="https://bit.ly/3B9OZSH">documentation to download here</a>
+<h2><i>Gerard [PRE-ALPHA STAGE] </i></h2>
+<a href="https://drive.google.com/drive/folders/1zrXhYOtUUtJi7eyE1CdD8OP7hlf8tV7b?usp=sharing">documentation here</a>
 
 <h1>desktop web-application for private monobreed dog kennel </h1>
-☛ class project after online-training "Java Web development by EPAM"
+☛ class project after online-training "Java Web development by EPAM Systems"
 
 
 <h2>MAIN USE OF APP</h2>
 <ol type="1">
-    <li> Provide actual information regarding dogEntities/puppies in the kennel
-        <ol>
-            <li>displaying photos dogEntities photos </li>
-            <li>presenting description dogEntities descriptions </li>
-        </ol>
-     </li> 
-    <li>Provide service for making requests for puppies from potential pet's owners</b></li>
-    <li>Provide service for processing requests</b></li>
+    <li>Provide actual information of the kennel
+        <ul>
+            <li>dos's information</li>
+            <li>kennel's contact information</li>
+            <li>dos's photos</li>
+            <li>notification for admnistrator</li>
+        </ul>
+    </li>
+    <li>Provide service for making requests for puppies by clients</li>
+    <li>Provide service for processing requests by kennel's administrator</li>
+     <ul>
+            <li>viewing all requests</li>
+            <li>accepting request</li>
+            <li>rejecting request</li>
+            <li>notification for clients</li>
+    </ul>
 </ol>
 
 <h2>APPLICATION ACTIONS</h2>
 
-![APP_ACTIONS](https://user-images.githubusercontent.com/39922259/130767024-aa72ec69-9289-47ba-9bdf-ef7dfe387253.png)
+![APP_ACTIONS](https://user-images.githubusercontent.com/39922259/131426549-d8ef73d2-c050-47fd-a646-d1b7533a5e2b.png)
+
 
 <h2>DATABASE SCHEME</h2>
 
-![database_scheme](https://user-images.githubusercontent.com/39922259/130765746-676de60b-141d-4be6-a19f-6527547b3b9c.png)
-
+![database_scheme_light](https://user-images.githubusercontent.com/39922259/131425865-dffcd8e2-39b7-4559-803f-d99e26c09897.png)
 
 <!-- 
 <h2>CLIENT'S requirements</h2> -->
