@@ -16,7 +16,8 @@ public enum GoToDogsPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) throws ServiceException {
-        List<Dog> dogsForView =  DogServiceImpl.getInstance().provideAllDogsForView();
+        List<Dog> dogsForView
+                = DogServiceImpl.getInstance().provideAllDogsForView();
         request.setAttribute(viewAttributeName, dogsForView);
         return Page.DOGS.getPageUrl();
     }

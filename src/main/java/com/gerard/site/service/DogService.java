@@ -13,6 +13,5 @@ public interface DogService {
 
     List<Dog> provideAllDogsForAdmin() throws ServiceException;
 
-    List<Dog> provideAlPuppiesForView() throws ServiceException;
-
+    List<Dog> provideAllPuppiesForView() throws ServiceException;
 }

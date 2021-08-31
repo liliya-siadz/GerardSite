@@ -14,28 +14,21 @@ public enum CommandIdentifier {
     SET_LOCALE_TO_BE(false),
     SET_LOCALE_TO_EN(false),
     SET_LOCALE_TO_RU(false),
-
     ERROR(false),
     ERROR_404(false),
-
     GO_TO_MAKE_REQUEST_PAGE(false),
     GO_TO_DOGS_PAGE(false),
     GO_TO_PHOTOS_PAGE(false),
     GO_TO_PUPPIES_PAGE(false),
-
+    GO_TO_LOGIN_PAGE(false),
     CHOSE_PUPPY(false),
     MAKE_REQUEST(false),
-
     GO_TO_ADMIN_DOGS_PAGE(true),
     GO_TO_ADMIN_REQUESTS_PAGE(true),
     GO_TO_ADMIN_PHOTOS_PAGE(true),
-
-    UPLOAD_PHOTO(true),
     DELETE_PHOTO(true),
-
     ACCEPT_REQUEST(true),
     REJECT_REQUEST(true),
-
     INVALIDATE_SESSION(false),
     RENEW_PASSWORD(false);
 

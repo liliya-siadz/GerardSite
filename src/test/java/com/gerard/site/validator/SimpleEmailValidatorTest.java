@@ -3,12 +3,13 @@ package com.gerard.site.validator;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
-public class EmailValidatorTest {
+public class SimpleEmailValidatorTest {
+
     @DataProvider(name = "dataProviderIsValid")
     public Object[][] dataProviderIsValid() {
-        return new Object[][] {
+        return new Object[][]{
                 {"sidelnikova.liliya@gmail.com", true},
                 {"valeriy.leontiev@index.ru", true},
                 {"leontrtg123iev@index.ru", true},
@@ -17,14 +18,14 @@ public class EmailValidatorTest {
                 {"////d123123sfgdfgdfg", false},
                 {" ferg           ", false},
                 {"seemslikemail@.com", false},
-                {"",false},
-                {null,false}
+                {"", false},
+                {null, false}
         };
     }
 
-    @Test(dataProvider ="dataProviderIsValid")
+    @Test(dataProvider = "dataProviderIsValid")
     public void testIsValid(String email, boolean expected) {
-        boolean actual = EmailValidator.INSTANCE.isValid(email);
+        boolean actual = SimpleEmailValidator.INSTANCE.isValid(email);
         assertEquals(actual, expected);
     }
 }

@@ -2,11 +2,14 @@ package com.gerard.site.service.view;
 
 import com.gerard.site.service.entity.DogEntity;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class Dog {
-
+public class Dog implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private int id;
     private DogEntity.DogSex dogSex;
     private String nickname;

@@ -12,4 +12,5 @@ public interface PhotoService {
 
     List<Photo> provideDecimalPieceOfPhotos(int pieceValue) throws ServiceException;
 
+    boolean deletePhoto(String photoPath) throws ServiceException;
 }

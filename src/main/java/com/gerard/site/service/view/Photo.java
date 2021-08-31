@@ -7,13 +7,12 @@ import java.util.Objects;
 
 public class Photo implements Serializable {
     @Serial
-    private static final long serialVersionUID=1L;
-
+    private static final long serialVersionUID = 1L;
     private String photoPath;
     private Date photoDate;
     private String nickname;
 
-    public Photo(){
+    public Photo() {
 
     }
 
@@ -49,10 +48,10 @@ public class Photo implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         Photo that = (Photo) object;

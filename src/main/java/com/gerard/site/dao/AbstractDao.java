@@ -6,20 +6,12 @@ import com.gerard.site.service.entity.AbstractEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractDao<E extends AbstractEntity<?>> {
     protected AbstractDao() {
     }
 
-    /**
-     * @author Denis Kotov
-     *
-     * @param query current query to data base
-     * @param pageNumber current page for displaying entities
-     * @return query with current page
-     */
     public String buildPaginatedQuery(String query, int pageNumber) {
         String LIMIT = " LIMIT ";
         String SEPARATOR = ", ";
@@ -34,15 +26,7 @@ public abstract class AbstractDao<E extends AbstractEntity<?>> {
         return queryBuilder.toString();
     }
 
-    public abstract Optional<E> find(E entity) throws DaoException;
+    public abstract Optional<E> find(E user) throws DaoException;
 
-    public abstract List<E> selectAll() throws DaoException;
-
-    public abstract boolean remove(E entity) throws DaoException;
-
-    public abstract boolean update(E entity, E newEntityVersion) throws DaoException;
-
-    public abstract boolean create(E entity) throws DaoException;
-
-    protected abstract E parseResultSet(ResultSet resultSet) throws SQLException;
+    protected abstract E parseResultSetEntity(ResultSet resultSet) throws SQLException;
 }

@@ -17,7 +17,7 @@ import static com.gerard.site.validator.ValidatorIdentifier.PHONE_PARAMETER_NAME
 
 public class RequestForm implements FormValidator, Serializable {
     @Serial
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     private String email;
     private String content;
     private String name;
@@ -25,54 +25,51 @@ public class RequestForm implements FormValidator, Serializable {
     private String patronymic;
     private String phone;
 
-    public RequestForm(){ }
+    public RequestForm() {
+    }
 
     public String getEmail() {
         return email;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-
-    public String getSurname() {
-        return surname;
-    }
-
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-
-    public String getPhone() {
-        return phone;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    public String getPatronymic() {
+        return patronymic;
+    }
+
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setPhone(String phone) {
@@ -108,7 +105,7 @@ public class RequestForm implements FormValidator, Serializable {
         if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         RequestForm that = (RequestForm) object;

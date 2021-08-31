@@ -13,12 +13,11 @@ import static com.gerard.site.validator.ValidatorIdentifier.PHONE_PARAMETER_NAME
 import static com.gerard.site.validator.ValidatorIdentifier.REPLY_PARAMETER_NAME;
 
 public class ValidatorFactory {
-
-    private static final Map<String, Validator> validators = new HashMap<>();
     private static ValidatorFactory instance;
+    private static final Map<String, Validator> validators = new HashMap<>();
 
     static {
-        validators.put(EMAIL_PARAMETER_NAME, EmailValidator.INSTANCE);
+        validators.put(EMAIL_PARAMETER_NAME, SimpleEmailValidator.INSTANCE);
         validators.put(REPLY_PARAMETER_NAME, PasswordValidator.INSTANCE);
         validators.put(CONTENT_PARAMETER_NAME, ContentValidator.INSTANCE);
         validators.put(APP_USER_NAME_PARAMETER_NAME, NameValidator.INSTANCE);
@@ -28,14 +27,17 @@ public class ValidatorFactory {
         validators.put(APP_USER_PATRONYMIC_PARAMETER_NAME, PatronymicValidator.INSTANCE);
     }
 
-    public static Validator getValidator(String fieldName){
-        return validators.get(fieldName);
+    private ValidatorFactory() {
     }
 
     public static void init() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new ValidatorFactory();
         }
+    }
+
+    public static Validator getValidator(String fieldName) {
+        return validators.get(fieldName);
     }
 }
 

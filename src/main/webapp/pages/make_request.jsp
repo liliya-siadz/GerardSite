@@ -15,7 +15,7 @@
 <body>
 <%@ include file="fragment/headers/header.jsp" %>
 <div style="margin-left: 30%;display: block">
-    <c:set var="puppies" value="${puppies}"/>
+    <c:set var="puppies" value="${puppies}" scope="session"/>
     <c:if test="${empty chosenPuppy and not isPuppyChosen}">
         <form method="GET"
               action="${applicationPath}${controllerUrl}">

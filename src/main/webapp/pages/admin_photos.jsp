@@ -40,6 +40,7 @@
                 <div style="display: block" >
                 <form method="POST"
                       action="${applicationPath}${controllerUrl}">
+                        <input type="hidden" name="photoPath" value="${photoForAdmin.photoPath}">
                         <button type="submit"
                             name="command"
                             style="background-color: orangered"
@@ -53,6 +54,6 @@
         <hr style=" border: 1px dashed red">
         </c:forEach>
 </div>
-<%@ include file="fragment/footers/footer.jsp" %>
+<%@ include file="fragment/footers/admin_footer.jsp" %>
 </body>
 </html>

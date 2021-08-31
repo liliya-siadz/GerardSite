@@ -9,7 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class NotificationFactory {
-    private static final Logger LOGGER = LogManager.getLogger(NotificationFactory.class);
+    private static final Logger LOGGER
+            = LogManager.getLogger(NotificationFactory.class);
 
     private NotificationFactory(){};
 
@@ -59,7 +60,7 @@ public class NotificationFactory {
                     + "Parameters 'request' is null!");
         }
         String subject = "ANSWER FOR PUPPY REQUEST FROM gerard.com";
-        String recipient = "gorilla.mobilla@mail.ru";
+        String recipient = request.getEmail();
         String content = new StringBuffer()
                 .append("<------------Request for puppy------------->")
                 .append("\nbirthday: ").append(request.getBirthday())

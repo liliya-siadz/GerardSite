@@ -1,11 +1,10 @@
 package com.gerard.site.dao.impl;
 
 import com.gerard.site.service.entity.AppUserEntity;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertTrue;
 
 public class AppUserDaoImplTest {
     @DataProvider(name = "existingOrNewValidUsers")
@@ -26,15 +25,15 @@ public class AppUserDaoImplTest {
         return new Object[][]{
                 {existingUser},
                 {existingUser}
-            };
+        };
     }
 
-    @Test(dataProvider = "existingOrNewValidUsers")
+    @Test(dataProvider = "existingOrNewValidUsers", enabled = false)
     public void testCreateIfExistsOtherwiseUpdate(AppUserEntity validUser)
             throws DaoException {
         boolean expected =
-                AppUserDaoImpl.getInstance().createIfExistsOtherwiseUpdate(validUser);
+                AppUserDaoImpl.getInstance()
+                        .createIfExistsOtherwiseUpdate(validUser);
         assertTrue(expected);
     }
-
 }

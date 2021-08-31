@@ -92,8 +92,9 @@ public interface Command {
         if (strPage != null) {
             try {
                 page = Integer.parseInt(strPage);
-            } catch (NumberFormatException e) {
-                LOGGER.warn("Cannot parse page number " +  strPage + ". The first page will be used - 1", e);
+            } catch (NumberFormatException exception) {
+                LOGGER.warn("Cannot parse page number " +  strPage
+                        + ". The first page will be used - 1", exception);
             }
         }
         return page;

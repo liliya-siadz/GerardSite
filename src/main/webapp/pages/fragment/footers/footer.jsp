@@ -51,9 +51,15 @@
         </small>
         <small>
             <div class="col-md-1">
-        <a href="${pageContext.request.contextPath}/login">
-            <fmt:message key="page.login.header"/>
-        </a>
+                <form method="GET"
+                      action="${applicationPath}${controllerUrl}">
+                    <button type="submit"
+                            name="command"
+                            class="btn btn-link"
+                            value="GO_TO_LOGIN_PAGE">
+                        <fmt:message key="page.login.header"/>
+                    </button>
+                </form>
             </div>
         </small>
         <small>

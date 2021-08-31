@@ -15,13 +15,16 @@ import org.testng.annotations.Test;
 import java.sql.Date;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class RequestServiceImplTest {
-    private static final Logger LOGGER = LogManager.getLogger(PhotoServiceImplTest.class);
+    private static final Logger LOGGER
+            = LogManager.getLogger(PhotoServiceImplTest.class);
 
-    @Test
-    public void testProvideAllPendingRequests() throws ServiceException {
+    @Test(enabled = false)
+    public void testProvideAllPendingRequests()
+            throws ServiceException {
         List<Request> requestsAndAppUserAndDogList =
                 RequestServiceImpl.getInstance().provideAllPendingRequests();
         LOGGER.info(requestsAndAppUserAndDogList);
@@ -32,18 +35,19 @@ public class RequestServiceImplTest {
     public Object[][] dataProviderSendRequest() throws DaoException {
         DogEntity bottleDogEntity = new DogEntity();
         bottleDogEntity.setId(1);
-        DogEntity existingDogEntity = DogDaoImpl.getInstance().find(bottleDogEntity).get();
+        DogEntity existingDogEntity
+                = DogDaoImpl.getInstance().find(bottleDogEntity).get();
 
         AppUserEntity existingUser = new AppUserEntity();
-        existingUser.setEmail("sidelnikova.liliya2.@gmail.com");
-        existingUser.setSurname("Сидельникова");
-        existingUser.setName("Лилия");
+        existingUser.setEmail("vechni.sputnik@mail.ru");
+        existingUser.setSurname("Vechni");
+        existingUser.setName("Sputnik");
         existingUser.setPatronymic("");
         existingUser.setPhone("290000000");
 
         RequestEntity request = new RequestEntity();
-        request.setEmail("sidelnikova.liliya2.@gmail.com");
-        request.setContent("Запрос №6");
+        request.setEmail("vechni.sputnik@mail.ru");
+        request.setContent("Запрос на питомца.");
         request.setDateFact(Date.valueOf("2021-08-12"));
         request.setDogId(1);
 
@@ -58,23 +62,16 @@ public class RequestServiceImplTest {
             RequestEntity requestEntity,
             AppUserEntity appUserEntity)
             throws ServiceException {
-        boolean actual = RequestServiceImpl.getInstance().sendRequest(
-                dogEntity, requestEntity,  appUserEntity);
+        boolean actual = RequestServiceImpl.getInstance()
+                .sendRequest(dogEntity, requestEntity, appUserEntity);
         assertTrue(actual);
     }
 
-    @Test
-    public void testProvideAllRequests() throws ServiceException {
-        List<Request> requests = RequestServiceImpl.getInstance().provideAllNotPendingRequests();
-        LOGGER.info(requests);
-        assertFalse(requests.isEmpty());
-    }
-
-    @Test
+    @Test(enabled = false)
     public void testTestProvideAllPendingRequests() throws ServiceException {
-        List<Request> pendingRequests
+        List<Request> allPendingRequests
                 = RequestServiceImpl.getInstance().provideAllPendingRequests();
-        LOGGER.info(pendingRequests);
-        assertFalse(pendingRequests.isEmpty());
+        LOGGER.info(allPendingRequests);
+        assertFalse(allPendingRequests.isEmpty());
     }
 }

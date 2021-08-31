@@ -10,6 +10,6 @@ public final class ValidatorIdentifier {
     public static final String PASSWORD_PARAMETER_NAME = "password";
     public static final String REPLY_PARAMETER_NAME = "reply";
 
-    private ValidatorIdentifier(){
+    private ValidatorIdentifier() {
     }
 }

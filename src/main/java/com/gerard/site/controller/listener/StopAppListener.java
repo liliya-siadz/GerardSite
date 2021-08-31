@@ -13,7 +13,7 @@ import jakarta.servlet.annotation.WebListener;
  * @see ConnectionPool#destroy() for details
  */
 @WebListener
-public class DestroyConnectionPoolListener implements ServletContextListener {
+public class StopAppListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         ConnectionPool.getInstance().destroy();

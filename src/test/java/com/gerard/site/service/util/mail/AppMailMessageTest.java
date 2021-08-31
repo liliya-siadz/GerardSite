@@ -7,13 +7,13 @@ import org.testng.annotations.Test;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertTrue;
 
 public class AppMailMessageTest {
 
     private static String testMessageContent = "test app mail sender";
-    private static String testMessageSubject = "mail sender test: " +
-            LocalDate.now(ZoneId.of("Europe/Paris"));
+    private static String testMessageSubject =
+            "mail sender test: " + LocalDate.now(ZoneId.of("Europe/Paris"));
 
     @DataProvider(name = "dataProviderTestSend")
     public Object[][] dataProviderTestSend() {
@@ -26,7 +26,8 @@ public class AppMailMessageTest {
     }
 
     @Test(dataProvider = "dataProviderTestSend")
-    public void testSendToCorrectRecipients(String recipient) throws ServiceException {
+    public void testSendToCorrectRecipients(String recipient)
+            throws ServiceException {
         AppMailMessage message = new AppMailMessage(testMessageSubject,
                 testMessageContent, recipient);
         assertTrue(message.send());
@@ -44,7 +45,8 @@ public class AppMailMessageTest {
 
     @Test(dataProvider = "dataProviderBlankOrEmptyRecipientsTestSend",
             expectedExceptions = ServiceException.class)
-    public void testSendToBlankOrEmptyRecipients(String recipient) throws ServiceException {
+    public void testSendToBlankOrEmptyRecipients(String recipient)
+            throws ServiceException {
         AppMailMessage message = new AppMailMessage(testMessageSubject,
                 testMessageContent, recipient);
         assert (message.send());

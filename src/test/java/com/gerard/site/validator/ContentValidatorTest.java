@@ -3,12 +3,13 @@ package com.gerard.site.validator;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ContentValidatorTest {
+
     @DataProvider(name = "dataProviderIsValid")
     public Object[][] dataProviderIsValid() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Hello this is my message.", true},
                 {"Здравствуйте.", true},
                 {"Hello dfgdfg !", true},
@@ -17,12 +18,12 @@ public class ContentValidatorTest {
                 {"////d123123sfgdfgdfg", false},
                 {"            ", false},
                 {null, false},
-                {"",false},
-                {"f".repeat(500),false}
+                {"", false},
+                {"f".repeat(500), false}
         };
     }
 
-    @Test(dataProvider ="dataProviderIsValid")
+    @Test(dataProvider = "dataProviderIsValid")
     public void testIsValid(String content, boolean expected) {
         boolean actual = ContentValidator.INSTANCE.isValid(content);
         assertEquals(actual, expected);

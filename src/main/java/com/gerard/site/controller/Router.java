@@ -56,7 +56,8 @@ public class Router {
      * @see Page
      */
     static String prepareUrl(HttpServletRequest request, HttpServletResponse response) {
-        String commandName = request.getParameter(COMMAND_IDENTIFIER_REQUEST_PARAMETER_NAME);
+        String commandName
+                = request.getParameter(COMMAND_IDENTIFIER_REQUEST_PARAMETER_NAME);
         Command command = CommandFactory.INSTANCE.getCommand(commandName);
         String pageUrl;
         try {
@@ -64,7 +65,7 @@ public class Router {
             LOGGER.trace("Command: " + commandName + " was executed.");
         } catch (ServiceException exception) {
             LOGGER.error("Unable to prepare page url! "
-                    + "Command name: " + commandName
+                    + "Command name: " + commandName + " . "
                     + "Command: " + command
                     + exception.getMessage(), exception);
             LOGGER.debug("Error page url will be returned .");
@@ -83,7 +84,8 @@ public class Router {
      * @param response HTTP response assigned to this HTTP request
      * @return page path
      */
-    static String preparePath(HttpServletRequest request, HttpServletResponse response) {
+    static String preparePath(HttpServletRequest request,
+                              HttpServletResponse response) {
         String pageUrl = prepareUrl(request, response);
         String pagePath = DIRECTORY_NAME + pageUrl + FILE_EXTENSION;
         return pagePath;

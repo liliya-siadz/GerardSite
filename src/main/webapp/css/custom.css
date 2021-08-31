@@ -33,5 +33,8 @@ div.customAnimation {
 }
 
 div.pendingRequest {
-    background-color: grey;
+    background-color: lightskyblue;
+}
+div.notPendingRequest {
+    background-color: dimgrey;
 }

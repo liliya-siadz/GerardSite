@@ -9,7 +9,7 @@ import java.sql.Date;
 
 public class Request implements Serializable {
     @Serial
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     private int requestId;
     private RequestEntity.RequestStatus requestStatus;
     private RequestEntity.RequestType requestType;
@@ -29,7 +29,6 @@ public class Request implements Serializable {
 
     public Request() {
     }
-
 
     public int getRequestId() {
         return requestId;
@@ -304,8 +303,7 @@ public class Request implements Serializable {
                     requestAndAppUserAndDogBuilder) {
                 return (request == null)
                         ? requestAndAppUserAndDogBuilder.request == null
-                        : request.equals(
-                                requestAndAppUserAndDogBuilder.request);
+                        : request.equals(requestAndAppUserAndDogBuilder.request);
             }
             return false;
         }
@@ -314,8 +312,8 @@ public class Request implements Serializable {
         public int hashCode() {
             int hash = 7;
             int hashcode = hash + 31 * (request == null
-                                        ? 0
-                                        : request.hashCode());
+                    ? 0
+                    : request.hashCode());
             return hashcode;
         }
 

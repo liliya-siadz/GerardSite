@@ -1,7 +1,6 @@
 package com.gerard.site.controller.command;
 
 import com.gerard.site.controller.Page;
-import com.gerard.site.service.entity.DogEntity;
 import com.gerard.site.service.ServiceException;
 import com.gerard.site.service.impl.DogServiceImpl;
 import com.gerard.site.service.view.Dog;
@@ -17,7 +16,7 @@ public enum GoToPuppiesPageCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServiceException {
-        List<Dog> puppies =  DogServiceImpl.getInstance().provideAlPuppiesForView();
+        List<Dog> puppies =  DogServiceImpl.getInstance().provideAllPuppiesForView();
         request.setAttribute(viewAttributeName, puppies);
         return Page.PUPPIES.getPageUrl();
     }

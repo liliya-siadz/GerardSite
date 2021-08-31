@@ -8,30 +8,34 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
 
 public class DogServiceImplTest {
-    private static final Logger LOGGER = LogManager.getLogger(DogServiceImplTest.class);
+    private static final Logger LOGGER
+            = LogManager.getLogger(DogServiceImplTest.class);
 
-    @Test
+    @Test(enabled = false)
     public void testProvideAllDogsForView() throws ServiceException {
-        List<Dog> dogsForView = DogServiceImpl.getInstance().provideAllDogsForView();
-        LOGGER.info(dogsForView);
-        assertFalse(dogsForView.isEmpty());
+        List<Dog> allDogsForView
+                = DogServiceImpl.getInstance().provideAllDogsForView();
+        LOGGER.info(allDogsForView);
+        assertFalse(allDogsForView.isEmpty());
     }
 
-    @Test
+    @Test(enabled = false)
     public void testProvideAlPuppiesForView() throws ServiceException {
-        List<Dog> puppies = DogServiceImpl.getInstance().provideAlPuppiesForView();
-        LOGGER.info(puppies);
-        assertFalse(puppies.isEmpty());
+        List<Dog> alPuppiesForView
+                = DogServiceImpl.getInstance().provideAllPuppiesForView();
+        LOGGER.info(alPuppiesForView);
+        assertFalse(alPuppiesForView.isEmpty());
 
     }
 
-    @Test
+    @Test(enabled = false)
     public void testProvideAllDogsForAdmin() throws ServiceException {
-        List<Dog> dogsForAdmin = DogServiceImpl.getInstance().provideAllDogsForAdmin();
-        LOGGER.info(dogsForAdmin);
-        assertFalse(dogsForAdmin.isEmpty());
+        List<Dog> allDogsForAdmin
+                = DogServiceImpl.getInstance().provideAllDogsForAdmin();
+        LOGGER.info(allDogsForAdmin);
+        assertFalse(allDogsForAdmin.isEmpty());
     }
 }

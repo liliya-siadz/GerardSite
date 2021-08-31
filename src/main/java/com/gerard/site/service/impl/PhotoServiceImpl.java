@@ -2,6 +2,7 @@ package com.gerard.site.service.impl;
 
 import com.gerard.site.dao.impl.DaoException;
 import com.gerard.site.dao.impl.PhotoDaoImpl;
+import com.gerard.site.service.util.WebappImageDeleterUtil;
 import com.gerard.site.service.view.Photo;
 import com.gerard.site.service.entity.PhotoEntity;
 import com.gerard.site.service.ServiceException;
@@ -13,10 +14,8 @@ import java.util.List;
 
 public class PhotoServiceImpl implements PhotoService {
     private static PhotoServiceImpl instance;
-    private static final String PEDIGREE_FOLDER_NAME = "pedigrees";
-    private static final String AVATAR_FOLDER_NAME = "avatars";
-    private static final String PHOTO_FOLDER_NAME = "photos";
-    private static final Logger LOGGER = LogManager.getLogger(PhotoServiceImpl.class);
+    private static final Logger LOGGER
+            = LogManager.getLogger(PhotoServiceImpl.class);
 
     private PhotoServiceImpl() {
     }
@@ -31,12 +30,14 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public List<Photo> provideAllPhotosForView() throws ServiceException {
         try {
-            List<Photo> allPhotosForView =
-                    PhotoDaoImpl.getInstance().selectAllPhotosAndDogs();
-            return allPhotosForView;
+            List<Photo> photos =
+                    PhotoDaoImpl.getInstance().selectAllPhotos();
+            return photos;
         } catch (DaoException exception) {
+            LOGGER.error( "Unable to provide information about photos! "
+                    + exception.getMessage(), exception);
             throw new ServiceException(
-                    "Unable to provide information from database! "
+                    "Unable to provide information about photos! "
                             + exception.getMessage(), exception);
         }
     }
@@ -44,25 +45,60 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public List<PhotoEntity> provideAllPhotosForAdmin() throws ServiceException {
         try {
-            List<PhotoEntity> allPhotosForAmin = PhotoDaoImpl.getInstance().selectAll();
-            return allPhotosForAmin;
+            List<PhotoEntity> photos
+                    = PhotoDaoImpl.getInstance().selectAll();
+            return photos;
         } catch (DaoException exception) {
+            LOGGER.error(   "Unable to provide information about photos! "
+                    + exception.getMessage(), exception);
             throw new ServiceException(
-                    "Unable to provide information from database! "
+                    "Unable to provide information about photos! "
                             + exception.getMessage(), exception);
         }
     }
+
     @Override
-    public  List<Photo> provideDecimalPieceOfPhotos(int pieceValue)
+    public List<Photo> provideDecimalPieceOfPhotos(int pieceValue)
             throws ServiceException {
         try {
             List<Photo> decimalPieceOfAllPhotos
-                    = PhotoDaoImpl.getInstance().provideDecimalPieceOfPhotos(pieceValue);
+                    = PhotoDaoImpl.getInstance()
+                    .provideDecimalPieceOfPhotos(pieceValue);
             return decimalPieceOfAllPhotos;
         } catch (DaoException exception) {
+            LOGGER.error(  "Unable to provide information about photos! "
+                    + exception.getMessage(), exception);
             throw new ServiceException(
-                    "Unable to provide information from database! "
+                    "Unable to provide information about photos! "
+                            + exception.getMessage(), exception);
+        }
+    }
+
+    @Override
+    public boolean deletePhoto(String photoPath) throws ServiceException {
+        if (photoPath == null) {
+            LOGGER.error("Parameter 'photoPath' is null!");
+            throw new ServiceException("Parameter 'photoPath' is null!");
+        }
+        try {
+            boolean isPhotoWasDeleted
+                    = PhotoDaoImpl.getInstance().deleteByPhotoPath(photoPath);
+            LOGGER.info("Photo: " + photoPath
+                    + (isPhotoWasDeleted ? " was " : " was not ")
+                    + "deleted from database .");
+            boolean isPathWasAddedToDeleterList
+                    = WebappImageDeleterUtil.addPathToDeleterList(photoPath);
+            LOGGER.info("Photo: " + photoPath
+                    + (isPhotoWasDeleted ? " was " : " was not ")
+                    + " added to deleter list");
+            return isPhotoWasDeleted && isPathWasAddedToDeleterList;
+        } catch (DaoException exception) {
+            LOGGER.error(  "Unable to delete photo! "
+                    + exception.getMessage(), exception);
+            throw new ServiceException(
+                    "Unable to delete photo! "
                             + exception.getMessage(), exception);
         }
     }
 }
+

@@ -10,7 +10,7 @@
     <name>gerard</name>
     <packaging>war</packaging>
 
-    <description>Class project after course "Java programming by EPAM".</description>
+    <description>Class project after course "Java programming by EPAM Systems".</description>
     <url>http://localhost:8080/gerard</url>
     <developers>
         <developer>

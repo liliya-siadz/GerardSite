@@ -31,7 +31,7 @@
             type="text"
             id="nameId"
             required
-            size="${50}"
+            masize="${50}"
             pattern="${namePattern}"
             maxlength="${nameMaxLength}"
             minlength="${nameMinLength}"

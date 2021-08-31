@@ -9,12 +9,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class DogDaoImplTest {
     private static final Logger LOGGER = LogManager.getLogger(DogDaoImplTest.class);
 
-    @Test
+    @Test(enabled = false)
     public void testFind() throws DaoException {
         DogEntity existingDogEntity = new DogEntity();
         existingDogEntity.setId(1);
@@ -23,7 +24,7 @@ public class DogDaoImplTest {
         assertTrue(dogEntity.isPresent());
     }
 
-    @Test
+    @Test(enabled = false)
     public void testSelectAllDogsWithPhotos() throws DaoException {
         List<Dog> dogsWithPhotos = DogDaoImpl.getInstance().selectAllDogsWithPhotos();
         LOGGER.info(dogsWithPhotos);

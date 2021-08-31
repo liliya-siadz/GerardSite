@@ -13,7 +13,7 @@ import static com.gerard.site.validator.ValidatorIdentifier.PASSWORD_PARAMETER_N
 
 public class LoginForm implements FormValidator, Serializable {
     @Serial
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     private String email;
     private String password;
 
@@ -68,6 +68,4 @@ public class LoginForm implements FormValidator, Serializable {
         sb.append('}');
         return sb.toString();
     }
-
-
 }

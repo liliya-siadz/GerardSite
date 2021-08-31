@@ -1,7 +1,7 @@
 package com.gerard.site.validator;
 
 public enum NameValidator implements Validator<String> {
-     INSTANCE;
+    INSTANCE;
 
     @Override
     public boolean isValid(String name) {

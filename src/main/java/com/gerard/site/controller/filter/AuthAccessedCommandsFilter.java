@@ -1,7 +1,12 @@
 package com.gerard.site.controller.filter;
 
 import com.gerard.site.controller.command.CommandIdentifier;
-import jakarta.servlet.*;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -30,18 +35,22 @@ public class AuthAccessedCommandsFilter implements Filter {
         String authAccessedParameterName = "command";
         String authAccessedParameterValue
                 = request.getParameter(authAccessedParameterName);
-        if(authAccessedParameterValue!=null) {
-            boolean isAuthAccessedCommandRequested = Arrays.stream(CommandIdentifier.values())
+        if (authAccessedParameterValue != null) {
+            boolean isAuthAccessedCommandRequested
+                    = Arrays.stream(CommandIdentifier.values())
                     .filter(CommandIdentifier::isAuthAccessedOnly)
                     .anyMatch(commandIdentifier ->
-                            commandIdentifier.name().equalsIgnoreCase(authAccessedParameterValue));
-            if(isAuthAccessedCommandRequested) {
+                            commandIdentifier.name()
+                                    .equalsIgnoreCase(authAccessedParameterValue));
+            if (isAuthAccessedCommandRequested) {
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
                 HttpServletRequest httpRequest = (HttpServletRequest) request;
                 HttpSession session = ((HttpServletRequest) request).getSession();
                 String sessionRoleIdentifierAttributeName = "sessionRoleIdentifier";
-                if(Objects.isNull(session.getAttribute(sessionRoleIdentifierAttributeName))) {
-                    httpResponse.sendRedirect(httpRequest.getServletContext() + defaultLocation);
+                if (Objects.isNull(session
+                        .getAttribute(sessionRoleIdentifierAttributeName))) {
+                    httpResponse.sendRedirect(
+                            httpRequest.getServletContext() + defaultLocation);
                     LOGGER.warn("Denied access try past.");
                 }
             }

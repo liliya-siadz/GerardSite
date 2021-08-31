@@ -15,8 +15,9 @@
 <%@ include file="fragment/headers/admin_header.jsp" %>
 <c:set var="requestsForAdmin" value="${requestsForAdmin}" scope="session"/>
 <c:forEach items="${requestsForAdmin}" var="requestForAdmin">
-<c:set var="itemStyle" value="${requestForAdmin.requestStatus eq 'PENDING' ? 'pendingRequest' : 'lol'}"/>
-<div style="display:inline-block;margin-left: 15%;"
+<c:set var="itemStyle" value="${requestForAdmin.requestStatus eq 'PENDING' ? 'pendingRequest' : 'notPendingRequest'}"/>
+<hr>
+    <div style="display:inline-block;margin-left: 15%;text-align: center"
      class="${itemStyle}">
     <br>
         <c:set var="avatar" value="${requestForAdmin.avatarPhotoPath}"/>
@@ -111,9 +112,8 @@
                 &#10006;
             </button>
         </form>
-        <hr style=" border: 1px dashed red">
 </div>
 </c:forEach>
-<%@ include file="fragment/footers/footer.jsp" %>
+<%@ include file="fragment/footers/admin_footer.jsp" %>
 </body>
 </html>

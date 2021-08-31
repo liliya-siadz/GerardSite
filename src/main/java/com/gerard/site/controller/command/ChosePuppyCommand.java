@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public enum ChosePuppyCommand implements Command {
     INSTANCE;
-
     private final String chosenPuppyIdParameterName = "chosenPuppyId";
     private final String chosenPuppyAttributeName = "chosenPuppy";
     private final String isPuppyChosenAttributeName = "isPuppyChosen";
@@ -20,8 +19,10 @@ public enum ChosePuppyCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServiceException {
-        int selectedDogId = Integer.parseInt(request.getParameter(chosenPuppyIdParameterName));
-        Optional<DogEntity> dogEntity = DogServiceImpl.getInstance().find(selectedDogId);
+        int selectedDogId
+                = Integer.parseInt(request.getParameter(chosenPuppyIdParameterName));
+        Optional<DogEntity> dogEntity
+                = DogServiceImpl.getInstance().find(selectedDogId);
         HttpSession session = request.getSession();
         session.setAttribute(chosenPuppyAttributeName, dogEntity.get());
         session.setAttribute(isPuppyChosenAttributeName, true);

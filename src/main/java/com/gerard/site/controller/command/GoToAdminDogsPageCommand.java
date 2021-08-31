@@ -10,13 +10,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
-public enum GoToAdminDogsPageCommand implements Command{
+public enum GoToAdminDogsPageCommand implements Command {
     INSTANCE;
     private final String viewAttributeName = "dogsForAdmin";
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        List<Dog> dogsForAdmin =  DogServiceImpl.getInstance().provideAllDogsForAdmin();
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
+        List<Dog> dogsForAdmin
+                = DogServiceImpl.getInstance().provideAllDogsForAdmin();
         request.getSession().setAttribute(viewAttributeName, dogsForAdmin);
         return Page.ADMIN_DOGS.getPageUrl();
     }

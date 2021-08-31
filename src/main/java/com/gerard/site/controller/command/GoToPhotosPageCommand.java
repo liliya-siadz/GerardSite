@@ -11,23 +11,26 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
-public enum GoToPhotosPageCommand implements Command{
+public enum GoToPhotosPageCommand implements Command {
     INSTANCE;
     private final String viewAttributeName = "photosForView";
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
         HttpSession session = request.getSession();
         int pageToDisplay = Command.getPage(request);
         List<Photo> photosForView =
                 PhotoServiceImpl.getInstance()
                         .provideDecimalPieceOfPhotos(pageToDisplay);
-        int photosQuantity = PhotoServiceImpl.getInstance().provideAllPhotosForView().size();
+        int photosQuantity
+                = PhotoServiceImpl.getInstance().provideAllPhotosForView().size();
 
         session.setAttribute(PaginationItem.PAGE_NUMBER, pageToDisplay);
         session.setAttribute(viewAttributeName, photosForView);
         session.setAttribute(PaginationItem.PAGINATION_ITEM,
-                new PaginationItem(photosQuantity, pageToDisplay, PaginationItem.PAGE_SIZE));
+                new PaginationItem(photosQuantity, pageToDisplay,
+                        PaginationItem.PAGE_SIZE));
         return Page.PHOTOS.getPageUrl();
     }
 }

@@ -1,6 +1,11 @@
 package com.gerard.site.controller.filter;
 
-import jakarta.servlet.*;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +23,8 @@ import java.io.IOException;
  */
 @WebFilter
 public class BlackListFilter implements Filter {
-    private static final Logger LOGGER = LogManager.getLogger(BlackListFilter.class);
+    private static final Logger LOGGER
+            = LogManager.getLogger(BlackListFilter.class);
 
     /**
      * Default location to redirect to
@@ -36,6 +42,7 @@ public class BlackListFilter implements Filter {
         this.expectedSessionRoleIdentifier = filterConfig.getInitParameter(
                 expectedSessionRoleIdentifierParameterName);
     }
+
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
@@ -47,8 +54,9 @@ public class BlackListFilter implements Filter {
         String sessionRoleIdentifierAttributeName = "sessionRoleIdentifier";
         String sessionRoleIdentifier
                 = session.getAttribute(sessionRoleIdentifierAttributeName).toString();
-        if(!sessionRoleIdentifier.equals(expectedSessionRoleIdentifier)){
-            httpResponse.sendRedirect(httpRequest.getServletContext() + defaultLocation);
+        if (!sessionRoleIdentifier.equals(expectedSessionRoleIdentifier)) {
+            httpResponse.sendRedirect(
+                    httpRequest.getServletContext() + defaultLocation);
             LOGGER.warn("Denied access try past.");
         }
         chain.doFilter(request, response);

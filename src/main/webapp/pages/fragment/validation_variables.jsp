@@ -24,7 +24,7 @@
 <fmt:message key="field.name.validation.message"
              var="nameValidationMessage"
              scope="application"/>
-<c:set var="namePattern" value="[\\w]*"/>
+<c:set var="namePattern" value="[a-zA-Z\u0400-\u04ff]{3,250}"/>
 <c:set var="nameMaxLength" value="250"/>
 <c:set var="nameMinLength" value="3"/>
 

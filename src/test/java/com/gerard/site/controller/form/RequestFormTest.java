@@ -4,10 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
 
 public class RequestFormTest {
-    private static final Logger LOGGER = LogManager.getLogger(RequestFormTest.class);
+    private static final Logger LOGGER
+            = LogManager.getLogger(RequestFormTest.class);
 
     @Test
     public void testValidateFormClientSideValidForm() {
@@ -17,14 +18,14 @@ public class RequestFormTest {
         String patronymic = null;
         String phone = "297841651";
         String content = "            Test test 1234";
-        RequestForm requestForm = new RequestForm();
-        requestForm.setEmail(email);
-        requestForm.setSurname(surname);
-        requestForm.setPatronymic(patronymic);
-        requestForm.setContent(content);
-        requestForm.setName(name);
-        requestForm.setPhone(phone);
-        LOGGER.info(requestForm);
-        assertFalse(requestForm.validateForm().containsValue(false));
+        RequestForm requestFormWithValidValues = new RequestForm();
+        requestFormWithValidValues.setEmail(email);
+        requestFormWithValidValues.setSurname(surname);
+        requestFormWithValidValues.setPatronymic(patronymic);
+        requestFormWithValidValues.setContent(content);
+        requestFormWithValidValues.setName(name);
+        requestFormWithValidValues.setPhone(phone);
+        LOGGER.info(requestFormWithValidValues);
+        assertFalse(requestFormWithValidValues.validateForm().containsValue(false));
     }
 }

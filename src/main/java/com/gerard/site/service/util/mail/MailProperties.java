@@ -4,7 +4,7 @@ import com.gerard.site.service.util.AppIdentifierUtil;
 
 import java.util.Properties;
 
-public class MailProperties {
+class MailProperties {
     static Properties mailProperties;
     static String userName;
     static String password;
@@ -12,7 +12,8 @@ public class MailProperties {
     private static MailProperties instance;
 
     private MailProperties() {
-        mailProperties = AppIdentifierUtil.getPropertiesByPath(this, MAIL_PROPERTIES_RESOURCE_PATH);
+        mailProperties = AppIdentifierUtil.getPropertiesByPath(
+                this, MAIL_PROPERTIES_RESOURCE_PATH);
         String userNamePropertyKey = "mail.user";
         String passwordPropertyKey = "password";
         userName = mailProperties.getProperty(userNamePropertyKey);

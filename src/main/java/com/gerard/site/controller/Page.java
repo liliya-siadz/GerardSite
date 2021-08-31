@@ -9,21 +9,21 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Liliya Siadzelnikava
  * @version 1.0
- * @see Router#prepareUrl(HttpServletRequest, HttpServletResponse)  for details of using
+ * @see Router#prepareUrl(HttpServletRequest, HttpServletResponse)
  */
 public enum Page {
     ADMIN_DOGS("/admin_dogs"),
-    ADMIN_REQUESTS ("/admin_requests"),
-    ADMIN_PENDING_REQUESTS ("/admin_pending_requests"),
-    ADMIN_PHOTOS ("/admin_photos"),
+    ADMIN_REQUESTS("/admin_requests"),
+    ADMIN_PENDING_REQUESTS("/admin_pending_requests"),
+    ADMIN_PHOTOS("/admin_photos"),
     DOGS("/dogs"),
     HOME("/home"),
-    LOGIN( "/login"),
-    PHOTOS( "/photos"),
-    PUPPIES( "/puppies"),
-    ERROR( "/error"),
+    LOGIN("/login"),
+    PHOTOS("/photos"),
+    PUPPIES("/puppies"),
+    ERROR("/error"),
     ERROR_404("/error-404"),
-    MAKE_REQUEST( "/make_request");
+    MAKE_REQUEST("/make_request");
 
     /**
      * Page's url, using for routing by Router {@link Router}

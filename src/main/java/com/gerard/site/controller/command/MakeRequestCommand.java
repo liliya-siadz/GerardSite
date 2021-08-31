@@ -15,7 +15,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Map;
 
-import static com.gerard.site.validator.ValidatorIdentifier.*;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_NAME_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_PATRONYMIC_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.APP_USER_SURNAME_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.CONTENT_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.PHONE_PARAMETER_NAME;
 
 public enum MakeRequestCommand implements Command {
     INSTANCE;
@@ -28,7 +33,6 @@ public enum MakeRequestCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServiceException {
-        HttpSession session = request.getSession();
         String email = request.getParameter(EMAIL_PARAMETER_NAME);
         String content = request.getParameter(CONTENT_PARAMETER_NAME);
         String name = request.getParameter(APP_USER_NAME_PARAMETER_NAME);
@@ -42,6 +46,7 @@ public enum MakeRequestCommand implements Command {
         requestForm.setSurname(surname);
         requestForm.setPatronymic(patronymic);
         requestForm.setPhone(phone);
+        HttpSession session = request.getSession();
         Map<String, Boolean> validationMap = requestForm.validateForm();
         if (validationMap.containsValue(false)) {
             session.setAttribute(validationMapNameAttributeName, validationMap);
@@ -63,8 +68,8 @@ public enum MakeRequestCommand implements Command {
                     RequestServiceImpl.getInstance()
                             .sendRequest(dogEntity, requestEntity, appUserEntity);
             session.setAttribute(isRequestMadeAttributeName, isRequestWasMade);
-            session.setAttribute(viewResultEmailAttributeName,email);
-            session.setAttribute(viewResultPhoneAttributeName,phone);
+            session.setAttribute(viewResultEmailAttributeName, email);
+            session.setAttribute(viewResultPhoneAttributeName, phone);
         }
         return Page.MAKE_REQUEST.getPageUrl();
     }

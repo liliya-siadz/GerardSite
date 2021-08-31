@@ -32,7 +32,8 @@ public class Controller extends HttpServlet {
     public static final String APPLICATION_CONTEXT = "/gerard";
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
             throws IOException {
         String url = Router.prepareUrl(request, response);
         String location = APPLICATION_CONTEXT + url;
@@ -43,7 +44,8 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         String path = Router.preparePath(request, response);
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(path);
+        RequestDispatcher requestDispatcher
+                = getServletContext().getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }
 }

@@ -68,6 +68,6 @@
         <hr style=" border: 1px dashed red">
     </c:forEach>
 </div>
-<%@ include file="fragment/footers/footer.jsp" %>
+<%@ include file="fragment/footers/admin_footer.jsp" %>
 </body>
 </html>

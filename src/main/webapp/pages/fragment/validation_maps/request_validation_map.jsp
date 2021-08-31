@@ -1,5 +1,4 @@
-
-    <c:if test="${not sessionScope.requestValidationMap.content}">
+ <c:if test="${not sessionScope.requestValidationMap.content}">
         &#9888;<b> <fmt:message key="field.content.label"/> </b>&#9746;
         :
         <p style="color:red;"><fmt:message key="field.content.validation.message"/></p>

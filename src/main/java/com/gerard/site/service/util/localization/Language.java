@@ -48,8 +48,8 @@ public enum Language {
      * @param languageCode language code that uses for find instance,
      *                     must exactly matched to instance name
      * @return {@code Optional.of(Language instance)}
-     *         if languageCode was matched to any instance name,
-     *         otherwise returns {@code Optional.empty()}
+     * if languageCode was matched to any instance name,
+     * otherwise returns {@code Optional.empty()}
      */
     public static Optional<Language> getLanguage(String languageCode) {
         for (Language value : values()) {

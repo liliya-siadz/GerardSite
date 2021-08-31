@@ -7,10 +7,9 @@ import org.testng.annotations.Test;
 
 import java.sql.Connection;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ConnectionPoolTest3 {
-
     private ConnectionPool connectionPool;
 
     @BeforeClass
@@ -39,7 +38,7 @@ public class ConnectionPoolTest3 {
     }
 
     @AfterClass
-    public void closeOpenedConnections() throws ConnectionException {
+    public void closeOpenedConnections() {
         connectionPool.destroy();
     }
 }

@@ -9,14 +9,18 @@ import com.gerard.site.service.view.Dog;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
-    private static DogDaoImpl instance;
     static final String TABLE_NAME = "dog";
     static final String COLUMN_LABEL_1 = "dog_id";
     static final String COLUMN_LABEL_2 = "dog_sex";
@@ -27,41 +31,36 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
     static final String COLUMN_LABEL_7 = "active";
     static final String COLUMN_LABEL_8 = "avatar_photo_id";
     static final String COLUMN_LABEL_9 = "pedigree_photo_id";
+    private static DogDaoImpl instance;
 
     private static final String SELECT_DOG_BY_ID =
             "select dog_id, dog_sex, nickname,"
-            + "fullname, birthday,avatar_photo_id, pedigree_photo_id,"
-            + "description, active from dog where dog_id=?";
-
-    private static final String SELECT_ALL_DOGS =
-            "select dog_id, dog_sex, nickname,"
-                    + "fullname, birthday,avatar_photo_id,"
-                    + " pedigree_photo_id, active, description from dog";
-
+                    + "fullname, birthday,avatar_photo_id, pedigree_photo_id,"
+                    + "description, active from dog where dog_id=?";
     private static final String SELECT_ALL_DOGS_WITH_PHOTOS =
             """
-            SELECT avatars.avatar, pedigrees.pedigree,
-            avatars.dog_id, avatars.nickname, avatars.fullname,
-            avatars.dog_sex, avatars.birthday, avatars.active, avatars.description
-            from
-            (select photo.photo_path as avatar, dog.dog_id, dog.nickname, dog.fullname,
-            dog.dog_sex, dog.birthday, dog.active, dog.description
-            from photo
-            inner join dog
-            on photo.photo_id = dog.avatar_photo_id
-            where photo.photo_type='avatar')
-            as
-            avatars
-            inner join
-            (select photo.photo_path as pedigree, photo.dog_id
-            from photo
-            inner join dog
-            on photo.photo_id = dog.pedigree_photo_id
-            where photo.photo_type='pedigree')
-            as
-            pedigrees
-            on avatars.dog_id = pedigrees.dog_id;
-            """;
+                    SELECT avatars.avatar, pedigrees.pedigree,
+                    avatars.dog_id, avatars.nickname, avatars.fullname,
+                    avatars.dog_sex, avatars.birthday, avatars.active, avatars.description
+                    from
+                    (select photo.photo_path as avatar, dog.dog_id, dog.nickname, dog.fullname,
+                    dog.dog_sex, dog.birthday, dog.active, dog.description
+                    from photo
+                    inner join dog
+                    on photo.photo_id = dog.avatar_photo_id
+                    where photo.photo_type='avatar')
+                    as
+                    avatars
+                    inner join
+                    (select photo.photo_path as pedigree, photo.dog_id
+                    from photo
+                    inner join dog
+                    on photo.photo_id = dog.pedigree_photo_id
+                    where photo.photo_type='pedigree')
+                    as
+                    pedigrees
+                    on avatars.dog_id = pedigrees.dog_id;
+                    """;
 
     private static final Logger LOGGER = LogManager.getLogger(DogDaoImpl.class);
 
@@ -84,19 +83,19 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
         int id = entity.getId();
         try (Connection connection =
                      ConnectionPool.getInstance().giveOutConnection();
-            PreparedStatement preparedStatement
-                    = connection.prepareStatement(SELECT_DOG_BY_ID)) {
-                preparedStatement.setInt(1, id);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                DogEntity selectedDogEntity = null;
-                if (resultSet.isBeforeFirst()) {
-                    while (resultSet.next()) {
-                        selectedDogEntity = parseResultSet(resultSet);
-                    }
+             PreparedStatement preparedStatement
+                     = connection.prepareStatement(SELECT_DOG_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            DogEntity dogEntity = null;
+            if (resultSet.isBeforeFirst()) {
+                while (resultSet.next()) {
+                    dogEntity = parseResultSetEntity(resultSet);
                 }
-                return Optional.ofNullable(selectedDogEntity);
+            }
+            return Optional.ofNullable(dogEntity);
         } catch (ConnectionException | SQLException exception) {
-            throw new DaoException("Unable to get data from table: "
+            throw new DaoException("Unable to select data from table: "
                     + TABLE_NAME + " ! "
                     + exception.getMessage(), exception);
         }
@@ -107,50 +106,28 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
         try (Connection connection =
                      ConnectionPool.getInstance().giveOutConnection();
              Statement statement = connection.createStatement()) {
-                ResultSet resultSet =
-                        statement.executeQuery(SELECT_ALL_DOGS_WITH_PHOTOS);
-                if (resultSet.isBeforeFirst()) {
-                    List<Dog> selectedUsers = new ArrayList<>();
-                    while (resultSet.next()) {
-                        selectedUsers.add(parseResultSetDogWithPhotos(resultSet));
-                    }
-                    return selectedUsers;
-                }else {
-                    LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
-                    return Collections.emptyList();
-                }
-        } catch (ConnectionException | SQLException exception) {
-            throw new DaoException("Unable to get data from table: "
-                    + TABLE_NAME + " ! "
-                    + "Reason: " + exception.getMessage(), exception);
-        }
-    }
-
-    @Override
-    public List<DogEntity> selectAll() throws DaoException {
-        try (Connection connection =
-                     ConnectionPool.getInstance().giveOutConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(SELECT_ALL_DOGS);
+            ResultSet resultSet =
+                    statement.executeQuery(SELECT_ALL_DOGS_WITH_PHOTOS);
             if (resultSet.isBeforeFirst()) {
-                List<DogEntity> selectedUsers = new ArrayList<>();
+                List<Dog> users = new ArrayList<>();
                 while (resultSet.next()) {
-                    selectedUsers.add(parseResultSet(resultSet));
+                    users.add(parseResultSetDog(resultSet));
                 }
-                return selectedUsers;
-            }else {
-                LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
+                return users;
+            } else {
+                LOGGER.info("No records were found in table: "
+                        + TABLE_NAME + ". ");
                 return Collections.emptyList();
             }
         } catch (ConnectionException | SQLException exception) {
-            throw new DaoException("Unable to get data from table: "
+            throw new DaoException("Unable to select data from table: "
                     + TABLE_NAME + " ! "
                     + "Reason: " + exception.getMessage(), exception);
         }
     }
 
     @Override
-    public Dog parseResultSetDogWithPhotos(ResultSet resultSet) throws SQLException {
+    public Dog parseResultSetDog(ResultSet resultSet) throws SQLException {
         int dogId = resultSet.getInt(COLUMN_LABEL_1);
         DogEntity.DogSex dogSex =
                 DogEntity.DogSex.valueOf(
@@ -159,9 +136,11 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
         String fullname = resultSet.getString(COLUMN_LABEL_4);
         Date birthday = resultSet.getDate(COLUMN_LABEL_5);
         final String avatarPhotoPathColumnAlias = "avatar";
-        final String pedigreePhotoPathColumnAlias= "pedigree";
-        String avatarPhotoPath = resultSet.getString(avatarPhotoPathColumnAlias);
-        String pedigreePhotoPath = resultSet.getString(pedigreePhotoPathColumnAlias);
+        final String pedigreePhotoPathColumnAlias = "pedigree";
+        String avatarPhotoPath
+                = resultSet.getString(avatarPhotoPathColumnAlias);
+        String pedigreePhotoPath
+                = resultSet.getString(pedigreePhotoPathColumnAlias);
         String description = resultSet.getString(COLUMN_LABEL_6);
         boolean active = resultSet.getBoolean(COLUMN_LABEL_7);
         Dog dog = new Dog();
@@ -178,7 +157,7 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
     }
 
     @Override
-    public DogEntity parseResultSet(ResultSet resultSet) throws SQLException {
+    public DogEntity parseResultSetEntity(ResultSet resultSet) throws SQLException {
         int dogId = resultSet.getInt(COLUMN_LABEL_1);
         DogEntity.DogSex dogSex =
                 DogEntity.DogSex.valueOf(
@@ -202,26 +181,5 @@ public class DogDaoImpl extends AbstractDao<DogEntity> implements DogDao {
                 .active(active)
                 .build();
         return dogEntity;
-    }
-
-    @Override
-    public boolean remove(DogEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean update(DogEntity entity,
-                          DogEntity newEntityVersion) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean create(DogEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean updateDogStatus(DogEntity dogEntity) throws DaoException {
-        throw new UnsupportedOperationException();
     }
 }

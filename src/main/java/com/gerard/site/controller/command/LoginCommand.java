@@ -12,7 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
-import static com.gerard.site.validator.ValidatorIdentifier.*;
+import static com.gerard.site.validator.ValidatorIdentifier.EMAIL_PARAMETER_NAME;
+import static com.gerard.site.validator.ValidatorIdentifier.PASSWORD_PARAMETER_NAME;
 
 public enum LoginCommand implements Command {
     INSTANCE;
@@ -23,7 +24,8 @@ public enum LoginCommand implements Command {
     private final String sessionRoleIdentifierAttributeName = "sessionRoleIdentifier";
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServiceException {
         LOGGER.trace("Login command was called.");
         HttpSession session = request.getSession();
         String email = request.getParameter(EMAIL_PARAMETER_NAME);
@@ -32,22 +34,24 @@ public enum LoginCommand implements Command {
         Map<String, Boolean> loginValidationMap = loginForm.validateForm();
         if (loginValidationMap.containsValue(false)) {
             session.setAttribute(validationMapNameAttributeName, loginValidationMap);
-            LOGGER.trace("Login form: " + loginForm +  " has validation errors: " + loginValidationMap);
+            LOGGER.trace("Login form: " + loginForm
+                    + " has validation errors: " + loginValidationMap);
             return Page.LOGIN.getPageUrl();
         } else {
-               boolean userWasAuthenticated =
-                       AppUserServiceImpl.getInstance().authenticate(loginForm);
-               if(userWasAuthenticated) {
-                   LOGGER.trace("User was authenticated.");
-                   session.setAttribute(authenticationResultAttributeName, true);
-                   session.setAttribute(authenticationIdentifierAttributeName, true);
-                   session.setAttribute(sessionRoleIdentifierAttributeName, authenticationIdentifierAttributeName);
-                   return Page.HOME.getPageUrl();
-               } else {
-                   LOGGER.trace("User was NOT authenticated.");
-                   session.setAttribute(authenticationResultAttributeName, false);
-                   return Page.LOGIN.getPageUrl();
-               }
-       }
+            boolean userWasAuthenticated =
+                    AppUserServiceImpl.getInstance().authenticate(loginForm);
+            if (userWasAuthenticated) {
+                LOGGER.trace("User was authenticated.");
+                session.setAttribute(authenticationResultAttributeName, true);
+                session.setAttribute(authenticationIdentifierAttributeName, true);
+                session.setAttribute(sessionRoleIdentifierAttributeName,
+                        authenticationIdentifierAttributeName);
+                return Page.HOME.getPageUrl();
+            } else {
+                LOGGER.trace("User was NOT authenticated.");
+                session.setAttribute(authenticationResultAttributeName, false);
+                return Page.LOGIN.getPageUrl();
+            }
+        }
     }
 }

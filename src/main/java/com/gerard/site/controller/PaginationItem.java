@@ -25,9 +25,6 @@ public class PaginationItem {
      * Request attribute name for storing pagination item
      */
     public static final String PAGINATION_ITEM = "pagination_item";
-
-
-
     private final int totalCount;
     private final int currentPage;
     private final int pageSize;

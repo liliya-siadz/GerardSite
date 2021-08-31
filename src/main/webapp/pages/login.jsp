@@ -15,57 +15,13 @@
 </head>
 <body>
 <%@include file="fragment/headers/header.jsp"%>
-<c:if test="${not empty sessionScope.isUserFound}">
-    <c:if test="${not sessionScope.isUserFound}">
+<c:if test="${not empty isUserFound}">
+    <c:if test="${not isUserFound}">
         <p style="color: red"><fmt:message key="page.login.command.authorization.result"/></p>
     </c:if>
 </c:if>
-<form method="POST"
-      action="${applicationPath}${controllerUrl}">
-    <p><fmt:message key="field.email.label"/>:(${emailValidationMessage})</p>
-    <p><input
-           type="text"
-           name="email"
-           required
-           size="${emailMaxLength}"
-           placeholder="${emailPlaceholder}"
-           pattern="${emailPattern}"
-           maxlength="${emailMaxLength}"
-           minlength="${emailMinLength}"
-           oninvalid="setCustomValidity('?')"/>
-    </p>
-    <p><fmt:message key="field.password.label"/>:(${passwordValidationMessage}) </p>
-    <p><input
-           type="password"
-           size="${passwordMaxLength}"
-           required
-           name="password"
-           placeholder="${passwordPlaceholder}"
-           pattern="${passwordPattern}"
-           maxlength="${passwordMaxLength}"
-           minlength="${passwordMinLength}"
-           oninvalid="setCustomValidity('?')"/>
-    </p>
-    <button type="submit"
-            name="command"
-            value="LOGIN"
-            class="btn btn-xs btn-outline-danger navbar-btn">
-        <fmt:message key="page.login.button.login.name"/>
-    </button>
-</form>
-<%--------------------        server-side validation erros---------------------%>
-<c:if test="${not empty sessionScope.loginValidationMap}">
-             <c:if test="${not sessionScope.loginValidationMap.email}">
-                 &#9888;<b>   <fmt:message key="field.email.label"/> </b>&#9746;
-                 :
-                 <p style="color:red;"><fmt:message key="field.email.validation.message"/></p>
-            </c:if>
-             <c:if test="${not sessionScope.loginValidationMap.password}">
-                 &#9888;<b><fmt:message key="field.password.label"/></b>&#9746;
-                  :
-                 <p style="color:red;"><fmt:message key="field.password.validation.message"/></p>
-            </c:if>
-</c:if>
+<%@include file="fragment/forms/login_form.jsp"%>
+<%@include file="fragment/validation_maps/login_validation_map.jsp"%>
 <%@ include file="fragment/footers/footer.jsp" %>
 </body>
 </html>

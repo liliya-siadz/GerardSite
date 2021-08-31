@@ -15,8 +15,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Custom util for servicing different identifiers
- * such as url and path.
+ * Custom util for servicing different
+ * resource's identifiers such as url and path.
  *
  * @author Liliya Siadzelnikava
  * @version 1.0

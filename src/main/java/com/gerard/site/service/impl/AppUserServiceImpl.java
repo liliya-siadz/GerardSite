@@ -51,7 +51,7 @@ public class AppUserServiceImpl implements AppUserService {
                 }
                 String token = getToken();
                 String userPassword = AppUserDaoImpl.getInstance()
-                        .selectUserPasswordByEmail(token, email).get();
+                        .selectPasswordByEmail(token, email).get();
                 boolean isPasswordCorrect = BCrypt.checkpw(password, userPassword);
                 if (isPasswordCorrect) {
                     userWasAuthenticated = true;
@@ -59,7 +59,9 @@ public class AppUserServiceImpl implements AppUserService {
             }
             return userWasAuthenticated;
         } catch (DaoException exception) {
-            throw new ServiceException("Unable to find record from form:  "
+            LOGGER.error("Unable to authenticate user:  "
+                    + loginForm + " . " + exception.getMessage(), exception);
+            throw new ServiceException("Unable to authenticate user:  "
                     + loginForm + " . " + exception.getMessage(), exception);
         }
     }

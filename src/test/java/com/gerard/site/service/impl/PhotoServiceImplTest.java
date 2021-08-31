@@ -9,12 +9,13 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
 
 public class PhotoServiceImplTest {
-    private static final Logger LOGGER = LogManager.getLogger(PhotoServiceImplTest.class);
+    private static final Logger LOGGER
+            = LogManager.getLogger(PhotoServiceImplTest.class);
 
-    @Test
+    @Test(enabled = false)
     public void provideAllPhotosForView() throws ServiceException {
         List<Photo> allPhotosForView =
                 PhotoServiceImpl.getInstance().provideAllPhotosForView();
@@ -22,9 +23,10 @@ public class PhotoServiceImplTest {
         assertFalse(allPhotosForView.isEmpty());
     }
 
-    @Test
+    @Test(enabled = false)
     public void testProvideAllPhotos() throws ServiceException {
-        List<PhotoEntity> allPhotos =  PhotoServiceImpl.getInstance().provideAllPhotosForAdmin();
+        List<PhotoEntity> allPhotos
+                = PhotoServiceImpl.getInstance().provideAllPhotosForAdmin();
         LOGGER.info(allPhotos);
         assertFalse(allPhotos.isEmpty());
     }

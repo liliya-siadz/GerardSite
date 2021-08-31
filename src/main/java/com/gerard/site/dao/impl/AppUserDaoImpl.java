@@ -12,14 +12,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
-public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUserDao {
-    private static AppUserDaoImpl instance;
+public class AppUserDaoImpl extends AbstractDao<AppUserEntity>
+        implements AppUserDao {
     static final String TABLE_NAME = "app_user";
     static final String COLUMN_LABEL_1 = "app_user_id";
     static final String COLUMN_LABEL_2 = "email";
@@ -29,19 +25,13 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     static final String COLUMN_LABEL_6 = "patronymic";
     static final String COLUMN_LABEL_7 = "phone";
     static final String COLUMN_LABEL_8 = "admin";
+    private static AppUserDaoImpl instance;
 
     private static final String SELECT_USER_PASSWORD_BY_EMAIL
             = "select password from app_user where email =?";
-
     private static final String SELECT_USER_BY_EMAIL
             = "select app_user_id, email, name, surname, patronymic,"
             + "phone, admin from app_user where email =?";
-
-    private static final String SELECT_ALL_USERS
-            = "select app_user_id, email, name, surname, patronymic,"
-            + "phone, admin from app_user";
-
-
     private static final String CREATE_APP_USER_IF_EXISTS_OTHERWISE_UPDATE =
                     """
                     INSERT INTO app_user
@@ -54,7 +44,9 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
                      patronymic = ?,
                      phone =?
                       """;
-    private static final Logger LOGGER = LogManager.getLogger(AppUserDaoImpl.class);
+
+    private static final Logger LOGGER
+            = LogManager.getLogger(AppUserDaoImpl.class);
 
     private AppUserDaoImpl() {
         super();
@@ -79,46 +71,22 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
                      connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            AppUserEntity selectedUser = null;
+            AppUserEntity userEntity = null;
             if (resultSet.isBeforeFirst()) {
                 while (resultSet.next()) {
-                    selectedUser = parseResultSet(resultSet);
+                    userEntity = parseResultSetEntity(resultSet);
                 }
             }
-            return Optional.ofNullable(selectedUser);
+            return Optional.ofNullable(userEntity);
         } catch (ConnectionException | SQLException exception) {
-            throw new DaoException("Unable to get data from table: "
+            throw new DaoException("Unable to select data from table: "
                     + TABLE_NAME + " ! "
                     + exception.getMessage(), exception);
         }
     }
 
     @Override
-    public List<AppUserEntity> selectAll() throws DaoException {
-        try (Connection connection =
-                     ConnectionPool.getInstance().giveOutConnection();
-             Statement statement =
-                     connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(SELECT_ALL_USERS);
-            if (resultSet.isBeforeFirst()) {
-                List<AppUserEntity> selectedUsers = new ArrayList<>();
-                while (resultSet.next()) {
-                    selectedUsers.add(parseResultSet(resultSet));
-                }
-                return selectedUsers;
-            } else {
-                LOGGER.info("No records were found in table: " + TABLE_NAME + ". ");
-                return Collections.emptyList();
-            }
-        } catch (ConnectionException | SQLException exception) {
-            throw new DaoException("Unable to get data from table: "
-                    + TABLE_NAME + " ! "
-                    + "Reason: " + exception.getMessage(), exception);
-        }
-    }
-
-    @Override
-    public Optional<String> selectUserPasswordByEmail(String token, String email)
+    public Optional<String> selectPasswordByEmail(String token, String email)
             throws DaoException {
         String passwordToken = "electronDance18";
         if (passwordToken.equals(token)) {
@@ -139,12 +107,12 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
                 }
                 return Optional.ofNullable(password);
             } catch (SQLException | ConnectionException exception) {
-                throw new DaoException("Unable to get data from table: "
+                throw new DaoException("Unable to select data from table: "
                         + TABLE_NAME + " ! "
                         + exception.getMessage(), exception);
             }
         } else {
-            LOGGER.warn("Unknown access for service! "
+            LOGGER.warn("Unknown access for dao! "
                     + ". Used token : " + token);
             throw new DaoException("Unknown access for service! . Access denied!");
         }
@@ -172,7 +140,6 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
             preparedStatement.setString(3, name);
             preparedStatement.setString(4, patronymic);
             preparedStatement.setString(5, phone);
-
             preparedStatement.setString(6, surname);
             preparedStatement.setString(7, name);
             preparedStatement.setString(8, patronymic);
@@ -182,8 +149,8 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
             connection.commit();
             preparedStatement.close();
             ConnectionPool.getInstance().getBackConnection(connection);
-            LOGGER.info(updatedRowsQuantity
-                    + " rows was updated in table " + TABLE_NAME
+            LOGGER.info(updatedRowsQuantity + " rows was updated in table "
+                    + TABLE_NAME + " . "
                     + "Used entity: " + appUser);
         } catch (ConnectionException | SQLException exception) {
             try {
@@ -207,7 +174,8 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
     }
 
     @Override
-    public AppUserEntity parseResultSet(ResultSet resultSet) throws SQLException {
+    public AppUserEntity parseResultSetEntity(ResultSet resultSet)
+            throws SQLException {
         int appUserId = resultSet.getInt(COLUMN_LABEL_1);
         String email = resultSet.getString(COLUMN_LABEL_2);
         String name = resultSet.getString(COLUMN_LABEL_4);
@@ -225,30 +193,5 @@ public class AppUserDaoImpl extends AbstractDao<AppUserEntity> implements AppUse
                 .admin(admin)
                 .build();
         return appUserEntity;
-    }
-
-    @Override
-    public boolean update(AppUserEntity user, AppUserEntity newUserVersion)
-            throws DaoException {
-        if (user == null) {
-            throw new DaoException("Parameter 'user' is null");
-        }
-        if (newUserVersion == null) {
-            throw new DaoException("Parameter 'newUserVersion' is null");
-        }
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean create(AppUserEntity user) throws DaoException {
-        if (user == null) {
-            throw new DaoException("Parameter 'user' is null");
-        }
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean remove(AppUserEntity entity) throws DaoException {
-        throw new UnsupportedOperationException();
     }
 }

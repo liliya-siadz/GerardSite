@@ -37,11 +37,14 @@ public class DogServiceImpl implements DogService {
         DogEntity dogEntity = new DogEntity();
         dogEntity.setId(id);
         try {
-            Optional<DogEntity> foundDog = DogDaoImpl.getInstance().find(dogEntity);
+            Optional<DogEntity> foundDog
+                    = DogDaoImpl.getInstance().find(dogEntity);
             return foundDog;
         } catch (DaoException exception) {
+            LOGGER.error("Unable to find dog! "
+                    + exception.getMessage(), exception);
             throw new ServiceException(
-                    "Unable to provide information from database! "
+                    "Unable to find dog! "
                             + exception.getMessage(), exception);
         }
     }
@@ -50,17 +53,17 @@ public class DogServiceImpl implements DogService {
         try {
             List<Dog> allDogsForView =
                     DogDaoImpl.getInstance().selectAllDogsWithPhotos();
-            allDogsForView.removeIf(dog-> !dog.isActive());
+            allDogsForView.removeIf(dog -> !dog.isActive());
             return allDogsForView;
         } catch (DaoException exception) {
             throw new ServiceException(
-                    "Unable to provide information from database! "
+                    "Unable to provide information about dogs! "
                             + exception.getMessage(), exception);
         }
     }
 
     @Override
-    public List<Dog> provideAlPuppiesForView() throws ServiceException {
+    public List<Dog> provideAllPuppiesForView() throws ServiceException {
         try {
             List<Dog> allPuppiesForView =
                     DogDaoImpl.getInstance().selectAllDogsWithPhotos();
@@ -68,7 +71,7 @@ public class DogServiceImpl implements DogService {
             return allPuppiesForView;
         } catch (DaoException exception) {
             throw new ServiceException(
-                    "Unable to provide information from database! "
+                    "Unable to provide information about dogs ! "
                             + exception.getMessage(), exception);
         }
     }
@@ -80,8 +83,10 @@ public class DogServiceImpl implements DogService {
                     DogDaoImpl.getInstance().selectAllDogsWithPhotos();
             return allDogsForAdmin;
         } catch (DaoException exception) {
+            LOGGER.error("Unable to provide information about dogs! "
+                    + exception.getMessage(), exception);
             throw new ServiceException(
-                    "Unable to provide information from database! "
+                    "Unable to provide dogs information! "
                             + exception.getMessage(), exception);
         }
     }
@@ -99,7 +104,8 @@ public class DogServiceImpl implements DogService {
         public long applyAsLong(Dog dogEntity) {
             LocalDate currentDate = LocalDate.now();
             LocalDate dogBirthday = dogEntity.getBirthday().toLocalDate();
-            long dogAgeInMonths = ChronoUnit.MONTHS.between(dogBirthday, currentDate);
+            long dogAgeInMonths
+                    = ChronoUnit.MONTHS.between(dogBirthday, currentDate);
             return dogAgeInMonths;
         }
     }

@@ -26,8 +26,8 @@ public class BCryptTest {
     }
 
     @Test(dataProvider = "dataProviderTestHashPwDifferentPasswords",
-            description = "Testing that password's hashed version"
-                    + "has bigger length")
+            description = "Testing that password's hashed version string"
+                    + " has bigger length")
     public void testHashpw2(String password) {
         String actual = BCrypt.hashpw(password, BCrypt.gensalt());
         assertTrue(actual.length() > password.length());
@@ -36,9 +36,12 @@ public class BCryptTest {
     @DataProvider(name = "dataProviderTestCheckpwPasswordAndHash")
     public Object[][] dataProviderTestCheckpwPasswordAndHash() {
         return new Object[][]{
-                {"lollypop1", BCrypt.hashpw("lollypop1", BCrypt.gensalt())},
-                {"rainbowAndLabour56", BCrypt.hashpw("rainbowAndLabour56", BCrypt.gensalt())},
-                {"asdasf3650002", BCrypt.hashpw("asdasf3650002", BCrypt.gensalt())}
+                {"lollypop1",
+                        BCrypt.hashpw("lollypop1", BCrypt.gensalt())},
+                {"rainbowAndLabour56",
+                        BCrypt.hashpw("rainbowAndLabour56", BCrypt.gensalt())},
+                {"asdasf3650002",
+                        BCrypt.hashpw("asdasf3650002", BCrypt.gensalt())}
         };
     }
 
@@ -46,6 +49,7 @@ public class BCryptTest {
             + "not hashed password",
             dataProvider = "dataProviderTestCheckpwPasswordAndHash")
     public void testCheckpw(String password, String hashedPassword) {
-        assertTrue(BCrypt.checkpw(password, hashedPassword));
+        boolean actual = BCrypt.checkpw(password, hashedPassword);
+        assertTrue(actual);
     }
 }
