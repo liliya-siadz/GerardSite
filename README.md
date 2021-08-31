@@ -1,5 +1,5 @@
 <h2><i>Gerard [PRE-ALPHA STAGE] </i></h2>
-<a href="https://bit.ly/3B9OZSH">documentation to download here</a>
+<a href="https://drive.google.com/drive/folders/1zrXhYOtUUtJi7eyE1CdD8OP7hlf8tV7b?usp=sharing">documentation here</a>
 
 <h1>desktop web-application for private monobreed dog kennel </h1>
 ☛ class project after online-training "Java Web development by EPAM Systems"
