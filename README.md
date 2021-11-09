@@ -9,9 +9,9 @@
 <ol type="1">
     <li>Provide actual information of the kennel
         <ul>
-            <li>dos's information</li>
+            <li>dog's information</li>
             <li>kennel's contact information</li>
-            <li>dos's photos</li>
+            <li>dog's photos</li>
             <li>notification for admnistrator</li>
         </ul>
     </li>
